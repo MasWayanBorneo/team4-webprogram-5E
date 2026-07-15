@@ -1,0 +1,608 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
+
+/* Root CSS variables - Defines primary, secondary, and tertiary color palette used throughout the site */
+
+:root{
+  --bg:#0d0a17;          /* violet-black page */
+  --surface:#16122a;     /* nav, cards */
+  --surface-2:#1d1838;   /* raised card */
+  --ink:#f5f2fb;         /* primary text */
+  --muted:#a79ec6;       /* secondary text */
+  --faint:#6f6790;       /* tertiary / captions */
+  --line:rgba(255,255,255,.09);
+
+  /* stage-light accent spectrum */
+  --violet:#7b5cff;
+  --magenta:#e23f97;
+  --pink:#ff5e8a;
+  --amber:#ffb45a;
+  --cyan:#39c6dd;
+  --accent:#00ff7bc3;      /* primary CTA */
+  --accent-press:#00ff7bc3;
+
+  /* duotone art gradients (colour for the placeholder tiles) */
+
+  --radius:16px;
+  --shell:1200px;
+  
+  /* --prime-color:#04ffd5;
+    --secondary-color:#41e71cc3;
+    --third-color:#1e1e1e; */
+    --prime-color:#1db1ac9d;
+    --secondary-color:#00ff7bc3;
+    --third-color:#000000;
+    --music-play-color:yellow;
+    --deep-color:#010912;
+    --surface:#031e33;
+    --mid:#021525;
+    --card:rgba(0,20,50, .45);
+    --heading:#e8f4ff;
+    --body:rgba(160,210,240,.8);
+    --button:rgba(160,220,255,.9);
+    --glow:rgba(80,200,255,.5);
+}
+
+/* Global styles - Resets default margins, padding, and box-sizing for all elements */
+/* * { font-family: Caveat; */*{
+    /* font-family: Special Elite; */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+
+/* html {
+    overflow-x: hidden;
+    width: 100%;
+} */
+
+/* Body - Main page container with centered layout and full viewport height background */
+body{
+
+    background:var(--mid);
+    overflow-x: hidden;
+    width: 100%;
+
+}
+
+/* Navbar - Sticky navigation bar positioned at top with dark background and border */
+.navbar{
+
+   background: var(--surface);
+   position:sticky;
+   width: 100%;
+   top: 0;
+   z-index: 1;
+   border-bottom: 2px solid #3e3a3a;
+}
+.navdiv{
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    padding:  15px;
+    font-family: Special Elite;
+}
+
+/* Logo - Band logo with fixed dimensions in navbar */
+.logo{
+    /* float:inline-start; */
+    /* margin-right:auto; */
+    height: 60px;
+    width: 80px;  
+}
+li{
+    list-style: none;
+     display: inline-block;
+     margin: 0 20px;
+}
+
+/* List item links - Navigation links with white color and bold weight */
+li a{
+    color: white;
+    font-size: 18px;
+    position: relative;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+
+/* Active music link - Highlighted link for Music page with primary color and underline */
+li a .Music {
+    color: var(--prime-color);
+    border-bottom: 4px solid var(--prime-color);
+}
+
+/* List hover effect - Link highlight on hover with underline animation */
+ul li :hover{
+    color: var(--prime-color);
+    border-bottom: 4px solid  var(--prime-color);
+}
+/* Top music player section - Flex container for featured song player with responsive layout */
+.top-lagu  {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 40px;
+   
+   
+}
+
+/* Featured player card - Primary music player with album art and playback controls */
+
+.top-lagu .player2 {
+    position: relative;
+    display: flex;
+    /* flex:auto; */
+    align-items: center;    
+    justify-content: center;
+    width: 400px;
+    flex-wrap: nowrap;  
+    background:var(--body) ;
+    border-radius: 20px;
+    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
+    flex-direction: column;
+     padding: 20px;
+     border: 2px solid var(--secondary-color);
+}
+
+/* Featured player album artwork - Image container with fixed dimensions */
+.player2 .imgbox2{
+     position: relative;
+    width: 250px;
+    height: 250px;
+    margin-bottom: 20px;
+    display: flex;
+   
+    /* border-top-right-radius: 20px; */  
+}
+
+/* Featured player control button - Primary action button for playback */
+.player2 .tombol{
+    font-size :30px;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    border:var(--secondary-color);
+    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
+    padding:10px;
+    margin-bottom: 10px;
+    width: 100%;
+    margin-top: auto;   
+}
+
+/* First lyrics button - Toggles lyrics display for primary song */
+.player2 .lirik{
+  
+    font-size :30px;
+    text-decoration: underline;
+    border-radius: 10px;
+    border:var(--secondary-color);
+    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
+    padding:10px;
+    margin-bottom: 10px;
+    width: 100%;
+    margin-top: auto;   
+}
+
+/* Second lyrics button - Toggles lyrics display for secondary song */
+.player2 .lirik2{
+    font-size :30px;
+    text-decoration: underline;
+    border-radius: 10px;
+    border:var(--secondary-color);
+    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
+    padding:10px;
+    margin-bottom: 10px;
+    width: 100%;
+    margin-top: auto;  
+}
+.player2 .lirik4{
+    font-size :30px;
+    text-decoration: underline;
+    border-radius: 10px;
+    border:var(--secondary-color);
+    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
+    padding:10px;
+    margin-bottom: 10px;
+    width: 100%;
+    margin-top: auto;  
+}
+
+/* Third lyrics button - Toggles lyrics display for tertiary song */
+.player2 .lirik3{
+    font-size :30px;
+    text-decoration: underline;
+    border-radius: 10px;
+    border:var(--secondary-color);
+    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
+    padding:10px;
+    margin-bottom: 10px;
+    width: 100%;
+    margin-top: auto;   
+}
+
+/* Main heading - Page title with large font and special font family */
+h1 {
+   text-align: center;
+    position: static;
+    flex-wrap: nowrap;
+    font-family: Special Elite;
+    padding: 40px;
+    font-size: 40px;
+    color:var(--heading);
+
+}
+h2{
+     font-family:'Courier New', Courier, monospace;
+    color: var(--heading);
+    font-size: medium;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+/* Footer - Page bottom section with dark background and centered text */
+
+
+/* List items - Navigation list items displayed inline with consistent spacing */
+
+
+/* Navigation container - Flexbox layout for navbar items with proper spacing */
+
+/* Players container - Flex grid layout for displaying multiple music players */
+.players-container{
+     display: flex;
+     gap: 30px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 50px;
+    
+    /*
+    border: 2px solid #000000;*/  
+}
+
+/* Individual player card - Music player with album artwork and controls */
+.player{
+    position: relative;
+    display: flex;
+    flex:auto;
+    align-items: center;    
+    justify-content: center;
+    width:250px;
+    flex-wrap: wrap;  
+    background:var(--glow) ;
+    border-radius: 20px;
+    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
+    flex-direction: column;
+     padding: 20px;
+     border: 2px solid var(--secondary-color);     
+}
+
+/* Player album artwork - Album cover image with rounded corners and overflow hidden */
+.player .imgbox{
+    position: relative;
+    width: 80%;
+    height: 80%;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    /* border-top-right-radius: 20px; */
+    overflow: hidden;   
+}
+
+/* Album artwork hover effect - Reduced opacity on hover for visual feedback */
+.player .imgbox:hover{
+    opacity: 60%;
+}
+
+/* Player button - Primary action button for player with secondary color background */
+.player button{
+    font-size :30px;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    border:var(--secondary-color);
+    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
+    padding:10px;
+    margin-bottom: 10px;
+    width: 100%;
+    margin-top: auto;   
+}
+
+/* Button anchor point - Anchor reference for dropdown menu positioning */
+.tombol {anchor-name: --tombol --tombol2;}
+
+/* Main dropdown menu - Positioned dropdown menu for button actions */
+#dropdown{
+    padding: 20px;
+    position: absolute;
+    width: 360px;
+    position-anchor: --tombol  --tombol2;
+    position-area: bottom center;
+    border-radius: 10px; 
+    justify-self: center;    
+}
+
+/* First lyrics anchor point - Position reference for first lyrics dropdown */
+.lirik{anchor-name: --lyric;}
+
+/* Second lyrics anchor point - Position reference for second lyrics dropdown */
+.lirik2{anchor-name: --lyric2;}
+
+/* Third lyrics anchor point - Position reference for third lyrics dropdown */
+.lirik3{anchor-name: --lyric3;}
+.lirik4{anchor-name: --lyric4;}
+/* Third lyrics dropdown menu - Scrollable menu displaying lyrics with dark background */
+#dropdown4{
+    color: #fffb00; 
+    border-color: #000000;
+    background-color: #3e3a3a;
+    width: 100%;
+    overflow-y: auto;
+    height: 500px;
+    padding: 20px;
+    position: absolute;
+    position-anchor:   --lyric3;
+    position-area: bottom center;
+    border-radius: 0px; 
+    justify-self: center; 
+    font-family: Caveat;
+    font-weight: bold;
+    font-size: 30px;   
+}
+#dropdown5{
+    color: #fffb00; 
+    border-color: #000000;
+    background-color: #3e3a3a;
+    width: 100%;
+    overflow-y: auto;
+    height: 500px;
+    padding: 20px;
+    position: absolute;
+    position-anchor:   --lyric4;
+    position-area: bottom center;
+    border-radius: 0px; 
+    justify-self: center; 
+    font-family: Caveat;
+    font-weight: bold;
+    font-size: 30px;   
+}
+
+/* Second lyrics dropdown menu - Scrollable menu displaying lyrics with dark background */
+#dropdown3{
+    color: #fffb00; 
+    border-color: #000000;
+    background-color: #3e3a3a;
+    width: 100%;
+    overflow-y: auto;
+    height: 500px;
+    padding: 20px;
+    position: absolute;
+    position-anchor:   --lyric2;
+    position-area: bottom center;
+    border-radius: 0px; 
+    justify-self: center; 
+    font-family: Caveat;
+    font-weight: bold;
+    font-size: 30px;    
+}
+
+/* First lyrics dropdown menu - Scrollable menu displaying lyrics with dark background */
+#dropdown2{
+    color: #fffb00; 
+    border-color: #000000;
+    background-color: #3e3a3a;
+    width:100%;
+    overflow-y: auto;
+    height: 500px;
+    padding: 20px;
+    position: absolute;
+    position-anchor: --lyric  ;
+    position-area: bottom center;
+    border-radius: 0px; 
+    justify-self: center; 
+    font-family: Caveat;
+    font-weight: bold;
+    font-size: 30px;    
+   
+}
+
+/* Icon image - Fixed-size image for social media or platform icons */
+.icon2 img{
+    width: 200px;
+}
+
+/* Icon container - Flex container for vertical alignment of icons */
+.icon2{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+   
+}
+
+/* Icon hover effect - Reduced opacity on hover for visual feedback */
+.icon2 img:hover{
+    opacity: 60%;
+   
+    
+}
+
+/* Player button hover effect - Opacity change with text underline on hover */
+.player button:hover{
+    opacity: 80%;
+    text-decoration: underline;
+}
+
+/* Streaming section - Container for streaming platform links and content */
+.streaming{
+    display: flex;
+    flex-direction: column;
+    flex-wrap:nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+   
+   
+}
+
+/* Streaming platform item - Card for individual streaming platform link */
+.streaming-platforms{
+    background-color: #e8f4ff;
+    position: relative;
+    width: 250px;
+    padding: 5px;
+    
+
+}
+
+
+/* Streaming platform hover effect - Reduced opacity on hover for platforms */
+.streaming-platforms:hover{
+    opacity: 60%;
+}
+
+
+/* CTA heading - Large centered heading for call-to-action section */
+.cta h2{
+    text-wrap: balance;
+    text-align: center;
+    font-size: 60px;
+    padding-top: 20px;
+    font-family: Special Elite;
+   text-transform: lowercase;
+   color: #fffb00;
+}
+.brand{
+    width: 60px;
+}
+
+/* Email subscription section - Row-reversed flex container for email input and button */
+footer h2{
+    text-align: center;
+    color: white;
+    margin-bottom: 20px; 
+     
+}
+footer{
+    background: var(--surface);
+}
+footer h3{
+    text-align: center;
+    color: white; 
+    margin: 20px; 
+   
+}
+footer p{text-align: start;color:gray;}
+.page-header {
+    text-align: center;
+    padding: 1.5rem 1.25rem 0.5rem;
+}
+.email {
+    display: flex;
+    flex-direction:row;
+    position: relative;
+    justify-content: center;   
+    flex-wrap: wrap;
+    margin: 30px;
+  
+
+}
+
+/* Email input field - Padded input field for email subscription */
+.email input{
+    padding: 7px ;
+    border-radius: 10px;
+    font-size: 15px;
+    text-wrap: balance;
+    display: flex;
+
+}
+
+/* Email submit button - Red button positioned over email input for subscription */
+#email-btn{
+    background-color: red;
+    color:white;
+    display: flex;
+    flex-direction: row;
+ 
+    border-radius: 10px;
+    
+}
+
+/* Icon container - Centers icon elements */
+.icon { text-align: center;}
+/* Global image styling - Full width/height with object-fit for responsive images */
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+}
+
+audio{
+   display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+
+/* Audio player control panel - Styled container for audio playback controls */
+audio::-webkit-media-controls-panel {
+    background-color: rgb(0, 0, 0);
+  
+    
+   
+}
+
+/* Audio play button - Styled play/pause button with primary color background */
+audio::-webkit-media-controls-play-button{
+background-color: var(--music-play-color);
+border-radius: 40px;
+transform: scale(1.6);
+
+
+
+}
+
+/* Audio current time display - Time counter text color in player */
+audio::-webkit-media-controls-current-time-display{
+    color:var(--music-play-color);   
+    padding-left:9px ;
+   
+  
+}
+
+/* Audio remaining time display - Remaining time text color with right padding */
+audio::-webkit-media-controls-time-remaining-display{
+    color:var(--music-play-color);
+    padding-right: 7px;   
+  
+}
+
+/* Audio timeline slider - Progress bar with rounded corners */
+audio::-webkit-media-controls-timeline{
+    background-color:var(--music-play-color);
+    border-radius: 40px;  
+    position: relative;  
+    
+   
+}
+
+/* Audio volume slider - Volume control with rounded corners and padding */
+audio::-webkit-media-controls-volume-slider{
+    background-color: var(--music-play-color);
+    border-radius: 40px;
+    padding-right: 20px;
+    padding-left: 20px;  
+}
+
+/* Audio mute button - Styled mute button with primary color background */
+audio::-webkit-media-controls-mute-button{
+    position: absolute;
+    align-items: end;
+    background-color:var(--music-play-color);
+    border-radius: 40px;  
+    transform: scale(1.6);
+    
+}
+
+

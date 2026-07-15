@@ -1,0 +1,335 @@
+
+
+:root{
+  --bg:#0d0a17;          /* violet-black page */
+  --surface:#16122a;     /* nav, cards */
+  --surface-2:#1d1838;   /* raised card */
+  --ink:#f5f2fb;         /* primary text */
+  --muted:#a79ec6;       /* secondary text */
+  --faint:#6f6790;       /* tertiary / captions */
+  --line:rgba(255,255,255,.09);
+
+  /* stage-light accent spectrum */
+  --violet:#7b5cff;
+  --magenta:#e23f97;
+  --pink:#ff5e8a;
+  --amber:#ffb45a;
+  --cyan:#39c6dd;
+  --accent:#00ff7bc3;      /* primary CTA */
+  --accent-press:#00ff7bc3;
+
+  /* duotone art gradients (colour for the placeholder tiles) */
+  --g1:linear-gradient(140deg,#7b5cff,#e23f97);
+  --g2:linear-gradient(140deg,#39c6dd,#7b5cff);
+  --g3:linear-gradient(140deg,#e23f97,#ffb45a);
+  --g4:linear-gradient(140deg,#5a4fff,#39c6dd);
+  --g5:linear-gradient(140deg,#ff5e8a,#ffb45a);
+  --g6:linear-gradient(140deg,#8a3fff,#e23f97);
+
+  --radius:16px;
+  --shell:1200px;
+  
+  /* --prime-color:#04ffd5;
+    --secondary-color:#41e71cc3;
+    --third-color:#1e1e1e; */
+    --prime-color:#1db1ac9d;
+    --secondary-color:#00ff7bc3;
+    --third-color:#000000;
+    --music-play-color:yellow;
+    --deep-color:#010912;
+    --surface:#031e33;
+    --mid:#021525;
+    --card:rgba(0,20,50, .45);
+    --heading:#e8f4ff;
+    --body:rgba(160,210,240,.8);
+    --button:rgba(160,220,255,.9);
+    --glow:rgba(80,200,255,.5);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--deep-color);
+}
+
+.app {
+    background:var(--glow);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e8f4ff;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.navbar {
+    background: #021525;
+    border-bottom: 1px solid rgba(160, 210, 240, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0.5rem 1.5rem;
+    min-height: 44px;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: rgba(160, 210, 240, 0.6);
+    text-decoration: none;
+    padding: 4px 0;
+    border-bottom: 1.5px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-bottom-color 0.2s;
+}
+
+.nav-link:hover {
+    color: #e8f4ff;
+}
+
+.nav-link.active {
+    color: rgba(160, 220, 255, 0.95);
+    border-bottom-color: rgba(160, 220, 255, 0.7);
+}
+
+.page-header {
+    padding: 1.5rem 1.25rem 0.5rem;
+}
+
+.page-title {
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: #e8f4ff;
+}
+
+.content, .profile-header {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.quick-facts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(160, 220, 255, 0.35);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+}
+
+.member-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: #021525;
+    border: 1px solid rgba(160, 210, 240, 0.1);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+    text-decoration: none;
+}
+
+.member-card:hover {
+    border-color: rgba(160, 220, 255, 0.3);
+    background: #031e33;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #031e33;
+    border: 1px solid rgba(160, 220, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.avatar-initials {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(160, 220, 255, 0.85);
+    letter-spacing: 0.05em;
+}
+
+
+
+.member-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.member-name {
+    font-size: 14px;
+    font-weight: 400;
+    color: #e8f4ff;
+    letter-spacing: 0.03em;
+    margin-bottom: 2px;
+}
+
+.member-role {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(160, 210, 240, 0.5);
+}
+
+.member-arrow {
+    font-size: 18px;
+    color: rgba(160, 220, 255, 0.25);
+}
+
+.back-nav {
+    padding: 1rem 1.5rem;
+    background: #021525;
+    border-bottom: 1px solid rgba(160, 210, 240, 0.1);
+}
+
+.back-link {
+    color: rgba(160, 220, 255, 0.85);
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.25rem;
+    text-align: center;
+}
+
+.profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #031e33;
+    border: 2px solid rgba(160, 220, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    font-size: 28px;
+    font-weight: 300;
+    color: rgba(160, 220, 255, 0.5);
+    letter-spacing: 0.05em;
+}
+
+.profile-name {
+    font-size: 24px;
+    font-weight: 300;
+    color: #e8f4ff;
+    margin-bottom: 4px;
+}
+
+.profile-role {
+    font-size: 14px;
+    color: rgba(160, 210, 240, 0.6);
+    margin-bottom: 1.5rem;
+}
+
+.quick-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.fact-card {
+    background: #021525;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(160, 210, 240, 0.1);
+    text-align: left;
+}
+
+.fact-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(160, 220, 255, 0.4);
+    margin-bottom: 4px;
+}
+
+.fact-value {
+    font-size: 13px;
+    color: #e8f4ff;
+}
+
+.bio-section {
+    width: 100%;
+    text-align: left;
+}
+
+.bio-title {
+    font-size: 16px;
+    font-weight: 400;
+    color: #e8f4ff;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(160, 210, 240, 0.1);
+    padding-bottom: 8px;
+}
+
+.bio-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(160, 210, 240, 0.8);
+    margin-bottom: 1rem;
+}
+
+.bio-list {
+    list-style-position: inside;
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(160, 210, 240, 0.8);
+}
+
+.bio-list li {
+    margin-bottom: 6px;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        gap: 1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .nav-link {
+        font-size: 12px;
+    }
+
+    .content {
+        padding: 0.75rem 1rem;
+    }
+
+    .member-card {
+        padding: 12px 14px;
+    }
+
+    .avatar {
+        width: 42px;
+        height: 42px;
+    }
+
+    .quick-facts {
+        grid-template-columns: 1fr 1fr;
+    }
+}

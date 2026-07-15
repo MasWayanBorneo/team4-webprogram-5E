@@ -1,0 +1,457 @@
+/* ==========================
+   ROOT COLORS
+========================== */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
+
+
+:root{
+  --bg:#0d0a17;          /* violet-black page */
+  --surface:#16122a;     /* nav, cards */
+  --surface-2:#1d1838;   /* raised card */
+  --ink:#f5f2fb;         /* primary text */
+  --muted:#a79ec6;       /* secondary text */
+  --faint:#6f6790;       /* tertiary / captions */
+  --line:rgba(255,255,255,.09);
+
+  /* stage-light accent spectrum */
+  --violet:#7b5cff;
+  --magenta:#e23f97;
+  --pink:#ff5e8a;
+  --amber:#ffb45a;
+  --cyan:#39c6dd;
+  --accent:#00ff7bc3;      /* primary CTA */
+  --accent-press:#00ff7bc3;
+
+  /* duotone art gradients (colour for the placeholder tiles) */
+  --g1:linear-gradient(140deg,#7b5cff,#e23f97);
+  --g2:linear-gradient(140deg,#39c6dd,#7b5cff);
+  --g3:linear-gradient(140deg,#e23f97,#ffb45a);
+  --g4:linear-gradient(140deg,#5a4fff,#39c6dd);
+  --g5:linear-gradient(140deg,#ff5e8a,#ffb45a);
+  --g6:linear-gradient(140deg,#8a3fff,#e23f97);
+
+  --radius:16px;
+  --shell:1200px;
+  
+  /* --prime-color:#04ffd5;
+    --secondary-color:#41e71cc3;
+    --third-color:#1e1e1e; */
+    --prime-color:#1db1ac9d;
+    --secondary-color:#00ff7bc3;
+    --third-color:#000000;
+    --music-play-color:yellow;
+    --deep-color:#010912;
+    --surface:#031e33;
+    --mid:#021525;
+    --card:rgba(0,20,50, .45);
+    --heading:#e8f4ff;
+    --body:rgba(160,210,240,.8);
+    --button:rgba(160,220,255,.9);
+    --glow:rgba(80,200,255,.5);
+}
+
+/* ==========================
+   GLOBAL
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background: var(--mid);
+
+    color:var(--heading);
+    font-family:'Segoe UI',sans-serif;
+    min-height:100vh;
+}
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding:40px 0 140px;
+}
+
+h1{
+    font-weight:300;
+    letter-spacing:.08em;
+    margin-bottom:30px;
+}
+
+/* ==========================
+   NAVBAR
+========================== */
+
+.navbar{
+   flex:auto;
+   background: var(--surface);
+   position: sticky;
+   width: 100%;
+   top: 0;
+   z-index: 100;
+   border-bottom: 2px solid #3e3a3a;
+}
+.navdiv{
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    padding:  15px;
+    font-family: Special Elite;
+}
+
+/* Logo - Band logo with fixed dimensions in navbar */
+.logo{
+    float:inline-start;
+    margin-right:auto;
+    height: 60px;
+    width: 80px;  
+}
+li{
+    list-style: none;
+     display: inline-block;
+     margin: 0 20px;
+}
+
+/* List item links - Navigation links with white color and bold weight */
+li a{
+    color: white;
+    font-size: 18px;
+    position: relative;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+li a .Merch {
+    color: var(--prime-color);
+    border-bottom: 4px solid var(--prime-color);
+}
+ul li :hover{
+    color: var(--prime-color);
+    border-bottom: 4px solid  var(--prime-color);
+}
+
+.navbar a:hover,
+.navbar .active{
+    color:var(--button);
+    text-shadow:0 0 15px var(--glow);
+}
+
+/* ==========================
+   FEATURED
+========================== */
+
+.featured-products{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.featured-card{
+    background:var(--surface);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:24px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:25px;
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+    0 0 20px rgba(80,200,255,.15);
+}
+
+.product-image{
+    width:150px;
+    height:150px;
+
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:5rem;
+}
+
+.product-info{
+    flex:1;
+    margin-left:30px;
+}
+
+.product-info h2{
+    color:var(--heading);
+    font-weight:300;
+}
+
+.product-info p{
+    color:var(--body);
+    margin-top:5px;
+}
+
+.product-info span{
+    display:block;
+    margin-top:10px;
+    font-size:2rem;
+    color:var(--button);
+}
+
+.featured-card button{
+    width:220px;
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+button{
+    background:var(--button);
+    color:var(--deep);
+
+    border:none;
+    border-radius:999px;
+
+    padding:14px 28px;
+
+    cursor:pointer;
+    font-size:1rem;
+    font-weight:400;
+    letter-spacing:.12em;
+
+    transition:.3s;
+
+    box-shadow:
+    0 0 15px rgba(80,200,255,.35);
+}
+
+button:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 0 30px rgba(80,200,255,.6);
+}
+
+/* ==========================
+   GRID
+========================== */
+
+hr{
+    margin:50px 0;
+    border:none;
+    border-top:1px solid rgba(255,255,255,.1);
+}
+
+.products-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.product-card{
+    background:var(--card);
+    border-radius:24px;
+
+    padding:20px;
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+    0 0 15px rgba(80,200,255,.15);
+}
+
+.card-image{
+    height:180px;
+    border-radius:20px;
+
+    background:rgba(255,255,255,.08);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:5rem;
+    margin-bottom:20px;
+}
+
+.price-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.price-row span{
+    font-size:2rem;
+    color:var(--button);
+}
+
+.price-row button{
+    padding:10px 25px;
+}
+
+.product-card h3{
+    font-weight:300;
+    margin-bottom:8px;
+}
+
+.product-card p{
+    color:var(--body);
+}
+footer {
+ flex:auto;
+   background: var(--third-color);
+   position: sticky;
+   width: 100%;
+ 
+   top: 0;
+   margin: -20px;
+   z-index: 100;
+   border-bottom: 2px solid #3e3a3a;
+ 
+}
+
+/* Footer heading - Styled heading within footer section */
+
+
+/* Footer paragraph - Left-aligned text content in footer with gray color */
+footer p{text-align: start;color:gray;}
+.email {
+    display: flex;
+    flex-direction:row;
+    position: relative;
+    justify-content: center;   
+    flex-wrap: wrap;
+    margin: 30px;
+  
+
+}
+
+/* Email input field - Padded input field for email subscription */
+.email input{
+    padding: 7px ;
+    border-radius: 10px;
+    font-size: 15px;
+    text-wrap: balance;
+    display: flex;
+
+}
+
+/* Email submit button - Red button positioned over email input for subscription */
+#email-btn{
+    background-color: red;
+    color:white;
+    display: flex;
+    flex-direction: row;
+ 
+    border-radius: 10px;
+    
+}
+
+/* Footer heading - Large centered heading in footer */
+footer h2{
+    text-align: center;
+    color: white;
+    margin-bottom: 20px; 
+     
+}
+footer h3{
+    text-align: center;
+    color: white; 
+    margin: 20px; 
+   
+}
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  
+}
+/* Icon container - Centers icon elements */
+.icon { text-align: center;}
+
+/* ==========================
+   CART BAR
+========================== */
+
+.cart-bar{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+
+    width:90%;
+    max-width:1200px;
+
+    background:rgba(0,20,50,.8);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    border-radius:30px;
+
+    backdrop-filter:blur(20px);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 30px;
+
+    box-shadow:
+    0 0 30px rgba(80,200,255,.2);
+}
+
+.cart-info{
+    font-size:1.3rem;
+    color:var(--heading);
+}
+
+.checkout-btn{
+    min-width:220px;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media(max-width:900px){
+
+    .products-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .featured-card{
+        flex-direction:column;
+        gap:20px;
+        text-align:center;
+    }
+
+    .product-info{
+        margin-left:0;
+    }
+}
+
+@media(max-width:600px){
+
+    .navbar ul{
+        gap:20px;
+        flex-wrap:wrap;
+    }
+
+    .products-grid{
+        grid-template-columns:1fr;
+    }
+
+    .cart-bar{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .checkout-btn{
+        width:100%;
+    }
+}

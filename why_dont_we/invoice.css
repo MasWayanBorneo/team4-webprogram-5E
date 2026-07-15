@@ -1,0 +1,142 @@
+/* INVOICE PAGE — uses tour.css for shared vars, navbar, footer */
+
+.invoice-section{
+    max-width:720px;
+}
+
+.invoice-card{
+    background:var(--card);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:16px;
+    padding:30px;
+}
+
+.invoice-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:20px;
+    padding-bottom:20px;
+    border-bottom:1px solid rgba(255,255,255,.15);
+    margin-bottom:20px;
+}
+
+.invoice-brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.invoice-logo{
+    width:56px;
+    height:56px;
+    object-fit:cover;
+    border-radius:50%;
+}
+
+.invoice-brand h2{
+    margin-bottom:4px;
+}
+
+.invoice-brand p{
+    color:var(--body);
+}
+
+.invoice-meta{
+    text-align:right;
+}
+
+.invoice-meta p{
+    margin-bottom:6px;
+}
+
+.invoice-status{
+    display:inline-block;
+    margin-top:4px;
+    padding:4px 14px;
+    border-radius:20px;
+    background:rgba(76,175,80,.18);
+    color:#4CAF50;
+    font-weight:bold;
+}
+
+.invoice-billto{
+    margin-bottom:24px;
+}
+
+.invoice-billto h3{
+    margin-bottom:8px;
+}
+
+.invoice-billto p{
+    color:var(--body);
+}
+
+.invoice-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:24px;
+}
+
+.invoice-table th,
+.invoice-table td{
+    text-align:left;
+    padding:12px 10px;
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+.invoice-table th{
+    color:var(--body);
+    font-size:.85rem;
+    text-transform:uppercase;
+    letter-spacing:.03em;
+}
+
+.invoice-total{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 18px;
+    border-radius:14px;
+    background:rgba(160,220,255,.08);
+    font-weight:bold;
+    font-size:1.2rem;
+    margin-bottom:18px;
+}
+
+.invoice-note{
+    color:var(--body);
+    font-size:.9rem;
+}
+
+.invoice-actions{
+    display:flex;
+    gap:16px;
+    align-items:center;
+    flex-wrap:wrap;
+    margin-top:24px;
+}
+
+.invoice-actions #print-btn{
+    border:none;
+    padding:12px 25px;
+    border-radius:25px;
+    cursor:pointer;
+    background:rgba(160,220,255,.9);
+    color:#010912;
+    font-weight:bold;
+}
+
+.invoice-actions #print-btn:hover{
+    background:#6dc9ff;
+}
+
+@media print{
+    .navbar, footer, .invoice-actions{
+        display:none;
+    }
+    .invoice-card{
+        border:none;
+    }
+}

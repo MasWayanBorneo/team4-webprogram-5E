@@ -1,0 +1,515 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
+
+
+:root{
+  --bg:#0d0a17;          /* violet-black page */
+  --surface:#16122a;     /* nav, cards */
+  --surface-2:#1d1838;   /* raised card */
+  --ink:#f5f2fb;         /* primary text */
+  --muted:#a79ec6;       /* secondary text */
+  --faint:#6f6790;       /* tertiary / captions */
+  --line:rgba(255,255,255,.09);
+
+  /* stage-light accent spectrum */
+  --violet:#7b5cff;
+  --magenta:#e23f97;
+  --pink:#ff5e8a;
+  --amber:#ffb45a;
+  --cyan:#39c6dd;
+  --accent:#00ff7bc3;      /* primary CTA */
+  --accent-press:#00ff7bc3;
+
+  /* duotone art gradients (colour for the placeholder tiles) */
+  --g1:linear-gradient(140deg,#7b5cff,#e23f97);
+  --g2:linear-gradient(140deg,#39c6dd,#7b5cff);
+  --g3:linear-gradient(140deg,#e23f97,#ffb45a);
+  --g4:linear-gradient(140deg,#5a4fff,#39c6dd);
+  --g5:linear-gradient(140deg,#ff5e8a,#ffb45a);
+  --g6:linear-gradient(140deg,#8a3fff,#e23f97);
+
+  --radius:16px;
+  --shell:1200px;
+  
+  /* --prime-color:#04ffd5;
+    --secondary-color:#41e71cc3;
+    --third-color:#1e1e1e; */
+    --prime-color:#1db1ac9d;
+    --secondary-color:#00ff7bc3;
+    --third-color:#000000;
+    --music-play-color:yellow;
+    --deep-color:#010912;
+    --surface:#031e33;
+    --mid:#021525;
+    --card:rgba(0,20,50, .45);
+    --heading:#e8f4ff;
+    --body:rgba(160,210,240,.8);
+    --button:rgba(160,220,255,.9);
+    --glow:rgba(80,200,255,.5);
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color:var(--mid);
+}
+
+.app {
+    background:var(--mid);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #e8f4ff;
+    min-height: 100vh;
+    width: 100%;
+
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.navbar{
+   flex:auto;
+   background: var(--surface);
+   position: sticky;
+   width: 100%;
+   top: 0;
+   z-index: 100;
+   border-bottom: 2px solid #3e3a3a;
+}
+.navdiv{
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    padding:  15px;
+    font-family: Special Elite;
+}
+.icon { text-align: center;}
+
+/* List items - Navigation list items displayed inline with consistent spacing */
+li{
+    list-style: none;
+     display: inline-block;
+     margin: 0 20px;
+}
+
+/* List item links - Navigation links with white color and bold weight */
+li a{
+    color: white;
+    font-size: 18px;
+    position: relative;
+    text-decoration: none;
+    font-weight: bold;
+
+}
+li a .About {
+    color: var(--prime-color);
+    border-bottom: 4px solid var(--prime-color);
+}
+
+.nav-link {
+    font-size: 13px;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: rgba(160, 210, 240, 0.6);
+    text-decoration: none;
+    padding: 4px 0;
+    border-bottom: 1.5px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-bottom-color 0.2s;
+}
+
+.nav-link:hover {
+    color: #e8f4ff;
+}
+
+.nav-link.active {
+    color: rgba(160, 220, 255, 0.95);
+    border-bottom-color: rgba(160, 220, 255, 0.7);
+}
+.logo{
+    float:inline-start;
+    margin-right:auto;
+    height: 60px;
+    width: 80px;  
+}
+li a .About {
+    color: var(--prime-color);
+    border-bottom: 4px solid var(--prime-color);
+}
+ul li :hover{
+    color: var(--prime-color);
+    border-bottom: 4px solid  var(--prime-color);
+}
+footer h2{
+    text-align: center;
+    color: white;
+    margin-bottom: 20px; 
+     
+}
+footer h3{
+    text-align: center;
+    color: white; 
+    margin: 20px; 
+   
+}
+footer p{text-align: start;color:gray;}
+.page-header {
+    text-align: center;
+    padding: 1.5rem 1.25rem 0.5rem;
+}
+
+
+.page-title {
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    color: #e8f4ff;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.content {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.quick-facts {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(160, 220, 255, 0.35);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+}
+
+.about-section,
+.history-section,
+.gallery-section,
+.members-section {
+    padding: 1.5rem 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.section-heading {
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: #e8f4ff;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.about-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(160, 210, 240, 0.8);
+    max-width: 720px;
+}
+
+/* HISTORY */
+
+.history-timeline {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 14px 16px;
+    background: var(--glow);
+    border: 1px solid rgba(160, 210, 240, 0.1);
+    border-radius: 10px;
+}
+
+.timeline-year {
+    flex-shrink: 0;
+    width: 70px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--prime-color);
+    letter-spacing: 0.04em;
+}
+
+.timeline-item p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(160, 210, 240, 0.8);
+}
+
+/* GALLERY */
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.gallery-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid rgba(160, 210, 240, 0.1);
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.gallery-img:hover {
+    transform: scale(1.03);
+    border-color: rgba(160, 220, 255, 0.3);
+}
+
+/* LIMELIGHT MEMBERSHIP */
+
+.limelight-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 1.5rem 0;
+}
+
+.benefit-card {
+    padding: 18px 16px;
+    background: var(--glow);
+    border: 1px solid rgba(160, 210, 240, 0.1);
+    border-radius: 10px;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.benefit-card:hover {
+    border-color: rgba(160, 220, 255, 0.3);
+    background: #031e33;
+}
+
+.benefit-icon {
+    font-size: 20px;
+    color: var(--prime-color);
+    margin-bottom: 10px;
+}
+
+.benefit-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e8f4ff;
+    margin-bottom: 6px;
+}
+
+.benefit-desc {
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba(160, 210, 240, 0.6);
+}
+
+.btn-join {
+    display: inline-block;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 25px;
+    background: red;
+    color: white;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+    
+}
+
+.btn-join:hover {
+  text-decoration: underline;
+    opacity: 50%;
+}
+
+/* LIMELIGHT FORM */
+
+.limelight-form {
+    max-width: 640px;
+    margin-top: 1.5rem;
+    padding: 22px;
+    background: var(--card);
+    border: 1px solid rgba(160, 210, 240, 0.1);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.limelight-form-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: #e8f4ff;
+    letter-spacing: 0.02em;
+}
+
+.limelight-form .form-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.limelight-form .form-group {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.limelight-form label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(160, 210, 240, 0.7);
+}
+
+.limelight-form input,
+.limelight-form select {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--mid);
+    color: #e8f4ff;
+    font-size: 14px;
+}
+
+.limelight-form input:focus,
+.limelight-form select:focus {
+    outline: 2px solid var(--prime-color);
+}
+
+.limelight-confirm {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4CAF50;
+}
+
+.member-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background:var(--glow);
+    border: 1px solid rgba(160, 210, 240, 0.1);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: border-color 0.2s, background-color 0.2s;
+    text-decoration: none;
+    color: inherit;
+}
+
+.member-card:hover {
+    border-color: rgba(160, 220, 255, 0.3);
+    background: #031e33;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #031e33;
+    border: 1px solid rgba(160, 220, 255, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.avatar-initials {
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(160, 220, 255, 0.85);
+    letter-spacing: 0.05em;
+}
+
+.avatar-img, .profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    display: block;
+}
+
+.member-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.member-name {
+    font-size: 14px;
+    font-weight: 400;
+    color: #e8f4ff;
+    letter-spacing: 0.03em;
+    margin-bottom: 2px;
+}
+
+.member-role {
+    font-size: 12px;
+    font-weight: 300;
+    color: rgba(160, 210, 240, 0.5);
+}
+
+.member-arrow {
+    font-size: 18px;
+    color: rgba(160, 220, 255, 0.25);
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        gap: 1rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .nav-link {
+        font-size: 12px;
+    }
+
+    .content {
+        padding: 0.75rem 1rem;
+    }
+
+    .member-card {
+        padding: 12px 14px;
+    }
+
+    .avatar {
+        width: 42px;
+        height: 42px;
+    }
+
+    .quick-facts {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .limelight-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .limelight-form .form-row {
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        gap: 4px;
+    }
+}
