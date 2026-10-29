@@ -27,6 +27,44 @@
     color:var(--card-ink);
 }
 
+/* pilih konser (form GET terpisah di atas form pesanan) */
+.concert-picker{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-bottom:22px;
+}
+
+.concert-picker label{
+    font-weight:600;
+}
+
+.concert-picker__row{
+    display:flex;
+    gap:10px;
+}
+
+.concert-picker select{
+    flex:1;
+    min-width:0;
+    padding:12px 14px;
+    border-radius:var(--btn-radius);
+    border:var(--field-border);
+    background:var(--field-bg);
+    color:var(--field-ink);
+    font-size:1rem;
+}
+
+.concert-picker__btn{
+    border:none;
+    padding:0 18px;
+    border-radius:var(--btn-radius);
+    background:var(--surface);
+    color:var(--heading);
+    font-weight:bold;
+    cursor:pointer;
+}
+
 .ticket-form{
     display:flex;
     flex-direction:column;
@@ -140,6 +178,24 @@
 }
 
 /* RINGKASAN PESANAN */
+
+/* tombol "Update total": hitung ulang total di server */
+.total-btn{
+    align-self:flex-end;
+    margin-top:-12px;
+    border:2px solid var(--surface);
+    padding:6px 14px;
+    border-radius:var(--btn-radius);
+    background:transparent;
+    color:var(--surface);
+    font-weight:600;
+    cursor:pointer;
+}
+
+.total-btn:hover{
+    background:var(--surface);
+    color:var(--heading);
+}
 
 .order-summary{
     display:flex;

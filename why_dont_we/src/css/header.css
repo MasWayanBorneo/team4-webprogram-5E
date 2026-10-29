@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 /* ============================================================================
-   HEADER BERSAMA — markup/gaya sama di semua halaman (pasangan footer.css).
+   HEADER BERSAMA — markup ada di includes/header.php (pasangan footer.css).
    Dibatasi di bawah .site-header supaya aturan halaman (li, li a, ul li :hover, .logo)
    tidak mengubah tampilannya.
    ============================================================================ */
