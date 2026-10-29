@@ -1,6 +1,6 @@
 /* ============================================================================
    MERCH PRODUCTS — temporary data source for src/merch/merch.html.
-   Each object is one row of the `products` table (see database/merch.sql),
+   Each object is one row of the `products` table in wdw_db (database/wdw_db.sql),
    with the same column names. When the database is ready, remove this file
    and point loadProducts() in src/js/merch.js at the API endpoint instead.
 
