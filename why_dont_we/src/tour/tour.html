@@ -47,94 +47,42 @@
         <section class="filter-section">
         
 
-            <div class="filters">
-                <button>Asia</button>
-                <button>America</button>
-                <button>Europe</button>
-                <button>Other</button>
+            <div class="filters" aria-label="Filter by region">
+                <button type="button" data-region="all" class="is-active" aria-pressed="true">All</button>
+                <button type="button" data-region="asia" aria-pressed="false">Asia</button>
+                <button type="button" data-region="america" aria-pressed="false">America</button>
+                <button type="button" data-region="europe" aria-pressed="false">Europe</button>
+                <button type="button" data-region="other" aria-pressed="false">Other</button>
             </div>
         </section>
 
-        <!-- Tour Listing -->
-        <section class="tour-section">
+        <!-- Tour Listing — diisi oleh ../js/tour.js dari api/concerts.php -->
+        <section id="tour-list" class="tour-section" aria-label="Upcoming concerts"></section>
+        <p id="tour-empty" class="tour-empty" hidden>No upcoming concerts in this region yet.</p>
 
-           
-
-            <!-- Item 1 -->
+        <!-- TEMPLATE KARTU KONSER -->
+        <template id="tpl-concert">
             <article class="tour-card">
-                <img src="../../assets/image/why-dont-we-just.png" alt="Jakarta Concert">
+                <img data-field="image" alt="">
 
                 <div class="tour-info">
-                    <h3>Jakarta Convention Center (JCC)</h3>
-                    <p>Jakarta Pusat</p>
-                    <p>12 August 2026</p>
+                    <h3 data-field="venue_name"></h3>
+                    <p data-field="location"></p>
+                    <p data-field="date"></p>
                 </div>
 
-                <div class="tour-status">
-                    <span class="available">Available</span>
-                    <a href="../ticket/ticket.html" class="ticket-link">Get Ticket</a>
-                </div>
+                <div class="tour-status"></div>
             </article>
-
-            <!-- Item 2 -->
-            <article class="tour-card">
-                <img src="../../assets/image/why-dont-we-just.png" alt="Bandung Concert">
-
-                <div class="tour-info">
-                    <h3>Jakarta Convention Center (JCC)</h3>
-                    <p>Jakarta Pusat</p>
-                    <p>12 August 2026</p>
-                </div>
-
-                <div class="tour-status">
-                    <span class="available">Available</span>
-                    <a href="../ticket/ticket.html" class="ticket-link">Get Ticket</a>
-                </div>
-            </article>
-
-            <!-- Item 3 -->
-            <article class="tour-card">
-                <img src="../../assets/image/why-dont-we-just.png" alt="Upcoming Tour">
-
-                <div class="tour-info">
-                    <h3>Jakarta Convention Center (JCC)</h3>
-                    <p>Jakarta Pusat</p>
-                    <p>12 August 2026</p>
-                </div>
-
-                <div class="tour-status">
-                    <span class="coming">Coming Soon</span>
-                    <button>Pre Order</button>
-                </div>
-            </article>
-
-            <!-- Item 4 -->
-            <article class="tour-card">
-                <img src="../../assets/image/why-dont-we-just.png" alt="Sold Out Tour">
-
-                <div class="tour-info">
-                    <h3>Jakarta Convention Center (JCC)</h3>
-                    <p>Jakarta Pusat</p>
-                    <p>12 August 2026</p>
-                </div>
-
-                <div class="tour-status">
-                    <span class="sold">Sold Out</span>
-                    
-                </div>
-            </article>
-
-        </section>
+        </template>
 
         <!-- Archive -->
         <section class="archive-section">
             <h2>Past Tour Archive</h2>
 
-            <select>
-                <option>2025</option>
-                <option>2024</option>
-                <option>2023</option>
-            </select>
+            <label for="archive-year" class="visually-hidden">Year</label>
+            <select id="archive-year"></select>
+            <p id="archive-empty" class="tour-empty" hidden>No past shows yet.</p>
+            <div id="archive-list" class="tour-section archive-list"></div>
         </section>
 
         <!-- Newsletter -->
@@ -198,6 +146,8 @@
     </div>
   </div>
 </footer>
+
+<script src="../js/tour.js" defer></script>
 
 </body>
 </html>

@@ -142,11 +142,11 @@
             return usd.format(Number(amount));
         }
 
-        const order = JSON.parse(sessionStorage.getItem('wdwTicketOrder') || 'null');
+        // data invoice diambil dari database: invoice.html?invoice=WDW-...
+        let order = null;
+        const invoiceNo = new URLSearchParams(location.search).get('invoice');
 
-        if (!order) {
-            document.getElementById('empty-state').hidden = false;
-        } else {
+        function showInvoice() {
             document.getElementById('invoice-section').hidden = false;
 
             document.getElementById('inv-number').textContent = order.invoiceNo;
@@ -165,6 +165,25 @@
             document.getElementById('inv-unit').textContent = formatPrice(order.unitPrice);
             document.getElementById('inv-subtotal').textContent = formatPrice(order.total);
             document.getElementById('inv-total').textContent = formatPrice(order.total);
+        }
+
+        function showEmpty() {
+            document.getElementById('empty-state').hidden = false;
+        }
+
+        if (!invoiceNo) {
+            showEmpty();
+        } else {
+            fetch('../../api/ticket-orders.php?invoice=' + encodeURIComponent(invoiceNo))
+                .then((res) => (res.ok ? res.json() : Promise.reject(new Error('status ' + res.status))))
+                .then((data) => {
+                    order = data;
+                    showInvoice();
+                })
+                .catch((error) => {
+                    console.error('Could not load invoice:', error);
+                    showEmpty();
+                });
         }
 
         document.getElementById('print-btn').addEventListener('click', () => {

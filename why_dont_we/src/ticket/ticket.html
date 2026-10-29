@@ -43,7 +43,7 @@
                 <div class="form-group">
                     <label for="concert">Concert</label>
                     <select id="concert" name="concert" required>
-                        <option value="Jakarta Convention Center (JCC) - 12 August 2026">Jakarta Convention Center (JCC) — 12 August 2026</option>
+                        <option value="">Loading concerts…</option>
                     </select>
                 </div>
 
@@ -64,27 +64,21 @@
                 </div>
 
                 <!-- Ticket Categories -->
-                <fieldset class="ticket-categories">
+                <!-- Kategori tiket diisi oleh ../js/ticket.js dari api/concerts.php?id=... -->
+                <fieldset class="ticket-categories" id="category-list">
                     <legend>Ticket Category</legend>
-
-                    <label class="category-card" for="regular">
-                        <input type="radio" id="regular" name="category" value="50" data-name="Regular" checked>
-                        <div class="category-info">
-                            <h3>Regular</h3>
-                            <p>Standing area access, official merch discount voucher.</p>
-                        </div>
-                        <span class="category-price">$50</span>
-                    </label>
-
-                    <label class="category-card" for="vip">
-                        <input type="radio" id="vip" name="category" value="100" data-name="VIP">
-                        <div class="category-info">
-                            <h3>VIP</h3>
-                            <p>Front-row standing area, exclusive merch pack, meet &amp; greet pass.</p>
-                        </div>
-                        <span class="category-price">$100</span>
-                    </label>
                 </fieldset>
+
+                <template id="tpl-category">
+                    <label class="category-card">
+                        <input type="radio" name="category" required>
+                        <div class="category-info">
+                            <h3 data-field="name"></h3>
+                            <p data-field="description"></p>
+                        </div>
+                        <span class="category-price" data-field="price"></span>
+                    </label>
+                </template>
 
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
@@ -93,8 +87,10 @@
 
                 <div class="order-summary">
                     <span>Total</span>
-                    <span id="total-price">$50</span>
+                    <span id="total-price">$0</span>
                 </div>
+
+                <p id="ticket-error" class="ticket-error" role="alert" hidden></p>
 
                 <button type="submit" class="ticket-submit">Proceed to Checkout</button>
             </form>
@@ -136,55 +132,7 @@
   </div>
 </footer>
 
-    <script>
-        const form = document.getElementById('ticket-form');
-        const quantityInput = document.getElementById('quantity');
-        const totalEl = document.getElementById('total-price');
-
-        const usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2 });
-
-        function formatPrice(amount) {
-            return usd.format(Number(amount));
-        }
-
-        function updateTotal() {
-            const selected = form.querySelector('input[name="category"]:checked');
-            const price = Number(selected.value);
-            const quantity = Number(quantityInput.value) || 1;
-            totalEl.textContent = formatPrice(price * quantity);
-        }
-
-        form.querySelectorAll('input[name="category"]').forEach((input) => {
-            input.addEventListener('change', updateTotal);
-        });
-        quantityInput.addEventListener('input', updateTotal);
-
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            const selected = form.querySelector('input[name="category"]:checked');
-            const unitPrice = Number(selected.value);
-            const quantity = Number(quantityInput.value) || 1;
-
-            const order = {
-                invoiceNo: 'WDW-' + Date.now().toString(36).toUpperCase(),
-                date: new Date().toISOString(),
-                concert: document.getElementById('concert').value,
-                fullname: document.getElementById('fullname').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                categoryName: selected.dataset.name,
-                unitPrice: unitPrice,
-                quantity: quantity,
-                total: unitPrice * quantity
-            };
-
-            sessionStorage.setItem('wdwTicketOrder', JSON.stringify(order));
-            window.location.href = 'invoice.html';
-        });
-
-        updateTotal();
-    </script>
+    <script src="../js/ticket.js" defer></script>
 
 </body>
 </html>

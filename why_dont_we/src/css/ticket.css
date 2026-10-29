@@ -101,6 +101,12 @@
     transition:border-color .15s, background .15s;
 }
 
+/* kategori yang kuotanya habis */
+.category-card:has(input:disabled){
+    opacity:.55;
+    cursor:not-allowed;
+}
+
 .category-card:has(input:checked){
     border-color:var(--secondary-color);
     background:rgba(255,255,255,.9);
@@ -160,6 +166,21 @@
     cursor:pointer;
     box-shadow:0 5px 30px rgba(0,0,0,.25);
     transition:opacity .2s, transform .2s;
+}
+
+.ticket-submit:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+    transform:none;
+}
+
+/* pesan error dari server (mis. kuota habis, email tidak valid) */
+.ticket-error{
+    padding:12px 14px;
+    border-radius:var(--btn-radius);
+    background:#ffd0cc;
+    color:#8a1c12;
+    font-weight:600;
 }
 
 .ticket-submit:hover{

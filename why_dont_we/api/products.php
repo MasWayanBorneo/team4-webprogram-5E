@@ -8,32 +8,21 @@
    http://localhost/team4-webdesign-4E/why_dont_we/api/products.php
    ============================================================================ */
 
-require __DIR__ . "/../config/database.php";
+require __DIR__ . "/helpers.php";
 
-header("Content-Type: application/json; charset=utf-8");
-
-$sql = "SELECT id, name, collection, price, image, is_featured
-        FROM products
-        WHERE is_active = 1
-        ORDER BY id";
-
-$result = mysqli_query($conn, $sql);
-
-if (!$result) {
-    http_response_code(500);
-    echo json_encode(["error" => "Gagal mengambil data produk."]);
-    exit;
-}
+$result = run_query($conn,
+    "SELECT id, name, collection, price, image, is_featured
+     FROM products
+     WHERE is_active = 1
+     ORDER BY id");
 
 $products = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    // mysqli mengembalikan semua nilai sebagai teks; ubah ke tipe aslinya
+    // ubah ke tipe aslinya (angka), bukan teks
     $row["id"]          = (int) $row["id"];
     $row["price"]       = (float) $row["price"];
     $row["is_featured"] = (int) $row["is_featured"];
     $products[] = $row;
 }
 
-mysqli_close($conn);
-
-echo json_encode($products, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+send_json($products);
