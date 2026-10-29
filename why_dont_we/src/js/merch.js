@@ -8,11 +8,14 @@
   const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
   /* --- sumber data ----------------------------------------------------------
-     Satu-satunya bagian yang diubah saat database siap, contohnya:
-       return fetch(ROOT + "api/products.php").then((res) => res.json());
-     Endpoint cukup mengembalikan baris tabel `products` sebagai array JSON. */
+     Produk diambil dari database lewat api/products.php (tabel `products`).
+     Halaman harus dibuka lewat http://localhost/..., bukan file://, supaya
+     PHP-nya jalan. */
   function loadProducts() {
-    return Promise.resolve(window.MERCH_PRODUCTS || []);
+    return fetch(ROOT + "api/products.php").then((res) => {
+      if (!res.ok) throw new Error(`API produk membalas status ${res.status}`);
+      return res.json();
+    });
   }
 
   // MySQL/PHP sering mengembalikan angka dan boolean sebagai teks ("1", "65.00")
@@ -25,7 +28,7 @@
     node.querySelectorAll("[data-field]").forEach((el) => {
       const field = el.dataset.field;
       if (field === "image") {
-        el.src = ROOT + product.image;
+        if (product.image) el.src = ROOT + product.image; // kolom image boleh kosong (NULL)
         el.alt = product.name;
       } else if (field === "price") {
         el.textContent = money.format(Number(product.price));
