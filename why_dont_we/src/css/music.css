@@ -215,18 +215,18 @@ h2{
     margin-top: auto;   
 }
 
-/* Button anchor point - Anchor reference for dropdown menu positioning */
-.tombol {anchor-name: --tombol --tombol2;}
-
-/* Main dropdown menu - Positioned dropdown menu for button actions */
+/* Stream popover - top/left/width come from ../js/music.js so it sits right
+   under the Stream button that was clicked, with the same width */
 #dropdown{
-    padding: 20px;
     position: absolute;
-    width: min(360px, 90vw);
-    position-anchor: --tombol  --tombol2;
-    position-area: bottom center;
-    border-radius: 10px; 
-    justify-self: center;    
+    inset: auto;
+    margin: 0;
+    padding: 12px;
+    box-sizing: border-box;
+    background: #fff;
+    border: var(--card-border);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
 /* First lyrics anchor point - Position reference for first lyrics dropdown */
@@ -315,15 +315,28 @@ h2{
 
 /* Icon image - Fixed-size image for social media or platform icons */
 .icon2 img{
-    width: min(200px, 60vw);
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto;
 }
 
-/* Icon container - Flex container for vertical alignment of icons */
+/* Icon container - stacks the platform logos, sized to the popover width */
 .icon2{
     display: flex;
-    align-items: center;
     flex-direction: column;
-   
+    gap: 10px;
+}
+
+.icon2 a{
+    display: block;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.icon2 a:hover{
+    background: rgba(0,0,0,.06);
 }
 
 /* Icon hover effect - Reduced opacity on hover for visual feedback */
