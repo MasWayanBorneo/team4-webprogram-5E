@@ -5,9 +5,12 @@
 html{scroll-behavior:smooth;}
 body{
   margin:0;
-  /* site theme (see base.css); the GIF now lives only behind the hero */
-  background:var(--page-bg);
-  color:var(--page-ink);
+  /* home keeps its GIF background; cards and buttons follow the site theme (base.css) */
+  background: url(../../assets/image/WDW-SlowDown-MobileHeader-640x1136.gif);
+  color:var(--ink);
+  /* same scale as `cover` on one viewport (gif is 640x1136), without locking the
+     body to 100vh — a fixed body height made the sticky header scroll away */
+  background-size: max(100%, calc(100vh * 640 / 1136)) auto;
   min-height: 100vh;
   font-family:"Space Grotesk",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
   font-size:clamp(15px,1vw + 13px,17px);
@@ -36,7 +39,7 @@ button{font:inherit;color:inherit;cursor:pointer;}
   margin-bottom:clamp(1.8rem,3vw,2.6rem);
 }
 .head-link{
-  font-weight:700;font-size:.95rem;color:var(--page-ink);
+  font-weight:700;font-size:.95rem;color:var(--heading);
   border-bottom:3px solid transparent;padding-bottom:2px;transition:border-color .15s;
   white-space:nowrap;
 }
@@ -108,13 +111,7 @@ img{
 /* ============================================================================
    HERO  — the signature: stage-light wash + edge-to-edge wordmark
    ============================================================================ */
-.hero{
-  position:relative;overflow:hidden;isolation:isolate;color:var(--ink);
-  background:url(../../assets/image/WDW-SlowDown-MobileHeader-640x1136.gif) center/cover no-repeat;
-  border-bottom:var(--card-border);
-}
-/* darken the GIF a little so the hero text stays readable */
-.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(1,9,18,.55),rgba(1,9,18,.15));}
+.hero{position:relative;overflow:hidden;isolation:isolate;}
 .hero__bg{
   position:absolute;inset:0;z-index:-2;
  
@@ -155,7 +152,7 @@ img{
 .release__meta{display:grid;gap:1.2rem;justify-items:start;}
 .release__kicker{background:var(--btn-bg);color:var(--btn-ink);font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;border-radius:999px;padding:.2rem .9rem;margin:0;}
 .release__title{font-family:var(--title-font);font-size:clamp(2.4rem,5vw,3.6rem);color:var(--cta-ink);text-transform:lowercase;line-height:1;margin:0;}
-.release__sub{color:var(--page-ink);font-weight:600;margin:0;}
+.release__sub{color:var(--heading);font-weight:600;margin:0;}
 .streams{
   display:grid;
   grid-auto-flow:column;

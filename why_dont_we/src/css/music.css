@@ -18,7 +18,7 @@
 /* Body - Main page container with centered layout and full viewport height background */
 body{
 
-    background:var(--prime-color);
+    background:var(--page-bg);
     overflow-x: hidden;
     width: 100%;
 
@@ -373,7 +373,7 @@ h2{
     padding-top: 20px;
     font-family: Special Elite;
    text-transform: lowercase;
-   color: #fffb00;
+   color: var(--cta-ink);
 }
 .brand{
     width: 60px;

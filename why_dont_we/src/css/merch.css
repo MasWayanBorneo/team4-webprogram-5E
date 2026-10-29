@@ -12,7 +12,7 @@
 }
 
 body{
-    background:var(--prime-color);
+    background:var(--page-bg);
     color:var(--heading);
     font-family:'Segoe UI',sans-serif;
     min-height:100vh;
@@ -47,14 +47,14 @@ img{
     text-align:center;
     font-size:60px;
     padding-top:20px;
-    font-family:'Special Elite',serif;
+    font-family:var(--title-font);
     text-transform:lowercase;
-    color:#fffb00;
+    color:var(--cta-ink);
 }
 
 .section-title{
     text-align:center;
-    font-family:'Special Elite',serif;
+    font-family:var(--title-font);
     font-size:40px;
     padding:40px 0;
     color:var(--heading);
@@ -73,8 +73,8 @@ img{
 
 .featured-card,
 .product-card{
-    border:2px solid var(--secondary-color);
-    border-radius:20px;
+    border:var(--card-border);
+    border-radius:var(--card-radius);
     box-shadow:0 5px 80px rgba(0,0,0,.5);
 }
 
@@ -103,10 +103,10 @@ img{
 ========================== */
 
 button{
-    background-color:var(--secondary-color);
-    color:#000;
+    background-color:var(--btn-bg);
+    color:var(--btn-ink);
     border:none;
-    border-radius:10px;
+    border-radius:var(--btn-radius);
     padding:10px 20px;
     font-size:22px;
     cursor:pointer;
