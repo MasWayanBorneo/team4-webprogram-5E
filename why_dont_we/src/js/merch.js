@@ -3,7 +3,7 @@
    and keeps the cart count. Product fields map 1:1 to the `products` table.
    ============================================================================ */
 (() => {
-  const ROOT = "../../";       // merch.html → project root (image paths are root-relative)
+  const ROOT = "../../"; // merch.html → project root (image paths are root-relative)
   const CART_KEY = "wdw-cart"; // { [productId]: quantity }
   const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
