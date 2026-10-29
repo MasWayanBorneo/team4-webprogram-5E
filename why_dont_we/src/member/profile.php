@@ -17,14 +17,14 @@
 <!-- ============================ HEADER ============================ -->
 <header class="site-header">
   <nav class="site-nav" aria-label="Main">
-    <a class="site-nav__logo" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+    <a class="site-nav__logo" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
     <ul class="site-nav__links">
-      <li><a href="../../index.html">Home</a></li>
-      <li><a href="profile.html" class="is-active" aria-current="page">About</a></li>
-      <li><a href="../music/music.html">Music</a></li>
-      <li><a href="../tour/tour.html">Tour</a></li>
-      <li><a href="../merch/merch.html">Merch</a></li>
-      <li><a href="../article/news.html">News</a></li>
+      <li><a href="../../index.php">Home</a></li>
+      <li><a href="profile.php" class="is-active" aria-current="page">About</a></li>
+      <li><a href="../music/music.php">Music</a></li>
+      <li><a href="../tour/tour.php">Tour</a></li>
+      <li><a href="../merch/merch.php">Merch</a></li>
+      <li><a href="../article/news.php">News</a></li>
     </ul>
   </nav>
 </header>
@@ -94,7 +94,7 @@
 
             <div class="content">
 
-                <a href="daniel.html" class="member-card">
+                <a href="daniel.php" class="member-card">
                     <div class="avatar">
                         <img src="../../assets/image/daniel.jpg" alt="Daniel" class="avatar-img">
                     </div>
@@ -103,7 +103,7 @@
                         <p class="member-role">Vocals · Guitar</p>
                     </div>
                     <span class="member-arrow">›</span>
-                </a> <a href="corbyn.html" class="member-card">
+                </a> <a href="corbyn.php" class="member-card">
                     <div class="avatar">
                         <img src="../../assets/image/corbyn.jpg" alt="Corbyn" class="avatar-img">
                     </div>
@@ -112,7 +112,7 @@
                         <p class="member-role">Vocals · Guitar</p>
                     </div>
                     <span class="member-arrow">›</span>
-                </a> <a href="jack.html" class="member-card">
+                </a> <a href="jack.php" class="member-card">
                     <div class="avatar">
                         <img src="../../assets/image/jack.jpg" alt="Jack" class="avatar-img">
                     </div>
@@ -121,7 +121,7 @@
                         <p class="member-role">Vocals · Guitar</p>
                     </div>
                     <span class="member-arrow">›</span>
-                </a> <a href="jonah.html" class="member-card">
+                </a> <a href="jonah.php" class="member-card">
                     <div class="avatar">
                         <img src="../../assets/image/jonah.jpg" alt="Jonah" class="avatar-img">
                     </div>
@@ -130,7 +130,7 @@
                         <p class="member-role">Vocals · Guitar</p>
                     </div>
                     <span class="member-arrow">›</span>
-                </a> <a href="zach.html" class="member-card">
+                </a> <a href="zach.php" class="member-card">
                     <div class="avatar">
                         <img src="../../assets/image/zach.jpg" alt="Zach" class="avatar-img">
                     </div>
@@ -226,20 +226,20 @@
   <div class="shell">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+        <a class="brand" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
         <p>Official site. Pop's five-piece — music, tour, and more.</p>
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.html">Albums</a></li><li><a href="../music/music.html">Singles</a></li><li><a href="../article/article-video.html">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article-video.php">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
-        <ul><li><a href="profile.html">About</a></li><li><a href="../tour/tour.html">Tour</a></li><li><a href="../article/news.html">News</a></li></ul>
+        <ul><li><a href="profile.php">About</a></li><li><a href="../tour/tour.php">Tour</a></li><li><a href="../article/news.php">News</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="More">
         <h4>More</h4>
-        <ul><li><a href="../merch/merch.html">Merch</a></li><li><a href="../ticket/ticket.html">Tickets</a></li><li><a href="../../index.html">Home</a></li></ul>
+        <ul><li><a href="../merch/merch.php">Merch</a></li><li><a href="../ticket/ticket.php">Tickets</a></li><li><a href="../../index.php">Home</a></li></ul>
       </nav>
     </div>
 

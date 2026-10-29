@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>International Tour Begins | Why Don't We</title>
+  <title>Tour Dates Revealed | Why Don't We</title>
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/article.css">
   <link rel="stylesheet" href="../css/header.css">
@@ -14,73 +14,69 @@
 <!-- ============================ HEADER ============================ -->
 <header class="site-header">
   <nav class="site-nav" aria-label="Main">
-    <a class="site-nav__logo" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+    <a class="site-nav__logo" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
     <ul class="site-nav__links">
-      <li><a href="../../index.html">Home</a></li>
-      <li><a href="../member/profile.html">About</a></li>
-      <li><a href="../music/music.html">Music</a></li>
-      <li><a href="../tour/tour.html">Tour</a></li>
-      <li><a href="../merch/merch.html">Merch</a></li>
-      <li><a href="news.html" class="is-active" aria-current="page">News</a></li>
+      <li><a href="../../index.php">Home</a></li>
+      <li><a href="../member/profile.php">About</a></li>
+      <li><a href="../music/music.php">Music</a></li>
+      <li><a href="../tour/tour.php">Tour</a></li>
+      <li><a href="../merch/merch.php">Merch</a></li>
+      <li><a href="news.php" class="is-active" aria-current="page">News</a></li>
     </ul>
   </nav>
 </header>
 
 <main>
 
-  <a href="news.html" class="back-link">&#8592; Back to News</a>
+  <a href="news.php" class="back-link">&#8592; Back to News</a>
 
   <div class="article-header">
-    <p class="category">Tour</p>
-    <h1>International Tour Begins</h1>
-    <p class="meta">June 1, 2026 &bull; 4 min read</p>
+    <p class="category">Announcement</p>
+    <h1>Tour Dates Revealed</h1>
+    <p class="meta">May 15, 2026 &bull; 3 min read</p>
   </div>
 
-  <img class="article-hero" src="../../assets/image/something-different.png" alt="International Tour">
+  <img class="article-hero" src="../../assets/image/hdylsthumb-5_0.jpg" alt="Tour Dates Revealed">
 
   <div class="article-body">
 
     <p>
-      Following the sold-out North American run, Why Don't We has confirmed an
-      international leg that will take them to Europe, Asia, and Latin America
-      for the first time since 2019. The global extension of the
-      <strong>Unfinished Business Tour</strong> runs from December 2026 through
-      March 2027.
+      The wait is over. Why Don't We has officially announced their 2026 North American
+      headline tour — 32 cities, three months, and what promises to be the biggest
+      production the band has ever brought to the road.
     </p>
 
-    <h2>European Dates</h2>
+    <h2>Full Tour Routing</h2>
     <p>
-      The European leg opens on <strong>December 5 in London</strong> at the O2 Arena,
-      followed by dates in Paris, Amsterdam, Berlin, Madrid, and Stockholm. The band
-      will also make their first-ever appearance in Dublin and Warsaw before wrapping
-      Europe on December 30 in Milan.
+      The <strong>Unfinished Business Tour</strong> kicks off on <strong>September 5</strong>
+      in Seattle, WA and wraps on <strong>November 28</strong> in Miami, FL. Major stops
+      include New York, Los Angeles, Chicago, Dallas, and Toronto.
     </p>
 
     <blockquote>
-      "International fans have been waiting a long time and so have we.
-      We cannot wait to finally be in the same room as you." — Jack Avery
+      "We have been dying to get back out there. This tour is going to feel like one long
+      reunion with everyone who has stuck with us." — Jack Avery
     </blockquote>
 
-    <h2>Asia-Pacific</h2>
+    <h2>Tickets</h2>
     <p>
-      January brings the band to the Asia-Pacific region, with confirmed shows in
-      Tokyo, Seoul, Manila, Jakarta, Singapore, and Sydney. The Southeast Asia leg
-      alone spans 8 cities across 3 weeks — the most comprehensive run the band
-      has ever done in the region.
+      Fan club pre-sale opens <strong>May 20 at 10 AM local time</strong>. General on-sale
+      follows on <strong>May 22</strong> via all major ticketing platforms. VIP packages —
+      including soundcheck access, a meet-and-greet, and exclusive merchandise —
+      are available in limited quantities.
     </p>
 
-    <h2>Latin America</h2>
+    <h2>Support Acts</h2>
     <p>
-      The tour closes out in Latin America through February and March, hitting
-      São Paulo, Buenos Aires, Bogotá, Mexico City, and Santiago. Fan-club
-      pre-sale for all international dates opens <strong>June 10</strong>.
-      General on-sale follows on <strong>June 14</strong>.
+      Support acts will be announced on a city-by-city basis over the coming weeks.
+      Follow the band's Instagram and Twitter for the latest updates as each date
+      is confirmed.
     </p>
 
     <p>
-      Full international dates are listed on the <a href="../tour/tour.html"
-      style="color:rgba(160,220,255,.9);">Tour page</a>. This one is going to be
-      special — do not miss your city.
+      Full dates and venue listings are available on the <a href="../tour/tour.php"
+      style="color:rgba(160,220,255,.9);">Tour page</a>. Don't sleep on tickets —
+      several markets sold out within hours during the last run.
     </p>
 
   </div>
@@ -92,20 +88,20 @@
   <div class="shell">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+        <a class="brand" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
         <p>Official site. Pop's five-piece — music, tour, and more.</p>
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.html">Albums</a></li><li><a href="../music/music.html">Singles</a></li><li><a href="article-video.html">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="article-video.php">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
-        <ul><li><a href="../member/profile.html">About</a></li><li><a href="../tour/tour.html">Tour</a></li><li><a href="news.html">News</a></li></ul>
+        <ul><li><a href="../member/profile.php">About</a></li><li><a href="../tour/tour.php">Tour</a></li><li><a href="news.php">News</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="More">
         <h4>More</h4>
-        <ul><li><a href="../merch/merch.html">Merch</a></li><li><a href="../ticket/ticket.html">Tickets</a></li><li><a href="../../index.html">Home</a></li></ul>
+        <ul><li><a href="../merch/merch.php">Merch</a></li><li><a href="../ticket/ticket.php">Tickets</a></li><li><a href="../../index.php">Home</a></li></ul>
       </nav>
     </div>
 

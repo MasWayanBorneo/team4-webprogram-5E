@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exclusive Studio Session | Why Don't We</title>
+  <title>International Tour Begins | Why Don't We</title>
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/article.css">
   <link rel="stylesheet" href="../css/header.css">
@@ -14,68 +14,73 @@
 <!-- ============================ HEADER ============================ -->
 <header class="site-header">
   <nav class="site-nav" aria-label="Main">
-    <a class="site-nav__logo" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+    <a class="site-nav__logo" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
     <ul class="site-nav__links">
-      <li><a href="../../index.html">Home</a></li>
-      <li><a href="../member/profile.html">About</a></li>
-      <li><a href="../music/music.html">Music</a></li>
-      <li><a href="../tour/tour.html">Tour</a></li>
-      <li><a href="../merch/merch.html">Merch</a></li>
-      <li><a href="news.html" class="is-active" aria-current="page">News</a></li>
+      <li><a href="../../index.php">Home</a></li>
+      <li><a href="../member/profile.php">About</a></li>
+      <li><a href="../music/music.php">Music</a></li>
+      <li><a href="../tour/tour.php">Tour</a></li>
+      <li><a href="../merch/merch.php">Merch</a></li>
+      <li><a href="news.php" class="is-active" aria-current="page">News</a></li>
     </ul>
   </nav>
 </header>
 
 <main>
 
-  <a href="news.html" class="back-link">&#8592; Back to News</a>
+  <a href="news.php" class="back-link">&#8592; Back to News</a>
 
   <div class="article-header">
-    <p class="category">Interview</p>
-    <h1>Exclusive Studio Session</h1>
-    <p class="meta">May 22, 2026 &bull; 5 min read</p>
+    <p class="category">Tour</p>
+    <h1>International Tour Begins</h1>
+    <p class="meta">June 1, 2026 &bull; 4 min read</p>
   </div>
 
-  <img class="article-hero" src="../../assets/image/flower.jpg" alt="Studio Session">
+  <img class="article-hero" src="../../assets/image/something-different.png" alt="International Tour">
 
   <div class="article-body">
 
     <p>
-      We were given rare access to the Los Angeles studio where Why Don't We has been
-      putting the finishing touches on their new record. What we found was five friends
-      who have grown into genuine artists — confident, collaborative, and completely
-      in sync.
+      Following the sold-out North American run, Why Don't We has confirmed an
+      international leg that will take them to Europe, Asia, and Latin America
+      for the first time since 2019. The global extension of the
+      <strong>Unfinished Business Tour</strong> runs from December 2026 through
+      March 2027.
     </p>
 
-    <h2>Inside the Room</h2>
+    <h2>European Dates</h2>
     <p>
-      The session started at noon and ran past midnight. Daniel Seavey sat behind a
-      grand piano in the corner, working through chord progressions with a notebook
-      open beside him. Across the room Zach Herron and Jonah Marais traded verses on
-      acoustic guitars, stopping occasionally to replay lines into a voice memo app.
-      The vibe was relaxed — almost domestic — broken only by bursts of laughter when
-      a harmony landed perfectly on the first try.
+      The European leg opens on <strong>December 5 in London</strong> at the O2 Arena,
+      followed by dates in Paris, Amsterdam, Berlin, Madrid, and Stockholm. The band
+      will also make their first-ever appearance in Dublin and Warsaw before wrapping
+      Europe on December 30 in Milan.
     </p>
 
     <blockquote>
-      "We are writing for ourselves this time. Not for a demographic or a release
-      window — just for the five of us in this room." — Daniel Seavey
+      "International fans have been waiting a long time and so have we.
+      We cannot wait to finally be in the same room as you." — Jack Avery
     </blockquote>
 
-    <h2>The Sound</h2>
+    <h2>Asia-Pacific</h2>
     <p>
-      Producer Evan Blair, who helmed the session, described the album's sonic palette
-      as "open-air pop" — big choruses with space left inside them. Live drums, real
-      bass, and analogue synths sit beneath polished vocals that the band tracked mostly
-      together, live in the room, to capture a sense of energy that overdubs rarely
-      replicate.
+      January brings the band to the Asia-Pacific region, with confirmed shows in
+      Tokyo, Seoul, Manila, Jakarta, Singapore, and Sydney. The Southeast Asia leg
+      alone spans 8 cities across 3 weeks — the most comprehensive run the band
+      has ever done in the region.
     </p>
 
-    <h2>What's Next</h2>
+    <h2>Latin America</h2>
     <p>
-      Mixing wraps this month, with mastering scheduled for early July ahead of the
-      August release. The band will share a studio diary series on their YouTube channel
-      leading up to the drop — subscribe now so you don't miss an episode.
+      The tour closes out in Latin America through February and March, hitting
+      São Paulo, Buenos Aires, Bogotá, Mexico City, and Santiago. Fan-club
+      pre-sale for all international dates opens <strong>June 10</strong>.
+      General on-sale follows on <strong>June 14</strong>.
+    </p>
+
+    <p>
+      Full international dates are listed on the <a href="../tour/tour.php"
+      style="color:rgba(160,220,255,.9);">Tour page</a>. This one is going to be
+      special — do not miss your city.
     </p>
 
   </div>
@@ -87,20 +92,20 @@
   <div class="shell">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+        <a class="brand" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
         <p>Official site. Pop's five-piece — music, tour, and more.</p>
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.html">Albums</a></li><li><a href="../music/music.html">Singles</a></li><li><a href="article-video.html">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="article-video.php">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
-        <ul><li><a href="../member/profile.html">About</a></li><li><a href="../tour/tour.html">Tour</a></li><li><a href="news.html">News</a></li></ul>
+        <ul><li><a href="../member/profile.php">About</a></li><li><a href="../tour/tour.php">Tour</a></li><li><a href="news.php">News</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="More">
         <h4>More</h4>
-        <ul><li><a href="../merch/merch.html">Merch</a></li><li><a href="../ticket/ticket.html">Tickets</a></li><li><a href="../../index.html">Home</a></li></ul>
+        <ul><li><a href="../merch/merch.php">Merch</a></li><li><a href="../ticket/ticket.php">Tickets</a></li><li><a href="../../index.php">Home</a></li></ul>
       </nav>
     </div>
 

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zach Herron</title>
+    <title>Daniel Seavey</title>
     <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/about.css">
     <link rel="stylesheet" href="../css/header.css">
@@ -16,57 +16,57 @@
 <!-- ============================ HEADER ============================ -->
 <header class="site-header">
   <nav class="site-nav" aria-label="Main">
-    <a class="site-nav__logo" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+    <a class="site-nav__logo" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
     <ul class="site-nav__links">
-      <li><a href="../../index.html">Home</a></li>
-      <li><a href="profile.html" class="is-active" aria-current="page">About</a></li>
-      <li><a href="../music/music.html">Music</a></li>
-      <li><a href="../tour/tour.html">Tour</a></li>
-      <li><a href="../merch/merch.html">Merch</a></li>
-      <li><a href="../article/news.html">News</a></li>
+      <li><a href="../../index.php">Home</a></li>
+      <li><a href="profile.php" class="is-active" aria-current="page">About</a></li>
+      <li><a href="../music/music.php">Music</a></li>
+      <li><a href="../tour/tour.php">Tour</a></li>
+      <li><a href="../merch/merch.php">Merch</a></li>
+      <li><a href="../article/news.php">News</a></li>
     </ul>
   </nav>
 </header>
 
     <div class="app">
         <div class="back-nav">
-            <a href="profile.html" class="back-link">‹ Members</a>
+            <a href="profile.php" class="back-link">‹ Members</a>
         </div>
         <div class="profile-header">
             <div class="profile-pic">
-                <img src="../../assets/image/zach.jpg" class="profile-pic">
+                <img src="../../assets/image/daniel.jpg" class="profile-pic">
             </div>
-            <h1 class="profile-name">Zach Herron</h1>
-            <p class="profile-role">Vocals</p>
+            <h1 class="profile-name">Daniel Seavey</h1>
+            <p class="profile-role">Vocals · Guitar · Producer</p>
 
             <div class="quick-facts">
                 <div class="fact-card">
                     <div class="fact-label">Born</div>
-                    <div class="fact-value">May 27, 2001</div>
+                    <div class="fact-value">April 2, 1999</div>
                 </div>
                 <div class="fact-card">
                     <div class="fact-label">Zodiac</div>
-                    <div class="fact-value">Gemini</div>
+                    <div class="fact-value">Aries</div>
                 </div>
                 <div class="fact-card">
                     <div class="fact-label">Hometown</div>
-                    <div class="fact-value">Dallas, Texas</div>
+                    <div class="fact-value">Portland, Oregon</div>
                 </div>
                 <div class="fact-card">
-                    <div class="fact-label">Position</div>
-                    <div class="fact-value">Youngest Member (Maknae)</div>
+                    <div class="fact-label">Instruments</div>
+                    <div class="fact-value">Guitar, Cello, Piano</div>
                 </div>
             </div>
 
             <div class="bio-section">
                 <h2 class="bio-title">Profile</h2>
-                <p class="bio-text">Zachary Dean Herron is the youngest member of Why Don't We. He went viral on social
-                    media after a video of him singing Shawn Mendes's "Stitches" at school spread widely.</p>
+                <p class="bio-text">Daniel James Seavey is the main singer, songwriter, and producer of the group. He
+                    first gained public attention as a contestant on American Idol season 14 at the age of 15.</p>
                 <h2 class="bio-title">Trivia</h2>
                 <ul class="bio-list">
-                    <li>Joined the school choir before becoming famous.</li>
-                    <li>Cites Justin Bieber and Shawn Mendes as his inspirations.</li>
-                    <li>Released his debut solo single "Timelapse" in 2016.</li>
+                    <li>Can play more than 20 musical instruments.</li>
+                    <li>Huge fan of The Beatles and Ed Sheeran.</li>
+                    <li>Has a pet dog named Kobe.</li>
                 </ul>
             </div>
         </div>
@@ -77,20 +77,20 @@
   <div class="shell">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+        <a class="brand" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
         <p>Official site. Pop's five-piece — music, tour, and more.</p>
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.html">Albums</a></li><li><a href="../music/music.html">Singles</a></li><li><a href="../article/article-video.html">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article-video.php">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
-        <ul><li><a href="profile.html">About</a></li><li><a href="../tour/tour.html">Tour</a></li><li><a href="../article/news.html">News</a></li></ul>
+        <ul><li><a href="profile.php">About</a></li><li><a href="../tour/tour.php">Tour</a></li><li><a href="../article/news.php">News</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="More">
         <h4>More</h4>
-        <ul><li><a href="../merch/merch.html">Merch</a></li><li><a href="../ticket/ticket.html">Tickets</a></li><li><a href="../../index.html">Home</a></li></ul>
+        <ul><li><a href="../merch/merch.php">Merch</a></li><li><a href="../ticket/ticket.php">Tickets</a></li><li><a href="../../index.php">Home</a></li></ul>
       </nav>
     </div>
 

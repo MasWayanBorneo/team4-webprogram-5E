@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Summer Festival Appearance | Why Don't We</title>
+  <title>New Music Video Released | Why Don't We</title>
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/article.css">
   <link rel="stylesheet" href="../css/header.css">
@@ -14,65 +14,65 @@
 <!-- ============================ HEADER ============================ -->
 <header class="site-header">
   <nav class="site-nav" aria-label="Main">
-    <a class="site-nav__logo" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+    <a class="site-nav__logo" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
     <ul class="site-nav__links">
-      <li><a href="../../index.html">Home</a></li>
-      <li><a href="../member/profile.html">About</a></li>
-      <li><a href="../music/music.html">Music</a></li>
-      <li><a href="../tour/tour.html">Tour</a></li>
-      <li><a href="../merch/merch.html">Merch</a></li>
-      <li><a href="news.html" class="is-active" aria-current="page">News</a></li>
+      <li><a href="../../index.php">Home</a></li>
+      <li><a href="../member/profile.php">About</a></li>
+      <li><a href="../music/music.php">Music</a></li>
+      <li><a href="../tour/tour.php">Tour</a></li>
+      <li><a href="../merch/merch.php">Merch</a></li>
+      <li><a href="news.php" class="is-active" aria-current="page">News</a></li>
     </ul>
   </nav>
 </header>
 
 <main>
 
-  <a href="news.html" class="back-link">&#8592; Back to News</a>
+  <a href="news.php" class="back-link">&#8592; Back to News</a>
 
   <div class="article-header">
-    <p class="category">Event</p>
-    <h1>Summer Festival Appearance</h1>
-    <p class="meta">May 18, 2026 &bull; 4 min read</p>
+    <p class="category">Music</p>
+    <h1>New Music Video Released</h1>
+    <p class="meta">May 25, 2026 &bull; 4 min read</p>
   </div>
 
-  <img class="article-hero" src="../../assets/image/jfthumbnail.jpg" alt="Summer Festival">
+  <img class="article-hero" src="../../assets/image/Polaroid5_0.png" alt="Music Video">
 
   <div class="article-body">
 
     <p>
-      Why Don't We will take the mainstage at <strong>Sunwave Festival 2026</strong> this
-      July, marking their first major festival headline slot since the band's return.
-      The annual three-day event in Austin, Texas draws over 80,000 fans and has become
-      one of the premier pop music gatherings in the country.
+      The official music video for Why Don't We's latest single <em>Come Around</em>
+      is now live on YouTube, and it has already surpassed 4 million views in its first
+      48 hours — making it the fastest-viewed video in the band's catalogue.
     </p>
 
-    <h2>The Set</h2>
+    <h2>The Concept</h2>
     <p>
-      The band promises a career-spanning set blending fan favourites with fresh material
-      from the upcoming album <em>Unfinished Business</em>. Expect a full production —
-      custom lighting rigs, live strings, and a few surprises the guys are keeping close
-      to their chests.
+      Directed by Malia James, the video unfolds across a series of split-screen
+      vignettes that mirror the song's theme of parallel lives barely missing each
+      other. Shot over two days in downtown Los Angeles and the Malibu coast, it trades
+      the high-gloss visuals of earlier releases for a warmer, more intimate look —
+      all golden-hour light and handheld camera work.
     </p>
 
     <blockquote>
-      "Playing a festival is a different energy entirely. Fifty thousand people singing
-      back your lyrics all at once — there is nothing like it." — Corbyn Besson
+      "We wanted the video to feel like a memory you can't quite hold onto.
+      Malia captured exactly that." — Zach Herron
     </blockquote>
 
-    <h2>Festival Details</h2>
+    <h2>Behind the Scenes</h2>
     <p>
-      Sunwave Festival runs <strong>July 18–20, 2026</strong> at Zilker Park, Austin, TX.
-      Why Don't We headlines the main stage on <strong>Saturday, July 19</strong> at 9 PM CT.
-      The full lineup features over 60 artists across four stages.
+      A behind-the-scenes documentary of the shoot is available exclusively on the
+      band's Patreon. Members get an uncut 22-minute look at how the split-screen
+      sequences were choreographed and a director's commentary track recorded the
+      morning after the wrap.
     </p>
 
-    <h2>Tickets &amp; Travel</h2>
+    <h2>Watch Now</h2>
     <p>
-      Single-day and three-day passes are available now at the Sunwave Festival website.
-      Camping packages and shuttle passes can also be added at checkout. The event
-      recommends booking accommodation early, as Austin hotels fill up quickly during
-      festival weekend.
+      The <em>Come Around</em> music video is streaming now on YouTube. Hit the like
+      button and share it with a friend who needs to hear this song — every stream
+      helps the album chart when it drops in August.
     </p>
 
   </div>
@@ -84,20 +84,20 @@
   <div class="shell">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+        <a class="brand" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
         <p>Official site. Pop's five-piece — music, tour, and more.</p>
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.html">Albums</a></li><li><a href="../music/music.html">Singles</a></li><li><a href="article-video.html">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="article-video.php">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
-        <ul><li><a href="../member/profile.html">About</a></li><li><a href="../tour/tour.html">Tour</a></li><li><a href="news.html">News</a></li></ul>
+        <ul><li><a href="../member/profile.php">About</a></li><li><a href="../tour/tour.php">Tour</a></li><li><a href="news.php">News</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="More">
         <h4>More</h4>
-        <ul><li><a href="../merch/merch.html">Merch</a></li><li><a href="../ticket/ticket.html">Tickets</a></li><li><a href="../../index.html">Home</a></li></ul>
+        <ul><li><a href="../merch/merch.php">Merch</a></li><li><a href="../ticket/ticket.php">Tickets</a></li><li><a href="../../index.php">Home</a></li></ul>
       </nav>
     </div>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Music Video Released | Why Don't We</title>
+  <title>Limited Edition Merch | Why Don't We</title>
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/article.css">
   <link rel="stylesheet" href="../css/header.css">
@@ -14,65 +14,64 @@
 <!-- ============================ HEADER ============================ -->
 <header class="site-header">
   <nav class="site-nav" aria-label="Main">
-    <a class="site-nav__logo" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+    <a class="site-nav__logo" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
     <ul class="site-nav__links">
-      <li><a href="../../index.html">Home</a></li>
-      <li><a href="../member/profile.html">About</a></li>
-      <li><a href="../music/music.html">Music</a></li>
-      <li><a href="../tour/tour.html">Tour</a></li>
-      <li><a href="../merch/merch.html">Merch</a></li>
-      <li><a href="news.html" class="is-active" aria-current="page">News</a></li>
+      <li><a href="../../index.php">Home</a></li>
+      <li><a href="../member/profile.php">About</a></li>
+      <li><a href="../music/music.php">Music</a></li>
+      <li><a href="../tour/tour.php">Tour</a></li>
+      <li><a href="../merch/merch.php">Merch</a></li>
+      <li><a href="news.php" class="is-active" aria-current="page">News</a></li>
     </ul>
   </nav>
 </header>
 
 <main>
 
-  <a href="news.html" class="back-link">&#8592; Back to News</a>
+  <a href="news.php" class="back-link">&#8592; Back to News</a>
 
   <div class="article-header">
-    <p class="category">Music</p>
-    <h1>New Music Video Released</h1>
-    <p class="meta">May 25, 2026 &bull; 4 min read</p>
+    <p class="category">Merch</p>
+    <h1>Limited Edition Merch Drop</h1>
+    <p class="meta">May 28, 2026 &bull; 2 min read</p>
   </div>
 
-  <img class="article-hero" src="../../assets/image/Polaroid5_0.png" alt="Music Video">
+  <img class="article-hero" src="../../assets/image/hoodie.png" alt="Limited Edition Merch">
 
   <div class="article-body">
 
     <p>
-      The official music video for Why Don't We's latest single <em>Come Around</em>
-      is now live on YouTube, and it has already surpassed 4 million views in its first
-      48 hours — making it the fastest-viewed video in the band's catalogue.
+      To celebrate the album announcement, Why Don't We has dropped a limited-edition
+      merch collection exclusively through the official store — and quantities are
+      extremely limited. If you want a piece, move fast.
     </p>
 
-    <h2>The Concept</h2>
+    <h2>What's in the Drop</h2>
     <p>
-      Directed by Malia James, the video unfolds across a series of split-screen
-      vignettes that mirror the song's theme of parallel lives barely missing each
-      other. Shot over two days in downtown Los Angeles and the Malibu coast, it trades
-      the high-gloss visuals of earlier releases for a warmer, more intimate look —
-      all golden-hour light and handheld camera work.
+      The collection includes a heavyweight pullover hoodie in midnight navy, a
+      washed-cotton crewneck in faded sage, a short-sleeve graphic tee featuring
+      original artwork by LA-based illustrator Cara Rios, and a enamel pin set.
+      Each item is screen-printed by hand in small batches in Los Angeles.
     </p>
 
     <blockquote>
-      "We wanted the video to feel like a memory you can't quite hold onto.
-      Malia captured exactly that." — Zach Herron
+      "We wanted merch that feels like something you actually want to wear, not
+      just a souvenir. Cara's artwork made that possible." — Corbyn Besson
     </blockquote>
 
-    <h2>Behind the Scenes</h2>
+    <h2>Album Bundle</h2>
     <p>
-      A behind-the-scenes documentary of the shoot is available exclusively on the
-      band's Patreon. Members get an uncut 22-minute look at how the split-screen
-      sequences were choreographed and a director's commentary track recorded the
-      morning after the wrap.
+      Bundle any merch item with the deluxe physical album pre-order and save 15%.
+      Bundles also include a signed lyric card — hand-signed by all five members —
+      while supplies last.
     </p>
 
-    <h2>Watch Now</h2>
+    <h2>How to Order</h2>
     <p>
-      The <em>Come Around</em> music video is streaming now on YouTube. Hit the like
-      button and share it with a friend who needs to hear this song — every stream
-      helps the album chart when it drops in August.
+      The collection is live now at the official store. Items ship worldwide.
+      Orders placed before June 10 will arrive before the album release date.
+      Head to the <a href="../merch/merch.php" style="color:rgba(160,220,255,.9);">Merch page</a>
+      to grab yours before they sell out.
     </p>
 
   </div>
@@ -84,20 +83,20 @@
   <div class="shell">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+        <a class="brand" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
         <p>Official site. Pop's five-piece — music, tour, and more.</p>
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.html">Albums</a></li><li><a href="../music/music.html">Singles</a></li><li><a href="article-video.html">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="article-video.php">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
-        <ul><li><a href="../member/profile.html">About</a></li><li><a href="../tour/tour.html">Tour</a></li><li><a href="news.html">News</a></li></ul>
+        <ul><li><a href="../member/profile.php">About</a></li><li><a href="../tour/tour.php">Tour</a></li><li><a href="news.php">News</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="More">
         <h4>More</h4>
-        <ul><li><a href="../merch/merch.html">Merch</a></li><li><a href="../ticket/ticket.html">Tickets</a></li><li><a href="../../index.html">Home</a></li></ul>
+        <ul><li><a href="../merch/merch.php">Merch</a></li><li><a href="../ticket/ticket.php">Tickets</a></li><li><a href="../../index.php">Home</a></li></ul>
       </nav>
     </div>
 

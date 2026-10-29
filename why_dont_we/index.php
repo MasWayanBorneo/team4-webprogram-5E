@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,14 +19,14 @@
 <!-- ============================ HEADER ============================ -->
 <header class="site-header">
   <nav class="site-nav" aria-label="Main">
-    <a class="site-nav__logo" href="index.html"><img src="assets/image/about-logo.png" alt="Why Don't We"></a>
+    <a class="site-nav__logo" href="index.php"><img src="assets/image/about-logo.png" alt="Why Don't We"></a>
     <ul class="site-nav__links">
-      <li><a href="index.html" class="is-active" aria-current="page">Home</a></li>
-      <li><a href="src/member/profile.html">About</a></li>
-      <li><a href="src/music/music.html">Music</a></li>
-      <li><a href="src/tour/tour.html">Tour</a></li>
-      <li><a href="src/merch/merch.html">Merch</a></li>
-      <li><a href="src/article/news.html">News</a></li>
+      <li><a href="index.php" class="is-active" aria-current="page">Home</a></li>
+      <li><a href="src/member/profile.php">About</a></li>
+      <li><a href="src/music/music.php">Music</a></li>
+      <li><a href="src/tour/tour.php">Tour</a></li>
+      <li><a href="src/merch/merch.php">Merch</a></li>
+      <li><a href="src/article/news.php">News</a></li>
     </ul>
   </nav>
 </header>
@@ -78,7 +79,7 @@
     <div class="shell">
       <header class="section-head">
         <h2 class="section-title" id="music-h">Featured Songs</h2>
-        <a class="head-link" href="src/music/music.html">All music →</a>
+        <a class="head-link" href="src/music/music.php">All music →</a>
       </header>
 
       <ul class="songs">
@@ -107,32 +108,32 @@
     <div class="shell">
       <header class="section-head">
         <h2 class="section-title" id="members-h">The Band</h2>
-        <a class="head-link" href="src/member/profile.html">Full bios →</a>
+        <a class="head-link" href="src/member/profile.php">Full bios →</a>
       </header>
 
       <ul class="members">
         <li class="member">
-          <a href="src/member/jonah.html">
+          <a href="src/member/jonah.php">
           <img src="assets/image/jonah.jpg" ></a>
           <h3 class="member__name">Jonah Marais</h3><p class="member__role">Vocals</p>
         </li>
         <li class="member">
-          <a href="src/member/corbyn.html">
+          <a href="src/member/corbyn.php">
            <img src="assets/image/besson-corbyn-image.jpg"></a>
           <h3 class="member__name">Corbyn Besson</h3><p class="member__role">Vocals</p>
         </li>
         <li class="member">
-             <a href="src/member/daniel.html">
+             <a href="src/member/daniel.php">
            <img src="assets/image/daniel.jpg"></a>
           <h3 class="member__name">Daniel Seavey</h3><p class="member__role">Vocals · Multi</p>
         </li>
         <li class="member">
-           <a href="src/member/jack.html">
+           <a href="src/member/jack.php">
            <img src="assets/image/jack.jpg"></a>
           <h3 class="member__name">Jack Avery</h3><p class="member__role">Vocals</p>
         </li>
         <li class="member">
-          <a href="src/member/zach.html">
+          <a href="src/member/zach.php">
            <img src="assets/image/zach.jpg"></a>
           <h3 class="member__name">Zach Herron</h3><p class="member__role">Vocals</p>
         </li>
@@ -145,14 +146,14 @@
     <div class="shell">
       <header class="section-head">
         <h2 class="section-title" id="tour-h">On Tour</h2>
-        <a class="head-link" href="src/tour/tour.html">All dates →</a>
+        <a class="head-link" href="src/tour/tour.php">All dates →</a>
       </header>
 
       <ul class="tour-list">
         <li class="tour-row">
           <div class="tour-date"><span class="day">12</span><span class="mon">Aug</span></div>
           <div class="tour-venue"><div class="v">Jakarta Convention Center</div><div class="c">Jakarta, Indonesia</div></div>
-          <a class="btn btn--primary" href="src/ticket/ticket.html">Get Tickets</a>
+          <a class="btn btn--primary" href="src/ticket/ticket.php">Get Tickets</a>
         </li>
       </ul>
     </div>
@@ -163,11 +164,11 @@
     <div class="shell">
       <header class="section-head">
         <h2 class="section-title" id="news-h">Latest News</h2>
-        <a class="head-link" href="src/article/news.html">All news →</a>
+        <a class="head-link" href="src/article/news.php">All news →</a>
       </header>
 
       <ul class="news" >
-        <li><a href="src/article/article-tour-dates.html"><article class="news-card">
+        <li><a href="src/article/article-tour-dates.php"><article class="news-card">
             <img src="assets/image/lovebackcover1_0.jpg">
           <div class="news-card__body">
             <time datetime="2026-06">June 2026</time>
@@ -175,7 +176,7 @@
             <p>Southeast Asia leg goes on sale Friday — full routing inside.</p>
           </div>
         </article></a></li>
-        <li><a href="src/article/article-international-tour.html"><article class="news-card">
+        <li><a href="src/article/article-international-tour.php"><article class="news-card">
           <img src="assets/image/why-dont-we-just.png" >
           <div class="news-card__body">
             <time datetime="2026-05">May 2026</time>
@@ -183,7 +184,7 @@
             <p>A thank-you to everyone who streamed, sang, and showed up.</p>
           </div>
         </article></a></li>
-        <li><a href="src/article/article-video.html"><article class="news-card">
+        <li><a href="src/article/article-video.php"><article class="news-card">
            <img src="assets/image/featured-news.png">
           <div class="news-card__body">
             <time datetime="2026-04">April 2026</time>
@@ -234,20 +235,20 @@
   <div class="shell">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="index.html"><img src="assets/image/about-logo.png" alt="Why Don't We"></a>
+        <a class="brand" href="index.php"><img src="assets/image/about-logo.png" alt="Why Don't We"></a>
         <p>Official site. Pop's five-piece — music, tour, and more.</p>
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="src/music/music.html">Albums</a></li><li><a href="src/music/music.html">Singles</a></li><li><a href="src/article/article-video.html">Videos</a></li></ul>
+        <ul><li><a href="src/music/music.php">Albums</a></li><li><a href="src/music/music.php">Singles</a></li><li><a href="src/article/article-video.php">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
-        <ul><li><a href="src/member/profile.html">About</a></li><li><a href="src/tour/tour.html">Tour</a></li><li><a href="src/article/news.html">News</a></li></ul>
+        <ul><li><a href="src/member/profile.php">About</a></li><li><a href="src/tour/tour.php">Tour</a></li><li><a href="src/article/news.php">News</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="More">
         <h4>More</h4>
-        <ul><li><a href="src/merch/merch.html">Merch</a></li><li><a href="src/ticket/ticket.html">Tickets</a></li><li><a href="index.html">Home</a></li></ul>
+        <ul><li><a href="src/merch/merch.php">Merch</a></li><li><a href="src/ticket/ticket.php">Tickets</a></li><li><a href="index.php">Home</a></li></ul>
       </nav>
     </div>
 

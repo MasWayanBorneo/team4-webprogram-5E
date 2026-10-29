@@ -16,14 +16,14 @@
 <!-- ============================ HEADER ============================ -->
 <header class="site-header">
   <nav class="site-nav" aria-label="Main">
-    <a class="site-nav__logo" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+    <a class="site-nav__logo" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
     <ul class="site-nav__links">
-      <li><a href="../../index.html">Home</a></li>
-      <li><a href="../member/profile.html">About</a></li>
-      <li><a href="../music/music.html">Music</a></li>
-      <li><a href="../tour/tour.html">Tour</a></li>
-      <li><a href="../merch/merch.html">Merch</a></li>
-      <li><a href="news.html" class="is-active" aria-current="page">News</a></li>
+      <li><a href="../../index.php">Home</a></li>
+      <li><a href="../member/profile.php">About</a></li>
+      <li><a href="../music/music.php">Music</a></li>
+      <li><a href="../tour/tour.php">Tour</a></li>
+      <li><a href="../merch/merch.php">Merch</a></li>
+      <li><a href="news.php" class="is-active" aria-current="page">News</a></li>
     </ul>
   </nav>
 </header>
@@ -36,7 +36,7 @@
 
         <h1>News</h1>
 
-        <a href="article-album.html" style="text-decoration:none;color:inherit;">
+        <a href="article-album.php" style="text-decoration:none;color:inherit;">
         <div class="featured-card">
 
             <div class="featured-image">
@@ -74,7 +74,7 @@
 
         <div class="news-grid">
 
-            <a href="article-tour-dates.html" style="text-decoration:none;color:inherit;">
+            <a href="article-tour-dates.php" style="text-decoration:none;color:inherit;">
             <article class="news-card">
 
                 <img src="../../assets/image/hdylsthumb-5_0.jpg"
@@ -99,7 +99,7 @@
             </article>
             </a>
 
-            <a href="article-festival.html" style="text-decoration:none;color:inherit;">
+            <a href="article-festival.php" style="text-decoration:none;color:inherit;">
             <article class="news-card">
 
                 <img src="../../assets/image/jfthumbnail.jpg"
@@ -124,7 +124,7 @@
             </article>
             </a>
 
-            <a href="article-studio.html" style="text-decoration:none;color:inherit;">
+            <a href="article-studio.php" style="text-decoration:none;color:inherit;">
             <article class="news-card">
 
                 <img src="../../assets/image/flower.jpg"
@@ -149,7 +149,7 @@
             </article>
             </a>
 
-            <a href="article-video.html" style="text-decoration:none;color:inherit;">
+            <a href="article-video.php" style="text-decoration:none;color:inherit;">
             <article class="news-card">
 
                 <img src="../../assets/image/Polaroid5_0.png"
@@ -174,7 +174,7 @@
             </article>
             </a>
 
-            <a href="article-merch.html" style="text-decoration:none;color:inherit;">
+            <a href="article-merch.php" style="text-decoration:none;color:inherit;">
             <article class="news-card">
 
                 <img src="../../assets/image/hoodie.png"
@@ -199,7 +199,7 @@
             </article>
             </a>
 
-            <a href="article-international-tour.html" style="text-decoration:none;color:inherit;">
+            <a href="article-international-tour.php" style="text-decoration:none;color:inherit;">
             <article class="news-card">
 
                 <img src="../../assets/image/something-different.png"
@@ -269,20 +269,20 @@
   <div class="shell">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+        <a class="brand" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
         <p>Official site. Pop's five-piece — music, tour, and more.</p>
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.html">Albums</a></li><li><a href="../music/music.html">Singles</a></li><li><a href="article-video.html">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="article-video.php">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
-        <ul><li><a href="../member/profile.html">About</a></li><li><a href="../tour/tour.html">Tour</a></li><li><a href="news.html">News</a></li></ul>
+        <ul><li><a href="../member/profile.php">About</a></li><li><a href="../tour/tour.php">Tour</a></li><li><a href="news.php">News</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="More">
         <h4>More</h4>
-        <ul><li><a href="../merch/merch.html">Merch</a></li><li><a href="../ticket/ticket.html">Tickets</a></li><li><a href="../../index.html">Home</a></li></ul>
+        <ul><li><a href="../merch/merch.php">Merch</a></li><li><a href="../ticket/ticket.php">Tickets</a></li><li><a href="../../index.php">Home</a></li></ul>
       </nav>
     </div>
 

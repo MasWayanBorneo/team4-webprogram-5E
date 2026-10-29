@@ -16,14 +16,14 @@
 <!-- ============================ HEADER ============================ -->
 <header class="site-header">
   <nav class="site-nav" aria-label="Main">
-    <a class="site-nav__logo" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+    <a class="site-nav__logo" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
     <ul class="site-nav__links">
-      <li><a href="../../index.html">Home</a></li>
-      <li><a href="../member/profile.html">About</a></li>
-      <li><a href="../music/music.html">Music</a></li>
-      <li><a href="../tour/tour.html" class="is-active" aria-current="page">Tour</a></li>
-      <li><a href="../merch/merch.html">Merch</a></li>
-      <li><a href="../article/news.html">News</a></li>
+      <li><a href="../../index.php">Home</a></li>
+      <li><a href="../member/profile.php">About</a></li>
+      <li><a href="../music/music.php">Music</a></li>
+      <li><a href="../tour/tour.php" class="is-active" aria-current="page">Tour</a></li>
+      <li><a href="../merch/merch.php">Merch</a></li>
+      <li><a href="../article/news.php">News</a></li>
     </ul>
   </nav>
 </header>
@@ -34,7 +34,7 @@
         <section class="page-header" id="empty-state" hidden>
             <h2>No Invoice Found</h2>
             <p class="ticket-sub">We couldn't find a recent order. Please book a ticket first.</p>
-            <a href="ticket.html" class="ticket-link">Get a Ticket</a>
+            <a href="ticket.php" class="ticket-link">Get a Ticket</a>
         </section>
 
         <!-- Invoice -->
@@ -94,7 +94,7 @@
 
             <div class="invoice-actions">
                 <button type="button" id="print-btn">Download Invoice (PDF)</button>
-                <a href="ticket.html" class="ticket-link">Book Another Ticket</a>
+                <a href="ticket.php" class="ticket-link">Book Another Ticket</a>
             </div>
 
         </section>
@@ -106,20 +106,20 @@
   <div class="shell">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+        <a class="brand" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
         <p>Official site. Pop's five-piece — music, tour, and more.</p>
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.html">Albums</a></li><li><a href="../music/music.html">Singles</a></li><li><a href="../article/article-video.html">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article-video.php">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
-        <ul><li><a href="../member/profile.html">About</a></li><li><a href="../tour/tour.html">Tour</a></li><li><a href="../article/news.html">News</a></li></ul>
+        <ul><li><a href="../member/profile.php">About</a></li><li><a href="../tour/tour.php">Tour</a></li><li><a href="../article/news.php">News</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="More">
         <h4>More</h4>
-        <ul><li><a href="../merch/merch.html">Merch</a></li><li><a href="ticket.html">Tickets</a></li><li><a href="../../index.html">Home</a></li></ul>
+        <ul><li><a href="../merch/merch.php">Merch</a></li><li><a href="ticket.php">Tickets</a></li><li><a href="../../index.php">Home</a></li></ul>
       </nav>
     </div>
 

@@ -1,5 +1,5 @@
 /* ============================================================================
-   PRODUK MERCH — sumber data sementara untuk src/merch/merch.html.
+   PRODUK MERCH — sumber data sementara untuk src/merch/merch.php.
    Setiap objek = satu baris tabel `products` (lihat database/merch.sql),
    dengan nama kolom yang sama. Saat database siap, hapus file ini dan arahkan
    loadProducts() di src/js/merch.js ke endpoint API.

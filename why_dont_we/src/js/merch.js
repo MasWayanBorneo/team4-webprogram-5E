@@ -1,9 +1,9 @@
 /* ============================================================================
-   HALAMAN MERCH — mengisi <template> di src/merch/merch.html dengan produk
+   HALAMAN MERCH — mengisi <template> di src/merch/merch.php dengan produk
    dan menghitung isi keranjang. Field produk sama persis dengan tabel `products`.
    ============================================================================ */
 (() => {
-  const ROOT = "../../"; // merch.html → root project (path gambar relatif dari root)
+  const ROOT = "../../"; // merch.php → root project (path gambar relatif dari root)
   const CART_KEY = "wdw-cart"; // { [idProduk]: jumlah }
   const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
