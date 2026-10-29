@@ -122,11 +122,12 @@ img{
   min-height:clamp(560px,88vh,820px);
   padding-block:5rem;}
 .hero__name{
-  font-family:"Anton",Arial Narrow,sans-serif;font-weight:400;text-transform:uppercase;
-  font-size:clamp(3.4rem,14vw,12rem);line-height:.84;letter-spacing:.005em;
+  /* site theme title: Special Elite, yellow, lowercase (see base.css) */
+  font-family:var(--title-font);font-weight:700;text-transform:lowercase;
+  font-size:clamp(3rem,11vw,8.5rem);line-height:.95;
   margin:.2em 0 0;
-  background:linear-gradient(180deg,#e8eb2bba 30%,#e9c9ff 75%,#ffc89a);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
+  color:var(--cta-ink);
+  text-shadow:0 4px 24px rgba(1,9,18,.55);
   
 }
 .hero__tag{max-width:48ch;color:var(--heading);font-size:clamp(1rem,1.5vw,1.2rem);margin:.4rem 0 0;}
@@ -140,8 +141,8 @@ img{
   background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:100px;
   padding:.4rem .9rem;font-size:.82rem;color:var(--ink);transition:border-color .15s;
 }
-.hero__badge:hover{border-color:var(--magenta);}
-.hero__badge .dot{width:8px;height:8px;border-radius:50%;background:var(--magenta);box-shadow:0 0 10px var(--magenta);}
+.hero__badge:hover{border-color:var(--secondary-color);}
+.hero__badge .dot{width:8px;height:8px;border-radius:50%;background:var(--secondary-color);box-shadow:0 0 10px var(--secondary-color);}
 
 /* ============================================================================
    LATEST RELEASE
