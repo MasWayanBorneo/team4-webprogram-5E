@@ -150,7 +150,7 @@
             document.getElementById('invoice-section').hidden = false;
 
             document.getElementById('inv-number').textContent = order.invoiceNo;
-            document.getElementById('inv-date').textContent = new Date(order.date).toLocaleString('id-ID', {
+            document.getElementById('inv-date').textContent = new Date(order.date).toLocaleString('en-US', {
                 dateStyle: 'long',
                 timeStyle: 'short'
             });
@@ -200,7 +200,7 @@
                 doc.setFontSize(11);
                 doc.setTextColor(40, 40, 40);
                 doc.text('Invoice No. ' + order.invoiceNo, rightX, 20, { align: 'right' });
-                doc.text('Date: ' + new Date(order.date).toLocaleString('id-ID', {
+                doc.text('Date: ' + new Date(order.date).toLocaleString('en-US', {
                     dateStyle: 'long',
                     timeStyle: 'short'
                 }), rightX, 27, { align: 'right' });
