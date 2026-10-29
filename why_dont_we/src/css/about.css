@@ -1,50 +1,4 @@
 
-
-:root{
-  --bg:#0d0a17;          /* violet-black page */
-  --surface:#16122a;     /* nav, cards */
-  --surface-2:#1d1838;   /* raised card */
-  --ink:#f5f2fb;         /* primary text */
-  --muted:#a79ec6;       /* secondary text */
-  --faint:#6f6790;       /* tertiary / captions */
-  --line:rgba(255,255,255,.09);
-
-  /* stage-light accent spectrum */
-  --violet:#7b5cff;
-  --magenta:#e23f97;
-  --pink:#ff5e8a;
-  --amber:#ffb45a;
-  --cyan:#39c6dd;
-  --accent:#00ff7bc3;      /* primary CTA */
-  --accent-press:#00ff7bc3;
-
-  /* duotone art gradients (colour for the placeholder tiles) */
-  --g1:linear-gradient(140deg,#7b5cff,#e23f97);
-  --g2:linear-gradient(140deg,#39c6dd,#7b5cff);
-  --g3:linear-gradient(140deg,#e23f97,#ffb45a);
-  --g4:linear-gradient(140deg,#5a4fff,#39c6dd);
-  --g5:linear-gradient(140deg,#ff5e8a,#ffb45a);
-  --g6:linear-gradient(140deg,#8a3fff,#e23f97);
-
-  --radius:16px;
-  --shell:1200px;
-  
-  /* --prime-color:#04ffd5;
-    --secondary-color:#41e71cc3;
-    --third-color:#1e1e1e; */
-    --prime-color:#1db1ac9d;
-    --secondary-color:#00ff7bc3;
-    --third-color:#000000;
-    --music-play-color:yellow;
-    --deep-color:#010912;
-    --surface:#031e33;
-    --mid:#021525;
-    --card:rgba(0,20,50, .45);
-    --heading:#e8f4ff;
-    --body:rgba(160,210,240,.8);
-    --button:rgba(160,220,255,.9);
-    --glow:rgba(80,200,255,.5);
-}
 * {
     margin: 0;
     padding: 0;
@@ -61,39 +15,6 @@ body {
     color: #e8f4ff;
     min-height: 100vh;
     width: 100%;
-}
-
-.navbar {
-    background: #021525;
-    border-bottom: 1px solid rgba(160, 210, 240, 0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    padding: 0.5rem 1.5rem;
-    min-height: 44px;
-    flex-wrap: wrap;
-}
-
-.nav-link {
-    font-size: 13px;
-    font-weight: 300;
-    letter-spacing: 0.08em;
-    color: rgba(160, 210, 240, 0.6);
-    text-decoration: none;
-    padding: 4px 0;
-    border-bottom: 1.5px solid transparent;
-    cursor: pointer;
-    transition: color 0.2s, border-bottom-color 0.2s;
-}
-
-.nav-link:hover {
-    color: #e8f4ff;
-}
-
-.nav-link.active {
-    color: rgba(160, 220, 255, 0.95);
-    border-bottom-color: rgba(160, 220, 255, 0.7);
 }
 
 .page-header {
@@ -166,8 +87,6 @@ body {
     color: rgba(160, 220, 255, 0.85);
     letter-spacing: 0.05em;
 }
-
-
 
 .member-info {
     flex: 1;
@@ -307,14 +226,6 @@ body {
 }
 
 @media (max-width: 768px) {
-    .navbar {
-        gap: 1rem;
-        padding: 0.5rem 1rem;
-    }
-
-    .nav-link {
-        font-size: 12px;
-    }
 
     .content {
         padding: 0.75rem 1rem;

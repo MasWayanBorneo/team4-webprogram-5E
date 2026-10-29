@@ -1,48 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
 
-/* Root CSS variables - Defines primary, secondary, and tertiary color palette used throughout the site */
-
-:root{
-  --bg:#0d0a17;          /* violet-black page */
-  --surface:#16122a;     /* nav, cards */
-  --surface-2:#1d1838;   /* raised card */
-  --ink:#f5f2fb;         /* primary text */
-  --muted:#a79ec6;       /* secondary text */
-  --faint:#6f6790;       /* tertiary / captions */
-  --line:rgba(255,255,255,.09);
-
-  /* stage-light accent spectrum */
-  --violet:#7b5cff;
-  --magenta:#e23f97;
-  --pink:#ff5e8a;
-  --amber:#ffb45a;
-  --cyan:#39c6dd;
-  --accent:#00ff7bc3;      /* primary CTA */
-  --accent-press:#00ff7bc3;
-
-  /* duotone art gradients (colour for the placeholder tiles) */
-
-  --radius:16px;
-  --shell:1200px;
-  
-  /* --prime-color:#04ffd5;
-    --secondary-color:#41e71cc3;
-    --third-color:#1e1e1e; */
-    --prime-color:#1db1ac9d;
-    --secondary-color:#00ff7bc3;
-    --third-color:#000000;
-    --music-play-color:yellow;
-    --deep-color:#010912;
-    --surface:#031e33;
-    --mid:#021525;
-    --card:rgba(0,20,50, .45);
-    --heading:#e8f4ff;
-    --body:rgba(160,210,240,.8);
-    --button:rgba(160,220,255,.9);
-    --glow:rgba(80,200,255,.5);
-}
-
 /* Global styles - Resets default margins, padding, and box-sizing for all elements */
 /* * { font-family: Caveat; */*{
     /* font-family: Special Elite; */
@@ -60,64 +18,12 @@
 /* Body - Main page container with centered layout and full viewport height background */
 body{
 
-    background:var(--mid);
+    background:var(--prime-color);
     overflow-x: hidden;
     width: 100%;
 
 }
 
-/* Navbar - Sticky navigation bar positioned at top with dark background and border */
-.navbar{
-
-   background: var(--surface);
-   position:sticky;
-   width: 100%;
-   top: 0;
-   z-index: 1;
-   border-bottom: 2px solid #3e3a3a;
-}
-.navdiv{
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    padding:  15px;
-    font-family: Special Elite;
-}
-
-/* Logo - Band logo with fixed dimensions in navbar */
-.logo{
-    /* float:inline-start; */
-    /* margin-right:auto; */
-    height: 60px;
-    width: 80px;  
-}
-li{
-    list-style: none;
-     display: inline-block;
-     margin: 0 20px;
-}
-
-/* List item links - Navigation links with white color and bold weight */
-li a{
-    color: white;
-    font-size: 18px;
-    position: relative;
-    text-decoration: none;
-    font-weight: bold;
-
-}
-
-/* Active music link - Highlighted link for Music page with primary color and underline */
-li a .Music {
-    color: var(--prime-color);
-    border-bottom: 4px solid var(--prime-color);
-}
-
-/* List hover effect - Link highlight on hover with underline animation */
-ul li :hover{
-    color: var(--prime-color);
-    border-bottom: 4px solid  var(--prime-color);
-}
 /* Top music player section - Flex container for featured song player with responsive layout */
 .top-lagu  {
     display: flex;
@@ -245,9 +151,7 @@ h2{
 
 /* Footer - Page bottom section with dark background and centered text */
 
-
 /* List items - Navigation list items displayed inline with consistent spacing */
-
 
 /* Navigation container - Flexbox layout for navbar items with proper spacing */
 
@@ -455,12 +359,10 @@ h2{
 
 }
 
-
 /* Streaming platform hover effect - Reduced opacity on hover for platforms */
 .streaming-platforms:hover{
     opacity: 60%;
 }
-
 
 /* CTA heading - Large centered heading for call-to-action section */
 .cta h2{
@@ -476,23 +378,6 @@ h2{
     width: 60px;
 }
 
-/* Email subscription section - Row-reversed flex container for email input and button */
-footer h2{
-    text-align: center;
-    color: white;
-    margin-bottom: 20px; 
-     
-}
-footer{
-    background: var(--surface);
-}
-footer h3{
-    text-align: center;
-    color: white; 
-    margin: 20px; 
-   
-}
-footer p{text-align: start;color:gray;}
 .page-header {
     text-align: center;
     padding: 1.5rem 1.25rem 0.5rem;
@@ -544,7 +429,6 @@ audio{
     justify-content: space-between;
 }
 
-
 /* Audio player control panel - Styled container for audio playback controls */
 audio::-webkit-media-controls-panel {
     background-color: rgb(0, 0, 0);
@@ -558,8 +442,6 @@ audio::-webkit-media-controls-play-button{
 background-color: var(--music-play-color);
 border-radius: 40px;
 transform: scale(1.6);
-
-
 
 }
 
@@ -604,5 +486,4 @@ audio::-webkit-media-controls-mute-button{
     transform: scale(1.6);
     
 }
-
 

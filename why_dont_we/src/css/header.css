@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+/* ============================================================================
+   SHARED SITE HEADER — same markup/style on every page (pair with footer.css).
+   Scoped under .site-header so page-level rules (li, li a, ul li :hover, .logo)
+   never change how it looks.
+   ============================================================================ */
+.site-header{
+  --surface:#031e33;
+  --ink:#f5f2fb;
+  --active:#1db1ac;
+
+  position:sticky;
+  top:0;
+  z-index:1000;
+  width:100%;
+  margin:0;
+  background:var(--surface);
+  border-bottom:2px solid #3e3a3a;
+}
+.site-header .site-nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:.75rem 1.5rem;
+  max-width:none;
+  padding:12px clamp(16px,3vw,32px);
+  font-family:'Special Elite',serif;
+}
+.site-header .site-nav__logo{display:block;flex:none;border:0;}
+.site-header .site-nav__logo img{display:block;height:60px;width:80px;object-fit:contain;}
+.site-header .site-nav__links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.4rem clamp(1rem,2.5vw,2.5rem);
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.site-header .site-nav__links li{display:block;margin:0;padding:0;list-style:none;}
+.site-header .site-nav__links a{
+  display:inline-block;
+  padding:4px 0;
+  color:var(--ink);
+  font-size:18px;
+  font-weight:bold;
+  text-decoration:none;
+  border-bottom:4px solid transparent;
+  transition:color .15s,border-color .15s;
+}
+.site-header .site-nav__links a:hover,
+.site-header .site-nav__links a.is-active{
+  color:var(--active);
+  border-bottom-color:var(--active);
+}
+
+@media (max-width:640px){
+  .site-header .site-nav{justify-content:center;}
+  .site-header .site-nav__logo img{height:44px;width:60px;}
+  .site-header .site-nav__links{justify-content:center;}
+  .site-header .site-nav__links a{font-size:15px;}
+}

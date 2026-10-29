@@ -1,4 +1,4 @@
-/* INVOICE PAGE — uses tour.css for shared vars, navbar, footer */
+/* INVOICE PAGE — uses tour.css for shared vars; header.css/footer.css for the shared header and footer */
 
 .invoice-section{
     max-width:720px;
@@ -133,7 +133,7 @@
 }
 
 @media print{
-    .navbar, footer, .invoice-actions{
+    .site-header, .site-footer, .invoice-actions{
         display:none;
     }
     .invoice-card{

@@ -1,55 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
 
-
-:root{
-  --bg:#0d0a17;          /* violet-black page */
-  --surface:#16122a;     /* nav, cards */
-  --surface-2:#1d1838;   /* raised card */
-  --ink:#f5f2fb;         /* primary text */
-  --muted:#a79ec6;       /* secondary text */
-  --faint:#6f6790;       /* tertiary / captions */
-  --line:rgba(255,255,255,.09);
-
-  /* stage-light accent spectrum */
-  --violet:#7b5cff;
-  --magenta:#e23f97;
-  --pink:#ff5e8a;
-  --amber:#ffb45a;
-  --cyan:#39c6dd;
-  --accent:#00ff7bc3;      /* primary CTA */
-  --accent-press:#00ff7bc3;
-
-  /* duotone art gradients (colour for the placeholder tiles) */
-  --g1:linear-gradient(140deg,#7b5cff,#e23f97);
-  --g2:linear-gradient(140deg,#39c6dd,#7b5cff);
-  --g3:linear-gradient(140deg,#e23f97,#ffb45a);
-  --g4:linear-gradient(140deg,#5a4fff,#39c6dd);
-  --g5:linear-gradient(140deg,#ff5e8a,#ffb45a);
-  --g6:linear-gradient(140deg,#8a3fff,#e23f97);
-
-  --radius:16px;
-  --shell:1200px;
-  
-  /* --prime-color:#04ffd5;
-    --secondary-color:#41e71cc3;
-    --third-color:#1e1e1e; */
-    --prime-color:#1db1ac9d;
-    --secondary-color:#00ff7bc3;
-    --third-color:#000000;
-    --music-play-color:yellow;
-    --deep-color:#010912;
-    --surface:#031e33;
-    --mid:#021525;
-    --card:rgba(0,20,50, .45);
-    --heading:#e8f4ff;
-    --body:rgba(160,210,240,.8);
-    --button:rgba(160,220,255,.9);
-    --glow:rgba(80,200,255,.5);
-}
-
-
-
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
@@ -63,32 +14,7 @@ body{
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
-}
-.navbar{
-
-   background: var(--surface);
-   position:fixed;
-   width: 100%;
-   top: 0;
-   z-index: 1;
-   border-bottom: 2px solid #3e3a3a;
-}
-.navdiv{
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    padding:  15px;
-    font-family: Special Elite;
-}
-
-/* Logo - Band logo with fixed dimensions in navbar */
-.logo{
-    /* float:inline-start; */
-    /* margin-right:auto; */
-    height: 60px;
-    width: 80px;  
-}
-li{
+}li{
     list-style: none;
      display: inline-block;
      margin: 0 20px;
@@ -196,15 +122,6 @@ img{
 }
 .play-tile:hover .play-btn{background:rgba(8,5,18,.28);}
 .play-tile:hover .play-btn::before{transform:scale(1);}
-
-/* ============================================================================
-   HEADER / NAV
-   ============================================================================ */
-.site-header{
-  position:sticky;top:0;z-index:50;
-  background:rgba(13,10,23,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  border-bottom:1px solid var(--line);
-}
 
 /* ============================================================================
    HERO  — the signature: stage-light wash + edge-to-edge wordmark
@@ -340,7 +257,6 @@ img{
   border:1px solid var(--line);border-radius:24px;padding:clamp(2.5rem,5vw,4rem);
 }
 
-
 .newsletter h2{font-family:"Anton",Arial Narrow,sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);text-transform:uppercase;margin:0;line-height:.95;}
 .newsletter p{color:var(--muted);margin:0;max-width:46ch;}
 .subscribe{display:grid;grid-template-columns:1fr auto;gap:.6rem;width:min(440px,100%);}
@@ -350,24 +266,6 @@ img{
 }
 .subscribe input::placeholder{color:var(--faint);}
 .subscribe input:focus-visible{outline:2px solid var(--magenta);outline-offset:1px;border-color:transparent;}
-
-/* ============================================================================
-   FOOTER
-   ============================================================================ */
-.site-footer{border-top:1px solid var(--line);background:var(--surface);}
-.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2rem;padding-block:clamp(2.5rem,5vw,4rem);}
-.footer-brand .brand{font-size:1.6rem;display:block;margin-bottom:.6rem;}
-.footer-brand p{color:var(--faint);font-size:.9rem;max-width:34ch;margin:0;}
-.footer-col h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 1rem;}
-.footer-col li{margin-bottom:.6rem;}
-.footer-col a{color:var(--faint);font-size:.92rem;transition:color .15s;}
-.footer-col a:hover{color:var(--ink);}
-.footer-bottom{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;padding-block:1.4rem;border-top:1px solid var(--line);}
-.footer-bottom p{color:var(--faint);font-size:.85rem;margin:0;}
-.socials{display:grid;grid-auto-flow:column;gap:1.2rem;align-items:center;}
-.socials a{color:var(--muted);display:grid;place-items:center;transition:color .15s,transform .15s;}
-.socials a:hover{color:var(--magenta);transform:translateY(-2px);}
-.socials svg{width:22px;height:22px;}
 
 /* ============================================================================
    ACCESSIBILITY — focus + reduced motion (quality floor)
@@ -381,22 +279,11 @@ a:focus-visible,button:focus-visible,.btn:focus-visible{outline:3px solid var(--
    RESPONSIVE
    ============================================================================ */
 @media (max-width:960px){
-  .nav-links{
-    grid-auto-flow:row;position:absolute;top:68px;left:0;right:0;
-    background:var(--surface);border-bottom:1px solid var(--line);
-    padding:1rem clamp(20px,4vw,40px);gap:.2rem;
-    transform:translateY(-130%);transition:transform .25s;pointer-events:none;
-  }
-  .nav-links a{padding:.7rem 0;}
-  .nav[data-open="true"] .nav-links{transform:translateY(0);pointer-events:auto;}
-  .nav-toggle{display:grid;}
-  .nav-cta .btn--ghost{display:none;}
 
   .songs{grid-template-columns:repeat(2,1fr);}
   .members{grid-template-columns:repeat(3,1fr);}
   .news{grid-template-columns:repeat(2,1fr);}
   .videos{grid-template-columns:1fr 1fr;}
-  .footer-grid{grid-template-columns:1fr 1fr;}
 }
 @media (max-width:620px){
   .release{grid-template-columns:1fr;}
@@ -410,6 +297,4 @@ a:focus-visible,button:focus-visible,.btn:focus-visible{outline:3px solid var(--
   .tour-row{grid-template-columns:auto 1fr;gap:1rem;}
   .tour-row .btn,.tour-soldout{grid-column:1 / -1;justify-self:start;}
   .subscribe{grid-template-columns:1fr;}
-  .footer-grid{grid-template-columns:1fr;}
-  .footer-bottom{grid-template-columns:1fr;justify-items:center;text-align:center;}
 }

@@ -1,16 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
-:root {
-    --deep-color: #010912;
-    --surface: #031e33;
-    --mid: #021525;
-    --card: rgba(0,20,50,.45);
-    --heading: #e8f4ff;
-    --body: rgba(160,210,240,.8);
-    --button: rgba(160,220,255,.9);
-    --prime-color: #1db1ac9d;
-}
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -19,42 +8,6 @@ body {
     color: var(--body);
     line-height: 1.6;
 }
-
-/* ── NAVBAR ── */
-.navbar {
-    background: var(--surface);
-    position: sticky;
-    width: 100%;
-    top: 0;
-    z-index: 10;
-    border-bottom: 2px solid #3e3a3a;
-}
-.navdiv {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    padding: 15px;
-    font-family: 'Special Elite', serif;
-}
-.navdiv ul { display: flex; list-style: none; }
-.navdiv ul li { display: inline-block; margin: 0 20px; }
-.navdiv ul li a {
-    color: white;
-    font-size: 18px;
-    text-decoration: none;
-    font-weight: bold;
-    position: relative;
-}
-.navdiv ul li a:hover,
-.navdiv ul li a .active {
-    color: var(--prime-color);
-    border-bottom: 4px solid var(--prime-color);
-}
-.navdiv ul li a .News {
-    color: var(--prime-color);
-    border-bottom: 4px solid var(--prime-color);
-}
-.logo { height: 60px; width: 80px; }
 
 /* ── MAIN WRAPPER ── */
 main {
@@ -137,11 +90,3 @@ main {
     font-style: italic;
 }
 
-/* ── FOOTER ── */
-footer {
-    background: #021525;
-    text-align: center;
-    padding: 1.2rem;
-    color: rgba(160,210,240,.8);
-    border-top: 1px solid rgba(80,200,255,.2);
-}

@@ -4,27 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merch Store</title>
+    <link rel="stylesheet" href="../css/base.css">
     <link rel="stylesheet" href="../css/merch.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
 </head>
 <body>
 
-    <!-- NAVBAR -->
-     <!-- Navigation bar -->
-  <nav class="navbar">
-    <div class="navdiv">
-      <div class="logo"><a href="#"><img src="../../assets/image/about-logo.png"  alt="WDW Logo" class="logo"></a></div>
-        <ul>
-          <li><a href="../../index.html">Home</a></li>
-          <li><a href="../member/profile.html">About</a></li>
-          <li><a href="../music/music.html">Music</a></li>
-          <li><a href="../tour/tour.html">Tour</a></li>
-          <li><a href="merch.html"><span class="Merch">Merch</span></a></li>
-          <li><a href="../article/news.html">News</a></li>
-          
-    </div>
+<!-- ============================ HEADER ============================ -->
+<header class="site-header">
+  <nav class="site-nav" aria-label="Main">
+    <a class="site-nav__logo" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+    <ul class="site-nav__links">
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../member/profile.html">About</a></li>
+      <li><a href="../music/music.html">Music</a></li>
+      <li><a href="../tour/tour.html">Tour</a></li>
+      <li><a href="merch.html" class="is-active" aria-current="page">Merch</a></li>
+      <li><a href="../article/news.html">News</a></li>
+    </ul>
   </nav>
+</header>
 
     <main class="container">
 
@@ -171,20 +172,20 @@
   <div class="shell">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="../../index.html"><img src="../../assets/image/about-logo.png"></a>
+        <a class="brand" href="../../index.html"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
         <p>Official site. Pop's five-piece — music, tour, and more.</p>
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="#">Albums</a></li><li><a href="#">Singles</a></li><li><a href="#">Videos</a></li></ul>
+        <ul><li><a href="../music/music.html">Albums</a></li><li><a href="../music/music.html">Singles</a></li><li><a href="../article/article-video.html">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
-        <ul><li><a href="#">About</a></li><li><a href="#">Tour</a></li><li><a href="#">News</a></li></ul>
+        <ul><li><a href="../member/profile.html">About</a></li><li><a href="../tour/tour.html">Tour</a></li><li><a href="../article/news.html">News</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="More">
         <h4>More</h4>
-        <ul><li><a href="#">Merch</a></li><li><a href="#">Contact</a></li><li><a href="#">Privacy</a></li></ul>
+        <ul><li><a href="merch.html">Merch</a></li><li><a href="../ticket/ticket.html">Tickets</a></li><li><a href="../../index.html">Home</a></li></ul>
       </nav>
     </div>
 

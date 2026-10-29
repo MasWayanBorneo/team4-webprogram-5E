@@ -10,9 +10,23 @@
   --ink:#f5f2fb;
   --magenta:#e23f97;
 
+  /* reset page-level `footer {}` rules (sticky, negative margin, centered text…) */
+  position:relative;
+  top:auto;
+  flex:none;
+  width:auto;
+  margin:0;
+  padding:0;
+  text-align:left;
+  color:var(--ink);
+  font-family:"Space Grotesk",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  line-height:1.6;
+  border-bottom:0;
   border-top:1px solid var(--line);
   background:var(--surface);
 }
+/* neutralise page-level `li {}` and `ul li :hover {}` rules */
+.site-footer li :hover{border-bottom:0;color:inherit;}
 .site-footer .shell{max-width:1200px;margin:0 auto;padding-inline:1.5rem;}
 .site-footer .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2rem;padding-block:clamp(2.5rem,5vw,4rem);}
 .site-footer .footer-brand .brand{font-size:1.6rem;display:block;margin-bottom:.6rem;}
@@ -20,13 +34,13 @@
 .site-footer .footer-brand p{color:var(--faint);font-size:.9rem;max-width:34ch;margin:0;}
 .site-footer .footer-col h4{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0 0 1rem;}
 .site-footer .footer-col ul{margin:0;padding:0;}
-.site-footer .footer-col li{margin-bottom:.6rem;list-style:none;}
-.site-footer .footer-col a{color:var(--faint);font-size:.92rem;text-decoration:none;transition:color .15s;}
+.site-footer .footer-col li{display:block;margin:0 0 .6rem;list-style:none;}
+.site-footer .footer-col a{color:var(--faint);font-size:.92rem;font-weight:400;text-decoration:none;transition:color .15s;}
 .site-footer .footer-col a:hover{color:var(--ink);}
 .site-footer .footer-bottom{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;padding-block:1.4rem;border-top:1px solid var(--line);}
 .site-footer .footer-bottom p{color:var(--faint);font-size:.85rem;margin:0;}
 .site-footer .socials{display:grid;grid-auto-flow:column;gap:1.2rem;align-items:center;margin:0;padding:0;}
-.site-footer .socials li{list-style:none;margin:0;}
+.site-footer .socials li{display:block;list-style:none;margin:0;}
 .site-footer .socials a{color:var(--muted);display:grid;place-items:center;transition:color .15s,transform .15s;}
 .site-footer .socials a:hover{color:var(--magenta);transform:translateY(-2px);}
 .site-footer .socials svg{width:22px;height:22px;}
