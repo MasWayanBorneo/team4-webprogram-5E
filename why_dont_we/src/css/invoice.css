@@ -148,8 +148,6 @@
 }
 
 .invoice-actions #print-btn{
-    display:inline-block;
-    text-decoration:none;
     border:none;
     padding:12px 25px;
     border-radius:var(--btn-radius);

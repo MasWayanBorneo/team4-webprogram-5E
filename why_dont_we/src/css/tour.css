@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap");
 
-/* HALAMAN TOUR (juga dimuat oleh ticket.php dan invoice.php) — tema situs,
+/* HALAMAN TOUR (juga dimuat oleh ticket.html dan invoice.html) — tema situs,
    lihat token TEMA di base.css */
 
 * {
@@ -51,10 +51,9 @@ h2 {
 
 /* TAMPILAN TOMBOL BERSAMA */
 
-.filters a,
+.filters button,
 .ticket-link,
-.newsletter button,
-.archive-form button {
+.newsletter button {
   display: inline-block;
   border: none;
   padding: 12px 25px;
@@ -69,10 +68,9 @@ h2 {
   transition: opacity 0.2s, transform 0.2s;
 }
 
-.filters a:hover,
+.filters button:hover,
 .ticket-link:hover,
-.newsletter button:hover,
-.archive-form button:hover {
+.newsletter button:hover {
   opacity: 0.85;
   text-decoration: underline;
   transform: translateY(-2px);
@@ -103,30 +101,6 @@ h2 {
   justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
-}
-
-/* filter yang sedang dipilih */
-.filters a.is-active {
-  background: var(--deep-color);
-  color: var(--btn-bg);
-}
-
-/* pesan saat tidak ada konser yang cocok */
-.tour-empty {
-  text-align: center;
-  font-weight: 600;
-  color: var(--page-ink);
-  padding: 20px 0;
-}
-
-/* teks khusus pembaca layar */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
 }
 
 /* DAFTAR KONSER */
@@ -201,11 +175,6 @@ h2 {
   color: #8a1c12;
 }
 
-.ended {
-  background: #dfe6ea;
-  color: #3d4a52;
-}
-
 .tour-status span + button,
 .tour-status span + .ticket-link {
   display: block;
@@ -221,12 +190,6 @@ h2 {
   font-weight: bold;
 }
 
-/* "Pre Order" untuk konser coming soon: belum bisa diklik */
-.tour-status button:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
 /* ARSIP TOUR */
 
 .archive-section {
@@ -234,17 +197,8 @@ h2 {
   text-align: center;
 }
 
-/* pilih tahun + tombol Show */
-.archive-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
 .archive-section select {
-  margin-top: 0;
+  margin-top: 20px;
   padding: 10px 12px;
   width: min(250px, 100%);
   border-radius: var(--btn-radius);
@@ -252,11 +206,6 @@ h2 {
   background: var(--field-bg);
   color: var(--field-ink);
   font-size: 1rem;
-}
-
-.archive-list {
-  margin-top: 24px;
-  text-align: left;
 }
 
 /* NEWSLETTER */

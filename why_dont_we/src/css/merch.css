@@ -26,7 +26,7 @@ img{
     object-fit:contain;
 }
 
-/* elemen dengan atribut hidden selalu disembunyikan */
+/* bagian yang dirender merch.js bisa disembunyikan saat kosong */
 [hidden]{
     display:none !important;
 }
@@ -92,8 +92,8 @@ img{
     opacity:.8;
 }
 
-.product-info span,
-.price-row span{
+.featured-card [data-field="price"],
+.product-card [data-field="price"]{
     font-family:'Special Elite',serif;
     color:var(--deep-color);
 }
@@ -163,12 +163,6 @@ button:hover{
     display:block;
     margin-top:10px;
     font-size:2rem;
-}
-
-/* tombol "Add" dibungkus form POST kecil */
-.add-form{
-    margin:0;
-    flex:none;
 }
 
 .featured-card button{
@@ -257,13 +251,6 @@ button:hover{
     color:var(--heading);
 }
 
-/* pesan singkat setelah produk ditambahkan */
-.cart-message{
-    font-family:'Segoe UI',sans-serif;
-    font-size:.95rem;
-    color:var(--btn-bg);
-}
-
 .checkout-btn{
     min-width:220px;
 }
@@ -279,7 +266,6 @@ button:hover{
         gap:16px;
     }
 
-    .featured-card .add-form,
     .featured-card button{
         width:100%;
     }
@@ -300,7 +286,7 @@ button:hover{
     .card-image{ margin-bottom:10px; }
     .price-row{ flex-direction:column; align-items:stretch; gap:8px; }
     .price-row span{ font-size:1.5rem; }
-    .price-row button{ font-size:16px; padding:8px; width:100%; }
+    .price-row button{ font-size:16px; padding:8px; }
     .product-card h3{ font-size:14px; }
     .product-card p{ font-size:13px; }
 

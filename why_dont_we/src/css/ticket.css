@@ -27,44 +27,6 @@
     color:var(--card-ink);
 }
 
-/* pilih konser (form GET terpisah di atas form pesanan) */
-.concert-picker{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    margin-bottom:22px;
-}
-
-.concert-picker label{
-    font-weight:600;
-}
-
-.concert-picker__row{
-    display:flex;
-    gap:10px;
-}
-
-.concert-picker select{
-    flex:1;
-    min-width:0;
-    padding:12px 14px;
-    border-radius:var(--btn-radius);
-    border:var(--field-border);
-    background:var(--field-bg);
-    color:var(--field-ink);
-    font-size:1rem;
-}
-
-.concert-picker__btn{
-    border:none;
-    padding:0 18px;
-    border-radius:var(--btn-radius);
-    background:var(--surface);
-    color:var(--heading);
-    font-weight:bold;
-    cursor:pointer;
-}
-
 .ticket-form{
     display:flex;
     flex-direction:column;
@@ -139,12 +101,6 @@
     transition:border-color .15s, background .15s;
 }
 
-/* kategori yang kuotanya habis */
-.category-card:has(input:disabled){
-    opacity:.55;
-    cursor:not-allowed;
-}
-
 .category-card:has(input:checked){
     border-color:var(--secondary-color);
     background:rgba(255,255,255,.9);
@@ -179,24 +135,6 @@
 
 /* RINGKASAN PESANAN */
 
-/* tombol "Update total": hitung ulang total di server */
-.total-btn{
-    align-self:flex-end;
-    margin-top:-12px;
-    border:2px solid var(--surface);
-    padding:6px 14px;
-    border-radius:var(--btn-radius);
-    background:transparent;
-    color:var(--surface);
-    font-weight:600;
-    cursor:pointer;
-}
-
-.total-btn:hover{
-    background:var(--surface);
-    color:var(--heading);
-}
-
 .order-summary{
     display:flex;
     justify-content:space-between;
@@ -222,21 +160,6 @@
     cursor:pointer;
     box-shadow:0 5px 30px rgba(0,0,0,.25);
     transition:opacity .2s, transform .2s;
-}
-
-.ticket-submit:disabled{
-    opacity:.6;
-    cursor:not-allowed;
-    transform:none;
-}
-
-/* pesan error dari server (mis. kuota habis, email tidak valid) */
-.ticket-error{
-    padding:12px 14px;
-    border-radius:var(--btn-radius);
-    background:#ffd0cc;
-    color:#8a1c12;
-    font-weight:600;
 }
 
 .ticket-submit:hover{
