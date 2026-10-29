@@ -1,18 +1,30 @@
-/* TICKET PAGE — uses tour.css for shared vars, navbar, footer */
+/* TICKET PAGE — loaded after tour.css; site theme, see the THEME tokens in base.css */
 
 .page-header{
-    margin-bottom:40px;
+    margin-bottom:30px;
+    text-align:center;
+}
+
+.page-header h2{
+    margin-bottom:10px;
 }
 
 .ticket-sub{
-    color:var(--body);
-    margin-top:10px;
+    color:var(--page-ink);
+    font-weight:600;
 }
 
-/* FORM LAYOUT */
+/* FORM CARD */
 
 .ticket-section{
-    max-width:640px;
+    max-width:680px;
+    margin:0 auto;
+    padding:clamp(1.25rem, 4vw, 2rem);
+    background:var(--card-bg-light);
+    border:var(--card-border);
+    border-radius:var(--card-radius);
+    box-shadow:var(--card-shadow);
+    color:var(--card-ink);
 }
 
 .ticket-form{
@@ -40,22 +52,23 @@
 
 .form-group label{
     font-weight:600;
-    color:var(--heading);
+    color:var(--card-ink);
 }
 
 .ticket-form input,
 .ticket-form select{
     padding:12px 14px;
-    border-radius:10px;
-    border:1px solid rgba(255,255,255,.15);
-    background:var(--card);
-    color:#e8f4ff;
+    border-radius:var(--btn-radius);
+    border:var(--field-border);
+    background:var(--field-bg);
+    color:var(--field-ink);
     font-size:1rem;
 }
 
 .ticket-form input:focus,
 .ticket-form select:focus{
-    outline:2px solid var(--prime-color);
+    outline:none;
+    border-color:var(--secondary-color);
 }
 
 /* TICKET CATEGORIES */
@@ -71,7 +84,7 @@
 
 .ticket-categories legend{
     font-weight:600;
-    color:var(--heading);
+    color:var(--card-ink);
     margin-bottom:6px;
     padding:0;
 }
@@ -82,21 +95,21 @@
     gap:16px;
     padding:16px 18px;
     border-radius:14px;
-    border:1px solid rgba(255,255,255,.15);
-    background:var(--card);
+    border:2px solid rgba(1,9,18,.15);
+    background:rgba(255,255,255,.55);
     cursor:pointer;
     transition:border-color .15s, background .15s;
 }
 
 .category-card:has(input:checked){
-    border-color:var(--prime-color);
-    background:rgba(29,177,172,.15);
+    border-color:var(--secondary-color);
+    background:rgba(255,255,255,.9);
 }
 
 .category-card input[type="radio"]{
     width:18px;
     height:18px;
-    accent-color:var(--prime-color);
+    accent-color:var(--deep-color);
 }
 
 .category-info{
@@ -104,17 +117,19 @@
 }
 
 .category-info h3{
+    font-family:'Courier New', Courier, monospace;
+    text-transform:uppercase;
     margin-bottom:4px;
 }
 
 .category-info p{
-    color:var(--body);
+    color:var(--card-ink-soft);
     font-size:.92rem;
 }
 
 .category-price{
     font-weight:bold;
-    color:var(--heading);
+    color:var(--card-ink);
     white-space:nowrap;
 }
 
@@ -126,7 +141,8 @@
     align-items:center;
     padding:16px 18px;
     border-radius:14px;
-    background:rgba(160,220,255,.08);
+    background:var(--surface);
+    color:var(--heading);
     font-weight:bold;
     font-size:1.1rem;
 }
@@ -136,20 +152,24 @@
 .ticket-submit{
     border:none;
     padding:14px 25px;
-    border-radius:25px;
-    background:rgba(160,220,255,.9);
-    color:#010912;
+    border-radius:var(--btn-radius);
+    background:var(--btn-bg);
+    color:var(--btn-ink);
     font-weight:bold;
-    font-size:1rem;
+    font-size:1.1rem;
     cursor:pointer;
+    box-shadow:0 5px 30px rgba(0,0,0,.25);
+    transition:opacity .2s, transform .2s;
 }
 
 .ticket-submit:hover{
-    background:#6dc9ff;
+    opacity:.85;
+    text-decoration:underline;
+    transform:translateY(-2px);
 }
 
 .ticket-confirm{
-    color:#4CAF50;
+    color:#0b5d1e;
     font-weight:600;
     text-align:center;
 }

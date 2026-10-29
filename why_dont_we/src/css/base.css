@@ -45,4 +45,30 @@
 
   --radius:16px;
   --shell:1200px;
+
+  /* ---- SITE THEME (one look for every page, based on the music page) ----
+     Change these to re-theme the whole site. */
+  --page-bg:var(--prime-color);               /* teal page background */
+  --page-ink:var(--deep-color);               /* body text on the teal page */
+  --page-ink-soft:rgba(1,9,18,.72);
+
+  --title-font:'Special Elite',serif;         /* section / page headings */
+  --title-ink:var(--heading);                 /* headings on the teal page */
+  --cta-ink:#fffb00;                          /* big yellow call-to-action */
+
+  --card-bg:var(--glow);                      /* blue card */
+  --card-bg-light:var(--body);                /* light-blue card */
+  --card-border:2px solid var(--secondary-color);
+  --card-radius:20px;
+  --card-shadow:0 5px 40px rgba(0,0,0,.35);
+  --card-ink:var(--deep-color);               /* text on cards */
+  --card-ink-soft:rgba(1,9,18,.72);
+
+  --btn-bg:var(--secondary-color);            /* neon-green button */
+  --btn-ink:#000;
+  --btn-radius:10px;
+
+  --field-bg:rgba(255,255,255,.9);            /* form inputs */
+  --field-ink:var(--deep-color);
+  --field-border:2px solid rgba(1,9,18,.15);
 }

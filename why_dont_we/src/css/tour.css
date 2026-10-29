@@ -1,5 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap");
+
+/* TOUR PAGE (also loaded by ticket.html and invoice.html) — site theme,
+   see the THEME tokens in base.css */
 
 * {
   margin: 0;
@@ -9,219 +11,264 @@
 
 body {
   font-family: "Segoe UI", sans-serif;
-  background: var(--mid);
-  color: #e8f4ff;
+  background: var(--page-bg);
+  color: var(--page-ink);
   line-height: 1.6;
 }
 
-/* MAIN */
-
-main {
-  max-width: 1200px;
-  margin: auto;
-  padding: 40px;
-}
-
-/* HERO */
-
-.page-header h1 {
-  margin-bottom: 20px;
-}
-
-.hero-banner {
-  border-radius: 20px;
-
-  margin-bottom: 70px;
-}
 img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
+/* MAIN */
+
+main {
+  max-width: 1232px;
+  margin: auto;
+  padding: 40px 16px 60px;
+}
+
+/* HEADINGS */
+
 h2 {
-  font-size: 2rem;
-  max-width: 800px;
+  font-family: var(--title-font);
+  color: var(--title-ink);
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  line-height: 1.25;
+}
+
+/* big yellow call-to-action, as on the music page */
+.page-header h2 {
+  color: var(--cta-ink);
+  text-transform: lowercase;
+  text-align: center;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  max-width: 900px;
+  margin: 0 auto 30px;
+}
+
+/* SHARED BUTTON LOOK */
+
+.filters button,
+.ticket-link,
+.newsletter button {
+  display: inline-block;
+  border: none;
+  padding: 12px 25px;
+  border-radius: var(--btn-radius);
+  cursor: pointer;
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.25);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.filters button:hover,
+.ticket-link:hover,
+.newsletter button:hover {
+  opacity: 0.85;
+  text-decoration: underline;
+  transform: translateY(-2px);
+}
+
+/* HERO */
+
+.hero-banner {
+  border-radius: var(--card-radius);
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+  margin-bottom: 50px;
+}
+
+.hero-banner img {
+  display: block;
 }
 
 /* FILTER */
 
 .filter-section {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .filters {
   display: flex;
-  gap: 15px;
+  justify-content: center;
+  gap: 12px;
   flex-wrap: wrap;
-  margin-top: 20px;
-}
-
-.filters button {
-  border: none;
-  border-radius: 30px;
-  padding: 10px 25px;
-  cursor: pointer;
-  background: rgba(160, 220, 255, 0.9);
-  color: #010912;
-  font-weight: 600;
 }
 
 /* TOUR */
 
-.tour-section h2 {
-  margin-bottom: 30px;
+.tour-section {
+  display: grid;
+  gap: 20px;
 }
 
 .tour-card {
   display: flex;
   align-items: center;
-  gap: 30px;
-  padding: 25px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  gap: 24px;
+  padding: 20px;
+  background: var(--card-bg-light);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  color: var(--card-ink);
 }
 
 .tour-card img {
   width: 180px;
   height: 120px;
+  flex: none;
   object-fit: cover;
   border-radius: 12px;
 }
 
 .tour-info {
   flex: 1;
+  min-width: 0;
 }
 
 .tour-info h3 {
-  margin-bottom: 10px;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.tour-info p {
+  color: var(--card-ink-soft);
 }
 
 .tour-status {
   text-align: center;
+  flex: none;
 }
 
+/* status badges */
 .tour-status span {
-  display: block;
-  margin-bottom: 15px;
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
   font-weight: bold;
 }
 
 .available {
-  color: #4caf50;
+  background: #b9f6ca;
+  color: #0b5d1e;
 }
 
 .coming {
-  color: #ffc107;
+  background: #fff3b0;
+  color: #6b4e00;
 }
 
 .sold {
-  color: #f44336;
+  background: #ffd0cc;
+  color: #8a1c12;
+}
+
+.tour-status span + button,
+.tour-status span + .ticket-link {
+  display: block;
 }
 
 .tour-status button:last-child {
   border: none;
   padding: 12px 25px;
-  border-radius: 25px;
+  border-radius: var(--btn-radius);
   cursor: pointer;
-  background: rgba(160, 220, 255, 0.9);
-  color: #010912;
+  background: var(--btn-bg);
+  color: var(--btn-ink);
   font-weight: bold;
-}
-
-.tour-status button:hover {
-  background: #6dc9ff;
-}
-
-.ticket-link {
-  display: inline-block;
-  border: none;
-  padding: 12px 25px;
-  border-radius: 25px;
-  cursor: pointer;
-  background: rgba(160, 220, 255, 0.9);
-  color: #010912;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-.ticket-link:hover {
-  background: #6dc9ff;
 }
 
 /* ARCHIVE */
 
 .archive-section {
-  margin-top: 70px;
+  margin-top: 60px;
+  text-align: center;
 }
 
 .archive-section select {
   margin-top: 20px;
-  padding: 10px;
-  width: 250px;
-  border-radius: 10px;
+  padding: 10px 12px;
+  width: min(250px, 100%);
+  border-radius: var(--btn-radius);
+  border: var(--field-border);
+  background: var(--field-bg);
+  color: var(--field-ink);
+  font-size: 1rem;
 }
 
 /* NEWSLETTER */
 
 .newsletter {
-  margin-top: 70px;
+  margin-top: 60px;
+  padding: 2rem clamp(1.25rem, 4vw, 2.5rem);
+  background: var(--card-bg-light);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  color: var(--card-ink);
 }
 
 .newsletter p {
-  margin: 15px 0;
+  margin: 0 0 15px;
+}
+
+.newsletter label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 
 .newsletter-form {
   display: flex;
-  gap: 20px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
 .newsletter input {
   flex: 1;
-  min-width: 250px;
+  min-width: 220px;
   padding: 12px;
+  border-radius: var(--btn-radius);
+  border: var(--field-border);
+  background: var(--field-bg);
+  color: var(--field-ink);
+  font-size: 1rem;
 }
 
-.newsletter button {
-  border: none;
-  padding: 12px 30px;
-  border-radius: 25px;
-  background: red;
-  color: #010912;
-  font-weight: bold;
-  cursor: pointer;
-}
+/* RESPONSIVE */
 
-/* FOOTER */
+@media (max-width: 700px) {
+  .tour-card {
+    flex-direction: column;
+    text-align: center;
+  }
 
-.email {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 30px;
-}
+  .tour-card img {
+    width: 100%;
+    height: 180px;
+  }
 
-/* Email input field - Padded input field for email subscription */
-.email input {
-  padding: 7px;
-  border-radius: 10px;
-  font-size: 15px;
-  text-wrap: balance;
-  display: flex;
-}
+  .tour-status {
+    width: 100%;
+  }
 
-/* Email submit button - Red button positioned over email input for subscription */
-#email-btn {
-  background-color: red;
-  color: white;
-  display: flex;
-  flex-direction: row;
+  .newsletter-form {
+    flex-direction: column;
+  }
 
-  border-radius: 10px;
-}
-
-.icon {
-  text-align: center;
+  .newsletter input {
+    min-width: 0;
+  }
 }

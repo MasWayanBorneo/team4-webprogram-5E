@@ -1,14 +1,31 @@
-/* INVOICE PAGE — uses tour.css for shared vars; header.css/footer.css for the shared header and footer */
+/* INVOICE PAGE — loaded after tour.css; site theme, see the THEME tokens in base.css */
 
 .invoice-section{
-    max-width:720px;
+    max-width:760px;
+    margin:0 auto;
+}
+
+/* the "no invoice" state reuses .page-header from tour.css */
+#empty-state{
+    text-align:center;
+}
+
+#empty-state .ticket-sub{
+    margin:10px 0 20px;
 }
 
 .invoice-card{
-    background:var(--card);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:16px;
-    padding:30px;
+    background:var(--card-bg-light);
+    border:var(--card-border);
+    border-radius:var(--card-radius);
+    box-shadow:var(--card-shadow);
+    color:var(--card-ink);
+    padding:clamp(1.25rem, 4vw, 30px);
+}
+
+.invoice-card h2{
+    color:var(--card-ink);
+    font-size:1.5rem;
 }
 
 .invoice-head{
@@ -18,7 +35,7 @@
     flex-wrap:wrap;
     gap:20px;
     padding-bottom:20px;
-    border-bottom:1px solid rgba(255,255,255,.15);
+    border-bottom:2px solid rgba(1,9,18,.15);
     margin-bottom:20px;
 }
 
@@ -31,8 +48,10 @@
 .invoice-logo{
     width:56px;
     height:56px;
-    object-fit:cover;
+    object-fit:contain;
+    padding:6px;
     border-radius:50%;
+    background:var(--surface);
 }
 
 .invoice-brand h2{
@@ -40,7 +59,7 @@
 }
 
 .invoice-brand p{
-    color:var(--body);
+    color:var(--card-ink-soft);
 }
 
 .invoice-meta{
@@ -56,8 +75,8 @@
     margin-top:4px;
     padding:4px 14px;
     border-radius:20px;
-    background:rgba(76,175,80,.18);
-    color:#4CAF50;
+    background:#b9f6ca;
+    color:#0b5d1e;
     font-weight:bold;
 }
 
@@ -66,15 +85,23 @@
 }
 
 .invoice-billto h3{
+    font-family:'Courier New', Courier, monospace;
+    text-transform:uppercase;
     margin-bottom:8px;
 }
 
 .invoice-billto p{
-    color:var(--body);
+    color:var(--card-ink-soft);
+}
+
+/* wide table scrolls inside the card on small phones */
+.invoice-card{
+    overflow-x:auto;
 }
 
 .invoice-table{
     width:100%;
+    min-width:520px;
     border-collapse:collapse;
     margin-bottom:24px;
 }
@@ -83,11 +110,11 @@
 .invoice-table td{
     text-align:left;
     padding:12px 10px;
-    border-bottom:1px solid rgba(255,255,255,.12);
+    border-bottom:1px solid rgba(1,9,18,.15);
 }
 
 .invoice-table th{
-    color:var(--body);
+    color:var(--card-ink-soft);
     font-size:.85rem;
     text-transform:uppercase;
     letter-spacing:.03em;
@@ -99,14 +126,15 @@
     align-items:center;
     padding:16px 18px;
     border-radius:14px;
-    background:rgba(160,220,255,.08);
+    background:var(--surface);
+    color:var(--heading);
     font-weight:bold;
     font-size:1.2rem;
     margin-bottom:18px;
 }
 
 .invoice-note{
-    color:var(--body);
+    color:var(--card-ink-soft);
     font-size:.9rem;
 }
 
@@ -114,6 +142,7 @@
     display:flex;
     gap:16px;
     align-items:center;
+    justify-content:center;
     flex-wrap:wrap;
     margin-top:24px;
 }
@@ -121,22 +150,32 @@
 .invoice-actions #print-btn{
     border:none;
     padding:12px 25px;
-    border-radius:25px;
+    border-radius:var(--btn-radius);
     cursor:pointer;
-    background:rgba(160,220,255,.9);
-    color:#010912;
+    background:var(--btn-bg);
+    color:var(--btn-ink);
     font-weight:bold;
+    font-size:1rem;
+    box-shadow:0 5px 30px rgba(0,0,0,.25);
+    transition:opacity .2s, transform .2s;
 }
 
 .invoice-actions #print-btn:hover{
-    background:#6dc9ff;
+    opacity:.85;
+    text-decoration:underline;
+    transform:translateY(-2px);
 }
 
 @media print{
     .site-header, .site-footer, .invoice-actions{
         display:none;
     }
+    body{
+        background:#fff;
+    }
     .invoice-card{
         border:none;
+        box-shadow:none;
+        background:#fff;
     }
 }

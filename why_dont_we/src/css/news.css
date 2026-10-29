@@ -1,37 +1,34 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
+
+/* NEWS PAGE — site theme (see the THEME tokens in base.css) */
 
 /* =========================
    GLOBAL
 ========================= */
 
-/* *{
-    margin:0;
-    padding:0;
+*,
+*::before,
+*::after{
     box-sizing:border-box;
-} */
-
-body{
-    font-family:"Segoe UI", sans-serif;
-    background:var(--mid);
-    color:rgba(160,210,240,.8);
-    line-height:1.6;
 }
 
-/* Navigation container - Flexbox layout for navbar items with proper spacing */
+body{
+    margin:0;
+    font-family:"Segoe UI", sans-serif;
+    background:var(--page-bg);
+    color:var(--page-ink);
+    line-height:1.6;
+}
 
 /* =========================
    MAIN
 ========================= */
 
 main{
-    width:90%;
-    max-width:1200px;
-
+    width:100%;
+    max-width:1232px;
     margin:auto;
-
-    padding:2rem 0;
+    padding:2rem 16px 3rem;
 }
 
 section{
@@ -42,44 +39,73 @@ section{
    HEADINGS
 ========================= */
 
-h1,
-h2,
-h3{
-    color:#E8F4FF;
-
-    font-weight:300;
-
-    letter-spacing:.08em;
+main > section > h1,
+main > section > h2{
+    font-family:var(--title-font);
+    color:var(--title-ink);
+    text-align:center;
+    margin:0 0 1.5rem;
 }
 
-h1{
-    margin-bottom:1.5rem;
+main > section > h1{
+    font-size:clamp(2rem, 7vw, 3.5rem);
+    color:var(--cta-ink);
+    text-transform:lowercase;
 }
 
-h2{
-    margin-bottom:1.5rem;
+main > section > h2{
+    font-size:clamp(1.6rem, 5vw, 2.4rem);
 }
 
 /* =========================
-   FEATURED NEWS
+   CARDS (featured + grid)
 ========================= */
 
-.featured-card{
-
-    background:var(--deep-color);
-
-    border:1px solid rgba(80,200,255,.25);
-
-    border-radius:20px;
-
+.featured-card,
+.news-card{
+    height:100%;
+    border:var(--card-border);
+    border-radius:var(--card-radius);
+    box-shadow:var(--card-shadow);
     overflow:hidden;
+    color:var(--card-ink);
+    transition:transform .2s;
+}
 
-    backdrop-filter:blur(8px);
+.featured-card{
+    background:var(--card-bg-light);
+}
+
+.news-card{
+    background:var(--card-bg);
+}
+
+a:hover > .featured-card,
+a:hover > .news-card{
+    transform:translateY(-4px);
+}
+
+.featured-card h2,
+.news-card h3{
+    font-family:'Courier New', Courier, monospace;
+    font-weight:700;
+    text-transform:uppercase;
+    color:var(--card-ink);
+    margin:0 0 .5rem;
+}
+
+.featured-card h2{
+    font-size:clamp(1.2rem, 3vw, 1.6rem);
+}
+
+.news-card h3{
+    font-size:1.05rem;
 }
 
 .featured-image img{
+    display:block;
     width:100%;
-    height:350px;
+    height:clamp(200px, 40vw, 350px);
     object-fit:cover;
 }
 
@@ -88,12 +114,21 @@ h2{
 }
 
 .category{
-    color:rgba(160,220,255,.9);
-    margin-bottom:.5rem;
+    display:inline-block;
+    margin:0 0 .6rem;
+    padding:.15rem .75rem;
+    border-radius:999px;
+    background:var(--btn-bg);
+    color:var(--btn-ink);
+    font-size:.75rem;
+    font-weight:700;
+    letter-spacing:.1em;
+    text-transform:uppercase;
 }
 
 .meta{
-    color:rgba(160,210,240,.5);
+    margin:0;
+    color:var(--card-ink-soft);
     font-size:.9rem;
 }
 
@@ -102,37 +137,24 @@ h2{
 ========================= */
 
 .news-grid{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap:24px;
 }
 
-.news-card{
-
-    flex:1 1 calc(50% - 20px);
-
-    background:var(--deep-color);
-
-    border:1px solid rgba(80,200,255,.25);
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    backdrop-filter:blur(8px);
+.news-grid > a{
+    display:block;
 }
 
 .news-card img{
+    display:block;
     width:100%;
     height:220px;
     object-fit:cover;
 }
 
 .news-content{
-    padding:1rem;
+    padding:1rem 1.2rem 1.2rem;
 }
 
 /* =========================
@@ -140,85 +162,78 @@ h2{
 ========================= */
 
 .subscribe-section{
+    background:var(--card-bg-light);
+    border:var(--card-border);
+    border-radius:var(--card-radius);
+    box-shadow:var(--card-shadow);
+    padding:2rem clamp(1.25rem, 4vw, 2.5rem);
+    text-align:center;
+}
 
-    border-top:1px solid rgba(80,200,255,.2);
+main > .subscribe-section > h2{
+    color:var(--card-ink);
+    margin-bottom:.5rem;
+}
 
-    padding-top:2rem;
+.subscribe-section p{
+    color:var(--card-ink-soft);
+    margin:0;
 }
 
 .subscribe-form{
-
     display:flex;
-
-    gap:20px;
-
+    justify-content:center;
+    gap:16px;
     align-items:flex-end;
-
-    margin-top:1rem;
-
+    margin-top:1.25rem;
     flex-wrap:wrap;
+    text-align:left;
 }
 
 .form-group{
-
     display:flex;
-
     flex-direction:column;
 }
 
 label{
     margin-bottom:.5rem;
+    font-weight:600;
+    color:var(--card-ink);
 }
 
 input{
-
     width:350px;
-
+    max-width:100%;
     padding:.8rem;
-
-    background:#021525;
-
-    color:#E8F4FF;
-
-    border:1px solid rgba(80,200,255,.3);
-
-    border-radius:8px;
+    background:var(--field-bg);
+    color:var(--field-ink);
+    border:var(--field-border);
+    border-radius:var(--btn-radius);
+    font-size:1rem;
 }
 
 input:focus{
-
     outline:none;
-
-    border-color:rgba(160,220,255,.9);
+    border-color:var(--secondary-color);
 }
 
 button{
-
-    background:rgba(160,220,255,.9);
-
-    color:#031e33;
-
+    background:var(--btn-bg);
+    color:var(--btn-ink);
     border:none;
-
-    border-radius:30px;
-
-    padding:.9rem 2rem;
-
+    border-radius:var(--btn-radius);
+    padding:.85rem 2rem;
     font-family:"Segoe UI", sans-serif;
-
-    font-weight:400;
-
-    letter-spacing:.12em;
-
+    font-size:1rem;
+    font-weight:600;
     cursor:pointer;
-
-    transition:.3s;
+    box-shadow:0 5px 30px rgba(0,0,0,.25);
+    transition:opacity .2s, transform .2s;
 }
 
 button:hover{
-
-    box-shadow:0 0 20px rgba(80,200,255,.5);
-
+    opacity:.85;
+    text-decoration:underline;
     transform:translateY(-2px);
 }
 
@@ -227,10 +242,6 @@ button:hover{
 ========================= */
 
 @media (max-width:768px){
-
-    .news-card{
-        flex:1 1 100%;
-    }
 
     input{
         width:100%;

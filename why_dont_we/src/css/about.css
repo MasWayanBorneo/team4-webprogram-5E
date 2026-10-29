@@ -1,3 +1,5 @@
+/* MEMBER PROFILE PAGES (corbyn, daniel, jack, jonah, zach) — site theme,
+   see the THEME tokens in base.css */
 
 * {
     margin: 0;
@@ -6,219 +8,161 @@
 }
 
 body {
-    background-color: var(--deep-color);
+    background-color: var(--page-bg);
 }
 
 .app {
-    background:var(--glow);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #e8f4ff;
+    color: var(--page-ink);
     min-height: 100vh;
     width: 100%;
+    padding-bottom: 2rem;
 }
 
-.page-header {
-    padding: 1.5rem 1.25rem 0.5rem;
-}
-
-.page-title {
-    font-size: 18px;
-    font-weight: 300;
-    letter-spacing: 0.06em;
-    color: #e8f4ff;
-}
-
-.content, .profile-header {
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.quick-facts {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    width: 100%;
-    margin-bottom: 2rem;
-}
-
-.section-label {
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(160, 220, 255, 0.35);
-    font-weight: 400;
-    margin-bottom: 0.75rem;
-}
-
-.member-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 16px;
-    background: #021525;
-    border: 1px solid rgba(160, 210, 240, 0.1);
-    border-radius: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    transition: border-color 0.2s, background-color 0.2s;
-    text-decoration: none;
-}
-
-.member-card:hover {
-    border-color: rgba(160, 220, 255, 0.3);
-    background: #031e33;
-}
-
-.avatar {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: #031e33;
-    border: 1px solid rgba(160, 220, 255, 0.18);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.avatar-initials {
-    font-size: 13px;
-    font-weight: 400;
-    color: rgba(160, 220, 255, 0.85);
-    letter-spacing: 0.05em;
-}
-
-.member-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.member-name {
-    font-size: 14px;
-    font-weight: 400;
-    color: #e8f4ff;
-    letter-spacing: 0.03em;
-    margin-bottom: 2px;
-}
-
-.member-role {
-    font-size: 12px;
-    font-weight: 300;
-    color: rgba(160, 210, 240, 0.5);
-}
-
-.member-arrow {
-    font-size: 18px;
-    color: rgba(160, 220, 255, 0.25);
-}
+/* BACK LINK */
 
 .back-nav {
-    padding: 1rem 1.5rem;
-    background: #021525;
-    border-bottom: 1px solid rgba(160, 210, 240, 0.1);
+    max-width: 1032px;
+    margin: 0 auto;
+    padding: 1.25rem 16px 0;
 }
 
 .back-link {
-    color: rgba(160, 220, 255, 0.85);
+    color: var(--page-ink);
+    font-weight: 600;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 15px;
     display: inline-flex;
     align-items: center;
     gap: 5px;
 }
 
+.back-link:hover {
+    text-decoration: underline;
+    opacity: .75;
+}
+
+/* PROFILE HEADER */
+
 .profile-header {
+    max-width: 1032px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem 1.25rem;
+    padding: 1.5rem 16px 2rem;
     text-align: center;
 }
 
 .profile-pic {
-    width: 100px;
-    height: 100px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
-    background: #031e33;
-    border: 2px solid rgba(160, 220, 255, 0.3);
+    background: var(--surface);
+    border: 4px solid var(--secondary-color);
+    box-shadow: var(--card-shadow);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
-    font-size: 28px;
-    font-weight: 300;
-    color: rgba(160, 220, 255, 0.5);
-    letter-spacing: 0.05em;
+    overflow: hidden;
+}
+
+/* the <img> inside reuses the class — let it fill the circle */
+.profile-pic .profile-pic {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border: 0;
+    box-shadow: none;
+    object-fit: cover;
+    object-position: top;
 }
 
 .profile-name {
-    font-size: 24px;
-    font-weight: 300;
-    color: #e8f4ff;
+    font-family: var(--title-font);
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: var(--cta-ink);
+    text-transform: lowercase;
     margin-bottom: 4px;
 }
 
 .profile-role {
-    font-size: 14px;
-    color: rgba(160, 210, 240, 0.6);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--page-ink);
     margin-bottom: 1.5rem;
 }
 
+/* QUICK FACTS */
+
 .quick-facts {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
     width: 100%;
     margin-bottom: 2rem;
 }
 
 .fact-card {
-    background: #021525;
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(160, 210, 240, 0.1);
+    background: var(--card-bg);
+    padding: 14px;
+    border-radius: 14px;
+    border: var(--card-border);
+    box-shadow: var(--card-shadow);
     text-align: left;
 }
 
 .fact-label {
-    font-size: 10px;
+    font-size: 11px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: rgba(160, 220, 255, 0.4);
+    color: var(--card-ink-soft);
     margin-bottom: 4px;
 }
 
 .fact-value {
-    font-size: 13px;
-    color: #e8f4ff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--card-ink);
 }
+
+/* BIO (light-blue card) */
 
 .bio-section {
     width: 100%;
     text-align: left;
+    background: var(--card-bg-light);
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    padding: clamp(1.25rem, 4vw, 2rem);
+    color: var(--card-ink);
 }
 
 .bio-title {
-    font-size: 16px;
-    font-weight: 400;
-    color: #e8f4ff;
+    font-family: var(--title-font);
+    font-size: 22px;
+    color: var(--card-ink);
     margin-bottom: 10px;
-    border-bottom: 1px solid rgba(160, 210, 240, 0.1);
+    border-bottom: 2px solid rgba(1, 9, 18, .15);
     padding-bottom: 8px;
 }
 
 .bio-text {
-    font-size: 13px;
-    line-height: 1.6;
-    color: rgba(160, 210, 240, 0.8);
-    margin-bottom: 1rem;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--card-ink);
+    margin-bottom: 1.5rem;
 }
 
 .bio-list {
     list-style-position: inside;
-    font-size: 13px;
-    line-height: 1.6;
-    color: rgba(160, 210, 240, 0.8);
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--card-ink);
 }
 
 .bio-list li {
@@ -226,20 +170,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
-    .content {
-        padding: 0.75rem 1rem;
-    }
-
-    .member-card {
-        padding: 12px 14px;
-    }
-
-    .avatar {
-        width: 42px;
-        height: 42px;
-    }
-
     .quick-facts {
         grid-template-columns: 1fr 1fr;
     }

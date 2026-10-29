@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
+
+/* ABOUT / MEMBERS PAGE — site theme, see the THEME tokens in base.css */
 
 * {
     margin: 0;
@@ -8,95 +9,85 @@
 }
 
 body {
-    background-color:var(--mid);
+    background-color: var(--page-bg);
 }
 
 .app {
-    background:var(--mid);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #e8f4ff;
+    color: var(--page-ink);
     min-height: 100vh;
     width: 100%;
-
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-}
-.icon { text-align: center;}
-
-/* List items - Navigation list items displayed inline with consistent spacing */
-li{
-    list-style: none;
-     display: inline-block;
-     margin: 0 20px;
+    padding-bottom: 2rem;
 }
 
-/* List item links - Navigation links with white color and bold weight */
-li a{
-    color: white;
-    font-size: 18px;
-    position: relative;
-    text-decoration: none;
-    font-weight: bold;
+.icon { text-align: center; }
 
-}ul li :hover{
-    color: var(--prime-color);
-    border-bottom: 4px solid  var(--prime-color);
-}.page-header {
+/* ---- shared card look ---- */
+.timeline-item,
+.benefit-card,
+.member-card,
+.limelight-form {
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    color: var(--card-ink);
+}
+
+/* PAGE HEADER */
+
+.page-header {
     text-align: center;
-    padding: 1.5rem 1.25rem 0.5rem;
+    padding: 2rem 1.25rem 0.5rem;
 }
 
+.page-header .section-label {
+    margin-bottom: 0.25rem;
+}
+
+/* big yellow call-to-action, as on the music page */
 .page-title {
-    font-size: 32px;
-    font-weight: 300;
-    letter-spacing: 0.1em;
-    color: #e8f4ff;
-    text-transform: uppercase;
+    font-family: var(--title-font);
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    font-weight: bold;
+    color: var(--cta-ink);
+    text-transform: lowercase;
     text-align: center;
 }
 
 .content {
-    max-width: 1000px;
+    max-width: 1032px;
     margin: 0 auto;
 }
 
-.quick-facts {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
-    width: 100%;
-    margin-bottom: 2rem;
-}
-
 .section-label {
-    font-size: 10px;
+    font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(160, 220, 255, 0.35);
-    font-weight: 400;
-    margin-bottom: 0.75rem;
+    color: var(--page-ink-soft);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
 }
 
 .about-section,
 .history-section,
 .gallery-section,
-.members-section {
-    padding: 1.5rem 1.25rem;
+.members-section,
+.limelight-section {
+    padding: 1.5rem 16px;
     margin-bottom: 1rem;
 }
 
 .section-heading {
-    font-size: 22px;
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    color: #e8f4ff;
-    text-transform: uppercase;
+    font-family: var(--title-font);
+    font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+    color: var(--title-ink);
     margin-bottom: 1rem;
 }
 
 .about-text {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.7;
-    color: rgba(160, 210, 240, 0.8);
+    color: var(--page-ink);
     max-width: 720px;
 }
 
@@ -113,25 +104,23 @@ li a{
     display: flex;
     gap: 18px;
     align-items: flex-start;
-    padding: 14px 16px;
-    background: var(--glow);
-    border: 1px solid rgba(160, 210, 240, 0.1);
-    border-radius: 10px;
+    padding: 16px 18px;
+    background: var(--card-bg-light);
 }
 
 .timeline-year {
     flex-shrink: 0;
     width: 70px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--prime-color);
-    letter-spacing: 0.04em;
+    font-family: var(--title-font);
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--card-ink);
 }
 
 .timeline-item p {
     font-size: 14px;
     line-height: 1.6;
-    color: rgba(160, 210, 240, 0.8);
+    color: var(--card-ink);
 }
 
 /* GALLERY */
@@ -139,21 +128,21 @@ li a{
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    gap: 14px;
 }
 
 .gallery-img {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 10px;
-    border: 1px solid rgba(160, 210, 240, 0.1);
-    transition: transform 0.2s, border-color 0.2s;
+    border-radius: 14px;
+    border: var(--card-border);
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s;
 }
 
 .gallery-img:hover {
     transform: scale(1.03);
-    border-color: rgba(160, 220, 255, 0.3);
 }
 
 /* LIMELIGHT MEMBERSHIP */
@@ -161,61 +150,60 @@ li a{
 .limelight-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    gap: 16px;
     margin: 1.5rem 0;
 }
 
 .benefit-card {
     padding: 18px 16px;
-    background: var(--glow);
-    border: 1px solid rgba(160, 210, 240, 0.1);
-    border-radius: 10px;
-    transition: border-color 0.2s, background-color 0.2s;
+    background: var(--card-bg);
+    transition: transform 0.2s;
 }
 
 .benefit-card:hover {
-    border-color: rgba(160, 220, 255, 0.3);
-    background: #031e33;
+    transform: translateY(-3px);
 }
 
 .benefit-icon {
-    font-size: 20px;
-    color: var(--prime-color);
+    font-size: 22px;
+    color: var(--card-ink);
     margin-bottom: 10px;
 }
 
 .benefit-title {
-    font-size: 14px;
-    font-weight: 600;
-    color: #e8f4ff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--card-ink);
     margin-bottom: 6px;
 }
 
 .benefit-desc {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.6;
-    color: rgba(160, 210, 240, 0.6);
+    color: var(--card-ink-soft);
 }
 
 .btn-join {
     display: inline-block;
     padding: 12px 28px;
     border: none;
-    border-radius: 25px;
-    background: red;
-    color: white;
+    border-radius: var(--btn-radius);
+    background: var(--btn-bg);
+    color: var(--btn-ink);
     font-weight: 700;
     text-decoration: none;
-    letter-spacing: 0.02em;
     cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.2s;
-    
+    font-size: 16px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.25);
+    transition: opacity 0.2s, transform 0.2s;
 }
 
 .btn-join:hover {
-  text-decoration: underline;
-    opacity: 50%;
+    text-decoration: underline;
+    opacity: 0.85;
+    transform: translateY(-2px);
 }
 
 /* LIMELIGHT FORM */
@@ -224,19 +212,16 @@ li a{
     max-width: 640px;
     margin-top: 1.5rem;
     padding: 22px;
-    background: var(--card);
-    border: 1px solid rgba(160, 210, 240, 0.1);
-    border-radius: 14px;
+    background: var(--card-bg-light);
     display: flex;
     flex-direction: column;
     gap: 18px;
 }
 
 .limelight-form-title {
-    font-size: 18px;
-    font-weight: 500;
-    color: #e8f4ff;
-    letter-spacing: 0.02em;
+    font-family: var(--title-font);
+    font-size: 22px;
+    color: var(--card-ink);
 }
 
 .limelight-form .form-row {
@@ -254,58 +239,57 @@ li a{
 }
 
 .limelight-form label {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
-    color: rgba(160, 210, 240, 0.7);
+    color: var(--card-ink);
 }
 
 .limelight-form input,
 .limelight-form select {
     padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: var(--mid);
-    color: #e8f4ff;
+    border-radius: var(--btn-radius);
+    border: var(--field-border);
+    background: var(--field-bg);
+    color: var(--field-ink);
     font-size: 14px;
 }
 
 .limelight-form input:focus,
 .limelight-form select:focus {
-    outline: 2px solid var(--prime-color);
+    outline: none;
+    border-color: var(--secondary-color);
 }
 
 .limelight-confirm {
     font-size: 13px;
     font-weight: 600;
-    color: #4CAF50;
+    color: #0b5d1e;
 }
+
+/* MEMBERS */
 
 .member-card {
     display: flex;
     align-items: center;
     gap: 14px;
     padding: 14px 16px;
-    background:var(--glow);
-    border: 1px solid rgba(160, 210, 240, 0.1);
-    border-radius: 10px;
-    margin-bottom: 10px;
+    background: var(--card-bg-light);
+    margin-bottom: 12px;
     cursor: pointer;
-    transition: border-color 0.2s, background-color 0.2s;
+    transition: transform 0.2s;
     text-decoration: none;
-    color: inherit;
 }
 
 .member-card:hover {
-    border-color: rgba(160, 220, 255, 0.3);
-    background: #031e33;
+    transform: translateX(4px);
 }
 
 .avatar {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-    background: #031e33;
-    border: 1px solid rgba(160, 220, 255, 0.18);
+    background: var(--surface);
+    border: 2px solid var(--secondary-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -315,8 +299,7 @@ li a{
 
 .avatar-initials {
     font-size: 13px;
-    font-weight: 400;
-    color: rgba(160, 220, 255, 0.85);
+    color: var(--heading);
     letter-spacing: 0.05em;
 }
 
@@ -334,41 +317,33 @@ li a{
 }
 
 .member-name {
-    font-size: 14px;
-    font-weight: 400;
-    color: #e8f4ff;
-    letter-spacing: 0.03em;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--card-ink);
     margin-bottom: 2px;
 }
 
 .member-role {
-    font-size: 12px;
-    font-weight: 300;
-    color: rgba(160, 210, 240, 0.5);
+    font-size: 13px;
+    color: var(--card-ink-soft);
 }
 
 .member-arrow {
-    font-size: 18px;
-    color: rgba(160, 220, 255, 0.25);
+    font-size: 24px;
+    color: var(--card-ink);
 }
 
 @media (max-width: 768px) {
-
-    .content {
-        padding: 0.75rem 1rem;
-    }
 
     .member-card {
         padding: 12px 14px;
     }
 
     .avatar {
-        width: 42px;
-        height: 42px;
-    }
-
-    .quick-facts {
-        grid-template-columns: 1fr 1fr;
+        width: 44px;
+        height: 44px;
     }
 
     .gallery-grid {
