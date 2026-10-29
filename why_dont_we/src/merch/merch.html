@@ -29,141 +29,68 @@
 
     <main class="container">
 
-        
+        <div class="cta">
+            <h2>Wear it loud — grab your official merch!</h2>
+        </div>
 
-        <!-- FEATURED PRODUCTS -->
-        <section class="featured-products">
+        <!-- Products are rendered by ../js/merch.js from ../data/products.js
+             (later: from the database). Edit the card markup in the templates below. -->
+        <p id="merch-status" class="merch-status" hidden></p>
 
-            <div class="featured-card">
-                <div class="product-image">
-                    <a href=""><img src="../../assets/image/gelang.png"></a>
-                </div>
-
-                <div class="product-info">
-                    <h2> bracelet</h2>
-                    <p>Covid-19 Collection</p>
-                    <span>$65</span>
-                </div>
-
-                <button>Add to Cart</button>
-            </div>
-
-            <div class="featured-card">
-                <div class="product-image">
-                    <a href=""><img src="../../assets/image/hoodie.png"></a>
-                </div>
-
-                <div class="product-info">
-                    <h2>Limited Edition Hoodie</h2>
-                    <p>New Era Collection</p>
-                    <span>$65</span>
-                </div>
-
-                <button>Add to Cart</button>
-            </div>
-
+        <!-- FEATURED PRODUCTS (is_featured = 1) -->
+        <section class="featured-section">
+            <h1 class="section-title">Featured merch</h1>
+            <div id="featured-list" class="featured-products"></div>
         </section>
 
-        <hr>
-
-        <!-- PRODUCT GRID -->
-        <section class="products-grid">
-
-            <div class="product-card">
-                <div class="card-image">
-                    <a href=""><img src="../../assets/image/hoodie.png"></a>
-                </div>
-
-                <div class="price-row">
-                    <span>$65</span>
-                    <button>Add</button>
-                </div>
-
-                <h3>Limited Edition Hoodie</h3>
-                <p>New Era Collection</p>
-            </div>
-
-            <div class="product-card">
-                <div class="card-image">
-                    <a href=""><img src="../../assets/image/kaoskaki.png"></a>
-                </div>
-
-                <div class="price-row">
-                    <span>$65</span>
-                    <button>Add</button>
-                </div>
-
-                <h3>Limited Edition Hoodie</h3>
-                <p>New Era Collection</p>
-            </div>
-
-            <div class="product-card">
-                <div class="card-image">
-                    <a href=""><img src="../../assets/image/—Pngtree—black t-shirt_5609353.png"></a>
-                </div>
-
-                <div class="price-row">
-                    <span>$65</span>
-                    <button>Add</button>
-                </div>
-
-                <h3>Limited Edition Hoodie</h3>
-                <p>New Era Collection</p>
-            </div>
-
-            <div class="product-card">
-                <div class="card-image">
-                    <a href=""><img src="../../assets/image/—Pngtree—plain dark green t shirt_14667981.png"></a>
-                </div>
-
-                <div class="price-row">
-                    <span>$65</span>
-                    <button>Add</button>
-                </div>
-
-                <h3>Limited Edition Hoodie</h3>
-                <p>New Era Collection</p>
-            </div>
-
-            <div class="product-card">
-                <div class="card-image">
-                    <a href=""><img src="../../assets/image/vecteezy_ai-generated-cowboy-hat-png_34616681.png"></a>
-                </div>
-
-                <div class="price-row">
-                    <span>$65</span>
-                    <button>Add</button>
-                </div>
-
-                <h3>Limited Edition Hoodie</h3>
-                <p>New Era Collection</p>
-            </div>
-
-            <div class="product-card">
-                <div class="card-image">
-                    <a href=""><img src="../../assets/image/vecteezy_seafoam-green-short-sleeve-crew-neck-tshirt-mockup-for_59901009.png"></a>
-                </div>
-
-                <div class="price-row">
-                    <span>$65</span>
-                    <button>Add</button>
-                </div>
-
-                <h3>Limited Edition Hoodie</h3>
-                <p>New Era Collection</p>
-            </div>
-
+        <!-- ALL PRODUCTS -->
+        <section>
+            <h1 class="section-title">All merch</h1>
+            <div id="product-list" class="products-grid"></div>
         </section>
 
     </main>
 
+    <!-- CARD TEMPLATES — data-field="<column>" is filled from the matching product field -->
+    <template id="tpl-featured">
+        <article class="featured-card">
+            <div class="product-image">
+                <img data-field="image" alt="">
+            </div>
+
+            <div class="product-info">
+                <h2 data-field="name"></h2>
+                <p data-field="collection"></p>
+                <span data-field="price"></span>
+            </div>
+
+            <button type="button" data-action="add-to-cart">Add to Cart</button>
+        </article>
+    </template>
+
+    <template id="tpl-product">
+        <article class="product-card">
+            <div class="card-image">
+                <img data-field="image" alt="">
+            </div>
+
+            <div class="price-row">
+                <span data-field="price"></span>
+                <button type="button" data-action="add-to-cart">Add</button>
+            </div>
+
+            <h3 data-field="name"></h3>
+            <p data-field="collection"></p>
+        </article>
+    </template>
+
     <!-- CART BAR -->
     <div class="cart-bar">
         <div class="cart-info">
-            🛒 Cart - 2 Items
+            🛒 Cart - <span id="cart-count">0 Items</span>
         </div>
 
-        <button class="checkout-btn">
+        <button type="button" class="checkout-btn">
             Checkout
         </button>
     </div>
@@ -200,5 +127,8 @@
     </div>
   </div>
 </footer>
+
+<script src="../data/products.js" defer></script>
+<script src="../js/merch.js" defer></script>
 </body>
 </html>
