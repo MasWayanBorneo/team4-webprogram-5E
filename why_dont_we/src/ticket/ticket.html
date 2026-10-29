@@ -68,21 +68,21 @@
                     <legend>Ticket Category</legend>
 
                     <label class="category-card" for="regular">
-                        <input type="radio" id="regular" name="category" value="750000" data-name="Regular" checked>
+                        <input type="radio" id="regular" name="category" value="50" data-name="Regular" checked>
                         <div class="category-info">
                             <h3>Regular</h3>
                             <p>Standing area access, official merch discount voucher.</p>
                         </div>
-                        <span class="category-price">Rp 750.000</span>
+                        <span class="category-price">$50</span>
                     </label>
 
                     <label class="category-card" for="vip">
-                        <input type="radio" id="vip" name="category" value="1500000" data-name="VIP">
+                        <input type="radio" id="vip" name="category" value="100" data-name="VIP">
                         <div class="category-info">
                             <h3>VIP</h3>
                             <p>Front-row standing area, exclusive merch pack, meet &amp; greet pass.</p>
                         </div>
-                        <span class="category-price">Rp 1.500.000</span>
+                        <span class="category-price">$100</span>
                     </label>
                 </fieldset>
 
@@ -93,7 +93,7 @@
 
                 <div class="order-summary">
                     <span>Total</span>
-                    <span id="total-price">Rp 750.000</span>
+                    <span id="total-price">$50</span>
                 </div>
 
                 <button type="submit" class="ticket-submit">Proceed to Checkout</button>
@@ -141,15 +141,17 @@
         const quantityInput = document.getElementById('quantity');
         const totalEl = document.getElementById('total-price');
 
-        function formatRupiah(amount) {
-            return 'Rp ' + amount.toLocaleString('id-ID');
+        const usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
+        function formatPrice(amount) {
+            return usd.format(Number(amount));
         }
 
         function updateTotal() {
             const selected = form.querySelector('input[name="category"]:checked');
             const price = Number(selected.value);
             const quantity = Number(quantityInput.value) || 1;
-            totalEl.textContent = formatRupiah(price * quantity);
+            totalEl.textContent = formatPrice(price * quantity);
         }
 
         form.querySelectorAll('input[name="category"]').forEach((input) => {

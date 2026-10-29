@@ -136,8 +136,10 @@
 </footer>
 
     <script>
-        function formatRupiah(amount) {
-            return 'Rp ' + Number(amount).toLocaleString('id-ID');
+        const usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
+        function formatPrice(amount) {
+            return usd.format(Number(amount));
         }
 
         const order = JSON.parse(sessionStorage.getItem('wdwTicketOrder') || 'null');
@@ -160,9 +162,9 @@
             document.getElementById('inv-concert').textContent = order.concert;
             document.getElementById('inv-category').textContent = order.categoryName;
             document.getElementById('inv-qty').textContent = order.quantity;
-            document.getElementById('inv-unit').textContent = formatRupiah(order.unitPrice);
-            document.getElementById('inv-subtotal').textContent = formatRupiah(order.total);
-            document.getElementById('inv-total').textContent = formatRupiah(order.total);
+            document.getElementById('inv-unit').textContent = formatPrice(order.unitPrice);
+            document.getElementById('inv-subtotal').textContent = formatPrice(order.total);
+            document.getElementById('inv-total').textContent = formatPrice(order.total);
         }
 
         document.getElementById('print-btn').addEventListener('click', () => {
@@ -249,8 +251,8 @@
                 doc.text(order.concert || '-', col.desc, y, { maxWidth: col.cat - col.desc - 4 });
                 doc.text(order.categoryName || '-', col.cat, y);
                 doc.text(String(order.quantity ?? '-'), col.qty, y);
-                doc.text(formatRupiah(order.unitPrice), col.unit, y);
-                doc.text(formatRupiah(order.total), col.sub, y, { align: 'right' });
+                doc.text(formatPrice(order.unitPrice), col.unit, y);
+                doc.text(formatPrice(order.total), col.sub, y, { align: 'right' });
 
                 y += 8;
                 doc.setDrawColor(220, 220, 220);
@@ -263,7 +265,7 @@
                 doc.setFontSize(13);
                 doc.setTextColor(20, 30, 45);
                 doc.text('Total Paid', marginX + 6, y + 1);
-                doc.text(formatRupiah(order.total), rightX - 6, y + 1, { align: 'right' });
+                doc.text(formatPrice(order.total), rightX - 6, y + 1, { align: 'right' });
 
                 y += 20;
                 doc.setFont('helvetica', 'normal');
