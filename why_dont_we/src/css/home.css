@@ -54,7 +54,7 @@
 html{scroll-behavior:smooth;}
 body{
   margin:0;
-  background: url(assets/image/WDW-SlowDown-MobileHeader-640x1136.gif);
+  background: url(../../assets/image/WDW-SlowDown-MobileHeader-640x1136.gif);
   color:var(--ink);
   background-size: cover;
   height: 100vh;
@@ -223,7 +223,7 @@ img{
   font-family:"Anton",Arial Narrow,sans-serif;font-weight:400;text-transform:uppercase;
   font-size:clamp(3.4rem,14vw,12rem);line-height:.84;letter-spacing:.005em;
   margin:.2em 0 0;
-  background:linear-gradient(180deg,#e6ea00ba 30%,#e9c9ff 75%,#ffc89a);
+  background:linear-gradient(180deg,#e8eb2bba 30%,#e9c9ff 75%,#ffc89a);
   -webkit-background-clip:text;background-clip:text;color:transparent;
   
 }
