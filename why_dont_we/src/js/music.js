@@ -1,30 +1,29 @@
 /* ============================================================================
-   HALAMAN MUSIC — menaruh popover "Stream" (#dropdown) tepat di bawah tombol
-   Stream yang diklik, dengan lebar yang sama seperti tombol itu.
+   HALAMAN MUSIC — kenyamanan untuk dropdown Stream (<details class="stream-dropdown">).
+   Dropdown sudah bisa dibuka/ditutup tanpa JavaScript; script ini hanya:
+   - menutup dropdown lain saat satu dropdown dibuka
+   - menutup dropdown saat klik di luar atau menekan tombol Esc
    ============================================================================ */
 (() => {
-  const popover = document.getElementById("dropdown");
-  if (!popover) return;
+  const dropdowns = document.querySelectorAll(".stream-dropdown");
 
-  let opener = null;
-
-  function placeUnder(button) {
-    const rect = button.getBoundingClientRect();
-    popover.style.width = `${rect.width}px`;
-    popover.style.left = `${rect.left + window.scrollX}px`;
-    popover.style.top = `${rect.bottom + window.scrollY + 8}px`;
+  function closeAll(except) {
+    dropdowns.forEach((dropdown) => {
+      if (dropdown !== except) dropdown.open = false;
+    });
   }
 
-  // click dijalankan sebelum browser membuka popover, jadi popover langsung muncul di posisinya
-  document.querySelectorAll('[popovertarget="dropdown"]').forEach((button) => {
-    button.addEventListener("click", () => {
-      opener = button;
-      placeUnder(button);
+  dropdowns.forEach((dropdown) => {
+    dropdown.addEventListener("toggle", () => {
+      if (dropdown.open) closeAll(dropdown);
     });
   });
 
-  // tetap menempel ke tombolnya saat layout berubah (layar diputar, ukuran jendela berubah)
-  window.addEventListener("resize", () => {
-    if (opener && popover.matches(":popover-open")) placeUnder(opener);
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".stream-dropdown")) closeAll();
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeAll();
   });
 })();

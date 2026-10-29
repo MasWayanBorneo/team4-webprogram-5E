@@ -215,20 +215,6 @@ h2{
     margin-top: auto;   
 }
 
-/* Popover Stream - top/left/width diatur oleh ../js/music.js supaya muncul tepat
-   di bawah tombol Stream yang diklik, dengan lebar yang sama */
-#dropdown{
-    position: absolute;
-    inset: auto;
-    margin: 0;
-    padding: 12px;
-    box-sizing: border-box;
-    background: #fff;
-    border: var(--card-border);
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.35);
-}
-
 /* Titik anchor lirik pertama - acuan posisi popup lirik pertama */
 .lirik{anchor-name: --lyric;}
 
@@ -313,37 +299,89 @@ h2{
    
 }
 
-/* Gambar ikon - logo platform streaming */
-.icon2 img{
-    display: block;
+/* Dropdown Stream - elemen <details>/<summary> bawaan HTML; menu terbuka
+   tepat di bawah tombol dengan lebar yang sama, tetap jalan tanpa JavaScript */
+.stream-dropdown{
+    position: relative;
     width: 100%;
-    max-width: 200px;
-    height: auto;
-    margin: 0 auto;
+    margin-top: auto;
+    margin-bottom: 10px;
 }
 
-/* Kontainer ikon - menyusun logo platform, menyesuaikan lebar popover */
-.icon2{
+.stream-dropdown > summary{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    color: #000;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
+    cursor: pointer;
+    user-select: none;
+}
+
+/* sembunyikan segitiga bawaan browser, ganti dengan panah sendiri */
+.stream-dropdown > summary::-webkit-details-marker{
+    display: none;
+}
+
+.stream-dropdown > summary::after{
+    content: "\25BE";
+    font-size: .8em;
+    transition: transform .2s;
+}
+
+.stream-dropdown[open] > summary::after{
+    transform: rotate(180deg);
+}
+
+.stream-dropdown > summary:hover{
+    opacity: 80%;
+    text-decoration: underline;
+}
+
+.stream-dropdown > summary:focus-visible{
+    outline: 3px solid var(--deep-color);
+    outline-offset: 2px;
+}
+
+.stream-menu{
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 20;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
+    padding: 10px;
+    background: #fff;
+    border: var(--card-border);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
-.icon2 a{
+.stream-menu a{
     display: block;
     padding: 4px;
     border-radius: 8px;
 }
 
-.icon2 a:hover{
+.stream-menu a:hover{
     background: rgba(0,0,0,.06);
 }
 
-/* Efek hover ikon - sedikit transparan saat di-hover */
-.icon2 img:hover{
-    opacity: 60%;
-   
-    
+.stream-menu img{
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto;
 }
 
 /* Efek hover tombol album - transparan dan bergaris bawah saat di-hover */
@@ -530,6 +568,7 @@ audio::-webkit-media-controls-mute-button{
     .player2{ padding: 16px; }
 
     .player2 .tombol,
+    .stream-dropdown > summary,
     .player2 .lirik,
     .player2 .lirik2,
     .player2 .lirik3,
@@ -556,7 +595,8 @@ audio::-webkit-media-controls-mute-button{
     .player{ padding: 12px; border-radius: 16px; }
     .player .imgbox{ width: 100%; margin-bottom: 12px; border-radius: 12px; }
     .player h2, .player .song-title h2{ font-size: 14px; }
-    .player button{ font-size: 18px; padding: 8px; }
+    .player button,
+    .player .stream-dropdown > summary{ font-size: 18px; padding: 8px; }
 
     .player2{ padding: 16px; }
     .video iframe{ border-radius: 12px; }
