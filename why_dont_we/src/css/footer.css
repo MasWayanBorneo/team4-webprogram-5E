@@ -1,5 +1,5 @@
 /* ============================================================================
-   FOOTER BERSAMA — markup/gaya sama seperti index.php, dipakai di semua halaman.
+   FOOTER BERSAMA — markup/gaya sama seperti index.html, dipakai di semua halaman.
    Dibatasi di bawah .site-footer supaya tidak bentrok dengan variabel :root halaman.
    ============================================================================ */
 .site-footer{
