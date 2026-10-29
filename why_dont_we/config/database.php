@@ -1,8 +1,8 @@
 <?php
 /* ============================================================================
-   DATABASE CONNECTION (mysqli, procedural style)
-   Include this file in any PHP page or API endpoint that needs MySQL; it
-   creates the connection in $conn:
+   KONEKSI DATABASE (mysqli, gaya prosedural)
+   Panggil file ini di setiap halaman PHP atau endpoint API yang butuh MySQL.
+   File ini membuat koneksi di variabel $conn:
 
        require __DIR__ . '/../config/database.php';
 
@@ -11,15 +11,15 @@
            echo $row['name'];
        }
 
-   For values that come from a form or the URL, use a prepared statement so
-   the input can never change the SQL:
+   Untuk nilai yang berasal dari form atau URL, gunakan prepared statement
+   supaya input pengguna tidak bisa mengubah perintah SQL (SQL injection):
 
        $stmt = mysqli_prepare($conn, "SELECT * FROM members WHERE slug = ?");
        mysqli_stmt_bind_param($stmt, "s", $slug);
        mysqli_stmt_execute($stmt);
        $member = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 
-   The values below match a default XAMPP install (user "root", no password).
+   Nilai di bawah sesuai instalasi bawaan XAMPP (user "root", tanpa password).
    ============================================================================ */
 
 $db_host = "localhost";
@@ -27,10 +27,10 @@ $db_user = "root";
 $db_pass = "";
 $db_name = "wdw_db";
 
-// report errors through return values, so the checks below can handle them
+// error dilaporkan lewat nilai kembalian, supaya bisa dicek dengan if di bawah
 mysqli_report(MYSQLI_REPORT_OFF);
 
-// "@" hides PHP's raw warning; the message below explains the failure instead
+// "@" menyembunyikan warning mentah PHP; pesan di bawah yang menjelaskan errornya
 $conn = @mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
 if (!$conn) {
@@ -38,5 +38,5 @@ if (!$conn) {
     die("Koneksi database gagal: " . mysqli_connect_error());
 }
 
-// utf8mb4 so names and paths with special characters (e.g. "—") come back intact
+// utf8mb4 supaya nama dan path dengan karakter khusus (misalnya "—") tidak rusak
 mysqli_set_charset($conn, "utf8mb4");

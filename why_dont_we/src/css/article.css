@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
-/* ARTICLE PAGES — site theme (see the THEME tokens in base.css) */
+/* HALAMAN ARTIKEL — tema situs (lihat token TEMA di base.css) */
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -11,7 +11,7 @@ body {
     line-height: 1.6;
 }
 
-/* ── MAIN WRAPPER ── */
+/* ── PEMBUNGKUS UTAMA ── */
 main {
     width: 100%;
     max-width: 892px;
@@ -19,7 +19,7 @@ main {
     padding: 2.5rem 16px 4rem;
 }
 
-/* ── BACK LINK ── */
+/* ── LINK KEMBALI ── */
 .back-link {
     display: inline-flex;
     align-items: center;
@@ -33,7 +33,7 @@ main {
 }
 .back-link:hover { opacity: .7; text-decoration: underline; }
 
-/* ── ARTICLE HEADER ── */
+/* ── HEADER ARTIKEL ── */
 .article-header { margin-bottom: 2rem; text-align: center; }
 
 .article-header .category {
@@ -62,7 +62,7 @@ main {
     font-size: .9rem;
 }
 
-/* ── HERO IMAGE ── */
+/* ── GAMBAR HERO ── */
 .article-hero {
     display: block;
     width: 100%;
@@ -74,7 +74,7 @@ main {
     margin-bottom: 2.5rem;
 }
 
-/* ── ARTICLE BODY (light-blue card) ── */
+/* ── ISI ARTIKEL (kartu biru muda) ── */
 .article-body {
     background: var(--card-bg-light);
     border: var(--card-border);

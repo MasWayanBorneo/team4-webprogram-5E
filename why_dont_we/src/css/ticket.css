@@ -1,4 +1,4 @@
-/* TICKET PAGE — loaded after tour.css; site theme, see the THEME tokens in base.css */
+/* HALAMAN TICKET — dimuat setelah tour.css; tema situs, lihat token TEMA di base.css */
 
 .page-header{
     margin-bottom:30px;
@@ -14,7 +14,7 @@
     font-weight:600;
 }
 
-/* FORM CARD */
+/* KARTU FORM */
 
 .ticket-section{
     max-width:680px;
@@ -71,7 +71,7 @@
     border-color:var(--secondary-color);
 }
 
-/* TICKET CATEGORIES */
+/* KATEGORI TIKET */
 
 .ticket-categories{
     border:none;
@@ -133,7 +133,7 @@
     white-space:nowrap;
 }
 
-/* ORDER SUMMARY */
+/* RINGKASAN PESANAN */
 
 .order-summary{
     display:flex;
@@ -147,7 +147,7 @@
     font-size:1.1rem;
 }
 
-/* SUBMIT */
+/* TOMBOL SUBMIT */
 
 .ticket-submit{
     border:none;

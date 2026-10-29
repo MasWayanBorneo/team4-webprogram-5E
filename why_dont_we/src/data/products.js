@@ -1,11 +1,11 @@
 /* ============================================================================
-   MERCH PRODUCTS — temporary data source for src/merch/merch.html.
-   Each object is one row of the `products` table in wdw_db (database/wdw_db.sql),
-   with the same column names. When the database is ready, remove this file
-   and point loadProducts() in src/js/merch.js at the API endpoint instead.
+   PRODUK MERCH — sumber data sementara untuk src/merch/merch.html.
+   Setiap objek = satu baris tabel `products` di wdw_db (database/wdw_db.sql),
+   dengan nama kolom yang sama. Saat database siap, hapus file ini dan arahkan
+   loadProducts() di src/js/merch.js ke endpoint API.
 
-   image       → path relative to the project root
-   is_featured → 1 = also shown in the large "featured" cards at the top
+   image       → path relatif dari root project
+   is_featured → 1 = juga tampil di kartu "featured" besar di bagian atas
    ============================================================================ */
 window.MERCH_PRODUCTS = [
   { id: 1, slug: "bracelet",               name: "Bracelet",               collection: "Covid-19 Collection", price: 65, image: "assets/image/gelang.png",   is_featured: 1 },

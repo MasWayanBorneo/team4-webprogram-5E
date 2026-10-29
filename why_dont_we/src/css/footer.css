@@ -1,6 +1,6 @@
 /* ============================================================================
-   SHARED SITE FOOTER — same markup/style as index.html, used on every page.
-   Scoped under .site-footer so it never collides with a page's own :root vars.
+   FOOTER BERSAMA — markup/gaya sama seperti index.html, dipakai di semua halaman.
+   Dibatasi di bawah .site-footer supaya tidak bentrok dengan variabel :root halaman.
    ============================================================================ */
 .site-footer{
   --line:rgba(255,255,255,.09);
@@ -10,7 +10,7 @@
   --ink:#f5f2fb;
   --magenta:#e23f97;
 
-  /* reset page-level `footer {}` rules (sticky, negative margin, centered text…) */
+  /* menetralkan aturan `footer {}` milik halaman (sticky, margin negatif, teks rata tengah…) */
   position:relative;
   top:auto;
   flex:none;
@@ -25,7 +25,7 @@
   border-top:1px solid var(--line);
   background:var(--surface);
 }
-/* neutralise page-level `li {}` and `ul li :hover {}` rules */
+/* menetralkan aturan `li {}` dan `ul li :hover {}` milik halaman */
 .site-footer li :hover{border-bottom:0;color:inherit;}
 .site-footer .shell{max-width:1200px;margin:0 auto;padding-inline:1.5rem;}
 .site-footer .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2rem;padding-block:clamp(2.5rem,5vw,4rem);}

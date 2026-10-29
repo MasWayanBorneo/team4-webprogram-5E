@@ -1,24 +1,24 @@
 /* ============================================================================
-   MERCH PAGE — fills the <template>s in src/merch/merch.html with products
-   and keeps the cart count. Product fields map 1:1 to the `products` table.
+   HALAMAN MERCH — mengisi <template> di src/merch/merch.html dengan produk
+   dan menghitung isi keranjang. Field produk sama persis dengan tabel `products`.
    ============================================================================ */
 (() => {
-  const ROOT = "../../"; // merch.html → project root (image paths are root-relative)
-  const CART_KEY = "wdw-cart"; // { [productId]: quantity }
+  const ROOT = "../../"; // merch.html → root project (path gambar relatif dari root)
+  const CART_KEY = "wdw-cart"; // { [idProduk]: jumlah }
   const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
-  /* --- data source ---------------------------------------------------------
-     The only thing to change when the database is ready, e.g.:
+  /* --- sumber data ----------------------------------------------------------
+     Satu-satunya bagian yang diubah saat database siap, contohnya:
        return fetch(ROOT + "api/products.php").then((res) => res.json());
-     The endpoint just has to return the rows of `products` as a JSON array. */
+     Endpoint cukup mengembalikan baris tabel `products` sebagai array JSON. */
   function loadProducts() {
     return Promise.resolve(window.MERCH_PRODUCTS || []);
   }
 
-  // MySQL/PHP often returns numbers and booleans as strings ("1", "65.00")
+  // MySQL/PHP sering mengembalikan angka dan boolean sebagai teks ("1", "65.00")
   const isFeatured = (p) => Number(p.is_featured) === 1 || p.is_featured === true;
 
-  /* --- render -------------------------------------------------------------- */
+  /* --- tampilkan ----------------------------------------------------------- */
   function fromTemplate(templateId, product) {
     const node = document.getElementById(templateId).content.firstElementChild.cloneNode(true);
     node.dataset.productId = product.id;
@@ -53,7 +53,7 @@
     status.hidden = false;
   }
 
-  /* --- cart ---------------------------------------------------------------- */
+  /* --- keranjang ----------------------------------------------------------- */
   function readCart() {
     try {
       return JSON.parse(localStorage.getItem(CART_KEY)) || {};
@@ -66,7 +66,7 @@
     try {
       localStorage.setItem(CART_KEY, JSON.stringify(cart));
     } catch {
-      /* storage unavailable (private mode) — cart still works for this visit */
+      /* storage tidak tersedia (mode private) — keranjang tetap jalan selama kunjungan ini */
     }
   }
 

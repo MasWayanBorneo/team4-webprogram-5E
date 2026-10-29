@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
 
 /* ==========================
-   MERCH PAGE — same theme as music.css: teal page, light-blue cards with a
-   neon-green border, green buttons, Special Elite headings, yellow CTA.
+   HALAMAN MERCH — tema sama seperti music.css: halaman toska, kartu biru muda dengan
+   border hijau neon, tombol hijau, judul Special Elite, CTA kuning.
 ========================== */
 
 *{
@@ -26,7 +26,7 @@ img{
     object-fit:contain;
 }
 
-/* sections rendered by merch.js can be hidden when empty */
+/* bagian yang dirender merch.js bisa disembunyikan saat kosong */
 [hidden]{
     display:none !important;
 }
@@ -39,7 +39,7 @@ img{
 }
 
 /* ==========================
-   HEADINGS (as on the music page)
+   JUDUL (seperti di halaman music)
 ========================== */
 
 .cta h2{
@@ -68,7 +68,7 @@ img{
 }
 
 /* ==========================
-   SHARED CARD LOOK
+   TAMPILAN KARTU BERSAMA
 ========================== */
 
 .featured-card,
@@ -99,7 +99,7 @@ img{
 }
 
 /* ==========================
-   BUTTON (green, as on the music page)
+   TOMBOL (hijau, seperti di halaman music)
 ========================== */
 
 button{
@@ -121,7 +121,7 @@ button:hover{
 }
 
 /* ==========================
-   FEATURED
+   PRODUK FEATURED
 ========================== */
 
 .featured-products{
@@ -171,7 +171,7 @@ button:hover{
 }
 
 /* ==========================
-   GRID
+   GRID PRODUK
 ========================== */
 
 .products-grid{
@@ -218,7 +218,7 @@ button:hover{
 }
 
 /* ==========================
-   CART BAR
+   BAR KERANJANG
 ========================== */
 
 .cart-bar{
@@ -256,7 +256,7 @@ button:hover{
 }
 
 /* ==========================
-   RESPONSIVE
+   RESPONSIF
 ========================== */
 
 @media (max-width:900px){

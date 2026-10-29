@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
 
-/* ABOUT / MEMBERS PAGE — site theme, see the THEME tokens in base.css */
+/* HALAMAN ABOUT / MEMBER — tema situs, lihat token TEMA di base.css */
 
 * {
     margin: 0;
@@ -22,7 +22,7 @@ body {
 
 .icon { text-align: center; }
 
-/* ---- shared card look ---- */
+/* ---- tampilan kartu bersama ---- */
 .timeline-item,
 .benefit-card,
 .member-card,
@@ -33,7 +33,7 @@ body {
     color: var(--card-ink);
 }
 
-/* PAGE HEADER */
+/* HEADER HALAMAN */
 
 .page-header {
     text-align: center;
@@ -44,7 +44,7 @@ body {
     margin-bottom: 0.25rem;
 }
 
-/* big yellow call-to-action, as on the music page */
+/* call-to-action besar berwarna kuning, seperti di halaman music */
 .page-title {
     font-family: var(--title-font);
     font-size: clamp(2.4rem, 8vw, 4rem);
@@ -91,7 +91,7 @@ body {
     max-width: 720px;
 }
 
-/* HISTORY */
+/* SEJARAH */
 
 .history-timeline {
     list-style: none;
@@ -123,7 +123,7 @@ body {
     color: var(--card-ink);
 }
 
-/* GALLERY */
+/* GALERI */
 
 .gallery-grid {
     display: grid;
@@ -206,7 +206,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* LIMELIGHT FORM */
+/* FORM LIMELIGHT */
 
 .limelight-form {
     max-width: 640px;
@@ -266,7 +266,7 @@ body {
     color: #0b5d1e;
 }
 
-/* MEMBERS */
+/* MEMBER */
 
 .member-card {
     display: flex;

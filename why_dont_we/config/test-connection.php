@@ -1,8 +1,8 @@
 <?php
 /* ============================================================================
-   CONNECTION TEST — open http://localhost/team4-webdesign-4E/why_dont_we/config/test-connection.php
-   It lists every table in wdw_db with its row count. Delete this file once the
-   site is connected; it is only a check.
+   TES KONEKSI — buka http://localhost/team4-webdesign-4E/why_dont_we/config/test-connection.php
+   Menampilkan semua tabel di wdw_db beserta jumlah barisnya. Hapus file ini
+   setelah situs tersambung ke database; file ini hanya untuk pengecekan.
    ============================================================================ */
 
 require __DIR__ . "/database.php";

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
 
-/* NEWS PAGE — site theme (see the THEME tokens in base.css) */
+/* HALAMAN NEWS — tema situs (lihat token TEMA di base.css) */
 
 /* =========================
    GLOBAL
@@ -21,7 +21,7 @@ body{
 }
 
 /* =========================
-   MAIN
+   KONTEN UTAMA
 ========================= */
 
 main{
@@ -36,7 +36,7 @@ section{
 }
 
 /* =========================
-   HEADINGS
+   JUDUL
 ========================= */
 
 main > section > h1,
@@ -58,7 +58,7 @@ main > section > h2{
 }
 
 /* =========================
-   CARDS (featured + grid)
+   KARTU (featured + grid)
 ========================= */
 
 .featured-card,
@@ -133,7 +133,7 @@ a:hover > .news-card{
 }
 
 /* =========================
-   NEWS GRID
+   GRID BERITA
 ========================= */
 
 .news-grid{
@@ -158,7 +158,7 @@ a:hover > .news-card{
 }
 
 /* =========================
-   SUBSCRIBE
+   FORM SUBSCRIBE
 ========================= */
 
 .subscribe-section{
@@ -238,7 +238,7 @@ button:hover{
 }
 
 /* =========================
-   RESPONSIVE
+   RESPONSIF
 ========================= */
 
 @media (max-width:768px){

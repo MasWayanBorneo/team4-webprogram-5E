@@ -1,11 +1,11 @@
-/* INVOICE PAGE — loaded after tour.css; site theme, see the THEME tokens in base.css */
+/* HALAMAN INVOICE — dimuat setelah tour.css; tema situs, lihat token TEMA di base.css */
 
 .invoice-section{
     max-width:760px;
     margin:0 auto;
 }
 
-/* the "no invoice" state reuses .page-header from tour.css */
+/* tampilan "invoice tidak ditemukan" memakai .page-header dari tour.css */
 #empty-state{
     text-align:center;
 }
@@ -94,7 +94,7 @@
     color:var(--card-ink-soft);
 }
 
-/* wide table scrolls inside the card on small phones */
+/* tabel lebar bisa di-scroll di dalam kartu pada HP kecil */
 .invoice-card{
     overflow-x:auto;
 }

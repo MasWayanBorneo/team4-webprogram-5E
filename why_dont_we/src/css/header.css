@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 /* ============================================================================
-   SHARED SITE HEADER — same markup/style on every page (pair with footer.css).
-   Scoped under .site-header so page-level rules (li, li a, ul li :hover, .logo)
-   never change how it looks.
+   HEADER BERSAMA — markup/gaya sama di semua halaman (pasangan footer.css).
+   Dibatasi di bawah .site-header supaya aturan halaman (li, li a, ul li :hover, .logo)
+   tidak mengubah tampilannya.
    ============================================================================ */
 .site-header{
   --surface:#031e33;

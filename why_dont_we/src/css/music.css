@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
 
-/* Global styles - Resets default margins, padding, and box-sizing for all elements */
+/* Gaya global - mereset margin, padding, dan box-sizing bawaan untuk semua elemen */
 /* * { font-family: Caveat; */*{
     /* font-family: Special Elite; */
     margin: 0;
@@ -15,7 +15,7 @@
     width: 100%;
 } */
 
-/* Body - Main page container with centered layout and full viewport height background */
+/* Body - kontainer utama halaman dengan background */
 body{
 
     background:var(--page-bg);
@@ -24,7 +24,7 @@ body{
 
 }
 
-/* Top music player section - 2 columns on desktop, 1 column on phones */
+/* Bagian lagu populer - 2 kolom di desktop, 1 kolom di HP */
 .top-lagu  {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 400px));
@@ -36,7 +36,7 @@ body{
     padding: 0 16px;
 }
 
-/* Featured player card - Primary music player with album art and playback controls */
+/* Kartu lagu populer - pemutar musik dengan cover album dan kontrol audio */
 
 .top-lagu .player2 {
     position: relative;
@@ -54,7 +54,7 @@ body{
      border: 2px solid var(--secondary-color);
 }
 
-/* Featured player album artwork - Image container with fixed dimensions */
+/* Cover album lagu populer - kontainer gambar */
 .player2 .imgbox2{
      position: relative;
     width: min(250px, 100%);
@@ -65,7 +65,7 @@ body{
     /* border-top-right-radius: 20px; */  
 }
 
-/* Featured player control button - Primary action button for playback */
+/* Tombol Stream lagu populer - tombol aksi utama */
 .player2 .tombol{
     font-size :30px;
     background-color: var(--secondary-color);
@@ -78,7 +78,7 @@ body{
     margin-top: auto;   
 }
 
-/* First lyrics button - Toggles lyrics display for primary song */
+/* Tombol lirik pertama - membuka lirik lagu pertama */
 .player2 .lirik{
   
     font-size :30px;
@@ -92,7 +92,7 @@ body{
     margin-top: auto;   
 }
 
-/* Second lyrics button - Toggles lyrics display for secondary song */
+/* Tombol lirik kedua - membuka lirik lagu kedua */
 .player2 .lirik2{
     font-size :30px;
     text-decoration: underline;
@@ -116,7 +116,7 @@ body{
     margin-top: auto;  
 }
 
-/* Third lyrics button - Toggles lyrics display for tertiary song */
+/* Tombol lirik ketiga - membuka lirik lagu ketiga */
 .player2 .lirik3{
     font-size :30px;
     text-decoration: underline;
@@ -129,7 +129,7 @@ body{
     margin-top: auto;   
 }
 
-/* Main heading - Page title with large font and special font family */
+/* Judul utama - judul halaman dengan font besar dan font khusus */
 h1 {
    text-align: center;
     position: static;
@@ -148,20 +148,20 @@ h2{
     font-size: 20px;
 }
 
-/* Footer - Page bottom section with dark background and centered text */
+/* Footer - bagian bawah halaman */
 
-/* List items - Navigation list items displayed inline with consistent spacing */
+/* List item - item navigasi sejajar dengan jarak konsisten */
 
-/* Navigation container - Flexbox layout for navbar items with proper spacing */
+/* Kontainer navigasi - layout flexbox untuk item navbar */
 
-/* Albums + videos wrapper - centered, same max width as the rest of the site */
+/* Pembungkus album + video - rata tengah, lebar maksimal sama dengan halaman lain */
 .music-main{
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 16px;
 }
 
-/* Players container - equal-size album cards that reflow to the screen width */
+/* Kontainer album - kartu album berukuran sama yang menyesuaikan lebar layar */
 .players-container{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
@@ -170,7 +170,7 @@ h2{
     margin-bottom: 50px;
 }
 
-/* Individual player card - Music player with album artwork and controls */
+/* Kartu album - cover album dan tombol Stream */
 .player{
     position: relative;
     display: flex;
@@ -186,7 +186,7 @@ h2{
      border: 2px solid var(--secondary-color);     
 }
 
-/* Player album artwork - Album cover image with rounded corners and overflow hidden */
+/* Cover album - gambar cover dengan sudut membulat */
 .player .imgbox{
     position: relative;
     width: 80%;
@@ -197,12 +197,12 @@ h2{
     overflow: hidden;   
 }
 
-/* Album artwork hover effect - Reduced opacity on hover for visual feedback */
+/* Efek hover cover album - sedikit transparan saat di-hover */
 .player .imgbox:hover{
     opacity: 60%;
 }
 
-/* Player button - Primary action button for player with secondary color background */
+/* Tombol kartu album - tombol aksi utama berwarna hijau */
 .player button{
     font-size :30px;
     background-color: var(--secondary-color);
@@ -215,8 +215,8 @@ h2{
     margin-top: auto;   
 }
 
-/* Stream popover - top/left/width come from ../js/music.js so it sits right
-   under the Stream button that was clicked, with the same width */
+/* Popover Stream - top/left/width diatur oleh ../js/music.js supaya muncul tepat
+   di bawah tombol Stream yang diklik, dengan lebar yang sama */
 #dropdown{
     position: absolute;
     inset: auto;
@@ -229,16 +229,16 @@ h2{
     box-shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
-/* First lyrics anchor point - Position reference for first lyrics dropdown */
+/* Titik anchor lirik pertama - acuan posisi popup lirik pertama */
 .lirik{anchor-name: --lyric;}
 
-/* Second lyrics anchor point - Position reference for second lyrics dropdown */
+/* Titik anchor lirik kedua - acuan posisi popup lirik kedua */
 .lirik2{anchor-name: --lyric2;}
 
-/* Third lyrics anchor point - Position reference for third lyrics dropdown */
+/* Titik anchor lirik ketiga - acuan posisi popup lirik ketiga */
 .lirik3{anchor-name: --lyric3;}
 .lirik4{anchor-name: --lyric4;}
-/* Third lyrics dropdown menu - Scrollable menu displaying lyrics with dark background */
+/* Popup lirik ketiga - lirik yang bisa di-scroll dengan background gelap */
 #dropdown4{
     color: #fffb00; 
     border-color: #000000;
@@ -274,7 +274,7 @@ h2{
     font-size: 30px;   
 }
 
-/* Second lyrics dropdown menu - Scrollable menu displaying lyrics with dark background */
+/* Popup lirik kedua - lirik yang bisa di-scroll dengan background gelap */
 #dropdown3{
     color: #fffb00; 
     border-color: #000000;
@@ -293,7 +293,7 @@ h2{
     font-size: 30px;    
 }
 
-/* First lyrics dropdown menu - Scrollable menu displaying lyrics with dark background */
+/* Popup lirik pertama - lirik yang bisa di-scroll dengan background gelap */
 #dropdown2{
     color: #fffb00; 
     border-color: #000000;
@@ -313,7 +313,7 @@ h2{
    
 }
 
-/* Icon image - Fixed-size image for social media or platform icons */
+/* Gambar ikon - logo platform streaming */
 .icon2 img{
     display: block;
     width: 100%;
@@ -322,7 +322,7 @@ h2{
     margin: 0 auto;
 }
 
-/* Icon container - stacks the platform logos, sized to the popover width */
+/* Kontainer ikon - menyusun logo platform, menyesuaikan lebar popover */
 .icon2{
     display: flex;
     flex-direction: column;
@@ -339,20 +339,20 @@ h2{
     background: rgba(0,0,0,.06);
 }
 
-/* Icon hover effect - Reduced opacity on hover for visual feedback */
+/* Efek hover ikon - sedikit transparan saat di-hover */
 .icon2 img:hover{
     opacity: 60%;
    
     
 }
 
-/* Player button hover effect - Opacity change with text underline on hover */
+/* Efek hover tombol album - transparan dan bergaris bawah saat di-hover */
 .player button:hover{
     opacity: 80%;
     text-decoration: underline;
 }
 
-/* Streaming section - Container for streaming platform links and content */
+/* Bagian streaming - kontainer link platform streaming */
 .streaming{
     display: flex;
     flex-direction: column;
@@ -363,7 +363,7 @@ h2{
    
 }
 
-/* Streaming platform item - Card for individual streaming platform link */
+/* Item platform streaming - kartu untuk satu link platform */
 .streaming-platforms{
     background-color: #e8f4ff;
     position: relative;
@@ -373,12 +373,12 @@ h2{
 
 }
 
-/* Streaming platform hover effect - Reduced opacity on hover for platforms */
+/* Efek hover platform streaming - sedikit transparan saat di-hover */
 .streaming-platforms:hover{
     opacity: 60%;
 }
 
-/* CTA heading - Large centered heading for call-to-action section */
+/* Judul CTA - judul besar rata tengah untuk call-to-action */
 .cta h2{
     text-wrap: balance;
     text-align: center;
@@ -407,7 +407,7 @@ h2{
 
 }
 
-/* Email input field - Padded input field for email subscription */
+/* Input email - kolom email untuk subscribe */
 .email input{
     padding: 7px ;
     border-radius: 10px;
@@ -417,7 +417,7 @@ h2{
 
 }
 
-/* Email submit button - Red button positioned over email input for subscription */
+/* Tombol submit email - tombol untuk subscribe */
 #email-btn{
     background-color: red;
     color:white;
@@ -428,9 +428,9 @@ h2{
     
 }
 
-/* Icon container - Centers icon elements */
+/* Kontainer ikon - membuat ikon rata tengah */
 .icon { text-align: center;}
-/* Global image styling - Full width/height with object-fit for responsive images */
+/* Gaya gambar global - lebar/tinggi penuh dengan object-fit */
 img{
     width: 100%;
     height: 100%;
@@ -443,7 +443,7 @@ audio{
     justify-content: space-between;
 }
 
-/* Audio player control panel - Styled container for audio playback controls */
+/* Panel kontrol audio - kontainer kontrol pemutar audio */
 audio::-webkit-media-controls-panel {
     background-color: rgb(0, 0, 0);
   
@@ -451,7 +451,7 @@ audio::-webkit-media-controls-panel {
    
 }
 
-/* Audio play button - Styled play/pause button with primary color background */
+/* Tombol play audio - tombol play/pause berwarna kuning */
 audio::-webkit-media-controls-play-button{
 background-color: var(--music-play-color);
 border-radius: 40px;
@@ -459,7 +459,7 @@ transform: scale(1.6);
 
 }
 
-/* Audio current time display - Time counter text color in player */
+/* Tampilan waktu berjalan - warna teks penghitung waktu */
 audio::-webkit-media-controls-current-time-display{
     color:var(--music-play-color);   
     padding-left:9px ;
@@ -467,14 +467,14 @@ audio::-webkit-media-controls-current-time-display{
   
 }
 
-/* Audio remaining time display - Remaining time text color with right padding */
+/* Tampilan sisa waktu - warna teks sisa waktu dengan padding kanan */
 audio::-webkit-media-controls-time-remaining-display{
     color:var(--music-play-color);
     padding-right: 7px;   
   
 }
 
-/* Audio timeline slider - Progress bar with rounded corners */
+/* Slider timeline audio - progress bar dengan sudut membulat */
 audio::-webkit-media-controls-timeline{
     background-color:var(--music-play-color);
     border-radius: 40px;  
@@ -483,7 +483,7 @@ audio::-webkit-media-controls-timeline{
    
 }
 
-/* Audio volume slider - Volume control with rounded corners and padding */
+/* Slider volume audio - kontrol volume dengan sudut membulat */
 audio::-webkit-media-controls-volume-slider{
     background-color: var(--music-play-color);
     border-radius: 40px;
@@ -491,7 +491,7 @@ audio::-webkit-media-controls-volume-slider{
     padding-left: 20px;  
 }
 
-/* Audio mute button - Styled mute button with primary color background */
+/* Tombol mute audio - tombol mute berwarna kuning */
 audio::-webkit-media-controls-mute-button{
     position: absolute;
     align-items: end;
@@ -501,7 +501,7 @@ audio::-webkit-media-controls-mute-button{
 
 }
 
-/* Videos - responsive 16:9 YouTube embeds: 2 per row on desktop, 1 on tablet/phone */
+/* Video - embed YouTube 16:9 yang responsif: 2 per baris di desktop, 1 di tablet/HP */
 .video{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
@@ -520,7 +520,7 @@ audio::-webkit-media-controls-mute-button{
 }
 
 /* =========================
-   RESPONSIVE
+   RESPONSIF
 ========================= */
 @media (max-width: 768px){
     .cta h2{ font-size: clamp(2rem, 8vw, 3rem); padding: 20px 16px 0; }
@@ -546,12 +546,12 @@ audio::-webkit-media-controls-mute-button{
 }
 
 @media (max-width: 640px){
-    /* featured songs stack into one column */
+    /* lagu populer tersusun jadi satu kolom */
     .top-lagu{ grid-template-columns: minmax(0, 400px); }
 }
 
 @media (max-width: 480px){
-    /* two album cards per row on phones */
+    /* dua kartu album per baris di HP */
     .players-container{ grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .player{ padding: 12px; border-radius: 16px; }
     .player .imgbox{ width: 100%; margin-bottom: 12px; border-radius: 12px; }

@@ -1,6 +1,6 @@
 /* ============================================================================
-   MUSIC PAGE — places the shared "Stream" popover (#dropdown) right under the
-   Stream button that opened it, with the same width as that button.
+   HALAMAN MUSIC — menaruh popover "Stream" (#dropdown) tepat di bawah tombol
+   Stream yang diklik, dengan lebar yang sama seperti tombol itu.
    ============================================================================ */
 (() => {
   const popover = document.getElementById("dropdown");
@@ -15,7 +15,7 @@
     popover.style.top = `${rect.bottom + window.scrollY + 8}px`;
   }
 
-  // click runs before the browser opens the popover, so it opens already in place
+  // click dijalankan sebelum browser membuka popover, jadi popover langsung muncul di posisinya
   document.querySelectorAll('[popovertarget="dropdown"]').forEach((button) => {
     button.addEventListener("click", () => {
       opener = button;
@@ -23,7 +23,7 @@
     });
   });
 
-  // keep it attached to its button when the layout changes (rotate, resize)
+  // tetap menempel ke tombolnya saat layout berubah (layar diputar, ukuran jendela berubah)
   window.addEventListener("resize", () => {
     if (opener && popover.matches(":popover-open")) placeUnder(opener);
   });
