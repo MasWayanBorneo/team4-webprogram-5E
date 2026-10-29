@@ -24,17 +24,16 @@ body{
 
 }
 
-/* Top music player section - Flex container for featured song player with responsive layout */
+/* Top music player section - 2 columns on desktop, 1 column on phones */
 .top-lagu  {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
-    margin: 40px;
-   
-   
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 400px));
+    justify-content: center;
+    align-items: start;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    padding: 0 16px;
 }
 
 /* Featured player card - Primary music player with album art and playback controls */
@@ -45,8 +44,8 @@ body{
     /* flex:auto; */
     align-items: center;    
     justify-content: center;
-    width: 400px;
-    flex-wrap: nowrap;  
+    width: 100%;
+    flex-wrap: nowrap;
     background:var(--body) ;
     border-radius: 20px;
     box-shadow: 0 5px 80px rgba(0,0,0,0.5);
@@ -58,8 +57,8 @@ body{
 /* Featured player album artwork - Image container with fixed dimensions */
 .player2 .imgbox2{
      position: relative;
-    width: 250px;
-    height: 250px;
+    width: min(250px, 100%);
+    aspect-ratio: 1;
     margin-bottom: 20px;
     display: flex;
    
@@ -155,28 +154,30 @@ h2{
 
 /* Navigation container - Flexbox layout for navbar items with proper spacing */
 
-/* Players container - Flex grid layout for displaying multiple music players */
+/* Albums + videos wrapper - centered, same max width as the rest of the site */
+.music-main{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+/* Players container - equal-size album cards that reflow to the screen width */
 .players-container{
-     display: flex;
-     gap: 30px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: start;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
+    gap: 30px;
+    align-items: stretch;
     margin-bottom: 50px;
-    
-    /*
-    border: 2px solid #000000;*/  
 }
 
 /* Individual player card - Music player with album artwork and controls */
 .player{
     position: relative;
     display: flex;
-    flex:auto;
-    align-items: center;    
-    justify-content: center;
-    width:250px;
-    flex-wrap: wrap;  
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 0;
+    flex-wrap: nowrap;
     background:var(--glow) ;
     border-radius: 20px;
     box-shadow: 0 5px 80px rgba(0,0,0,0.5);
@@ -189,7 +190,7 @@ h2{
 .player .imgbox{
     position: relative;
     width: 80%;
-    height: 80%;
+    aspect-ratio: 1;
     margin-bottom: 20px;
     border-radius: 20px;
     /* border-top-right-radius: 20px; */
@@ -221,7 +222,7 @@ h2{
 #dropdown{
     padding: 20px;
     position: absolute;
-    width: 360px;
+    width: min(360px, 90vw);
     position-anchor: --tombol  --tombol2;
     position-area: bottom center;
     border-radius: 10px; 
@@ -314,7 +315,7 @@ h2{
 
 /* Icon image - Fixed-size image for social media or platform icons */
 .icon2 img{
-    width: 200px;
+    width: min(200px, 60vw);
 }
 
 /* Icon container - Flex container for vertical alignment of icons */
@@ -482,8 +483,69 @@ audio::-webkit-media-controls-mute-button{
     position: absolute;
     align-items: end;
     background-color:var(--music-play-color);
-    border-radius: 40px;  
+    border-radius: 40px;
     transform: scale(1.6);
-    
+
+}
+
+/* Videos - responsive 16:9 YouTube embeds: 2 per row on desktop, 1 on tablet/phone */
+.video{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+}
+.video iframe{
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 16px;
+    background: #000;
+    box-shadow: 0 5px 40px rgba(0,0,0,0.4);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px){
+    .cta h2{ font-size: clamp(2rem, 8vw, 3rem); padding: 20px 16px 0; }
+    h1{ font-size: clamp(1.6rem, 6vw, 2.2rem); padding: 28px 16px; }
+
+    .top-lagu{ gap: 20px; }
+    .player2{ padding: 16px; }
+
+    .player2 .tombol,
+    .player2 .lirik,
+    .player2 .lirik2,
+    .player2 .lirik3,
+    .player2 .lirik4,
+    .player button{ font-size: 22px; }
+
+    .players-container{ grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr)); gap: 16px; }
+    .video{ gap: 16px; }
+
+    #dropdown2, #dropdown3, #dropdown4, #dropdown5{
+        height: 70vh;
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 640px){
+    /* featured songs stack into one column */
+    .top-lagu{ grid-template-columns: minmax(0, 400px); }
+}
+
+@media (max-width: 480px){
+    /* two album cards per row on phones */
+    .players-container{ grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .player{ padding: 12px; border-radius: 16px; }
+    .player .imgbox{ width: 100%; margin-bottom: 12px; border-radius: 12px; }
+    .player h2, .player .song-title h2{ font-size: 14px; }
+    .player button{ font-size: 18px; padding: 8px; }
+
+    .player2{ padding: 16px; }
+    .video iframe{ border-radius: 12px; }
 }
 
