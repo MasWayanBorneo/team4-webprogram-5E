@@ -2,73 +2,73 @@
    BASE — token desain yang dipakai bersama oleh semua halaman.
    Urutan load di setiap halaman: base.css → css halaman → header.css → footer.css
    ============================================================================ */
-:root{
-  --bg:#0d0a17;          /* halaman ungu-hitam */
-  --surface:#031e33;     /* nav, kartu */
-  --surface-2:#1d1838;   /* kartu menonjol */
-  --mid:#021525;
-  --deep-color:#010912;
-  --card:rgba(0,20,50,.45);
-  --line:rgba(255,255,255,.09);
+:root {
+  --bg: #0d0a17; /* halaman ungu-hitam */
+  --surface: #031e33; /* nav, kartu */
+  --surface-2: #1d1838; /* kartu menonjol */
+  --mid: #021525;
+  --deep-color: #010912;
+  --card: rgba(0, 20, 50, 0.45);
+  --line: rgba(255, 255, 255, 0.09);
 
   /* teks */
-  --ink:#f5f2fb;         /* teks utama */
-  --muted:#a79ec6;       /* teks kedua */
-  --faint:#6f6790;       /* teks ketiga / keterangan */
-  --heading:#e8f4ff;
-  --body:rgba(160,210,240,.8);
+  --ink: #f5f2fb; /* teks utama */
+  --muted: #a79ec6; /* teks kedua */
+  --faint: #6f6790; /* teks ketiga / keterangan */
+  --heading: #e8f4ff;
+  --body: rgba(160, 210, 240, 0.8);
 
   /* warna brand */
-  --prime-color:#1db1ac9d;
-  --secondary-color:#00ff7bc3;
-  --third-color:#000000;
-  --music-play-color:yellow;
-  --button:rgba(160,220,255,.9);
-  --glow:rgba(80,200,255,.5);
+  --prime-color: #1f2b62c4;
+  --secondary-color: #00ff7bc3;
+  --third-color: #000000;
+  --music-play-color: yellow;
+  --button: rgba(160, 220, 255, 0.9);
+  --glow: rgba(80, 200, 255, 0.5);
 
   /* spektrum warna aksen lampu panggung */
-  --violet:#7b5cff;
-  --magenta:#e23f97;
-  --pink:#ff5e8a;
-  --amber:#ffb45a;
-  --cyan:#39c6dd;
-  --accent:#00ff7bc3;    /* CTA utama */
-  --accent-press:#00ff7bc3;
+  --violet: #7b5cff;
+  --magenta: #e23f97;
+  --pink: #ff5e8a;
+  --amber: #ffb45a;
+  --cyan: #39c6dd;
+  --accent: #00ff7bc3; /* CTA utama */
+  --accent-press: #00ff7bc3;
 
   /* gradasi dua warna untuk artwork */
-  --g1:linear-gradient(140deg,#7b5cff,#e23f97);
-  --g2:linear-gradient(140deg,#39c6dd,#7b5cff);
-  --g3:linear-gradient(140deg,#e23f97,#ffb45a);
-  --g4:linear-gradient(140deg,#5a4fff,#39c6dd);
-  --g5:linear-gradient(140deg,#ff5e8a,#ffb45a);
-  --g6:linear-gradient(140deg,#8a3fff,#e23f97);
+  --g1: linear-gradient(140deg, #7b5cff, #e23f97);
+  --g2: linear-gradient(140deg, #39c6dd, #7b5cff);
+  --g3: linear-gradient(140deg, #e23f97, #ffb45a);
+  --g4: linear-gradient(140deg, #5a4fff, #39c6dd);
+  --g5: linear-gradient(140deg, #ff5e8a, #ffb45a);
+  --g6: linear-gradient(140deg, #8a3fff, #e23f97);
 
-  --radius:16px;
-  --shell:1200px;
+  --radius: 16px;
+  --shell: 1200px;
 
   /* ---- TEMA SITUS (satu tampilan untuk semua halaman, berdasarkan halaman music) ----
      Ubah nilai di sini untuk mengganti tema seluruh situs. */
-  --page-bg:var(--prime-color);               /* background halaman toska */
-  --page-ink:var(--deep-color);               /* teks paragraf di atas halaman toska */
-  --page-ink-soft:rgba(1,9,18,.72);
+  --page-bg: var(--prime-color); /* background halaman toska */
+  --page-ink: var(--deep-color); /* teks paragraf di atas halaman toska */
+  --page-ink-soft: rgba(1, 9, 18, 0.72);
 
-  --title-font:'Special Elite',serif;         /* judul bagian / halaman */
-  --title-ink:var(--heading);                 /* judul di atas halaman toska */
-  --cta-ink:#fffb00;                          /* call-to-action besar berwarna kuning */
+  --title-font: "Special Elite", serif; /* judul bagian / halaman */
+  --title-ink: var(--heading); /* judul di atas halaman toska */
+  --cta-ink: #fffb00; /* call-to-action besar berwarna kuning */
 
-  --card-bg:var(--glow);                      /* kartu biru */
-  --card-bg-light:var(--body);                /* kartu biru muda */
-  --card-border:2px solid var(--secondary-color);
-  --card-radius:20px;
-  --card-shadow:0 5px 40px rgba(0,0,0,.35);
-  --card-ink:var(--deep-color);               /* teks di atas kartu */
-  --card-ink-soft:rgba(1,9,18,.72);
+  --card-bg: var(--glow); /* kartu biru */
+  --card-bg-light: var(--body); /* kartu biru muda */
+  --card-border: 2px solid var(--secondary-color);
+  --card-radius: 20px;
+  --card-shadow: 0 5px 40px rgba(0, 0, 0, 0.35);
+  --card-ink: var(--deep-color); /* teks di atas kartu */
+  --card-ink-soft: rgba(1, 9, 18, 0.72);
 
-  --btn-bg:var(--secondary-color);            /* tombol hijau neon */
-  --btn-ink:#000;
-  --btn-radius:10px;
+  --btn-bg: var(--secondary-color); /* tombol hijau neon */
+  --btn-ink: #000;
+  --btn-radius: 10px;
 
-  --field-bg:rgba(255,255,255,.9);            /* input form */
-  --field-ink:var(--deep-color);
-  --field-border:2px solid rgba(1,9,18,.15);
+  --field-bg: rgba(255, 255, 255, 0.9); /* input form */
+  --field-ink: var(--deep-color);
+  --field-border: 2px solid rgba(1, 9, 18, 0.15);
 }
