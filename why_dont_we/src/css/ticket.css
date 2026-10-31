@@ -1,175 +1,179 @@
 /* HALAMAN TICKET — dimuat setelah tour.css; tema situs, lihat token TEMA di base.css */
 
-.page-header{
-    margin-bottom:30px;
-    text-align:center;
+.page-header {
+  margin-bottom: 30px;
+  text-align: center;
 }
 
-.page-header h2{
-    margin-bottom:10px;
+.page-header h2 {
+  margin-bottom: 11px;
 }
 
-.ticket-sub{
-    color:var(--page-ink);
-    font-weight:600;
+.ticket-sub {
+  color: var(--page-ink);
+  font-weight: 600;
 }
 
 /* KARTU FORM */
 
-.ticket-section{
-    max-width:680px;
-    margin:0 auto;
-    padding:clamp(1.25rem, 4vw, 2rem);
-    background:var(--card-bg-light);
-    border:var(--card-border);
-    border-radius:var(--card-radius);
-    box-shadow:var(--card-shadow);
-    color:var(--card-ink);
+.ticket-section {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  background: var(--card-bg-light);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  color: var(--card-ink);
 }
 
-.ticket-form{
-    display:flex;
-    flex-direction:column;
-    gap:22px;
+.ticket-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
 }
 
-.form-row{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
+.form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.form-row .form-group{
-    flex:1;
-    min-width:220px;
+.form-row .form-group {
+  flex: 1;
+  min-width: 220px;
 }
 
-.form-group{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.form-group label{
-    font-weight:600;
-    color:var(--card-ink);
+.form-group label {
+  font-weight: 600;
+  color: var(--card-ink);
 }
 
 .ticket-form input,
-.ticket-form select{
-    padding:12px 14px;
-    border-radius:var(--btn-radius);
-    border:var(--field-border);
-    background:var(--field-bg);
-    color:var(--field-ink);
-    font-size:1rem;
+.ticket-form select {
+  padding: 12px 14px;
+  border-radius: var(--btn-radius);
+  border: var(--field-border);
+  background: var(--field-bg);
+  color: var(--field-ink);
+  font-size: 1rem;
 }
 
 .ticket-form input:focus,
-.ticket-form select:focus{
-    outline:none;
-    border-color:var(--secondary-color);
+.ticket-form select:focus {
+  outline: none;
+  border-color: var(--secondary-color);
 }
 
 /* KATEGORI TIKET */
 
-.ticket-categories{
-    border:none;
-    padding:0;
-    margin:0;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
+.ticket-categories {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-.ticket-categories legend{
-    font-weight:600;
-    color:var(--card-ink);
-    margin-bottom:6px;
-    padding:0;
+.ticket-categories legend {
+  font-weight: 600;
+  color: var(--card-ink);
+  margin-bottom: 6px;
+  padding: 0;
 }
 
-.category-card{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    padding:16px 18px;
-    border-radius:14px;
-    border:2px solid rgba(1,9,18,.15);
-    background:rgba(255,255,255,.55);
-    cursor:pointer;
-    transition:border-color .15s, background .15s;
+.category-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 2px solid rgba(1, 9, 18, 0.15);
+  background: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
 }
 
-.category-card:has(input:checked){
-    border-color:var(--secondary-color);
-    background:rgba(255,255,255,.9);
+.category-card:has(input:checked) {
+  border-color: var(--secondary-color);
+  background: rgba(255, 255, 255, 0.9);
 }
 
-.category-card input[type="radio"]{
-    width:18px;
-    height:18px;
-    accent-color:var(--deep-color);
+.category-card input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--deep-color);
 }
 
-.category-info{
-    flex:1;
+.category-info {
+  flex: 1;
 }
 
-.category-info h3{
-    font-family:'Courier New', Courier, monospace;
-    text-transform:uppercase;
-    margin-bottom:4px;
+.category-info h3 {
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  margin-bottom: 4px;
 }
 
-.category-info p{
-    color:var(--card-ink-soft);
-    font-size:.92rem;
+.category-info p {
+  color: var(--card-ink-soft);
+  font-size: 0.92rem;
 }
 
-.category-price{
-    font-weight:bold;
-    color:var(--card-ink);
-    white-space:nowrap;
+.category-price {
+  font-weight: bold;
+  color: var(--card-ink);
+  white-space: nowrap;
 }
 
 /* RINGKASAN PESANAN */
 
-.order-summary{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:16px 18px;
-    border-radius:14px;
-    background:var(--surface);
-    color:var(--heading);
-    font-weight:bold;
-    font-size:1.1rem;
+.order-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: var(--surface);
+  color: var(--heading);
+  font-weight: bold;
+  font-size: 1.1rem;
 }
 
 /* TOMBOL SUBMIT */
 
-.ticket-submit{
-    border:none;
-    padding:14px 25px;
-    border-radius:var(--btn-radius);
-    background:var(--btn-bg);
-    color:var(--btn-ink);
-    font-weight:bold;
-    font-size:1.1rem;
-    cursor:pointer;
-    box-shadow:0 5px 30px rgba(0,0,0,.25);
-    transition:opacity .2s, transform .2s;
+.ticket-submit {
+  border: none;
+  padding: 14px 25px;
+  border-radius: var(--btn-radius);
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.25);
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
 }
 
-.ticket-submit:hover{
-    opacity:.85;
-    text-decoration:underline;
-    transform:translateY(-2px);
+.ticket-submit:hover {
+  opacity: 0.85;
+  text-decoration: underline;
+  transform: translateY(-2px);
 }
 
-.ticket-confirm{
-    color:#0b5d1e;
-    font-weight:600;
-    text-align:center;
+.ticket-confirm {
+  color: #0b5d1e;
+  font-weight: 600;
+  text-align: center;
 }
