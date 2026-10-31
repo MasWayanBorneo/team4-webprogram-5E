@@ -72,7 +72,7 @@ button {
   grid-template-columns: 1fr auto;
   align-items: start;
   gap: 1rem;
-  margin-bottom: clamp(1.8rem, 3vw, 2.6rem);
+  margin-bottom: clamp(1.7rem, 3vw, 2.6rem);
 }
 .head-link {
   font-weight: 700;
