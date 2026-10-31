@@ -85,7 +85,7 @@
           <h3 class="song__name">8 Letters</h3><p class="song__len">3:34</p>
         </a></li>
         <li class="song"><a href="src/music/music.php">
-          <img src="assets/image/fallin.png" alt="Fallin' cover">
+          <img src="assets/image/fallin.jpg" alt="Fallin' cover">
           <h3 class="song__name">Fallin'</h3><p class="song__len">2:46</p>
         </a></li>
         <li class="song"><a href="src/music/music.php">
@@ -169,7 +169,7 @@
           <h3 class="product__name">Bracelet</h3><p class="product__price">$65</p>
         </a></li>
         <li class="product"><a href="src/merch/merch.php">
-          <img src="assets/image/—Pngtree—black t-shirt_5609353.png" alt="Black T-Shirt">
+          <img src="assets/image/pngtree-black-tshirt.png" alt="Black T-Shirt">
           <h3 class="product__name">Black T-Shirt</h3><p class="product__price">$65</p>
         </a></li>
         <li class="product"><a href="src/merch/merch.php">
@@ -206,7 +206,7 @@
           </div>
         </article></a></li>
         <li><a href="src/article/article-video.php"><article class="news-card">
-          <img src="assets/image/featured-news.png" alt="">
+          <img src="assets/image/featured-news.jpg" alt="">
           <div class="news-card__body">
             <time datetime="2026-04">April 2026</time>
             <h3>Behind the scenes: the new video</h3>

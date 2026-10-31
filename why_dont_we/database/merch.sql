@@ -21,7 +21,7 @@ INSERT INTO products (id, slug, name, collection, price, image, is_featured) VAL
   (1, 'bracelet',               'Bracelet',               'Covid-19 Collection', 65.00, 'assets/image/gelang.png',   1),
   (2, 'limited-edition-hoodie', 'Limited Edition Hoodie', 'New Era Collection',  65.00, 'assets/image/hoodie.png',   1),
   (3, 'socks',                  'Socks',                  'New Era Collection',  65.00, 'assets/image/kaoskaki.png', 0),
-  (4, 'black-t-shirt',          'Black T-Shirt',          'New Era Collection',  65.00, 'assets/image/—Pngtree—black t-shirt_5609353.png', 0),
-  (5, 'dark-green-t-shirt',     'Dark Green T-Shirt',     'New Era Collection',  65.00, 'assets/image/—Pngtree—plain dark green t shirt_14667981.png', 0),
+  (4, 'black-t-shirt',          'Black T-Shirt',          'New Era Collection',  65.00, 'assets/image/pngtree-black-tshirt.png', 0),
+  (5, 'dark-green-t-shirt',     'Dark Green T-Shirt',     'New Era Collection',  65.00, 'assets/image/pngtree-green-tshirt.png', 0),
   (6, 'cowboy-hat',             'Cowboy Hat',             'New Era Collection',  65.00, 'assets/image/vecteezy_ai-generated-cowboy-hat-png_34616681.png', 0),
   (7, 'seafoam-t-shirt',        'Seafoam T-Shirt',        'New Era Collection',  65.00, 'assets/image/vecteezy_seafoam-green-short-sleeve-crew-neck-tshirt-mockup-for_59901009.png', 0);
