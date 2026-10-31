@@ -1,13 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap");
 
 /* Gaya global - mereset margin, padding, dan box-sizing bawaan untuk semua elemen */
-/* * { font-family: Caveat; */*{
-    /* font-family: Special Elite; */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
+/* * { font-family: Caveat; */
+* {
+  /* font-family: Special Elite; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
 }
 
 /* html {
@@ -16,136 +17,132 @@
 } */
 
 /* Body - kontainer utama halaman dengan background */
-body{
-
-    background:var(--page-bg);
-    overflow-x: hidden;
-    width: 100%;
-
+body {
+  background: var(--page-bg);
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Bagian lagu populer - 2 kolom di desktop, 1 kolom di HP */
-.top-lagu  {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 400px));
-    justify-content: center;
-    align-items: start;
-    gap: 30px;
-    max-width: 1200px;
-    margin: 0 auto 40px;
-    padding: 0 16px;
+.top-lagu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 400px));
+  justify-content: center;
+  align-items: start;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto 40px;
+  padding: 0 16px;
 }
 
 /* Kartu lagu populer - pemutar musik dengan cover album dan kontrol audio */
 
 .top-lagu .player2 {
-    position: relative;
-    display: flex;
-    /* flex:auto; */
-    align-items: center;    
-    justify-content: center;
-    width: 100%;
-    flex-wrap: nowrap;
-    background:var(--body) ;
-    border-radius: 20px;
-    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
-    flex-direction: column;
-     padding: 20px;
-     border: 2px solid var(--secondary-color);
+  position: relative;
+  display: flex;
+  /* flex:auto; */
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: nowrap;
+  background: var(--body);
+  border-radius: 20px;
+  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
+  flex-direction: column;
+  padding: 20px;
+  border: 2px solid var(--secondary-color);
 }
 
 /* Cover album lagu populer - kontainer gambar */
-.player2 .imgbox2{
-     position: relative;
-    width: min(250px, 100%);
-    aspect-ratio: 1;
-    margin-bottom: 20px;
-    display: flex;
-   
-    /* border-top-right-radius: 20px; */  
+.player2 .imgbox2 {
+  position: relative;
+  width: min(250px, 100%);
+  aspect-ratio: 1;
+  margin-bottom: 20px;
+  display: flex;
+
+  /* border-top-right-radius: 20px; */
 }
 
 /* Tombol Stream lagu populer - tombol aksi utama */
-.player2 .tombol{
-    font-size :30px;
-    background-color: var(--secondary-color);
-    border-radius: 10px;
-    border:var(--secondary-color);
-    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
-    padding:10px;
-    margin-bottom: 10px;
-    width: 100%;
-    margin-top: auto;   
+.player2 .tombol {
+  font-size: 30px;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  border: var(--secondary-color);
+  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  margin-top: auto;
 }
 
 /* Tombol lirik pertama - membuka lirik lagu pertama */
-.player2 .lirik{
-  
-    font-size :30px;
-    text-decoration: underline;
-    border-radius: 10px;
-    border:var(--secondary-color);
-    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
-    padding:10px;
-    margin-bottom: 10px;
-    width: 100%;
-    margin-top: auto;   
+.player2 .lirik {
+  font-size: 30px;
+  text-decoration: underline;
+  border-radius: 10px;
+  border: var(--secondary-color);
+  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  margin-top: auto;
 }
 
 /* Tombol lirik kedua - membuka lirik lagu kedua */
-.player2 .lirik2{
-    font-size :30px;
-    text-decoration: underline;
-    border-radius: 10px;
-    border:var(--secondary-color);
-    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
-    padding:10px;
-    margin-bottom: 10px;
-    width: 100%;
-    margin-top: auto;  
+.player2 .lirik2 {
+  font-size: 30px;
+  text-decoration: underline;
+  border-radius: 10px;
+  border: var(--secondary-color);
+  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  margin-bottom: 9px;
+  width: 100%;
+  margin-top: auto;
 }
-.player2 .lirik4{
-    font-size :30px;
-    text-decoration: underline;
-    border-radius: 10px;
-    border:var(--secondary-color);
-    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
-    padding:10px;
-    margin-bottom: 10px;
-    width: 100%;
-    margin-top: auto;  
+.player2 .lirik4 {
+  font-size: 30px;
+  text-decoration: underline;
+  border-radius: 10px;
+  border: var(--secondary-color);
+  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  margin-top: auto;
 }
 
 /* Tombol lirik ketiga - membuka lirik lagu ketiga */
-.player2 .lirik3{
-    font-size :30px;
-    text-decoration: underline;
-    border-radius: 10px;
-    border:var(--secondary-color);
-    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
-    padding:10px;
-    margin-bottom: 10px;
-    width: 100%;
-    margin-top: auto;   
+.player2 .lirik3 {
+  font-size: 30px;
+  text-decoration: underline;
+  border-radius: 10px;
+  border: var(--secondary-color);
+  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  margin-top: auto;
 }
 
 /* Judul utama - judul halaman dengan font besar dan font khusus */
 h1 {
-   text-align: center;
-    position: static;
-    flex-wrap: nowrap;
-    font-family: Special Elite;
-    padding: 40px;
-    font-size: 40px;
-    color:var(--heading);
-
+  text-align: center;
+  position: static;
+  flex-wrap: nowrap;
+  font-family: Special Elite;
+  padding: 40px;
+  font-size: 40px;
+  color: var(--heading);
 }
-h2{
-     font-family:'Courier New', Courier, monospace;
-    color: var(--heading);
-    font-size: medium;
-    text-transform: uppercase;
-    font-size: 20px;
+h2 {
+  font-family: "Courier New", Courier, monospace;
+  color: var(--heading);
+  font-size: medium;
+  text-transform: uppercase;
+  font-size: 20px;
 }
 
 /* Footer - bagian bawah halaman */
@@ -155,450 +152,482 @@ h2{
 /* Kontainer navigasi - layout flexbox untuk item navbar */
 
 /* Pembungkus album + video - rata tengah, lebar maksimal sama dengan halaman lain */
-.music-main{
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 16px;
+.music-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
 }
 
 /* Kontainer album - kartu album berukuran sama yang menyesuaikan lebar layar */
-.players-container{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
-    gap: 30px;
-    align-items: stretch;
-    margin-bottom: 50px;
+.players-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
+  gap: 30px;
+  align-items: stretch;
+  margin-bottom: 50px;
 }
 
 /* Kartu album - cover album dan tombol Stream */
-.player{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    min-width: 0;
-    flex-wrap: nowrap;
-    background:var(--glow) ;
-    border-radius: 20px;
-    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
-    flex-direction: column;
-     padding: 20px;
-     border: 2px solid var(--secondary-color);     
+.player {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 0;
+  flex-wrap: nowrap;
+  background: var(--glow);
+  border-radius: 20px;
+  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
+  flex-direction: column;
+  padding: 20px;
+  border: 2px solid var(--secondary-color);
 }
 
 /* Cover album - gambar cover dengan sudut membulat */
-.player .imgbox{
-    position: relative;
-    width: 80%;
-    aspect-ratio: 1;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    /* border-top-right-radius: 20px; */
-    overflow: hidden;   
+.player .imgbox {
+  position: relative;
+  width: 80%;
+  aspect-ratio: 1;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  /* border-top-right-radius: 20px; */
+  overflow: hidden;
 }
 
 /* Efek hover cover album - sedikit transparan saat di-hover */
-.player .imgbox:hover{
-    opacity: 60%;
+.player .imgbox:hover {
+  opacity: 60%;
 }
 
 /* Tombol kartu album - tombol aksi utama berwarna hijau */
-.player button{
-    font-size :30px;
-    background-color: var(--secondary-color);
-    border-radius: 10px;
-    border:var(--secondary-color);
-    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
-    padding:10px;
-    margin-bottom: 10px;
-    width: 100%;
-    margin-top: auto;   
+.player button {
+  font-size: 30px;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  border: var(--secondary-color);
+  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 100%;
+  margin-top: auto;
 }
 
 /* Titik anchor lirik pertama - acuan posisi popup lirik pertama */
-.lirik{anchor-name: --lyric;}
+.lirik {
+  anchor-name: --lyric;
+}
 
 /* Titik anchor lirik kedua - acuan posisi popup lirik kedua */
-.lirik2{anchor-name: --lyric2;}
+.lirik2 {
+  anchor-name: --lyric2;
+}
 
 /* Titik anchor lirik ketiga - acuan posisi popup lirik ketiga */
-.lirik3{anchor-name: --lyric3;}
-.lirik4{anchor-name: --lyric4;}
-/* Popup lirik ketiga - lirik yang bisa di-scroll dengan background gelap */
-#dropdown4{
-    color: #fffb00; 
-    border-color: #000000;
-    background-color: #3e3a3a;
-    width: 100%;
-    overflow-y: auto;
-    height: 500px;
-    padding: 20px;
-    position: absolute;
-    position-anchor:   --lyric3;
-    position-area: bottom center;
-    border-radius: 0px; 
-    justify-self: center; 
-    font-family: Caveat;
-    font-weight: bold;
-    font-size: 30px;   
+.lirik3 {
+  anchor-name: --lyric3;
 }
-#dropdown5{
-    color: #fffb00; 
-    border-color: #000000;
-    background-color: #3e3a3a;
-    width: 100%;
-    overflow-y: auto;
-    height: 500px;
-    padding: 20px;
-    position: absolute;
-    position-anchor:   --lyric4;
-    position-area: bottom center;
-    border-radius: 0px; 
-    justify-self: center; 
-    font-family: Caveat;
-    font-weight: bold;
-    font-size: 30px;   
+.lirik4 {
+  anchor-name: --lyric4;
+}
+/* Popup lirik ketiga - lirik yang bisa di-scroll dengan background gelap */
+#dropdown4 {
+  color: #fffb00;
+  border-color: #000000;
+  background-color: #3e3a3a;
+  width: 100%;
+  overflow-y: auto;
+  height: 500px;
+  padding: 20px;
+  position: absolute;
+  position-anchor: --lyric3;
+  position-area: bottom center;
+  border-radius: 0px;
+  justify-self: center;
+  font-family: Caveat;
+  font-weight: bold;
+  font-size: 30px;
+}
+#dropdown5 {
+  color: #fffb00;
+  border-color: #000000;
+  background-color: #3e3a3a;
+  width: 100%;
+  overflow-y: auto;
+  height: 500px;
+  padding: 20px;
+  position: absolute;
+  position-anchor: --lyric4;
+  position-area: bottom center;
+  border-radius: 0px;
+  justify-self: center;
+  font-family: Caveat;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 /* Popup lirik kedua - lirik yang bisa di-scroll dengan background gelap */
-#dropdown3{
-    color: #fffb00; 
-    border-color: #000000;
-    background-color: #3e3a3a;
-    width: 100%;
-    overflow-y: auto;
-    height: 500px;
-    padding: 20px;
-    position: absolute;
-    position-anchor:   --lyric2;
-    position-area: bottom center;
-    border-radius: 0px; 
-    justify-self: center; 
-    font-family: Caveat;
-    font-weight: bold;
-    font-size: 30px;    
+#dropdown3 {
+  color: #fffb00;
+  border-color: #000000;
+  background-color: #3e3a3a;
+  width: 100%;
+  overflow-y: auto;
+  height: 500px;
+  padding: 20px;
+  position: absolute;
+  position-anchor: --lyric2;
+  position-area: bottom center;
+  border-radius: 0px;
+  justify-self: center;
+  font-family: Caveat;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 /* Popup lirik pertama - lirik yang bisa di-scroll dengan background gelap */
-#dropdown2{
-    color: #fffb00; 
-    border-color: #000000;
-    background-color: #3e3a3a;
-    width:100%;
-    overflow-y: auto;
-    height: 500px;
-    padding: 20px;
-    position: absolute;
-    position-anchor: --lyric  ;
-    position-area: bottom center;
-    border-radius: 0px; 
-    justify-self: center; 
-    font-family: Caveat;
-    font-weight: bold;
-    font-size: 30px;    
-   
+#dropdown2 {
+  color: #fffb00;
+  border-color: #000000;
+  background-color: #3e3a3a;
+  width: 100%;
+  overflow-y: auto;
+  height: 500px;
+  padding: 20px;
+  position: absolute;
+  position-anchor: --lyric;
+  position-area: bottom center;
+  border-radius: 0px;
+  justify-self: center;
+  font-family: Caveat;
+  font-weight: bold;
+  font-size: 30px;
 }
 
 /* Dropdown Stream - elemen <details>/<summary> bawaan HTML; menu terbuka
    tepat di bawah tombol dengan lebar yang sama, tetap jalan tanpa JavaScript */
-.stream-dropdown{
-    position: relative;
-    width: 100%;
-    margin-top: auto;
-    margin-bottom: 10px;
+.stream-dropdown {
+  position: relative;
+  width: 100%;
+  margin-top: auto;
+  margin-bottom: 10px;
 }
 
-.stream-dropdown > summary{
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 30px;
-    color: #000;
-    background-color: var(--secondary-color);
-    border-radius: 10px;
-    box-shadow: 0 5px 80px rgba(0,0,0,0.5);
-    cursor: pointer;
-    user-select: none;
+.stream-dropdown > summary {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  color: #000;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  user-select: none;
 }
 
 /* sembunyikan segitiga bawaan browser, ganti dengan panah sendiri */
-.stream-dropdown > summary::-webkit-details-marker{
-    display: none;
+.stream-dropdown > summary::-webkit-details-marker {
+  display: none;
 }
 
-.stream-dropdown > summary::after{
-    content: "\25BE";
-    font-size: .8em;
-    transition: transform .2s;
+.stream-dropdown > summary::after {
+  content: "\25BE";
+  font-size: 0.8em;
+  transition: transform 0.2s;
 }
 
-.stream-dropdown[open] > summary::after{
-    transform: rotate(180deg);
+.stream-dropdown[open] > summary::after {
+  transform: rotate(180deg);
 }
 
-.stream-dropdown > summary:hover{
-    opacity: 80%;
-    text-decoration: underline;
+.stream-dropdown > summary:hover {
+  opacity: 80%;
+  text-decoration: underline;
 }
 
-.stream-dropdown > summary:focus-visible{
-    outline: 3px solid var(--deep-color);
-    outline-offset: 2px;
+.stream-dropdown > summary:focus-visible {
+  outline: 3px solid var(--deep-color);
+  outline-offset: 2px;
 }
 
-.stream-menu{
-    position: absolute;
-    top: calc(100% + 6px);
-    left: 0;
-    right: 0;
-    z-index: 20;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 10px;
-    background: #fff;
-    border: var(--card-border);
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.35);
+.stream-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  background: #fff;
+  border: var(--card-border);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-.stream-menu a{
-    display: block;
-    padding: 4px;
-    border-radius: 8px;
+.stream-menu a {
+  display: block;
+  padding: 4px;
+  border-radius: 8px;
 }
 
-.stream-menu a:hover{
-    background: rgba(0,0,0,.06);
+.stream-menu a:hover {
+  background: rgba(0, 0, 0, 0.06);
 }
 
-.stream-menu img{
-    display: block;
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-    margin: 0 auto;
+.stream-menu img {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  margin: 0 auto;
 }
 
 /* Efek hover tombol album - transparan dan bergaris bawah saat di-hover */
-.player button:hover{
-    opacity: 80%;
-    text-decoration: underline;
+.player button:hover {
+  opacity: 80%;
+  text-decoration: underline;
 }
 
 /* Bagian streaming - kontainer link platform streaming */
-.streaming{
-    display: flex;
-    flex-direction: column;
-    flex-wrap:nowrap;
-    justify-content: space-evenly;
-    align-items: center;
-   
-   
+.streaming {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 /* Item platform streaming - kartu untuk satu link platform */
-.streaming-platforms{
-    background-color: #e8f4ff;
-    position: relative;
-    width: 250px;
-    padding: 5px;
-    
-
+.streaming-platforms {
+  background-color: #e8f4ff;
+  position: relative;
+  width: 250px;
+  padding: 5px;
 }
 
 /* Efek hover platform streaming - sedikit transparan saat di-hover */
-.streaming-platforms:hover{
-    opacity: 60%;
+.streaming-platforms:hover {
+  opacity: 60%;
 }
 
 /* Judul CTA - judul besar rata tengah untuk call-to-action */
-.cta h2{
-    text-wrap: balance;
-    text-align: center;
-    font-size: 60px;
-    padding-top: 20px;
-    font-family: Special Elite;
-   text-transform: lowercase;
-   color: var(--cta-ink);
+.cta h2 {
+  text-wrap: balance;
+  text-align: center;
+  font-size: 60px;
+  padding-top: 20px;
+  font-family: Special Elite;
+  text-transform: lowercase;
+  color: var(--cta-ink);
 }
-.brand{
-    width: 60px;
+.brand {
+  width: 60px;
 }
 
 .page-header {
-    text-align: center;
-    padding: 1.5rem 1.25rem 0.5rem;
+  text-align: center;
+  padding: 1.5rem 1.25rem 0.5rem;
 }
 .email {
-    display: flex;
-    flex-direction:row;
-    position: relative;
-    justify-content: center;   
-    flex-wrap: wrap;
-    margin: 30px;
-  
-
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 30px;
 }
 
 /* Input email - kolom email untuk subscribe */
-.email input{
-    padding: 7px ;
-    border-radius: 10px;
-    font-size: 15px;
-    text-wrap: balance;
-    display: flex;
-
+.email input {
+  padding: 7px;
+  border-radius: 10px;
+  font-size: 15px;
+  text-wrap: balance;
+  display: flex;
 }
 
 /* Tombol submit email - tombol untuk subscribe */
-#email-btn{
-    background-color: red;
-    color:white;
-    display: flex;
-    flex-direction: row;
- 
-    border-radius: 10px;
-    
+#email-btn {
+  background-color: red;
+  color: white;
+  display: flex;
+  flex-direction: row;
+
+  border-radius: 10px;
 }
 
 /* Kontainer ikon - membuat ikon rata tengah */
-.icon { text-align: center;}
+.icon {
+  text-align: center;
+}
 /* Gaya gambar global - lebar/tinggi penuh dengan object-fit */
-img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;  
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-audio{
-   display: flex;
-    width: 100%;
-    justify-content: space-between;
+audio {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 /* Panel kontrol audio - kontainer kontrol pemutar audio */
 audio::-webkit-media-controls-panel {
-    background-color: rgb(0, 0, 0);
-  
-    
-   
+  background-color: rgb(0, 0, 0);
 }
 
 /* Tombol play audio - tombol play/pause berwarna kuning */
-audio::-webkit-media-controls-play-button{
-background-color: var(--music-play-color);
-border-radius: 40px;
-transform: scale(1.6);
-
+audio::-webkit-media-controls-play-button {
+  background-color: var(--music-play-color);
+  border-radius: 40px;
+  transform: scale(1.6);
 }
 
 /* Tampilan waktu berjalan - warna teks penghitung waktu */
-audio::-webkit-media-controls-current-time-display{
-    color:var(--music-play-color);   
-    padding-left:9px ;
-   
-  
+audio::-webkit-media-controls-current-time-display {
+  color: var(--music-play-color);
+  padding-left: 9px;
 }
 
 /* Tampilan sisa waktu - warna teks sisa waktu dengan padding kanan */
-audio::-webkit-media-controls-time-remaining-display{
-    color:var(--music-play-color);
-    padding-right: 7px;   
-  
+audio::-webkit-media-controls-time-remaining-display {
+  color: var(--music-play-color);
+  padding-right: 7px;
 }
 
 /* Slider timeline audio - progress bar dengan sudut membulat */
-audio::-webkit-media-controls-timeline{
-    background-color:var(--music-play-color);
-    border-radius: 40px;  
-    position: relative;  
-    
-   
+audio::-webkit-media-controls-timeline {
+  background-color: var(--music-play-color);
+  border-radius: 40px;
+  position: relative;
 }
 
 /* Slider volume audio - kontrol volume dengan sudut membulat */
-audio::-webkit-media-controls-volume-slider{
-    background-color: var(--music-play-color);
-    border-radius: 40px;
-    padding-right: 20px;
-    padding-left: 20px;  
+audio::-webkit-media-controls-volume-slider {
+  background-color: var(--music-play-color);
+  border-radius: 40px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 /* Tombol mute audio - tombol mute berwarna kuning */
-audio::-webkit-media-controls-mute-button{
-    position: absolute;
-    align-items: end;
-    background-color:var(--music-play-color);
-    border-radius: 40px;
-    transform: scale(1.6);
-
+audio::-webkit-media-controls-mute-button {
+  position: absolute;
+  align-items: end;
+  background-color: var(--music-play-color);
+  border-radius: 40px;
+  transform: scale(1.6);
 }
 
 /* Video - embed YouTube 16:9 yang responsif: 2 per baris di desktop, 1 di tablet/HP */
-.video{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
-    gap: 24px;
-    margin-bottom: 60px;
+.video {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+  gap: 24px;
+  margin-bottom: 60px;
 }
-.video iframe{
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    border: 0;
-    border-radius: 16px;
-    background: #000;
-    box-shadow: 0 5px 40px rgba(0,0,0,0.4);
+.video iframe {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: 16px;
+  background: #000;
+  box-shadow: 0 5px 40px rgba(0, 0, 0, 0.4);
 }
 
 /* =========================
    RESPONSIF
 ========================= */
-@media (max-width: 768px){
-    .cta h2{ font-size: clamp(2rem, 8vw, 3rem); padding: 20px 16px 0; }
-    h1{ font-size: clamp(1.6rem, 6vw, 2.2rem); padding: 28px 16px; }
+@media (max-width: 768px) {
+  .cta h2 {
+    font-size: clamp(2rem, 8vw, 3rem);
+    padding: 20px 16px 0;
+  }
+  h1 {
+    font-size: clamp(1.6rem, 6vw, 2.2rem);
+    padding: 28px 16px;
+  }
 
-    .top-lagu{ gap: 20px; }
-    .player2{ padding: 16px; }
+  .top-lagu {
+    gap: 20px;
+  }
+  .player2 {
+    padding: 16px;
+  }
 
-    .player2 .tombol,
-    .stream-dropdown > summary,
-    .player2 .lirik,
-    .player2 .lirik2,
-    .player2 .lirik3,
-    .player2 .lirik4,
-    .player button{ font-size: 22px; }
+  .player2 .tombol,
+  .stream-dropdown > summary,
+  .player2 .lirik,
+  .player2 .lirik2,
+  .player2 .lirik3,
+  .player2 .lirik4,
+  .player button {
+    font-size: 22px;
+  }
 
-    .players-container{ grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr)); gap: 16px; }
-    .video{ gap: 16px; }
+  .players-container {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr));
+    gap: 16px;
+  }
+  .video {
+    gap: 16px;
+  }
 
-    #dropdown2, #dropdown3, #dropdown4, #dropdown5{
-        height: 70vh;
-        font-size: 24px;
-    }
+  #dropdown2,
+  #dropdown3,
+  #dropdown4,
+  #dropdown5 {
+    height: 70vh;
+    font-size: 24px;
+  }
 }
 
-@media (max-width: 640px){
-    /* lagu populer tersusun jadi satu kolom */
-    .top-lagu{ grid-template-columns: minmax(0, 400px); }
+@media (max-width: 640px) {
+  /* lagu populer tersusun jadi satu kolom */
+  .top-lagu {
+    grid-template-columns: minmax(0, 400px);
+  }
 }
 
-@media (max-width: 480px){
-    /* dua kartu album per baris di HP */
-    .players-container{ grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .player{ padding: 12px; border-radius: 16px; }
-    .player .imgbox{ width: 100%; margin-bottom: 12px; border-radius: 12px; }
-    .player h2, .player .song-title h2{ font-size: 14px; }
-    .player button,
-    .player .stream-dropdown > summary{ font-size: 18px; padding: 8px; }
+@media (max-width: 480px) {
+  /* dua kartu album per baris di HP */
+  .players-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .player {
+    padding: 12px;
+    border-radius: 16px;
+  }
+  .player .imgbox {
+    width: 100%;
+    margin-bottom: 12px;
+    border-radius: 12px;
+  }
+  .player h2,
+  .player .song-title h2 {
+    font-size: 14px;
+  }
+  .player button,
+  .player .stream-dropdown > summary {
+    font-size: 18px;
+    padding: 8px;
+  }
 
-    .player2{ padding: 16px; }
-    .video iframe{ border-radius: 12px; }
+  .player2 {
+    padding: 16px;
+  }
+  .video iframe {
+    border-radius: 12px;
+  }
 }
-
