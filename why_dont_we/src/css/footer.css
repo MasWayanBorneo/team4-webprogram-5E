@@ -51,6 +51,9 @@
   .site-footer .footer-brand{flex-basis:100%;}
 }
 @media (max-width:620px){
-  .site-footer .footer-col{flex-basis:100%;}
+  /* tiga kolom link tetap berdampingan di HP supaya footer tidak terlalu panjang */
+  .site-footer .footer-grid{gap:1.5rem 1rem;}
+  .site-footer .footer-col{flex-basis:80px;}
+  .site-footer .footer-col h4{margin-bottom:.7rem;}
   .site-footer .footer-bottom{flex-direction:column;text-align:center;}
 }

@@ -679,14 +679,12 @@ button:focus-visible,
 }
 
 /* ============================================================================
-   RESPONSIF — laptop kecil/tablet landscape, tablet, HP, HP kecil
+   RESPONSIF — tablet (≤ 860px) dan HP (≤ 640px)
    ============================================================================ */
-@media (max-width: 1024px) {
+@media (max-width: 860px) {
   .members {
     --cols: 3;
   }
-}
-@media (max-width: 860px) {
   .songs,
   .products,
   .news,
@@ -731,12 +729,5 @@ button:focus-visible,
   }
   .tour-row .btn {
     flex: 1 1 100%;
-  }
-}
-@media (max-width: 380px) {
-  .songs,
-  .products,
-  .members {
-    --cols: 1;
   }
 }

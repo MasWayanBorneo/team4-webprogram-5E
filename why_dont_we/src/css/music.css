@@ -527,10 +527,10 @@ audio::-webkit-media-controls-mute-button {
   transform: scale(1.6);
 }
 
-/* Video - embed YouTube 16:9 yang responsif: 2 per baris di desktop, 1 di tablet/HP */
+/* Video - embed YouTube 16:9 yang responsif: 2 per baris di laptop/tablet, 1 di HP */
 .video {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 24px;
   margin-bottom: 60px;
 }
@@ -578,6 +578,14 @@ audio::-webkit-media-controls-mute-button {
   .players-container {
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr));
     gap: 16px;
+  }
+  /* cover album memenuhi kartu supaya tidak terlihat kecil di tablet */
+  .player {
+    padding: 14px;
+  }
+  .player .imgbox {
+    width: 100%;
+    margin-bottom: 14px;
   }
   .video {
     gap: 16px;
