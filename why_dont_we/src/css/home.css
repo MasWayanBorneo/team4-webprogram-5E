@@ -12,7 +12,8 @@ html {
 body {
   margin: 0;
   /* home tetap memakai background GIF; kartu dan tombol mengikuti tema situs (base.css) */
-  background: url(../../assets/image/WDW-SlowDown-MobileHeader-640x1136.gif);
+  /* warna cadangan dipakai kalau GIF gagal dimuat */
+  background: var(--page-bg) url(../../assets/image/home-bg.gif);
   color: var(--ink);
   /* skala sama seperti `cover` untuk satu layar (gif 640x1136), tanpa mengunci
      tinggi body ke 100vh — tinggi body yang dikunci membuat header sticky ikut hilang */

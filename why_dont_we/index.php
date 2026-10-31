@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Why Don't We — official site. New music, world tour dates, and the latest news from the five-piece pop group.">
 <title>Why Don't We — Official</title>
+<!-- GIF background diunduh lebih awal, tidak menunggu home.css selesai dibaca -->
+<link rel="preload" href="assets/image/home-bg.gif" as="image">
 <link rel="stylesheet" href="src/css/base.css">
 <link rel="stylesheet" href="src/css/home.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
