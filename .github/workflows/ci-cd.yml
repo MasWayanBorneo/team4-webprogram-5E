@@ -1,0 +1,63 @@
+# Simpan di: .github/workflows/ci-cd.yml
+# (hapus ci.yml dan .htmlvalidate.json yang lama, keduanya tidak relevan untuk proyek PHP)
+
+name: CI/CD
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+# Cegah dua deploy berjalan bersamaan kalau ada dua merge berdekatan
+concurrency:
+  group: deploy-main
+  cancel-in-progress: false
+
+jobs:
+  # ---------- CI: berjalan di setiap PR dan setiap push ke main ----------
+  cek-php:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil kode
+        uses: actions/checkout@v4
+
+      - name: Siapkan PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"   # samakan dengan versi PHP di hosting kalian
+
+      - name: Cek sintaks semua file PHP
+        run: |
+          files=$(find ./why_dont_we -name "*.php" -not -path "*/vendor/*")
+          if [ -z "$files" ]; then
+            echo "Tidak ada file PHP ditemukan. Cek lagi path folder di workflow."
+            exit 1
+          fi
+          echo "$files" | xargs -n1 php -l
+
+  # ---------- CD: hanya setelah merge ke main DAN CI lulus ----------
+  deploy:
+    needs: cek-php
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ambil kode
+        uses: actions/checkout@v4
+
+      - name: Upload ke hosting lewat FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./why_dont_we/
+          server-dir: ${{ secrets.FTP_SERVER_DIR }}
+          # File yang TIDAK boleh ikut ter-upload ke hosting
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/database/**
+            **/koneksi.php
+            **/config.php
