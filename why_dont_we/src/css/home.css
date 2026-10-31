@@ -1,6 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap");
-
+/* ============================================================================
+   HOME — layout memakai flexbox.
+   Daftar kartu (lagu, member, merch, berita, video) memakai --cols untuk jumlah
+   kolom; nilainya diubah di bagian RESPONSIF untuk tablet dan HP.
+   ============================================================================ */
 * {
   box-sizing: border-box;
 }
@@ -54,10 +56,10 @@ button {
   width: 100%;
   max-width: var(--shell);
   margin-inline: auto;
-  padding-inline: clamp(20px, 4vw, 40px);
+  padding-inline: clamp(16px, 4vw, 40px);
 }
 .section {
-  padding-block: clamp(3.5rem, 7vw, 7rem);
+  padding-block: clamp(3rem, 7vw, 7rem);
 }
 .section-title {
   font-family: var(--title-font);
@@ -68,10 +70,11 @@ button {
   margin: 0;
 }
 .section-head {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: start;
-  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
   margin-bottom: clamp(1.7rem, 3vw, 2.6rem);
 }
 .head-link {
@@ -86,10 +89,31 @@ button {
 .head-link:hover {
   border-color: var(--secondary-color);
 }
+.eyebrow {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--heading);
+}
+/* teks hanya untuk pembaca layar */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 /* tampilan kartu bersama (tema situs) */
 .song,
 .member,
+.product,
 .tour-row,
 .news-card,
 .newsletter {
@@ -98,20 +122,48 @@ button {
   box-shadow: var(--card-shadow);
   color: var(--card-ink);
 }
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 .brand {
   width: 61px;
 }
+
+/* ---- baris kartu: flex-wrap dengan jumlah kolom dari --cols ----------------- */
+.songs,
+.members,
+.products,
+.news,
+.videos {
+  --gap: clamp(1rem, 2vw, 1.6rem);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+}
+.songs > li,
+.members > li,
+.products > li,
+.news > li,
+.videos > li {
+  flex: 0 0 calc((100% - (var(--cols) - 1) * var(--gap)) / var(--cols));
+  min-width: 0;
+  margin: 0;
+}
+.songs,
+.products {
+  --cols: 4;
+}
+.members {
+  --cols: 5;
+}
+.news,
+.videos {
+  --cols: 3;
+}
+
 /* tombol */
 .btn {
-  display: inline-grid;
-  grid-auto-flow: column;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  place-items: center;
   font-weight: 600;
   font-size: 0.95rem;
   border: none;
@@ -153,41 +205,38 @@ img {
   fill: currentColor;
 }
 
-/* tile artwork — gradasi + tekstur titik + vignette halus ------------------- */
+/* tile artwork — gambar menutupi tile + vignette halus ----------------------- */
 .art {
   position: relative;
   overflow: hidden;
   border-radius: var(--radius);
-  --_g: var(--g1);
   isolation: isolate;
 }
-
 .art::after {
-  /* vignette bawah supaya teks/overlay terbaca */
+  /* vignette bawah supaya overlay terbaca */
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
   background: linear-gradient(to top, rgba(8, 5, 18, 0.45), transparent 55%);
 }
-/* <img> yang dimasukkan berada di atas dan menutupi gradasi */
 .art > img {
   position: absolute;
   inset: 0;
   z-index: 1;
 }
 
-/* overlay tombol play untuk tile lagu + video */
+/* overlay tombol play untuk tile video */
 .play-tile {
   position: relative;
-  display: grid;
 }
 .play-btn {
   position: absolute;
   inset: 0;
   z-index: 2;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: rgba(8, 5, 18, 0);
   border: none;
   transition: background 0.2s;
@@ -223,16 +272,13 @@ img {
   overflow: hidden;
   isolation: isolate;
 }
-.hero__bg {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-}
 .hero__inner {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   gap: 1.4rem;
-  align-content: center;
-  min-height: clamp(560px, 88vh, 820px);
+  min-height: clamp(520px, 88vh, 820px);
   padding-block: 5rem;
 }
 .hero__name {
@@ -253,18 +299,16 @@ img {
   margin: 0.4rem 0 0;
 }
 .hero__cta {
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.9rem;
-  justify-content: start;
   margin-top: 0.8rem;
 }
 .hero__badge {
-  display: inline-grid;
-  grid-auto-flow: column;
-  gap: 0.55rem;
+  display: inline-flex;
   align-items: center;
-  width: max-content;
+  gap: 0.55rem;
+  max-width: 100%;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--line);
   border-radius: 100px;
@@ -277,6 +321,7 @@ img {
   border-color: var(--secondary-color);
 }
 .hero__badge .dot {
+  flex: none;
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -288,30 +333,23 @@ img {
    RILIS TERBARU
    ============================================================================ */
 .release {
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: clamp(2rem, 5vw, 4rem);
+  display: flex;
   align-items: center;
+  gap: clamp(2rem, 5vw, 4rem);
 }
 .release__art {
+  flex: 0 1 45%;
   aspect-ratio: 1/1;
-  display: grid;
-  place-items: center;
   margin: 0;
   border: var(--card-border);
   box-shadow: var(--card-shadow);
 }
-.release__art svg {
-  width: 46%;
-  height: 46%;
-  position: relative;
-  z-index: 1;
-  opacity: 0.92;
-}
 .release__meta {
-  display: grid;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 1.2rem;
-  justify-items: start;
 }
 .release__kicker {
   background: var(--btn-bg);
@@ -338,16 +376,14 @@ img {
   margin: 0;
 }
 .streams {
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.7rem;
-  justify-content: start;
 }
 .stream-chip {
-  display: grid;
-  grid-auto-flow: column;
-  gap: 0.5rem;
+  display: inline-flex;
   align-items: center;
+  gap: 0.5rem;
   background: var(--btn-bg);
   color: var(--btn-ink);
   border: none;
@@ -371,93 +407,101 @@ img {
 }
 
 /* ============================================================================
-   LAGU PILIHAN
+   KARTU LAGU, MEMBER, MERCH — seluruh kartu bisa diklik
    ============================================================================ */
-.songs {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(1rem, 2vw, 1.6rem);
-}
-.song {
-  display: grid;
-  gap: 0.6rem;
-  align-content: start;
-  background: var(--card-bg);
+.song,
+.member,
+.product {
   padding: 14px;
-  margin: 0;
+  transition: transform 0.15s;
 }
-.song > img {
-  aspect-ratio: 1/1;
+.song:hover,
+.member:hover,
+.product:hover {
+  transform: translateY(-4px);
+}
+.song > a,
+.member > a,
+.product > a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+}
+.song img,
+.member img,
+.product img {
   height: auto;
   border-radius: 12px;
 }
-.song__art {
-  aspect-ratio: 1/1;
-}
-.song__name {
+.song__name,
+.member__name,
+.product__name {
   font-family: "Courier New", Courier, monospace;
   font-weight: 700;
   text-transform: uppercase;
   font-size: 1rem;
+  line-height: 1.3;
   margin: 0;
 }
-.song__len {
+.song__len,
+.member__role,
+.product__price {
   color: var(--card-ink-soft);
   font-size: 0.85rem;
   margin: 0;
 }
 
-/* ============================================================================
-   MEMBER
-   ============================================================================ */
-.members {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: clamp(1rem, 2vw, 1.6rem);
+/* lagu */
+.song {
+  background: var(--card-bg);
 }
+.song img {
+  aspect-ratio: 1/1;
+}
+
+/* member */
 .member {
-  display: grid;
-  gap: 0.5rem;
-  align-content: start;
   background: var(--card-bg-light);
   padding: 12px;
-  margin: 0;
 }
 .member img {
   aspect-ratio: 3/4;
-  height: auto;
-  border-radius: 12px;
-}
-.member__photo {
-  aspect-ratio: 3/4;
-}
-.member__name {
-  font-family: "Courier New", Courier, monospace;
-  font-weight: 700;
-  font-size: 1rem;
-  text-transform: uppercase;
-  margin: 0;
 }
 .member__role {
-  color: var(--card-ink-soft);
   font-size: 0.82rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  margin: 0;
+}
+
+/* merch — gambar produk PNG transparan, jadi tidak dipotong */
+.product {
+  background: var(--card-bg-light);
+}
+.product img {
+  aspect-ratio: 1/1;
+  object-fit: contain;
+  padding: 12px;
+  background: var(--field-bg);
+}
+.product__price {
+  font-weight: 700;
+  font-size: 0.95rem;
 }
 
 /* ============================================================================
    TOUR — daftar tanggal konser
    ============================================================================ */
 .tour-list {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 }
 .tour-row {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: clamp(1rem, 3vw, 2.5rem);
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 1rem clamp(1rem, 3vw, 2.5rem);
   margin: 0;
   padding: 1.1rem 1.4rem;
   background: var(--card-bg-light);
@@ -467,8 +511,9 @@ img {
   transform: translateX(4px);
 }
 .tour-date {
-  display: grid;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-width: 62px;
 }
 .tour-date .day {
@@ -484,6 +529,9 @@ img {
   text-transform: uppercase;
   color: var(--card-ink-soft);
 }
+.tour-venue {
+  flex: 1 1 200px;
+}
 .tour-venue .v {
   font-family: "Courier New", Courier, monospace;
   font-weight: 700;
@@ -494,34 +542,17 @@ img {
   color: var(--card-ink-soft);
   font-size: 0.9rem;
 }
-.tour-soldout {
-  font-size: 0.82rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--card-ink-soft);
-  justify-self: end;
-}
 
 /* ============================================================================
    BERITA
    ============================================================================ */
-.news {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1.2rem, 2.5vw, 2rem);
-}
-.news > li {
-  margin: 0;
-  display: block;
-}
 .news > li > a {
   display: block;
   height: 100%;
 }
 .news-card {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 0;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   background: var(--card-bg-light);
   overflow: hidden;
@@ -534,18 +565,15 @@ img {
   aspect-ratio: 16/10;
   height: auto;
 }
-.news-card__art {
-  aspect-ratio: 16/10;
-  border-radius: 0;
-}
 .news-card__body {
-  display: grid;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 0.5rem;
-  align-content: start;
   padding: 1.2rem;
 }
 .news-card time {
-  justify-self: start;
   background: var(--btn-bg);
   color: var(--btn-ink);
   border-radius: 999px;
@@ -571,16 +599,9 @@ img {
 /* ============================================================================
    VIDEO
    ============================================================================ */
-.videos {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1rem, 2vw, 1.6rem);
-}
 .video {
   aspect-ratio: 16/9;
   border-radius: var(--card-radius);
-  overflow: hidden;
-  margin: 0;
   border: var(--card-border);
   box-shadow: var(--card-shadow);
 }
@@ -589,14 +610,14 @@ img {
    NEWSLETTER
    ============================================================================ */
 .newsletter {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 1.6rem;
-  justify-items: center;
   text-align: center;
   background: var(--card-bg-light);
-  padding: clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.2rem, 5vw, 4rem);
 }
-
 .newsletter h2 {
   font-family: var(--title-font);
   font-size: clamp(1.8rem, 4vw, 2.8rem);
@@ -610,12 +631,14 @@ img {
   max-width: 46ch;
 }
 .subscribe {
-  display: grid;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  flex-wrap: wrap;
   gap: 0.6rem;
   width: min(440px, 100%);
 }
 .subscribe input {
+  flex: 1 1 220px;
+  min-width: 0;
   background: var(--field-bg);
   border: var(--field-border);
   border-radius: var(--btn-radius);
@@ -629,6 +652,12 @@ img {
 .subscribe input:focus-visible {
   outline: none;
   border-color: var(--secondary-color);
+}
+.subscribe-btn {
+  flex: 1 0 auto;
+  border: none;
+  padding: 0.85rem 1.7rem;
+  font-weight: 600;
 }
 
 /* ============================================================================
@@ -650,58 +679,64 @@ button:focus-visible,
 }
 
 /* ============================================================================
-   RESPONSIF
+   RESPONSIF — laptop kecil/tablet landscape, tablet, HP, HP kecil
    ============================================================================ */
-@media (max-width: 960px) {
-  .songs {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@media (max-width: 1024px) {
   .members {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .news {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .videos {
-    grid-template-columns: 1fr 1fr;
+    --cols: 3;
   }
 }
-@media (max-width: 620px) {
+@media (max-width: 860px) {
+  .songs,
+  .products,
+  .news,
+  .videos {
+    --cols: 2;
+  }
   .release {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    align-items: stretch;
   }
   .release__art {
-    max-width: 320px;
+    flex: none;
+    width: min(100%, 400px);
+    align-self: center;
   }
-  .songs {
-    grid-template-columns: 1fr 1fr;
+  .release__meta {
+    align-items: center;
+    text-align: center;
   }
+  .streams {
+    justify-content: center;
+  }
+}
+@media (max-width: 640px) {
   .members {
-    grid-template-columns: 1fr 1fr;
+    --cols: 2;
   }
-  .news {
-    grid-template-columns: 1fr;
-  }
+  .news,
   .videos {
-    grid-template-columns: 1fr;
+    --cols: 1;
+  }
+  .hero__inner {
+    min-height: auto;
+    padding-block: 4rem 3rem;
   }
   .hero__cta {
-    grid-auto-flow: row;
-    justify-items: start;
-  }
-  .hero__cta .btn {
-    width: 100%;
+    flex-direction: column;
+    align-self: stretch;
   }
   .tour-row {
-    grid-template-columns: auto 1fr;
-    gap: 1rem;
+    padding: 1rem;
   }
-  .tour-row .btn,
-  .tour-soldout {
-    grid-column: 1 / -1;
-    justify-self: start;
+  .tour-row .btn {
+    flex: 1 1 100%;
   }
-  .subscribe {
-    grid-template-columns: 1fr;
+}
+@media (max-width: 380px) {
+  .songs,
+  .products,
+  .members {
+    --cols: 1;
   }
 }
