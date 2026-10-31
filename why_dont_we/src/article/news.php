@@ -40,7 +40,7 @@
         <div class="featured-card">
 
             <div class="featured-image">
-                <img src="../../assets/image/featured-news.png"
+                <img src="../../assets/image/featured-news.jpg"
                      alt="New album announcement">
             </div>
 

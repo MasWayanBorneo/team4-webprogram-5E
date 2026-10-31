@@ -77,14 +77,14 @@
             <p class="section-label">Behind The Scenes</p>
             <h2 class="section-heading">Gallery</h2>
             <div class="gallery-grid">
-                <img src="../../assets/image/WDW COVER FINAL (1) (1).jpg" alt="Why Don't We cover art" class="gallery-img">
+                <img src="../../assets/image/wdw-cover-final.jpg" alt="Why Don't We cover art" class="gallery-img">
                 <img src="../../assets/image/8letters.jpg" alt="8 Letters album era" class="gallery-img">
                 <img src="../../assets/image/HDYLS-new.jpg" alt="How Do You Love? era" class="gallery-img">
                 <img src="../../assets/image/Polaroid5_0.png" alt="Band polaroid" class="gallery-img">
-                <img src="../../assets/image/Polaroid (1)_1.png" alt="Band polaroid" class="gallery-img">
+                <img src="../../assets/image/polaroid-1.png" alt="Band polaroid" class="gallery-img">
                 <img src="../../assets/image/album2.jpg" alt="Album artwork" class="gallery-img">
-                <img src="../../assets/image/why-dont-we-just.png" alt="Why Don't We Just era" class="gallery-img">
-                <img src="../../assets/image/only-the-begining.png" alt="Only the Beginning era" class="gallery-img">
+                <img src="../../assets/image/why-dont-we-just.jpg" alt="Why Don't We Just era" class="gallery-img">
+                <img src="../../assets/image/only-the-begining.jpg" alt="Only the Beginning era" class="gallery-img">
             </div>
         </div>
 

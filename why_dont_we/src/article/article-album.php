@@ -35,7 +35,7 @@
         <p class="meta">May 15, 2026 &bull; 3 min read</p>
       </div>
 
-      <img class="article-hero" src="../../assets/image/featured-news.png" alt="New Album Drops This Summer" />
+      <img class="article-hero" src="../../assets/image/featured-news.jpg" alt="New Album Drops This Summer" />
 
       <div class="article-body">
         <p>

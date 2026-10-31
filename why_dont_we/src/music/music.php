@@ -49,7 +49,7 @@
         </div>
       </details>
        <button class ="lirik2" popovertarget="dropdown3">Show lyric </button>
-      <audio src="../../assets/audio/Why Don't We - Fallin' (Adrenaline) [Official Music Video].mp3" type="audio/mp3" controls>
+      <audio src="../../assets/audio/fallin-adrenaline.mp3" type="audio/mp3" controls>
         Your browser does not support the audio element.
       </audio>
       <div id="dropdown3" popover>
@@ -167,7 +167,7 @@
         </div>
       </details>
        <button class ="lirik4" popovertarget="dropdown5">Show lyric </button>
-      <audio src="../../assets/audio/Why Don't We - What Am I [Official Video].mp3" type="audio/mp3" controls>
+      <audio src="../../assets/audio/what-am-i.mp3" type="audio/mp3" controls>
         Your browser does not support the audio element.
       </audio>
       <div id="dropdown5" popover>
@@ -281,7 +281,7 @@
     </div>
      <div class="player2">
       <div class="imgbox2">
-         <a href="https://open.spotify.com/track/4zRZAmBQP8vhNPf9i9opXt?si=c4fe6a9302404e1e"><img src="../../assets/image/trust-fund-baby.png" alt="Album 1"></a>
+         <a href="https://open.spotify.com/track/4zRZAmBQP8vhNPf9i9opXt?si=c4fe6a9302404e1e"><img src="../../assets/image/trust-fund-baby.jpg" alt="Album 1"></a>
       </div>
 
       <div class="song-title"><h2>trust fund baby</h2></div>
@@ -294,7 +294,7 @@
         </div>
       </details>
        <button class ="lirik3" popovertarget="dropdown4">Show lyric </button>
-      <audio src="../../assets/audio/Trust Fund Baby - Why Don't We [Official Music Video].mp3" type="audio/mp3" controls>
+      <audio src="../../assets/audio/trust-fund-baby.mp3" type="audio/mp3" controls>
         Your browser does not support the audio element.
       </audio>
      <div id="dropdown4" popover >
@@ -584,7 +584,7 @@
     <div class="player">
       <h2>2017</h2>
       <div class="imgbox">
-        <a href="#"><img src="../../assets/image/WDW COVER FINAL (1) (1).jpg" alt="Album 5"></a>
+        <a href="#"><img src="../../assets/image/wdw-cover-final.jpg" alt="Album 5"></a>
       </div>
       <div class="song-title"><h2>good times and bad ones</h2></div>
       <details class="stream-dropdown">
@@ -616,7 +616,7 @@
      <div class="player">
       <h2>2016</h2>
       <div class="imgbox">
-        <img src="../../assets/image/fallin.png" alt="Album 7">
+        <img src="../../assets/image/fallin.jpg" alt="Album 7">
       </div>
       <div class="song-title"><h2>Fallin</h2></div>
       <details class="stream-dropdown">
@@ -650,7 +650,7 @@
      <div class="player">
       <h2>2018</h2>
       <div class="imgbox">
-        <img src="../../assets/image/trust-fund-baby.png" alt="Album 9">
+        <img src="../../assets/image/trust-fund-baby.jpg" alt="Album 9">
       </div>
       <div class="song-title"><h2>trust fund baby</h2></div>
       <details class="stream-dropdown">
@@ -668,7 +668,7 @@
      <div class="player">
       <h2>2020</h2>
       <div class="imgbox">
-        <img src="../../assets/image/why-dont-we-just.png" alt="Album 10">
+        <img src="../../assets/image/why-dont-we-just.jpg" alt="Album 10">
       </div>
       <div class="song-title"><h2>why don't we just</h2></div>
       <details class="stream-dropdown">

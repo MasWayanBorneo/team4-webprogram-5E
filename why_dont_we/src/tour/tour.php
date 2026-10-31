@@ -39,7 +39,7 @@
                 </h2>
                     <div class="hero-banner">
                 
-                <img src="../../assets/image/maxresdefault[1]_0(1).jpg" alt="">
+                <img src="../../assets/image/maxresdefault-1-0.jpg" alt="">
             </div>
         </section>
 
@@ -62,7 +62,7 @@
 
             <!-- Item 1 -->
             <article class="tour-card">
-                <img src="../../assets/image/why-dont-we-just.png" alt="Jakarta Concert">
+                <img src="../../assets/image/why-dont-we-just.jpg" alt="Jakarta Concert">
 
                 <div class="tour-info">
                     <h3>Jakarta Convention Center (JCC)</h3>
@@ -78,7 +78,7 @@
 
             <!-- Item 2 -->
             <article class="tour-card">
-                <img src="../../assets/image/why-dont-we-just.png" alt="Bandung Concert">
+                <img src="../../assets/image/why-dont-we-just.jpg" alt="Bandung Concert">
 
                 <div class="tour-info">
                     <h3>Jakarta Convention Center (JCC)</h3>
@@ -94,7 +94,7 @@
 
             <!-- Item 3 -->
             <article class="tour-card">
-                <img src="../../assets/image/why-dont-we-just.png" alt="Upcoming Tour">
+                <img src="../../assets/image/why-dont-we-just.jpg" alt="Upcoming Tour">
 
                 <div class="tour-info">
                     <h3>Jakarta Convention Center (JCC)</h3>
@@ -110,7 +110,7 @@
 
             <!-- Item 4 -->
             <article class="tour-card">
-                <img src="../../assets/image/why-dont-we-just.png" alt="Sold Out Tour">
+                <img src="../../assets/image/why-dont-we-just.jpg" alt="Sold Out Tour">
 
                 <div class="tour-info">
                     <h3>Jakarta Convention Center (JCC)</h3>
