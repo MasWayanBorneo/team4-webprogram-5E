@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
-
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
 body{
@@ -44,15 +41,13 @@ button{font:inherit;color:inherit;cursor:pointer;}
   white-space:nowrap;
 }
 .head-link:hover{border-color:var(--secondary-color);}
+.eyebrow{margin:0;font-size:.85rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--heading);}
+/* teks hanya untuk pembaca layar */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
 
 /* tampilan kartu bersama (tema situs) */
 .song,.member,.tour-row,.news-card,.newsletter{
   border:var(--card-border);border-radius:var(--card-radius);box-shadow:var(--card-shadow);color:var(--card-ink);
-}
-img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;  
 }
 .brand{
   width: 60px;
@@ -112,10 +107,6 @@ img{
    HERO — ciri khas halaman: judul besar di atas background GIF
    ============================================================================ */
 .hero{position:relative;overflow:hidden;isolation:isolate;}
-.hero__bg{
-  position:absolute;inset:0;z-index:-2;
- 
-}
 .hero__inner{
   display:grid;
   gap:1.4rem;align-content:center;
@@ -155,10 +146,9 @@ img{
 .release__title{font-family:var(--title-font);font-size:clamp(2.4rem,5vw,3.6rem);color:var(--cta-ink);text-transform:lowercase;line-height:1;margin:0;}
 .release__sub{color:var(--heading);font-weight:600;margin:0;}
 .streams{
-  display:grid;
-  grid-auto-flow:column;
+  display:flex;
+  flex-wrap:wrap;
   gap:.7rem;
-  justify-content:start;
 }
 .stream-chip{
   display:grid;grid-auto-flow:column;gap:.5rem;align-items:center;
@@ -177,9 +167,12 @@ img{
   gap:clamp(1rem,2vw,1.6rem);
 
 }
-.song{display:grid;gap:.6rem;align-content:start;background:var(--card-bg);padding:14px;margin:0;}
-.song > img{aspect-ratio:1/1;height:auto;border-radius:12px;}
-.song__art{aspect-ratio:1/1;}
+.song{background:var(--card-bg);padding:14px;margin:0;transition:transform .15s;}
+.song:hover,.member:hover{transform:translateY(-4px);}
+/* seluruh kartu lagu & member bisa diklik */
+.song > a,.member > a{display:grid;align-content:start;height:100%;}
+.song > a{gap:.6rem;}
+.song img{aspect-ratio:1/1;height:auto;border-radius:12px;}
 .song__name{font-family:'Courier New',Courier,monospace;font-weight:700;text-transform:uppercase;font-size:1rem;margin:0;}
 .song__len{color:var(--card-ink-soft);font-size:.85rem;margin:0;}
 
@@ -187,9 +180,9 @@ img{
    MEMBER
    ============================================================================ */
 .members{display:grid;grid-template-columns:repeat(5,1fr);gap:clamp(1rem,2vw,1.6rem);}
-.member{display:grid;gap:.5rem;align-content:start;background:var(--card-bg-light);padding:12px;margin:0;}
+.member{background:var(--card-bg-light);padding:12px;margin:0;transition:transform .15s;}
+.member > a{gap:.5rem;}
 .member img{aspect-ratio:3/4;height:auto;border-radius:12px;}
-.member__photo{aspect-ratio:3/4;}
 .member__name{font-family:'Courier New',Courier,monospace;font-weight:700;font-size:1rem;text-transform:uppercase;margin:0;}
 .member__role{color:var(--card-ink-soft);font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin:0;}
 
