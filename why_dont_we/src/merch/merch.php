@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Merch Store</title>
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/merch.css">
+    <link rel="stylesheet" href="../css/base.css?v=<?= filemtime(__DIR__ . '/../css/base.css') ?>">
+    <link rel="stylesheet" href="../css/merch.css?v=<?= filemtime(__DIR__ . '/../css/merch.css') ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/header.css?v=<?= filemtime(__DIR__ . '/../css/header.css') ?>">
+    <link rel="stylesheet" href="../css/footer.css?v=<?= filemtime(__DIR__ . '/../css/footer.css') ?>">
 </head>
 <body>
 
@@ -128,7 +128,7 @@
   </div>
 </footer>
 
-<script src="../data/products.js" defer></script>
-<script src="../js/merch.js" defer></script>
+<script src="../data/products.js?v=<?= filemtime(__DIR__ . '/../data/products.js') ?>" defer></script>
+<script src="../js/merch.js?v=<?= filemtime(__DIR__ . '/../js/merch.js') ?>" defer></script>
 </body>
 </html>

@@ -7,13 +7,13 @@
 <title>Why Don't We — Official</title>
 <!-- GIF background diunduh lebih awal, tidak menunggu home.css selesai dibaca -->
 <link rel="preload" href="assets/home-bg.gif" as="image">
-<link rel="stylesheet" href="src/css/base.css">
-<link rel="stylesheet" href="src/css/home.css">
+<link rel="stylesheet" href="src/css/base.css?v=<?= filemtime(__DIR__ . '/src/css/base.css') ?>">
+<link rel="stylesheet" href="src/css/home.css?v=<?= filemtime(__DIR__ . '/src/css/home.css') ?>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="src/css/header.css">
-<link rel="stylesheet" href="src/css/footer.css">
+<link rel="stylesheet" href="src/css/header.css?v=<?= filemtime(__DIR__ . '/src/css/header.css') ?>">
+<link rel="stylesheet" href="src/css/footer.css?v=<?= filemtime(__DIR__ . '/src/css/footer.css') ?>">
 </head>
 <body>
 
