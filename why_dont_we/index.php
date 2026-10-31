@@ -18,9 +18,9 @@
 <!-- ============================ HEADER ============================ -->
 <header class="site-header">
   <nav class="site-nav" aria-label="Main">
-    <a class="site-nav__logo" href="index.html"><img src="assets/image/about-logo.png" alt="Why Don't We"></a>
+    <a class="site-nav__logo" href="index.php"><img src="assets/image/about-logo.png" alt="Why Don't We"></a>
     <ul class="site-nav__links">
-      <li><a href="index.html" class="is-active" aria-current="page">Home</a></li>
+      <li><a href="index.php" class="is-active" aria-current="page">Home</a></li>
       <li><a href="src/member/profile.php">About</a></li>
       <li><a href="src/music/music.php">Music</a></li>
       <li><a href="src/tour/tour.php">Tour</a></li>
@@ -149,6 +149,35 @@
     </div>
   </section>
 
+  <!-- ============================ MERCH ============================ -->
+  <section class="section" id="merch" aria-labelledby="merch-h">
+    <div class="shell">
+      <header class="section-head">
+        <h2 class="section-title" id="merch-h">Merch</h2>
+        <a class="head-link" href="src/merch/merch.php">Shop all →</a>
+      </header>
+
+      <ul class="products">
+        <li class="product"><a href="src/merch/merch.php">
+          <img src="assets/image/hoodie.png" alt="Limited Edition Hoodie">
+          <h3 class="product__name">Limited Edition Hoodie</h3><p class="product__price">$65</p>
+        </a></li>
+        <li class="product"><a href="src/merch/merch.php">
+          <img src="assets/image/gelang.png" alt="Bracelet">
+          <h3 class="product__name">Bracelet</h3><p class="product__price">$65</p>
+        </a></li>
+        <li class="product"><a href="src/merch/merch.php">
+          <img src="assets/image/—Pngtree—black t-shirt_5609353.png" alt="Black T-Shirt">
+          <h3 class="product__name">Black T-Shirt</h3><p class="product__price">$65</p>
+        </a></li>
+        <li class="product"><a href="src/merch/merch.php">
+          <img src="assets/image/kaoskaki.png" alt="Socks">
+          <h3 class="product__name">Socks</h3><p class="product__price">$65</p>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
   <!-- ============================ NEWS ============================ -->
   <section class="section" id="news" aria-labelledby="news-h">
     <div class="shell">
@@ -224,7 +253,7 @@
   <div class="shell">
     <div class="footer-grid">
       <div class="footer-brand">
-        <a class="brand" href="index.html"><img src="assets/image/about-logo.png" alt="Why Don't We"></a>
+        <a class="brand" href="index.php"><img src="assets/image/about-logo.png" alt="Why Don't We"></a>
         <p>Official site. Pop's five-piece — music, tour, and more.</p>
       </div>
       <nav class="footer-col" aria-label="Music">
@@ -237,12 +266,12 @@
       </nav>
       <nav class="footer-col" aria-label="More">
         <h4>More</h4>
-        <ul><li><a href="src/merch/merch.php">Merch</a></li><li><a href="src/ticket/ticket.php">Tickets</a></li><li><a href="index.html">Home</a></li></ul>
+        <ul><li><a href="src/merch/merch.php">Merch</a></li><li><a href="src/ticket/ticket.php">Tickets</a></li><li><a href="index.php">Home</a></li></ul>
       </nav>
     </div>
 
     <div class="footer-bottom">
-      <p>© 2026 Why Don't We. All rights reserved.</p>
+      <p>© <?= date('Y') ?> Why Don't We. All rights reserved.</p>
       <ul class="socials">
         <li><a href="https://www.instagram.com/whydontwemusic?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3 0 4.1.1 1 .1 1.7.2 2.3.5.6.2 1.1.5 1.6 1 .5.5.8 1 1 1.6.2.6.4 1.3.5 2.3.1 1.1.1 1.4.1 4.1s0 3-.1 4.1c-.1 1-.2 1.7-.5 2.3a4.3 4.3 0 0 1-1 1.6 4.3 4.3 0 0 1-1.6 1c-.6.2-1.3.4-2.3.5-1.1.1-1.4.1-4.1.1s-3 0-4.1-.1c-1-.1-1.7-.2-2.3-.5a4.3 4.3 0 0 1-1.6-1 4.3 4.3 0 0 1-1-1.6c-.2-.6-.4-1.3-.5-2.3C2 15 2 14.7 2 12s0-3 .1-4.1c.1-1 .2-1.7.5-2.3.2-.6.5-1.1 1-1.6.5-.5 1-.8 1.6-1 .6-.2 1.3-.4 2.3-.5C9 2 9.3 2 12 2zm0 1.8c-2.7 0-3 0-4 .1-.9 0-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.8-.3 1.7-.1 1-.1 1.3-.1 4s0 3 .1 4c0 .9.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.8.3 1.7.3 1 .1 1.3.1 4 .1s3 0 4-.1c.9 0 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1 .1-.3.3-.8.3-1.7.1-1 .1-1.3.1-4s0-3-.1-4c0-.9-.2-1.4-.3-1.7a2.7 2.7 0 0 0-.7-1 2.7 2.7 0 0 0-1-.7c-.3-.1-.8-.3-1.7-.3-1-.1-1.3-.1-4-.1zm0 3.1a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2zm0 1.8a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6zm5.3-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a></li>
         <li><a href="https://web.facebook.com/whydontwemusic/?_rdc=1&_rdr#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a></li>

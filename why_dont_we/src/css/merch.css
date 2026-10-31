@@ -178,8 +178,8 @@ button:hover {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  gap: clamp(16px, 3vw, 30px);
 }
 
 .product-card {

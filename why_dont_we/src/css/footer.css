@@ -1,5 +1,5 @@
 /* ============================================================================
-   FOOTER BERSAMA — markup/gaya sama seperti index.html, dipakai di semua halaman.
+   FOOTER BERSAMA — markup/gaya sama seperti index.php, dipakai di semua halaman.
    Dibatasi di bawah .site-footer supaya tidak bentrok dengan variabel :root halaman.
    ============================================================================ */
 .site-footer{
@@ -28,7 +28,9 @@
 /* menetralkan aturan `li {}` dan `ul li :hover {}` milik halaman */
 .site-footer li :hover{border-bottom:0;color:inherit;}
 .site-footer .shell{max-width:1200px;margin:0 auto;padding-inline:1.5rem;}
-.site-footer .footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:2rem;padding-block:clamp(2.5rem,5vw,4rem);}
+.site-footer .footer-grid{display:flex;flex-wrap:wrap;gap:2rem;padding-block:clamp(2.5rem,5vw,4rem);}
+.site-footer .footer-brand{flex:1.6 1 260px;}
+.site-footer .footer-col{flex:1 1 140px;}
 .site-footer .footer-brand .brand{font-size:1.6rem;display:block;margin-bottom:.6rem;}
 .site-footer .footer-brand .brand img{height:40px;width:auto;}
 .site-footer .footer-brand p{color:var(--faint);font-size:.9rem;max-width:34ch;margin:0;}
@@ -37,18 +39,21 @@
 .site-footer .footer-col li{display:block;margin:0 0 .6rem;list-style:none;}
 .site-footer .footer-col a{color:var(--faint);font-size:.92rem;font-weight:400;text-decoration:none;transition:color .15s;}
 .site-footer .footer-col a:hover{color:var(--ink);}
-.site-footer .footer-bottom{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center;padding-block:1.4rem;border-top:1px solid var(--line);}
+.site-footer .footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;padding-block:1.4rem;border-top:1px solid var(--line);}
 .site-footer .footer-bottom p{color:var(--faint);font-size:.85rem;margin:0;}
-.site-footer .socials{display:grid;grid-auto-flow:column;gap:1.2rem;align-items:center;margin:0;padding:0;}
+.site-footer .socials{display:flex;gap:1.2rem;align-items:center;margin:0;padding:0;}
 .site-footer .socials li{display:block;list-style:none;margin:0;}
-.site-footer .socials a{color:var(--muted);display:grid;place-items:center;transition:color .15s,transform .15s;}
+.site-footer .socials a{color:var(--muted);display:flex;align-items:center;justify-content:center;transition:color .15s,transform .15s;}
 .site-footer .socials a:hover{color:var(--magenta);transform:translateY(-2px);}
 .site-footer .socials svg{width:22px;height:22px;}
 
 @media (max-width:960px){
-  .site-footer .footer-grid{grid-template-columns:1fr 1fr;}
+  .site-footer .footer-brand{flex-basis:100%;}
 }
 @media (max-width:620px){
-  .site-footer .footer-grid{grid-template-columns:1fr;}
-  .site-footer .footer-bottom{grid-template-columns:1fr;justify-items:center;text-align:center;}
+  /* tiga kolom link tetap berdampingan di HP supaya footer tidak terlalu panjang */
+  .site-footer .footer-grid{gap:1.5rem 1rem;}
+  .site-footer .footer-col{flex-basis:80px;}
+  .site-footer .footer-col h4{margin-bottom:.7rem;}
+  .site-footer .footer-bottom{flex-direction:column;text-align:center;}
 }
