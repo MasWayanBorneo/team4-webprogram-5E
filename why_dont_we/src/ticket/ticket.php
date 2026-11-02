@@ -1,3 +1,86 @@
+<?php
+require __DIR__ . '/../../includes/db.php';
+
+// konser yang bisa dipesan
+$concerts = mysqli_fetch_all(mysqli_query($conn, "SELECT id, venue_name, event_date FROM concerts WHERE status = 'available' ORDER BY event_date"), MYSQLI_ASSOC);
+
+// konser terpilih: dari form (POST), dari link "Get Ticket" (?concert=), atau konser pertama
+$concert_id = (int) ($_POST['concert'] ?? $_GET['concert'] ?? 0);
+if (!in_array($concert_id, array_map('intval', array_column($concerts, 'id')), true)) {
+    $concert_id = $concerts ? (int) $concerts[0]['id'] : 0;
+}
+
+// kategori tiket konser terpilih + sisa kuota (pesanan yang dibatalkan tidak dihitung)
+$stmt = mysqli_prepare($conn, "
+    SELECT c.id, c.name, c.description, c.price,
+           c.quota - COALESCE(SUM(o.quantity), 0) AS remaining
+    FROM ticket_categories c
+    LEFT JOIN ticket_orders o ON o.ticket_category_id = c.id AND o.status <> 'cancelled'
+    WHERE c.concert_id = ?
+    GROUP BY c.id
+    ORDER BY c.price");
+mysqli_stmt_bind_param($stmt, 'i', $concert_id);
+mysqli_stmt_execute($stmt);
+$categories = [];
+foreach (mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC) as $row) {
+    $categories[$row['id']] = $row;
+}
+
+function concert_label($concert)
+{
+    return $concert['venue_name'] . ' — ' . date('j F Y', strtotime($concert['event_date']));
+}
+
+/* --- form → tabel ticket_orders ------------------------------------------- */
+$error = '';
+$old = ['fullname' => '', 'email' => '', 'phone' => '', 'category' => '', 'quantity' => '1'];
+
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
+    $old = [
+        'fullname' => trim($_POST['fullname'] ?? ''),
+        'email'    => trim($_POST['email'] ?? ''),
+        'phone'    => trim($_POST['phone'] ?? ''),
+        'category' => $_POST['category'] ?? '',
+        'quantity' => $_POST['quantity'] ?? '1',
+    ];
+    $category = $categories[(int) $old['category']] ?? null;
+    $quantity = filter_var($old['quantity'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 10]]);
+
+    if ($old['fullname'] === '' || strlen($old['fullname']) > 100) {
+        $error = 'Please enter your full name.';
+    } elseif (!filter_var($old['email'], FILTER_VALIDATE_EMAIL) || strlen($old['email']) > 100) {
+        $error = 'Please enter a valid email address.';
+    } elseif (!preg_match('/^[0-9+\s-]{8,20}$/', $old['phone'])) {
+        $error = 'Please enter a valid phone number.';
+    } elseif (!$category) {
+        $error = 'Please choose a ticket category.';
+    } elseif ($quantity === false) {
+        $error = 'You can buy between 1 and 10 tickets.';
+    } elseif ($quantity > $category['remaining']) {
+        $error = 'Only ' . max(0, $category['remaining']) . ' ' . $category['name'] . ' tickets are left.';
+    } else {
+        // harga diambil dari database, bukan dari browser, lalu disimpan sebagai unit_price
+        $unit_price = $category['price'];
+        $total = $unit_price * $quantity;
+        $invoice_no = 'WDW-' . strtoupper(bin2hex(random_bytes(4)));
+
+        // belum ada pembayaran online: pesanan langsung dianggap lunas, sesuai tampilan invoice
+        $stmt = mysqli_prepare($conn, "
+            INSERT INTO ticket_orders (invoice_no, ticket_category_id, full_name, email, phone, quantity, unit_price, total, status)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'paid')");
+        mysqli_stmt_bind_param($stmt, 'sisssidd', $invoice_no, $category['id'], $old['fullname'], $old['email'], $old['phone'], $quantity, $unit_price, $total);
+
+        if (mysqli_stmt_execute($stmt)) {
+            header('Location: invoice.php?no=' . urlencode($invoice_no));
+            exit;
+        }
+        $error = 'Something went wrong. Please try again.';
+    }
+}
+
+// kategori yang dicentang: pilihan sebelumnya, atau kategori pertama
+$checked = isset($categories[(int) $old['category']]) ? (int) $old['category'] : (int) array_key_first($categories);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,66 +121,70 @@
 
         <!-- Ticket Form -->
         <section class="ticket-section">
-            <form class="ticket-form" id="ticket-form">
+            <?php if (!$concerts || !$categories): ?>
+            <p class="ticket-sub">There are no shows on sale right now. Check the <a href="../tour/tour.php">Tour page</a> for upcoming dates.</p>
+            <?php else: ?>
+            <form class="ticket-form" id="ticket-form" method="post" action="ticket.php">
 
                 <div class="form-group">
                     <label for="concert">Concert</label>
-                    <select id="concert" name="concert" required>
-                        <option value="Jakarta Convention Center (JCC) - 12 August 2026">Jakarta Convention Center (JCC) — 12 August 2026</option>
+                    <!-- ganti konser → muat ulang halaman supaya kategori tiketnya ikut berganti -->
+                    <select id="concert" name="concert" required onchange="location.href = 'ticket.php?concert=' + this.value">
+                        <?php foreach ($concerts as $concert): ?>
+                        <option value="<?= $concert['id'] ?>"<?= (int) $concert['id'] === $concert_id ? ' selected' : '' ?>><?= e(concert_label($concert)) ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="fullname">Full Name</label>
-                        <input type="text" id="fullname" name="fullname" placeholder="Your full name" required>
+                        <input type="text" id="fullname" name="fullname" placeholder="Your full name" maxlength="100" value="<?= e($old['fullname']) ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="you@email.com" required>
+                        <input type="email" id="email" name="email" placeholder="you@email.com" maxlength="100" value="<?= e($old['email']) ?>" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" placeholder="08xx xxxx xxxx" required>
+                    <input type="tel" id="phone" name="phone" placeholder="08xx xxxx xxxx" maxlength="20" value="<?= e($old['phone']) ?>" required>
                 </div>
 
                 <!-- Ticket Categories -->
                 <fieldset class="ticket-categories">
                     <legend>Ticket Category</legend>
 
-                    <label class="category-card" for="regular">
-                        <input type="radio" id="regular" name="category" value="50" data-name="Regular" checked>
+                    <?php foreach ($categories as $category): ?>
+                    <label class="category-card" for="category-<?= $category['id'] ?>">
+                        <input type="radio" id="category-<?= $category['id'] ?>" name="category" value="<?= $category['id'] ?>" data-price="<?= e($category['price']) ?>"<?= (int) $category['id'] === $checked ? ' checked' : '' ?><?= $category['remaining'] <= 0 ? ' disabled' : '' ?>>
                         <div class="category-info">
-                            <h3>Regular</h3>
-                            <p>Standing area access, official merch discount voucher.</p>
+                            <h3><?= e($category['name']) ?><?= $category['remaining'] <= 0 ? ' (Sold Out)' : '' ?></h3>
+                            <p><?= e($category['description']) ?></p>
                         </div>
-                        <span class="category-price">$50</span>
+                        <span class="category-price">$<?= e(rtrim(rtrim($category['price'], '0'), '.')) ?></span>
                     </label>
-
-                    <label class="category-card" for="vip">
-                        <input type="radio" id="vip" name="category" value="100" data-name="VIP">
-                        <div class="category-info">
-                            <h3>VIP</h3>
-                            <p>Front-row standing area, exclusive merch pack, meet &amp; greet pass.</p>
-                        </div>
-                        <span class="category-price">$100</span>
-                    </label>
+                    <?php endforeach; ?>
                 </fieldset>
 
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
-                    <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required>
+                    <input type="number" id="quantity" name="quantity" min="1" max="10" value="<?= e($old['quantity']) ?>" required>
                 </div>
 
                 <div class="order-summary">
                     <span>Total</span>
-                    <span id="total-price">$50</span>
+                    <span id="total-price"></span>
                 </div>
+
+                <?php if ($error): ?>
+                <p class="form-msg form-msg--error" role="alert"><?= e($error) ?></p>
+                <?php endif; ?>
 
                 <button type="submit" class="ticket-submit">Proceed to Checkout</button>
             </form>
+            <?php endif; ?>
         </section>
 
     </main>
@@ -112,7 +199,7 @@
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article-video.php">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article.php?slug=new-music-video-released">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
@@ -137,53 +224,29 @@
 </footer>
 
     <script>
+        // hanya menghitung total di layar; harga sebenarnya dihitung ulang di server saat form dikirim
         const form = document.getElementById('ticket-form');
-        const quantityInput = document.getElementById('quantity');
-        const totalEl = document.getElementById('total-price');
 
-        const usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2 });
+        if (form) {
+            const quantityInput = document.getElementById('quantity');
+            const totalEl = document.getElementById('total-price');
 
-        function formatPrice(amount) {
-            return usd.format(Number(amount));
+            const usd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
+            function updateTotal() {
+                const selected = form.querySelector('input[name="category"]:checked');
+                const price = selected ? Number(selected.dataset.price) : 0;
+                const quantity = Number(quantityInput.value) || 1;
+                totalEl.textContent = usd.format(price * quantity);
+            }
+
+            form.querySelectorAll('input[name="category"]').forEach((input) => {
+                input.addEventListener('change', updateTotal);
+            });
+            quantityInput.addEventListener('input', updateTotal);
+
+            updateTotal();
         }
-
-        function updateTotal() {
-            const selected = form.querySelector('input[name="category"]:checked');
-            const price = Number(selected.value);
-            const quantity = Number(quantityInput.value) || 1;
-            totalEl.textContent = formatPrice(price * quantity);
-        }
-
-        form.querySelectorAll('input[name="category"]').forEach((input) => {
-            input.addEventListener('change', updateTotal);
-        });
-        quantityInput.addEventListener('input', updateTotal);
-
-        form.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            const selected = form.querySelector('input[name="category"]:checked');
-            const unitPrice = Number(selected.value);
-            const quantity = Number(quantityInput.value) || 1;
-
-            const order = {
-                invoiceNo: 'WDW-' + Date.now().toString(36).toUpperCase(),
-                date: new Date().toISOString(),
-                concert: document.getElementById('concert').value,
-                fullname: document.getElementById('fullname').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                categoryName: selected.dataset.name,
-                unitPrice: unitPrice,
-                quantity: quantity,
-                total: unitPrice * quantity
-            };
-
-            sessionStorage.setItem('wdwTicketOrder', JSON.stringify(order));
-            window.location.href = 'invoice.php';
-        });
-
-        updateTotal();
     </script>
 
 </body>

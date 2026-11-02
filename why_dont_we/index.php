@@ -109,23 +109,23 @@
       </header>
 
       <ul class="members">
-        <li class="member"><a href="src/member/jonah.php">
+        <li class="member"><a href="src/member/member.php?m=jonah">
           <img src="assets/image/jonah.jpg" alt="Jonah Marais">
           <h3 class="member__name">Jonah Marais</h3><p class="member__role">Vocals</p>
         </a></li>
-        <li class="member"><a href="src/member/corbyn.php">
+        <li class="member"><a href="src/member/member.php?m=corbyn">
           <img src="assets/image/besson-corbyn-image.jpg" alt="Corbyn Besson">
           <h3 class="member__name">Corbyn Besson</h3><p class="member__role">Vocals</p>
         </a></li>
-        <li class="member"><a href="src/member/daniel.php">
+        <li class="member"><a href="src/member/member.php?m=daniel">
           <img src="assets/image/daniel.jpg" alt="Daniel Seavey">
           <h3 class="member__name">Daniel Seavey</h3><p class="member__role">Vocals · Multi</p>
         </a></li>
-        <li class="member"><a href="src/member/jack.php">
+        <li class="member"><a href="src/member/member.php?m=jack">
           <img src="assets/image/jack.jpg" alt="Jack Avery">
           <h3 class="member__name">Jack Avery</h3><p class="member__role">Vocals</p>
         </a></li>
-        <li class="member"><a href="src/member/zach.php">
+        <li class="member"><a href="src/member/member.php?m=zach">
           <img src="assets/image/zach.jpg" alt="Zach Herron">
           <h3 class="member__name">Zach Herron</h3><p class="member__role">Vocals</p>
         </a></li>
@@ -189,7 +189,7 @@
       </header>
 
       <ul class="news">
-        <li><a href="src/article/article-tour-dates.php"><article class="news-card">
+        <li><a href="src/article/article.php?slug=tour-dates-revealed"><article class="news-card">
           <img src="assets/image/lovebackcover1_0.jpg" alt="">
           <div class="news-card__body">
             <time datetime="2026-06">June 2026</time>
@@ -197,7 +197,7 @@
             <p>Southeast Asia leg goes on sale Friday — full routing inside.</p>
           </div>
         </article></a></li>
-        <li><a href="src/article/article-international-tour.php"><article class="news-card">
+        <li><a href="src/article/article.php?slug=international-tour-begins"><article class="news-card">
           <img src="assets/image/something-different.png" alt="">
           <div class="news-card__body">
             <time datetime="2026-06">June 2026</time>
@@ -205,7 +205,7 @@
             <p>Europe, Asia, and Latin America — the band's first run abroad since 2019.</p>
           </div>
         </article></a></li>
-        <li><a href="src/article/article-video.php"><article class="news-card">
+        <li><a href="src/article/article.php?slug=new-music-video-released"><article class="news-card">
           <img src="assets/image/featured-news.jpg" alt="">
           <div class="news-card__body">
             <time datetime="2026-04">April 2026</time>
@@ -239,11 +239,13 @@
       <div class="newsletter">
         <h2 id="news-signup-h">Never miss a drop</h2>
         <p>Presale codes, tour news, and merch first. Straight to your inbox.</p>
-        <form class="subscribe" onsubmit="event.preventDefault();this.reset();">
+        <form class="subscribe" method="post" action="api/subscribe.php">
+          <input type="hidden" name="source" value="home">
           <label for="email" class="sr-only">Email address</label>
-          <input id="email" type="email" placeholder="you@email.com" required>
+          <input id="email" name="email" type="email" maxlength="100" placeholder="you@email.com" required>
           <button class="subscribe-btn" type="submit">Sign up</button>
         </form>
+        <?php include __DIR__ . '/includes/subscribe-message.php'; ?>
       </div>
     </div>
   </section>
@@ -260,7 +262,7 @@
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="src/music/music.php">Albums</a></li><li><a href="src/music/music.php">Singles</a></li><li><a href="src/article/article-video.php">Videos</a></li></ul>
+        <ul><li><a href="src/music/music.php">Albums</a></li><li><a href="src/music/music.php">Singles</a></li><li><a href="src/article/article.php?slug=new-music-video-released">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>

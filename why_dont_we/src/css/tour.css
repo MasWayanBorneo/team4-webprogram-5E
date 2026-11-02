@@ -103,6 +103,12 @@ h2 {
   flex-wrap: wrap;
 }
 
+/* region yang sedang dipilih */
+.filters button[aria-pressed="true"] {
+  background: var(--btn-ink);
+  color: var(--btn-bg);
+}
+
 /* DAFTAR KONSER */
 
 .tour-section {

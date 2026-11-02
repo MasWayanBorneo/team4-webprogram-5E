@@ -7,12 +7,12 @@
   const CART_KEY = "wdw-cart"; // { [idProduk]: jumlah }
   const money = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
-  /* --- sumber data ----------------------------------------------------------
-     Satu-satunya bagian yang diubah saat database siap, contohnya:
-       return fetch(ROOT + "api/products.php").then((res) => res.json());
-     Endpoint cukup mengembalikan baris tabel `products` sebagai array JSON. */
+  /* --- sumber data: baris tabel `products` dari api/products.php ----------- */
   function loadProducts() {
-    return Promise.resolve(window.MERCH_PRODUCTS || []);
+    return fetch(ROOT + "api/products.php").then((res) => {
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      return res.json();
+    });
   }
 
   // MySQL/PHP sering mengembalikan angka dan boolean sebagai teks ("1", "65.00")

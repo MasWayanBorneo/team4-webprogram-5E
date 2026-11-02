@@ -1,3 +1,35 @@
+<?php
+require __DIR__ . '/../../includes/db.php';
+
+// invoice.php?no=WDW-XXXXXXXX — dibuka setelah pesan tiket di ticket.php
+$invoice_no = $_GET['no'] ?? '';
+
+$stmt = mysqli_prepare($conn, "
+    SELECT o.invoice_no, o.created_at, o.full_name, o.email, o.phone,
+           o.quantity, o.unit_price, o.total,
+           c.name AS category, k.venue_name, k.event_date
+    FROM ticket_orders o
+    JOIN ticket_categories c ON c.id = o.ticket_category_id
+    JOIN concerts k ON k.id = c.concert_id
+    WHERE o.invoice_no = ?");
+mysqli_stmt_bind_param($stmt, 's', $invoice_no);
+mysqli_stmt_execute($stmt);
+$row = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+
+// diteruskan ke JavaScript di bawah dengan nama field yang sama seperti sebelumnya
+$order = $row ? [
+    'invoiceNo'    => $row['invoice_no'],
+    'date'         => date('c', strtotime($row['created_at'])),
+    'concert'      => $row['venue_name'] . ' — ' . date('j F Y', strtotime($row['event_date'])),
+    'fullname'     => $row['full_name'],
+    'email'        => $row['email'],
+    'phone'        => $row['phone'],
+    'categoryName' => $row['category'],
+    'unitPrice'    => (float) $row['unit_price'],
+    'quantity'     => (int) $row['quantity'],
+    'total'        => (float) $row['total'],
+] : null;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -111,7 +143,7 @@
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article-video.php">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article.php?slug=new-music-video-released">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
@@ -142,7 +174,7 @@
             return usd.format(Number(amount));
         }
 
-        const order = JSON.parse(sessionStorage.getItem('wdwTicketOrder') || 'null');
+        const order = <?= json_encode($order, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) ?>;
 
         if (!order) {
             document.getElementById('empty-state').hidden = false;

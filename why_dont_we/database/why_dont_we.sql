@@ -177,6 +177,7 @@ CREATE TABLE products (
   collection    VARCHAR(100)  NULL,
   price         DECIMAL(12,2) NOT NULL,
   image         VARCHAR(255)  NULL,                 -- path relatif dari root project
+  is_featured   BOOLEAN       NOT NULL DEFAULT FALSE, -- TRUE = juga tampil di kartu besar halaman Merch
   is_active     BOOLEAN       NOT NULL DEFAULT TRUE,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -184,7 +185,7 @@ CREATE TABLE products (
 CREATE TABLE subscribers (
   id             INT UNSIGNED  NOT NULL AUTO_INCREMENT,
   email          VARCHAR(100)  NOT NULL,
-  source         ENUM('home','news') NOT NULL,      -- form subscribe yang dipakai
+  source         ENUM('home','news','tour') NOT NULL, -- form subscribe yang dipakai
   subscribed_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   UNIQUE KEY uq_subscribers_email (email)
@@ -296,11 +297,11 @@ INSERT INTO ticket_categories (id, concert_id, name, description, price, quota) 
   (1, 1, 'Regular', 'Standing area access, official merch discount voucher.', 50.00, 500),
   (2, 1, 'VIP', 'Front-row standing area, exclusive merch pack, meet & greet pass.', 100.00, 100);
 
-INSERT INTO products (id, name, collection, price, image, is_active) VALUES
-  (1, 'Bracelet', 'Covid-19 Collection', 65.0, 'assets/image/gelang.png', 1),
-  (2, 'Limited Edition Hoodie', 'New Era Collection', 65.0, 'assets/image/hoodie.png', 1),
-  (3, 'Socks', 'New Era Collection', 65.0, 'assets/image/kaoskaki.png', 1),
-  (4, 'Black T-Shirt', 'New Era Collection', 65.0, 'assets/image/pngtree-black-tshirt.png', 1),
-  (5, 'Dark Green T-Shirt', 'New Era Collection', 65.0, 'assets/image/pngtree-green-tshirt.png', 1),
-  (6, 'Cowboy Hat', 'New Era Collection', 65.0, 'assets/image/vecteezy_ai-generated-cowboy-hat-png_34616681.png', 1),
-  (7, 'Seafoam T-Shirt', 'New Era Collection', 65.0, 'assets/image/vecteezy_seafoam-green-short-sleeve-crew-neck-tshirt-mockup-for_59901009.png', 1);
+INSERT INTO products (id, name, collection, price, image, is_featured, is_active) VALUES
+  (1, 'Bracelet', 'Covid-19 Collection', 65.0, 'assets/image/gelang.png', 1, 1),
+  (2, 'Limited Edition Hoodie', 'New Era Collection', 65.0, 'assets/image/hoodie.png', 1, 1),
+  (3, 'Socks', 'New Era Collection', 65.0, 'assets/image/kaoskaki.png', 0, 1),
+  (4, 'Black T-Shirt', 'New Era Collection', 65.0, 'assets/image/pngtree-black-tshirt.png', 0, 1),
+  (5, 'Dark Green T-Shirt', 'New Era Collection', 65.0, 'assets/image/pngtree-green-tshirt.png', 0, 1),
+  (6, 'Cowboy Hat', 'New Era Collection', 65.0, 'assets/image/vecteezy_ai-generated-cowboy-hat-png_34616681.png', 0, 1),
+  (7, 'Seafoam T-Shirt', 'New Era Collection', 65.0, 'assets/image/vecteezy_seafoam-green-short-sleeve-crew-neck-tshirt-mockup-for_59901009.png', 0, 1);

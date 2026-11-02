@@ -1,0 +1,136 @@
+<?php
+/* ============================================================================
+   HALAMAN PERSONEL — satu file untuk kelima personel.
+   member.php?m=<slug>  (slug: daniel, corbyn, jack, jonah, zach)
+   ============================================================================ */
+require __DIR__ . '/../../includes/db.php';
+
+$slug = $_GET['m'] ?? '';
+
+$stmt = mysqli_prepare($conn, 'SELECT * FROM members WHERE slug = ?');
+mysqli_stmt_bind_param($stmt, 's', $slug);
+mysqli_stmt_execute($stmt);
+$member = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+
+// slug tidak dikenal → kembali ke daftar personel
+if (!$member) {
+    header('Location: profile.php');
+    exit;
+}
+
+$stmt = mysqli_prepare($conn, 'SELECT content FROM member_trivia WHERE member_id = ? ORDER BY sort_order');
+mysqli_stmt_bind_param($stmt, 'i', $member['id']);
+mysqli_stmt_execute($stmt);
+$trivia = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);
+
+// empat kotak fakta: tiga sama untuk semua personel, yang keempat dari extra_label/extra_value
+$facts = [
+    'Born'     => $member['birth_date'] ? date('F j, Y', strtotime($member['birth_date'])) : '',
+    'Zodiac'   => $member['zodiac'],
+    'Hometown' => $member['hometown'],
+];
+if ($member['extra_label']) {
+    $facts[$member['extra_label']] = $member['extra_value'];
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= e($member['full_name']) ?></title>
+    <link rel="stylesheet" href="../css/base.css?v=<?= filemtime(__DIR__ . '/../css/base.css') ?>">
+    <link rel="stylesheet" href="../css/about.css?v=<?= filemtime(__DIR__ . '/../css/about.css') ?>">
+    <link rel="stylesheet" href="../css/header.css?v=<?= filemtime(__DIR__ . '/../css/header.css') ?>">
+    <link rel="stylesheet" href="../css/footer.css?v=<?= filemtime(__DIR__ . '/../css/footer.css') ?>">
+</head>
+
+<body>
+
+<!-- ============================ HEADER ============================ -->
+<header class="site-header">
+  <nav class="site-nav" aria-label="Main">
+    <a class="site-nav__logo" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+    <ul class="site-nav__links">
+      <li><a href="../../index.php">Home</a></li>
+      <li><a href="profile.php" class="is-active" aria-current="page">About</a></li>
+      <li><a href="../music/music.php">Music</a></li>
+      <li><a href="../tour/tour.php">Tour</a></li>
+      <li><a href="../merch/merch.php">Merch</a></li>
+      <li><a href="../article/news.php">News</a></li>
+    </ul>
+  </nav>
+</header>
+
+    <div class="app">
+        <div class="back-nav">
+            <a href="profile.php" class="back-link">‹ Members</a>
+        </div>
+        <div class="profile-header">
+            <div class="profile-pic">
+                <img src="../../<?= e($member['photo']) ?>" alt="<?= e($member['full_name']) ?>" class="profile-pic">
+            </div>
+            <h1 class="profile-name"><?= e($member['full_name']) ?></h1>
+            <p class="profile-role"><?= e($member['roles']) ?></p>
+
+            <div class="quick-facts">
+                <?php foreach ($facts as $label => $value): ?>
+                <div class="fact-card">
+                    <div class="fact-label"><?= e($label) ?></div>
+                    <div class="fact-value"><?= e($value) ?></div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+
+            <div class="bio-section">
+                <h2 class="bio-title">Profile</h2>
+                <p class="bio-text"><?= e($member['bio']) ?></p>
+                <?php if ($trivia): ?>
+                <h2 class="bio-title">Trivia</h2>
+                <ul class="bio-list">
+                    <?php foreach ($trivia as $item): ?>
+                    <li><?= e($item['content']) ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================ FOOTER ============================ -->
+    <footer class="site-footer">
+  <div class="shell">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="../../index.php"><img src="../../assets/image/about-logo.png" alt="Why Don't We"></a>
+        <p>Official site. Pop's five-piece — music, tour, and more.</p>
+      </div>
+      <nav class="footer-col" aria-label="Music">
+        <h4>Music</h4>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article.php?slug=new-music-video-released">Videos</a></li></ul>
+      </nav>
+      <nav class="footer-col" aria-label="Band">
+        <h4>Band</h4>
+        <ul><li><a href="profile.php">About</a></li><li><a href="../tour/tour.php">Tour</a></li><li><a href="../article/news.php">News</a></li></ul>
+      </nav>
+      <nav class="footer-col" aria-label="More">
+        <h4>More</h4>
+        <ul><li><a href="../merch/merch.php">Merch</a></li><li><a href="../ticket/ticket.php">Tickets</a></li><li><a href="../../index.php">Home</a></li></ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 Why Don't We. All rights reserved.</p>
+      <ul class="socials" aria-label="Social media">
+        <li><a href="https://www.instagram.com/whydontwemusic?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3 0 4.1.1 1 .1 1.7.2 2.3.5.6.2 1.1.5 1.6 1 .5.5.8 1 1 1.6.2.6.4 1.3.5 2.3.1 1.1.1 1.4.1 4.1s0 3-.1 4.1c-.1 1-.2 1.7-.5 2.3a4.3 4.3 0 0 1-1 1.6 4.3 4.3 0 0 1-1.6 1c-.6.2-1.3.4-2.3.5-1.1.1-1.4.1-4.1.1s-3 0-4.1-.1c-1-.1-1.7-.2-2.3-.5a4.3 4.3 0 0 1-1.6-1 4.3 4.3 0 0 1-1-1.6c-.2-.6-.4-1.3-.5-2.3C2 15 2 14.7 2 12s0-3 .1-4.1c.1-1 .2-1.7.5-2.3.2-.6.5-1.1 1-1.6.5-.5 1-.8 1.6-1 .6-.2 1.3-.4 2.3-.5C9 2 9.3 2 12 2zm0 1.8c-2.7 0-3 0-4 .1-.9 0-1.4.2-1.7.3-.4.2-.7.4-1 .7-.3.3-.5.6-.7 1-.1.3-.3.8-.3 1.7-.1 1-.1 1.3-.1 4s0 3 .1 4c0 .9.2 1.4.3 1.7.2.4.4.7.7 1 .3.3.6.5 1 .7.3.1.8.3 1.7.3 1 .1 1.3.1 4 .1s3 0 4-.1c.9 0 1.4-.2 1.7-.3.4-.2.7-.4 1-.7.3-.3.5-.6.7-1 .1-.3.3-.8.3-1.7.1-1 .1-1.3.1-4s0-3-.1-4c0-.9-.2-1.4-.3-1.7a2.7 2.7 0 0 0-.7-1 2.7 2.7 0 0 0-1-.7c-.3-.1-.8-.3-1.7-.3-1-.1-1.3-.1-4-.1zm0 3.1a5.1 5.1 0 1 1 0 10.2 5.1 5.1 0 0 1 0-10.2zm0 1.8a3.3 3.3 0 1 0 0 6.6 3.3 3.3 0 0 0 0-6.6zm5.3-3.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg></a></li>
+        <li><a href="https://web.facebook.com/whydontwemusic/?_rdc=1&_rdr#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg></a></li>
+        <li><a href="https://x.com/whydontwemusic" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 4.9c-.8.4-1.7.6-2.6.8a4.5 4.5 0 0 0 2-2.5c-.9.5-1.9.9-2.9 1.1a4.5 4.5 0 0 0-7.7 4.1A12.8 12.8 0 0 1 2.5 3.7a4.5 4.5 0 0 0 1.4 6 4.5 4.5 0 0 1-2-.6v.1a4.5 4.5 0 0 0 3.6 4.4 4.5 4.5 0 0 1-2 .1 4.5 4.5 0 0 0 4.2 3.1A9 9 0 0 1 1 18.6a12.8 12.8 0 0 0 6.9 2c8.3 0 12.8-6.9 12.8-12.8v-.6c.9-.6 1.6-1.4 2.3-2.3z"/></svg></a></li>
+        <li><a href="https://www.tiktok.com/@whydontwemusic" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.3 2.2 1.6 3.6 3.8 3.8v2.6c-1.3.1-2.6-.3-3.8-1v5.6a5.8 5.8 0 1 1-5-5.7v2.8a3.1 3.1 0 1 0 2.2 3V3h2.8z"/></svg></a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+
+</html>

@@ -718,7 +718,7 @@
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="music.php">Albums</a></li><li><a href="music.php">Singles</a></li><li><a href="../article/article-video.php">Videos</a></li></ul>
+        <ul><li><a href="music.php">Albums</a></li><li><a href="music.php">Singles</a></li><li><a href="../article/article.php?slug=new-music-video-released">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>

@@ -1,3 +1,27 @@
+<?php
+require __DIR__ . '/../../includes/db.php';
+
+// tombol filter: tour.php?region=asia, kosong = semua region
+$regions = ['asia' => 'Asia', 'america' => 'America', 'europe' => 'Europe', 'other' => 'Other'];
+$region = $_GET['region'] ?? '';
+
+if (isset($regions[$region])) {
+    $stmt = mysqli_prepare($conn, 'SELECT * FROM concerts WHERE region = ? ORDER BY event_date');
+    mysqli_stmt_bind_param($stmt, 's', $region);
+    mysqli_stmt_execute($stmt);
+    $concerts = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);
+} else {
+    $region = '';
+    $concerts = mysqli_fetch_all(mysqli_query($conn, 'SELECT * FROM concerts ORDER BY event_date'), MYSQLI_ASSOC);
+}
+
+// status di database → [class CSS, teks label]
+$statuses = [
+    'available'   => ['available', 'Available'],
+    'coming_soon' => ['coming', 'Coming Soon'],
+    'sold_out'    => ['sold', 'Sold Out'],
+];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,82 +71,42 @@
         <section class="filter-section">
         
 
-            <div class="filters">
-                <button>Asia</button>
-                <button>America</button>
-                <button>Europe</button>
-                <button>Other</button>
-            </div>
+            <form class="filters" method="get" action="tour.php">
+                <button type="submit" name="region" value=""<?= $region === '' ? ' aria-pressed="true"' : '' ?>>All</button>
+                <?php foreach ($regions as $value => $label): ?>
+                <button type="submit" name="region" value="<?= $value ?>"<?= $region === $value ? ' aria-pressed="true"' : '' ?>><?= $label ?></button>
+                <?php endforeach; ?>
+            </form>
         </section>
 
         <!-- Tour Listing -->
         <section class="tour-section">
 
-           
+            <?php if (!$concerts): ?>
+            <p>No shows scheduled in this region yet.</p>
+            <?php endif; ?>
 
-            <!-- Item 1 -->
+            <?php foreach ($concerts as $concert): ?>
+            <?php [$status_class, $status_label] = $statuses[$concert['status']]; ?>
             <article class="tour-card">
-                <img src="../../assets/image/why-dont-we-just.jpg" alt="Jakarta Concert">
+                <img src="../../<?= e($concert['image']) ?>" alt="<?= e($concert['venue_name']) ?>">
 
                 <div class="tour-info">
-                    <h3>Jakarta Convention Center (JCC)</h3>
-                    <p>Jakarta Pusat</p>
-                    <p>12 August 2026</p>
+                    <h3><?= e($concert['venue_name']) ?></h3>
+                    <p><?= e($concert['city']) ?></p>
+                    <p><?= date('j F Y', strtotime($concert['event_date'])) ?></p>
                 </div>
 
                 <div class="tour-status">
-                    <span class="available">Available</span>
-                    <a href="../ticket/ticket.php" class="ticket-link">Get Ticket</a>
-                </div>
-            </article>
-
-            <!-- Item 2 -->
-            <article class="tour-card">
-                <img src="../../assets/image/why-dont-we-just.jpg" alt="Bandung Concert">
-
-                <div class="tour-info">
-                    <h3>Jakarta Convention Center (JCC)</h3>
-                    <p>Jakarta Pusat</p>
-                    <p>12 August 2026</p>
-                </div>
-
-                <div class="tour-status">
-                    <span class="available">Available</span>
-                    <a href="../ticket/ticket.php" class="ticket-link">Get Ticket</a>
-                </div>
-            </article>
-
-            <!-- Item 3 -->
-            <article class="tour-card">
-                <img src="../../assets/image/why-dont-we-just.jpg" alt="Upcoming Tour">
-
-                <div class="tour-info">
-                    <h3>Jakarta Convention Center (JCC)</h3>
-                    <p>Jakarta Pusat</p>
-                    <p>12 August 2026</p>
-                </div>
-
-                <div class="tour-status">
-                    <span class="coming">Coming Soon</span>
+                    <span class="<?= $status_class ?>"><?= $status_label ?></span>
+                    <?php if ($concert['status'] === 'available'): ?>
+                    <a href="../ticket/ticket.php?concert=<?= $concert['id'] ?>" class="ticket-link">Get Ticket</a>
+                    <?php elseif ($concert['status'] === 'coming_soon'): ?>
                     <button>Pre Order</button>
+                    <?php endif; ?>
                 </div>
             </article>
-
-            <!-- Item 4 -->
-            <article class="tour-card">
-                <img src="../../assets/image/why-dont-we-just.jpg" alt="Sold Out Tour">
-
-                <div class="tour-info">
-                    <h3>Jakarta Convention Center (JCC)</h3>
-                    <p>Jakarta Pusat</p>
-                    <p>12 August 2026</p>
-                </div>
-
-                <div class="tour-status">
-                    <span class="sold">Sold Out</span>
-                    
-                </div>
-            </article>
+            <?php endforeach; ?>
 
         </section>
 
@@ -138,7 +122,7 @@
         </section>
 
         <!-- Newsletter -->
-        <section class="newsletter">
+        <section class="newsletter" id="newsletter">
            
 
             <p>
@@ -146,14 +130,18 @@
                 Join the mailing list.
             </p>
 
-            <form>
+            <form method="post" action="../../api/subscribe.php">
+                <input type="hidden" name="source" value="tour">
                 <label for="email">Email</label>
 
                 <div class="newsletter-form">
                     <input
                         type="email"
                         id="email"
+                        name="email"
+                        maxlength="100"
                         placeholder="Enter your email"
+                        required
                     >
 
                     <button type="submit">
@@ -161,6 +149,7 @@
                     </button>
                 </div>
             </form>
+            <?php include __DIR__ . '/../../includes/subscribe-message.php'; ?>
         </section>
 
     </main>
@@ -175,7 +164,7 @@
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article-video.php">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article.php?slug=new-music-video-released">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
