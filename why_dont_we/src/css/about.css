@@ -13,7 +13,7 @@ body {
 
 .app {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--page-ink);
+    color: var(--pages-ink);
     min-height: 100vh;
     width: 100%;
     padding-bottom: 2rem;
