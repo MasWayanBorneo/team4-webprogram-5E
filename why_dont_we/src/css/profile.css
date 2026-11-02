@@ -266,6 +266,10 @@ body {
     color: #0b5d1e;
 }
 
+.limelight-error {
+    color: #8a1c12;
+}
+
 /* MEMBER */
 
 .member-card {

@@ -1,3 +1,45 @@
+<?php
+require __DIR__ . '/../../includes/db.php';
+
+$members = mysqli_fetch_all(mysqli_query($conn, 'SELECT * FROM members ORDER BY sort_order'), MYSQLI_ASSOC);
+
+/* --- form Limelight → tabel limelight_members ----------------------------- */
+$ll_error = '';
+$ll_old = ['name' => '', 'email' => '', 'dob' => '', 'favorite' => ''];
+
+if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
+    $ll_old = [
+        'name'     => trim($_POST['name'] ?? ''),
+        'email'    => trim($_POST['email'] ?? ''),
+        'dob'      => $_POST['dob'] ?? '',
+        'favorite' => $_POST['favorite'] ?? '',
+    ];
+    $dob = DateTime::createFromFormat('Y-m-d', $ll_old['dob']);
+
+    if ($ll_old['name'] === '' || strlen($ll_old['name']) > 100) {
+        $ll_error = 'Please enter your full name.';
+    } elseif (!filter_var($ll_old['email'], FILTER_VALIDATE_EMAIL) || strlen($ll_old['email']) > 100) {
+        $ll_error = 'Please enter a valid email address.';
+    } elseif (!$dob || $dob->format('Y-m-d') !== $ll_old['dob'] || $dob > new DateTime()) {
+        $ll_error = 'Please enter a valid date of birth.';
+    } else {
+        // favorite_member_id boleh kosong
+        $favorite = $ll_old['favorite'] === '' ? null : (int) $ll_old['favorite'];
+
+        $stmt = mysqli_prepare($conn, 'INSERT INTO limelight_members (full_name, email, date_of_birth, favorite_member_id) VALUES (?, ?, ?, ?)');
+        mysqli_stmt_bind_param($stmt, 'sssi', $ll_old['name'], $ll_old['email'], $ll_old['dob'], $favorite);
+
+        if (mysqli_stmt_execute($stmt)) {
+            // redirect supaya refresh tidak mengirim form dua kali
+            header('Location: profile.php?joined=1#limelight-form');
+            exit;
+        }
+        $ll_error = mysqli_stmt_errno($stmt) === 1062
+            ? 'This email is already registered as a Limelight.'
+            : 'Something went wrong. Please try again.';
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,53 +135,18 @@
             <h2 class="section-heading">Members</h2>
 
             <div class="content">
-
-                <a href="daniel.php" class="member-card">
+                <?php foreach ($members as $m): ?>
+                <a href="member.php?m=<?= e($m['slug']) ?>" class="member-card">
                     <div class="avatar">
-                        <img src="../../assets/image/daniel.jpg" alt="Daniel" class="avatar-img">
+                        <img src="../../<?= e($m['photo']) ?>" alt="<?= e($m['full_name']) ?>" class="avatar-img">
                     </div>
                     <div class="member-info">
-                        <p class="member-name">Daniel Seavey</p>
-                        <p class="member-role">Vocals · Guitar</p>
-                    </div>
-                    <span class="member-arrow">›</span>
-                </a> <a href="corbyn.php" class="member-card">
-                    <div class="avatar">
-                        <img src="../../assets/image/corbyn.jpg" alt="Corbyn" class="avatar-img">
-                    </div>
-                    <div class="member-info">
-                        <p class="member-name">Corbyn Besson</p>
-                        <p class="member-role">Vocals · Guitar</p>
-                    </div>
-                    <span class="member-arrow">›</span>
-                </a> <a href="jack.php" class="member-card">
-                    <div class="avatar">
-                        <img src="../../assets/image/jack.jpg" alt="Jack" class="avatar-img">
-                    </div>
-                    <div class="member-info">
-                        <p class="member-name">Jack Avery</p>
-                        <p class="member-role">Vocals · Guitar</p>
-                    </div>
-                    <span class="member-arrow">›</span>
-                </a> <a href="jonah.php" class="member-card">
-                    <div class="avatar">
-                        <img src="../../assets/image/jonah.jpg" alt="Jonah" class="avatar-img">
-                    </div>
-                    <div class="member-info">
-                        <p class="member-name">Jonah Marais</p>
-                        <p class="member-role">Vocals · Guitar</p>
-                    </div>
-                    <span class="member-arrow">›</span>
-                </a> <a href="zach.php" class="member-card">
-                    <div class="avatar">
-                        <img src="../../assets/image/zach.jpg" alt="Zach" class="avatar-img">
-                    </div>
-                    <div class="member-info">
-                        <p class="member-name">Zach Herron</p>
-                        <p class="member-role">Vocals · Guitar</p>
+                        <p class="member-name"><?= e($m['full_name']) ?></p>
+                        <p class="member-role"><?= e($m['roles']) ?></p>
                     </div>
                     <span class="member-arrow">›</span>
                 </a>
+                <?php endforeach; ?>
             </div>
         </div>
 
@@ -185,39 +192,41 @@
                 </div>
             </div>
 
-            <form class="limelight-form" id="limelight-form">
+            <form class="limelight-form" id="limelight-form" method="post" action="profile.php#limelight-form">
                 <h3 class="limelight-form-title">Become a Limelight</h3>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="ll-name">Full Name</label>
-                        <input type="text" id="ll-name" name="name" placeholder="Your full name" required>
+                        <input type="text" id="ll-name" name="name" placeholder="Your full name" maxlength="100" value="<?= e($ll_old['name']) ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="ll-email">Email</label>
-                        <input type="email" id="ll-email" name="email" placeholder="you@email.com" required>
+                        <input type="email" id="ll-email" name="email" placeholder="you@email.com" maxlength="100" value="<?= e($ll_old['email']) ?>" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="ll-dob">Date of Birth</label>
-                        <input type="date" id="ll-dob" name="dob" required>
+                        <input type="date" id="ll-dob" name="dob" max="<?= date('Y-m-d') ?>" value="<?= e($ll_old['dob']) ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="ll-favorite">Favorite Member</label>
                         <select id="ll-favorite" name="favorite">
-                            <option value="Daniel">Daniel Seavey</option>
-                            <option value="Corbyn">Corbyn Besson</option>
-                            <option value="Jack">Jack Avery</option>
-                            <option value="Jonah">Jonah Marais</option>
-                            <option value="Zach">Zach Herron</option>
+                            <?php foreach ($members as $m): ?>
+                            <option value="<?= $m['id'] ?>"<?= (string) $m['id'] === $ll_old['favorite'] ? ' selected' : '' ?>><?= e($m['full_name']) ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
 
                 <button type="submit" class="btn-join">Join Limelight</button>
-                <p class="limelight-confirm" id="limelight-confirm" hidden>Welcome to Limelight! Check your email to confirm your membership.</p>
+                <?php if (isset($_GET['joined'])): ?>
+                <p class="limelight-confirm">Welcome to Limelight! Check your email to confirm your membership.</p>
+                <?php elseif ($ll_error): ?>
+                <p class="limelight-confirm limelight-error"><?= e($ll_error) ?></p>
+                <?php endif; ?>
             </form>
         </div>
     </div>
@@ -231,7 +240,7 @@
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article-video.php">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article.php?slug=new-music-video-released">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
@@ -255,13 +264,6 @@
   </div>
 </footer>
 
-  <script>
-      document.getElementById('limelight-form').addEventListener('submit', (event) => {
-          event.preventDefault();
-          document.getElementById('limelight-confirm').hidden = false;
-          event.target.reset();
-      });
-  </script>
 </body>
 
 </html>

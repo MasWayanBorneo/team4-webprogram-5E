@@ -33,8 +33,8 @@
             <h2>Wear it loud — grab your official merch!</h2>
         </div>
 
-        <!-- Products are rendered by ../js/merch.js from ../data/products.js
-             (later: from the database). Edit the card markup in the templates below. -->
+        <!-- Products are rendered by ../js/merch.js from the database (../../api/products.php).
+             Edit the card markup in the templates below. -->
         <p id="merch-status" class="merch-status" hidden></p>
 
         <!-- FEATURED PRODUCTS (is_featured = 1) -->
@@ -104,7 +104,7 @@
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article-video.php">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article.php?slug=new-music-video-released">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
@@ -128,7 +128,6 @@
   </div>
 </footer>
 
-<script src="../data/products.js?v=<?= filemtime(__DIR__ . '/../data/products.js') ?>" defer></script>
 <script src="../js/merch.js?v=<?= filemtime(__DIR__ . '/../js/merch.js') ?>" defer></script>
 </body>
 </html>

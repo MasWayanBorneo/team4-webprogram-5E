@@ -1,10 +1,45 @@
+<?php
+/* ============================================================================
+   HALAMAN PERSONEL — satu file untuk kelima personel.
+   member.php?m=<slug>  (slug: daniel, corbyn, jack, jonah, zach)
+   ============================================================================ */
+require __DIR__ . '/../../includes/db.php';
+
+$slug = $_GET['m'] ?? '';
+
+$stmt = mysqli_prepare($conn, 'SELECT * FROM members WHERE slug = ?');
+mysqli_stmt_bind_param($stmt, 's', $slug);
+mysqli_stmt_execute($stmt);
+$member = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+
+// slug tidak dikenal → kembali ke daftar personel
+if (!$member) {
+    header('Location: profile.php');
+    exit;
+}
+
+$stmt = mysqli_prepare($conn, 'SELECT content FROM member_trivia WHERE member_id = ? ORDER BY sort_order');
+mysqli_stmt_bind_param($stmt, 'i', $member['id']);
+mysqli_stmt_execute($stmt);
+$trivia = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);
+
+// empat kotak fakta: tiga sama untuk semua personel, yang keempat dari extra_label/extra_value
+$facts = [
+    'Born'     => $member['birth_date'] ? date('F j, Y', strtotime($member['birth_date'])) : '',
+    'Zodiac'   => $member['zodiac'],
+    'Hometown' => $member['hometown'],
+];
+if ($member['extra_label']) {
+    $facts[$member['extra_label']] = $member['extra_value'];
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jack Avery</title>
+    <title><?= e($member['full_name']) ?></title>
     <link rel="stylesheet" href="../css/base.css?v=<?= filemtime(__DIR__ . '/../css/base.css') ?>">
     <link rel="stylesheet" href="../css/about.css?v=<?= filemtime(__DIR__ . '/../css/about.css') ?>">
     <link rel="stylesheet" href="../css/header.css?v=<?= filemtime(__DIR__ . '/../css/header.css') ?>">
@@ -34,40 +69,31 @@
         </div>
         <div class="profile-header">
             <div class="profile-pic">
-                <img src="../../assets/image/jack.jpg" class="profile-pic">
+                <img src="../../<?= e($member['photo']) ?>" alt="<?= e($member['full_name']) ?>" class="profile-pic">
             </div>
-            <h1 class="profile-name">Jack Avery</h1>
-            <p class="profile-role">Vocals · Guitar</p>
+            <h1 class="profile-name"><?= e($member['full_name']) ?></h1>
+            <p class="profile-role"><?= e($member['roles']) ?></p>
 
             <div class="quick-facts">
+                <?php foreach ($facts as $label => $value): ?>
                 <div class="fact-card">
-                    <div class="fact-label">Born</div>
-                    <div class="fact-value">July 1, 1999</div>
+                    <div class="fact-label"><?= e($label) ?></div>
+                    <div class="fact-value"><?= e($value) ?></div>
                 </div>
-                <div class="fact-card">
-                    <div class="fact-label">Zodiac</div>
-                    <div class="fact-value">Cancer</div>
-                </div>
-                <div class="fact-card">
-                    <div class="fact-label">Hometown</div>
-                    <div class="fact-value">Burbank, California</div>
-                </div>
-                <div class="fact-card">
-                    <div class="fact-label">Skills</div>
-                    <div class="fact-value">Skateboarding</div>
-                </div>
+                <?php endforeach; ?>
             </div>
 
             <div class="bio-section">
                 <h2 class="bio-title">Profile</h2>
-                <p class="bio-text">Jack Robert Avery started his career by uploading song covers on YouTube and
-                    participating in the IMPACT music tour before joining Why Don't We.</p>
+                <p class="bio-text"><?= e($member['bio']) ?></p>
+                <?php if ($trivia): ?>
                 <h2 class="bio-title">Trivia</h2>
                 <ul class="bio-list">
-                    <li>Has a daughter named Lavender May Avery.</li>
-                    <li>Initially more interested in basketball before focusing on music.</li>
-                    <li>Can play the piano and guitar.</li>
+                    <?php foreach ($trivia as $item): ?>
+                    <li><?= e($item['content']) ?></li>
+                    <?php endforeach; ?>
                 </ul>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -82,7 +108,7 @@
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article-video.php">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="../article/article.php?slug=new-music-video-released">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>

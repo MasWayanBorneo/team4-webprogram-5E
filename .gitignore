@@ -21,3 +21,7 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+# hasil render halaman PHP oleh CI
+*.rendered.html
+# data login database (lihat why_dont_we/includes/config.example.php)
+why_dont_we/includes/config.php

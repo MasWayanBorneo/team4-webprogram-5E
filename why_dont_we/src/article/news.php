@@ -1,3 +1,25 @@
+<?php
+require __DIR__ . '/../../includes/db.php';
+
+$sql = 'SELECT n.*, c.name AS category FROM news n JOIN news_categories c ON c.id = n.category_id ORDER BY n.published_at, n.id';
+$all_news = mysqli_fetch_all(mysqli_query($conn, $sql), MYSQLI_ASSOC);
+
+// berita is_featured tampil besar di atas, sisanya di grid
+$featured = null;
+$others = [];
+foreach ($all_news as $item) {
+    if (!$featured && $item['is_featured']) {
+        $featured = $item;
+    } else {
+        $others[] = $item;
+    }
+}
+
+function news_meta($item)
+{
+    return date('F j, Y', strtotime($item['published_at'])) . ' • ' . (int) $item['read_time_min'] . ' min read';
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,33 +58,34 @@
 
         <h1>News</h1>
 
-        <a href="article-album.php" style="text-decoration:none;color:inherit;">
+        <?php if ($featured): ?>
+        <a href="article.php?slug=<?= e($featured['slug']) ?>" style="text-decoration:none;color:inherit;">
         <div class="featured-card">
 
             <div class="featured-image">
-                <img src="../../assets/image/featured-news.jpg"
-                     alt="New album announcement">
+                <img src="../../<?= e($featured['thumbnail']) ?>"
+                     alt="<?= e($featured['title']) ?>">
             </div>
 
             <div class="featured-content">
 
                 <p class="category">
-                    Announcement
+                    <?= e($featured['category']) ?>
                 </p>
 
                 <h2>
-                    New Album Drops This Summer —
-                    Full Details
+                    <?= e($featured['title']) ?>
                 </h2>
 
                 <p class="meta">
-                    May 15, 2026 • 3 min read
+                    <?= news_meta($featured) ?>
                 </p>
 
             </div>
 
         </div>
         </a>
+        <?php endif; ?>
 
     </section>
 
@@ -74,155 +97,32 @@
 
         <div class="news-grid">
 
-            <a href="article-tour-dates.php" style="text-decoration:none;color:inherit;">
+            <?php foreach ($others as $item): ?>
+            <a href="article.php?slug=<?= e($item['slug']) ?>" style="text-decoration:none;color:inherit;">
             <article class="news-card">
 
-                <img src="../../assets/image/hdylsthumb-5_0.jpg"
-                     alt="Tour dates revealed">
+                <img src="../../<?= e($item['thumbnail']) ?>"
+                     alt="<?= e($item['title']) ?>">
 
                 <div class="news-content">
 
                     <p class="category">
-                        Announcement
+                        <?= e($item['category']) ?>
                     </p>
 
                     <h3>
-                        Tour Dates Revealed
+                        <?= e($item['title']) ?>
                     </h3>
 
                     <p class="meta">
-                        May 15, 2026 • 3 min read
+                        <?= news_meta($item) ?>
                     </p>
 
                 </div>
 
             </article>
             </a>
-
-            <a href="article-festival.php" style="text-decoration:none;color:inherit;">
-            <article class="news-card">
-
-                <img src="../../assets/image/jfthumbnail.jpg"
-                     alt="Band performance">
-
-                <div class="news-content">
-
-                    <p class="category">
-                        Event
-                    </p>
-
-                    <h3>
-                        Summer Festival Appearance
-                    </h3>
-
-                    <p class="meta">
-                        May 18, 2026 • 4 min read
-                    </p>
-
-                </div>
-
-            </article>
-            </a>
-
-            <a href="article-studio.php" style="text-decoration:none;color:inherit;">
-            <article class="news-card">
-
-                <img src="../../assets/image/flower.jpg"
-                     alt="Behind the scenes">
-
-                <div class="news-content">
-
-                    <p class="category">
-                        Interview
-                    </p>
-
-                    <h3>
-                        Exclusive Studio Session
-                    </h3>
-
-                    <p class="meta">
-                        May 22, 2026 • 5 min read
-                    </p>
-
-                </div>
-
-            </article>
-            </a>
-
-            <a href="article-video.php" style="text-decoration:none;color:inherit;">
-            <article class="news-card">
-
-                <img src="../../assets/image/Polaroid5_0.png"
-                     alt="Music video release">
-
-                <div class="news-content">
-
-                    <p class="category">
-                        Music
-                    </p>
-
-                    <h3>
-                        New Music Video Released
-                    </h3>
-
-                    <p class="meta">
-                        May 25, 2026 • 4 min read
-                    </p>
-
-                </div>
-
-            </article>
-            </a>
-
-            <a href="article-merch.php" style="text-decoration:none;color:inherit;">
-            <article class="news-card">
-
-                <img src="../../assets/image/hoodie.png"
-                     alt="Merchandise update">
-
-                <div class="news-content">
-
-                    <p class="category">
-                        Merch
-                    </p>
-
-                    <h3>
-                        Limited Edition Merch
-                    </h3>
-
-                    <p class="meta">
-                        May 28, 2026 • 2 min read
-                    </p>
-
-                </div>
-
-            </article>
-            </a>
-
-            <a href="article-international-tour.php" style="text-decoration:none;color:inherit;">
-            <article class="news-card">
-
-                <img src="../../assets/image/something-different.png"
-                     alt="Upcoming concert">
-
-                <div class="news-content">
-
-                    <p class="category">
-                        Tour
-                    </p>
-
-                    <h3>
-                        International Tour Begins
-                    </h3>
-
-                    <p class="meta">
-                        June 1, 2026 • 4 min read
-                    </p>
-
-                </div>
-
-            </article>
-            </a>
+            <?php endforeach; ?>
 
         </div>
 
@@ -230,7 +130,7 @@
 
     <!-- Subscribe -->
 
-    <section class="subscribe-section">
+    <section class="subscribe-section" id="subscribe">
 
         <h2>Stay Updated</h2>
 
@@ -239,7 +139,9 @@
             updates and merchandise drops.
         </p>
 
-        <form class="subscribe-form">
+        <form class="subscribe-form" method="post" action="../../api/subscribe.php">
+
+            <input type="hidden" name="source" value="news">
 
             <div class="form-group">
 
@@ -250,7 +152,10 @@
                 <input
                     type="email"
                     id="email"
-                    placeholder="Enter your email">
+                    name="email"
+                    maxlength="100"
+                    placeholder="Enter your email"
+                    required>
 
             </div>
 
@@ -259,6 +164,8 @@
             </button>
 
         </form>
+
+        <?php include __DIR__ . '/../../includes/subscribe-message.php'; ?>
 
     </section>
 
@@ -274,7 +181,7 @@
       </div>
       <nav class="footer-col" aria-label="Music">
         <h4>Music</h4>
-        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="article-video.php">Videos</a></li></ul>
+        <ul><li><a href="../music/music.php">Albums</a></li><li><a href="../music/music.php">Singles</a></li><li><a href="article.php?slug=new-music-video-released">Videos</a></li></ul>
       </nav>
       <nav class="footer-col" aria-label="Band">
         <h4>Band</h4>
