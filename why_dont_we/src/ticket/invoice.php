@@ -6,7 +6,7 @@ $invoice_no = $_GET['no'] ?? '';
 
 $stmt = mysqli_prepare($conn, "
     SELECT o.invoice_no, o.created_at, o.full_name, o.email, o.phone,
-           o.quantity, o.unit_price, o.total,
+           o.quantity, o.unit_price, o.total, o.status,
            c.name AS category, k.venue_name, k.event_date
     FROM ticket_orders o
     JOIN ticket_categories c ON c.id = o.ticket_category_id
@@ -28,7 +28,22 @@ $order = $row ? [
     'unitPrice'    => (float) $row['unit_price'],
     'quantity'     => (int) $row['quantity'],
     'total'        => (float) $row['total'],
+    'status'       => $row['status'],
 ] : null;
+
+// tampilan tiap status pesanan: [label status, class tambahan, label total, catatan]
+// paid      = tiket biasa / pre-order yang sudah dikonfirmasi → tiket dengan sobekan terbit
+// pending   = pre-order yang belum dikonfirmasi panitia → belum ada tiket
+// cancelled = dibatalkan → tidak berlaku
+$status_views = [
+    'paid'      => ['Paid', '', 'Total Paid',
+                    'Please bring this invoice and a valid ID to the venue entrance. E-tickets will also be sent to your email.'],
+    'pending'   => ['Pre-order · Awaiting confirmation', ' invoice-status--pending', 'Total Due',
+                    'This is a pre-order. Your ticket will be issued on this page once the committee confirms your pre-order.'],
+    'cancelled' => ['Cancelled', ' invoice-status--cancelled', 'Total',
+                    'This order has been cancelled and is no longer valid.'],
+];
+[$status_label, $status_class, $total_label, $status_note] = $status_views[$order['status'] ?? 'paid'] ?? $status_views['paid'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,7 +101,7 @@ $order = $row ? [
                     <div class="invoice-meta">
                         <p><strong>Invoice No.</strong> <span id="inv-number"></span></p>
                         <p><strong>Date</strong> <span id="inv-date"></span></p>
-                        <p class="invoice-status">Paid</p>
+                        <p class="invoice-status<?= $status_class ?>"><?= $status_label ?></p>
                     </div>
                 </header>
 
@@ -119,11 +134,11 @@ $order = $row ? [
                 </table>
 
                 <div class="invoice-total">
-                    <span>Total Paid</span>
+                    <span><?= $total_label ?></span>
                     <span id="inv-total"></span>
                 </div>
 
-                <p class="invoice-note">Please bring this invoice and a valid ID to the venue entrance. E-tickets will also be sent to your email.</p>
+                <p class="invoice-note"><?= $status_note ?></p>
             </div>
 
             <div class="invoice-actions">
@@ -197,6 +212,15 @@ $order = $row ? [
         }
 
         const order = <?= json_encode($order, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) ?>;
+        const totalLabel = <?= json_encode($total_label) ?>;
+        const statusNote = <?= json_encode($status_note, JSON_HEX_TAG | JSON_HEX_AMP) ?>;
+
+        // label status di PDF: [teks, warna RGB]
+        const pdfStatus = {
+            paid: ['PAID', [76, 175, 80]],
+            pending: ['PRE-ORDER - AWAITING CONFIRMATION', [200, 140, 0]],
+            cancelled: ['CANCELLED', [200, 50, 40]],
+        }[order?.status] || ['PAID', [76, 175, 80]];
 
         if (!order) {
             document.getElementById('empty-state').hidden = false;
@@ -260,8 +284,8 @@ $order = $row ? [
                 }), rightX, 27, { align: 'right' });
 
                 doc.setFont('helvetica', 'bold');
-                doc.setTextColor(76, 175, 80);
-                doc.text('PAID', rightX, 34, { align: 'right' });
+                doc.setTextColor(...pdfStatus[1]);
+                doc.text(pdfStatus[0], rightX, 34, { align: 'right' });
 
                 y += 15;
                 doc.setDrawColor(200, 200, 200);
@@ -327,17 +351,21 @@ $order = $row ? [
                 doc.setFont('helvetica', 'bold');
                 doc.setFontSize(13);
                 doc.setTextColor(20, 30, 45);
-                doc.text('Total Paid', marginX + 6, y + 1);
+                doc.text(totalLabel, marginX + 6, y + 1);
                 doc.text(formatPrice(order.total), rightX - 6, y + 1, { align: 'right' });
 
                 y += 20;
                 doc.setFont('helvetica', 'normal');
                 doc.setFontSize(9);
                 doc.setTextColor(130, 130, 130);
-                doc.text(
-                    'Please bring this invoice and a valid ID to the venue entrance. E-tickets will also be sent to your email.',
-                    marginX, y, { maxWidth: rightX - marginX }
-                );
+                doc.text(statusNote, marginX, y, { maxWidth: rightX - marginX });
+
+                // tiket dengan sobekan hanya untuk pesanan lunas; pre-order (pending) dan
+                // pesanan batal hanya mendapat invoice tanpa tiket
+                if (order.status !== 'paid') {
+                    doc.save(order.invoiceNo + '.pdf');
+                    return;
+                }
 
                 /* ---- TIKET DENGAN SOBEKAN --------------------------------------------
                    Kiri: bagian pengunjung. Kanan: "Committee Copy" yang disobek panitia di

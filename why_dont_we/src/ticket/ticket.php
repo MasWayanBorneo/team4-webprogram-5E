@@ -1,14 +1,21 @@
 <?php
 require __DIR__ . '/../../includes/db.php';
 
-// konser yang bisa dipesan
-$concerts = mysqli_fetch_all(mysqli_query($conn, "SELECT id, venue_name, event_date FROM concerts WHERE status = 'available' ORDER BY event_date"), MYSQLI_ASSOC);
-
-// konser terpilih: dari form (POST), dari link "Get Ticket" (?concert=), atau konser pertama
-$concert_id = (int) ($_POST['concert'] ?? $_GET['concert'] ?? 0);
-if (!in_array($concert_id, array_map('intval', array_column($concerts, 'id')), true)) {
-    $concert_id = $concerts ? (int) $concerts[0]['id'] : 0;
+// konser yang bisa dipesan: available (tiket biasa) dan coming_soon (pre-order)
+$concerts = [];
+$result = mysqli_query($conn, "SELECT id, venue_name, event_date, status FROM concerts WHERE status IN ('available', 'coming_soon') ORDER BY event_date");
+foreach (mysqli_fetch_all($result, MYSQLI_ASSOC) as $row) {
+    $concerts[(int) $row['id']] = $row;
 }
+
+// konser terpilih: dari form (POST), dari link "Get Ticket" / "Pre Order" (?concert=), atau konser pertama
+$concert_id = (int) ($_POST['concert'] ?? $_GET['concert'] ?? 0);
+if (!isset($concerts[$concert_id])) {
+    $concert_id = $concerts ? (int) array_key_first($concerts) : 0;
+}
+
+// pre-order: konser belum mulai dijual, pesanan disimpan 'pending' sampai dikonfirmasi panitia
+$is_preorder = $concert_id && $concerts[$concert_id]['status'] === 'coming_soon';
 
 // kategori tiket konser terpilih + sisa kuota (pesanan yang dibatalkan tidak dihitung)
 $stmt = mysqli_prepare($conn, "
@@ -28,7 +35,8 @@ foreach (mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC) as $row) 
 
 function concert_label($concert)
 {
-    return $concert['venue_name'] . ' — ' . date('j F Y', strtotime($concert['event_date']));
+    return $concert['venue_name'] . ' — ' . date('j F Y', strtotime($concert['event_date']))
+        . ($concert['status'] === 'coming_soon' ? ' (Pre-order)' : '');
 }
 
 /* --- form → tabel ticket_orders ------------------------------------------- */
@@ -64,11 +72,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
         $total = $unit_price * $quantity;
         $invoice_no = 'WDW-' . strtoupper(bin2hex(random_bytes(4)));
 
-        // belum ada pembayaran online: pesanan langsung dianggap lunas, sesuai tampilan invoice
+        // belum ada pembayaran online: tiket biasa langsung dianggap lunas ('paid');
+        // pre-order 'pending' sampai panitia mengubahnya jadi 'paid' (tiket baru terbit setelah itu)
+        $status = $is_preorder ? 'pending' : 'paid';
         $stmt = mysqli_prepare($conn, "
             INSERT INTO ticket_orders (invoice_no, ticket_category_id, full_name, email, phone, quantity, unit_price, total, status)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'paid')");
-        mysqli_stmt_bind_param($stmt, 'sisssidd', $invoice_no, $category['id'], $old['fullname'], $old['email'], $old['phone'], $quantity, $unit_price, $total);
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        mysqli_stmt_bind_param($stmt, 'sisssidds', $invoice_no, $category['id'], $old['fullname'], $old['email'], $old['phone'], $quantity, $unit_price, $total, $status);
 
         if (mysqli_stmt_execute($stmt)) {
             header('Location: invoice.php?no=' . urlencode($invoice_no));
@@ -115,8 +125,13 @@ $checked = isset($categories[(int) $old['category']]) ? (int) $old['category'] :
 
         <!-- Page Header -->
         <section class="page-header">
+            <?php if ($is_preorder): ?>
+            <h2>Pre-order Your Tickets</h2>
+            <p class="ticket-sub">Tickets for this show aren't on sale yet. Reserve your spot now — your ticket will be issued once your pre-order is confirmed.</p>
+            <?php else: ?>
             <h2>Get Your Tickets</h2>
             <p class="ticket-sub">Choose a category and grab your spot before they sell out.</p>
+            <?php endif; ?>
         </section>
 
         <!-- Ticket Form -->
@@ -182,7 +197,7 @@ $checked = isset($categories[(int) $old['category']]) ? (int) $old['category'] :
                 <p class="form-msg form-msg--error" role="alert"><?= e($error) ?></p>
                 <?php endif; ?>
 
-                <button type="submit" class="ticket-submit">Proceed to Checkout</button>
+                <button type="submit" class="ticket-submit"><?= $is_preorder ? 'Place Pre-order' : 'Proceed to Checkout' ?></button>
             </form>
             <?php endif; ?>
         </section>

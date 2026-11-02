@@ -80,6 +80,18 @@
     font-weight:bold;
 }
 
+/* pre-order yang belum dikonfirmasi (kuning) dan pesanan batal (merah),
+   warnanya sama dengan label Coming Soon / Sold Out di halaman Tour */
+.invoice-status--pending{
+    background:#fff3b0;
+    color:#6b4e00;
+}
+
+.invoice-status--cancelled{
+    background:#ffd0cc;
+    color:#8a1c12;
+}
+
 .invoice-billto{
     margin-bottom:24px;
 }
