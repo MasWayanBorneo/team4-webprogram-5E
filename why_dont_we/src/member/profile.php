@@ -172,8 +172,15 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
                 <?php endforeach; ?>
             </div>
 
-            <form class="limelight-form" id="limelight-form" method="post" action="profile.php#limelight-form">
-                <h3 class="limelight-form-title">Become a Limelight</h3>
+            <!-- form tertutup sampai CTA diklik; tetap terbuka setelah kirim form
+                 supaya pesan berhasil / error langsung terlihat -->
+            <details class="limelight-join" id="limelight-form"<?= $ll_error || isset($_GET['joined']) ? ' open' : '' ?>>
+            <summary class="limelight-cta">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <span>Become a Limelight</span>
+            </summary>
+
+            <form class="limelight-form" method="post" action="profile.php#limelight-form">
 
                 <div class="form-row">
                     <div class="form-group">
@@ -208,6 +215,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
                 <p class="limelight-confirm limelight-error"><?= e($ll_error) ?></p>
                 <?php endif; ?>
             </form>
+            </details>
         </div>
     </div>
 <!-- ============================ FOOTER ============================ -->

@@ -206,7 +206,50 @@ body {
     transform: translateY(-2px);
 }
 
-/* FORM LIMELIGHT */
+/* FORM LIMELIGHT — tertutup di balik tombol CTA bintang pink (<details>),
+   form baru muncul setelah tombol diklik */
+
+.limelight-join {
+    margin-top: 1.5rem;
+}
+
+.limelight-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 30px;
+    border: 2px solid var(--pink);
+    border-radius: 999px;
+    background: rgba(255, 94, 138, 0.12);
+    color: var(--ink);
+    font-family: var(--title-font);
+    font-size: 22px;
+    cursor: pointer;
+    list-style: none; /* sembunyikan segitiga bawaan <summary> */
+    box-shadow: 0 0 30px rgba(255, 94, 138, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.limelight-cta::-webkit-details-marker {
+    display: none;
+}
+.limelight-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 45px rgba(255, 94, 138, 0.55);
+}
+.limelight-cta:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 4px;
+}
+
+.limelight-cta .fa-star {
+    color: var(--pink);
+    font-size: 28px;
+    transition: transform 0.4s;
+}
+/* bintang berputar saat form dibuka */
+.limelight-join[open] .limelight-cta .fa-star {
+    transform: rotate(144deg);
+}
 
 .limelight-form {
     max-width: 640px;
@@ -218,10 +261,11 @@ body {
     gap: 18px;
 }
 
-.limelight-form-title {
-    font-family: var(--title-font);
-    font-size: 22px;
-    color: var(--card-ink);
+@media (prefers-reduced-motion: reduce) {
+    .limelight-cta,
+    .limelight-cta .fa-star {
+        transition: none;
+    }
 }
 
 .limelight-form .form-row {
