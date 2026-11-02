@@ -122,19 +122,21 @@ $statuses = [
         </section>
 
         <!-- Newsletter -->
+        <!-- susunan sama dengan form subscribe di halaman News -->
         <section class="newsletter" id="newsletter">
-           
+
+            <h2>Stay Updated</h2>
 
             <p>
                 Be the first to know about new tour dates.
                 Join the mailing list.
             </p>
 
-            <form method="post" action="../../api/subscribe.php">
+            <form class="newsletter-form" method="post" action="../../api/subscribe.php">
                 <input type="hidden" name="source" value="tour">
-                <label for="email">Email</label>
 
-                <div class="newsletter-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
                     <input
                         type="email"
                         id="email"
@@ -143,11 +145,11 @@ $statuses = [
                         placeholder="Enter your email"
                         required
                     >
-
-                    <button type="submit">
-                        Subscribe
-                    </button>
                 </div>
+
+                <button type="submit">
+                    Subscribe
+                </button>
             </form>
             <?php include __DIR__ . '/../../includes/subscribe-message.php'; ?>
         </section>
