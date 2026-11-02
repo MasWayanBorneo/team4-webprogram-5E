@@ -15,7 +15,7 @@ SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 DROP TABLE IF EXISTS ticket_orders, ticket_categories, concerts,
-                     limelight_members, member_trivia, members,
+                     limelight_benefits, limelight_members, member_trivia, members,
                      news, news_categories,
                      songs, albums, videos,
                      products, subscribers;
@@ -100,6 +100,17 @@ CREATE TABLE limelight_members (
   UNIQUE KEY uq_limelight_email (email),
   CONSTRAINT fk_limelight_member FOREIGN KEY (favorite_member_id) REFERENCES members (id)
     ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- kartu benefit di bagian Limelight Membership (halaman About)
+CREATE TABLE limelight_benefits (
+  id            INT UNSIGNED  NOT NULL AUTO_INCREMENT,
+  icon          VARCHAR(50)   NOT NULL,             -- nama ikon Font Awesome, mis. fa-ticket
+  title         VARCHAR(100)  NOT NULL,
+  description   VARCHAR(255)  NOT NULL,
+  sort_order    TINYINT UNSIGNED NOT NULL DEFAULT 0, -- urutan tampil
+  is_active     BOOLEAN       NOT NULL DEFAULT TRUE, -- FALSE = disembunyikan tanpa dihapus
+  PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ---- Berita ----------------------------------------------------------------
@@ -218,6 +229,14 @@ INSERT INTO member_trivia (member_id, content, sort_order) VALUES
   (5, 'Joined the school choir before becoming famous.', 1),
   (5, 'Cites Justin Bieber and Shawn Mendes as his inspirations.', 2),
   (5, 'Released his debut solo single "Timelapse" in 2016.', 3);
+
+INSERT INTO limelight_benefits (id, icon, title, description, sort_order) VALUES
+  (1, 'fa-ticket', 'Early Ticket Access', 'Pre-sale codes and priority booking before tickets go public.', 1),
+  (2, 'fa-video', 'Exclusive Content', 'Behind-the-scenes footage, unreleased clips, and livestreams.', 2),
+  (3, 'fa-bag-shopping', 'Merch Discounts', 'Members-only drops and discount codes on official merch.', 3),
+  (4, 'fa-comments', 'Direct Connection', 'Monthly Q&As and video calls with Daniel, Corbyn, Jack, Jonah, and Zach.', 4),
+  (5, 'fa-cake-candles', 'Birthday Shoutouts', 'A little something special from the band on your big day.', 5),
+  (6, 'fa-star', 'Meet & Greet Priority', 'First in line for meet-and-greets and VIP experiences at shows.', 6);
 
 INSERT INTO news_categories (id, name) VALUES
   (1, 'Announcement'),

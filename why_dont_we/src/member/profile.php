@@ -3,6 +3,9 @@ require __DIR__ . '/../../includes/db.php';
 
 $members = mysqli_fetch_all(mysqli_query($conn, 'SELECT * FROM members ORDER BY sort_order'), MYSQLI_ASSOC);
 
+// kartu benefit Limelight; benefit baru cukup ditambah sebagai baris di tabel
+$benefits = mysqli_fetch_all(mysqli_query($conn, 'SELECT icon, title, description FROM limelight_benefits WHERE is_active = 1 ORDER BY sort_order, id'), MYSQLI_ASSOC);
+
 /* --- form Limelight → tabel limelight_members ----------------------------- */
 $ll_error = '';
 $ll_old = ['name' => '', 'email' => '', 'dob' => '', 'favorite' => ''];
@@ -160,36 +163,13 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
             </p>
 
             <div class="limelight-grid">
+                <?php foreach ($benefits as $benefit): ?>
                 <div class="benefit-card">
-                    <i class="fa-solid fa-ticket benefit-icon"></i>
-                    <p class="benefit-title">Early Ticket Access</p>
-                    <p class="benefit-desc">Pre-sale codes and priority booking before tickets go public.</p>
+                    <i class="fa-solid <?= e($benefit['icon']) ?> benefit-icon"></i>
+                    <p class="benefit-title"><?= e($benefit['title']) ?></p>
+                    <p class="benefit-desc"><?= e($benefit['description']) ?></p>
                 </div>
-                <div class="benefit-card">
-                    <i class="fa-solid fa-video benefit-icon"></i>
-                    <p class="benefit-title">Exclusive Content</p>
-                    <p class="benefit-desc">Behind-the-scenes footage, unreleased clips, and livestreams.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fa-solid fa-bag-shopping benefit-icon"></i>
-                    <p class="benefit-title">Merch Discounts</p>
-                    <p class="benefit-desc">Members-only drops and discount codes on official merch.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fa-solid fa-comments benefit-icon"></i>
-                    <p class="benefit-title">Direct Connection</p>
-                    <p class="benefit-desc">Monthly Q&As and video calls with Daniel, Corbyn, Jack, Jonah, and Zach.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fa-solid fa-cake-candles benefit-icon"></i>
-                    <p class="benefit-title">Birthday Shoutouts</p>
-                    <p class="benefit-desc">A little something special from the band on your big day.</p>
-                </div>
-                <div class="benefit-card">
-                    <i class="fa-solid fa-star benefit-icon"></i>
-                    <p class="benefit-title">Meet &amp; Greet Priority</p>
-                    <p class="benefit-desc">First in line for meet-and-greets and VIP experiences at shows.</p>
-                </div>
+                <?php endforeach; ?>
             </div>
 
             <form class="limelight-form" id="limelight-form" method="post" action="profile.php#limelight-form">
