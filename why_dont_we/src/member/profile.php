@@ -34,7 +34,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
 
         if (mysqli_stmt_execute($stmt)) {
             // redirect supaya refresh tidak mengirim form dua kali
-            header('Location: profile.php?joined=1#limelight-form');
+            header('Location: profile.php?joined=1#limelight');
             exit;
         }
         $ll_error = mysqli_stmt_errno($stmt) === 1062
@@ -153,7 +153,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
             </div>
         </div>
 
-        <div class="content limelight-section">
+        <div class="content limelight-section" id="limelight">
             <p class="section-label">Join The Fam</p>
             <h2 class="section-heading">Limelight Membership</h2>
             <p class="about-text">
@@ -172,8 +172,18 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
                 <?php endforeach; ?>
             </div>
 
-            <form class="limelight-form" id="limelight-form" method="post" action="profile.php#limelight-form">
-                <h3 class="limelight-form-title">Become a Limelight</h3>
+            <button type="button" class="limelight-cta" id="limelight-open" aria-haspopup="dialog">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <span>Become a Limelight</span>
+            </button>
+
+            <!-- form ada di dalam modal; dibuka oleh tombol CTA di atas (script di bawah) -->
+            <dialog class="limelight-modal" id="limelight-form" aria-labelledby="limelight-modal-title">
+            <form class="limelight-form" method="post" action="profile.php#limelight-form">
+                <div class="limelight-modal-head">
+                    <h3 class="limelight-form-title" id="limelight-modal-title">Become a Limelight</h3>
+                    <button type="button" class="limelight-close" id="limelight-close" aria-label="Close">&times;</button>
+                </div>
 
                 <div class="form-row">
                     <div class="form-group">
@@ -202,12 +212,23 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
                 </div>
 
                 <button type="submit" class="btn-join">Join Limelight</button>
-                <?php if (isset($_GET['joined'])): ?>
-                <p class="limelight-confirm">Welcome to Limelight! Check your email to confirm your membership.</p>
-                <?php elseif ($ll_error): ?>
+                <?php if ($ll_error): ?>
                 <p class="limelight-confirm limelight-error"><?= e($ll_error) ?></p>
                 <?php endif; ?>
             </form>
+            </dialog>
+
+            <?php if (isset($_GET['joined'])): ?>
+            <!-- pop-up setelah berhasil daftar (style .toast di base.css); hilang sendiri setelah beberapa detik -->
+            <div class="toast" id="limelight-toast" role="status">
+                <span class="toast-icon" aria-hidden="true"><i class="fa-solid fa-star"></i></span>
+                <div class="toast-body">
+                    <p class="toast-title">Welcome to Limelight!</p>
+                    <p>Check your email to confirm your membership.</p>
+                </div>
+                <button type="button" class="toast-close" id="limelight-toast-close" aria-label="Close">&times;</button>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 <!-- ============================ FOOTER ============================ -->
@@ -244,6 +265,33 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
   </div>
 </footer>
 
+  <script>
+      // modal Limelight: buka lewat tombol CTA, tutup lewat tombol ×, tombol Esc, atau klik di luar kartu
+      const limelightModal = document.getElementById('limelight-form');
+
+      document.getElementById('limelight-open').addEventListener('click', () => limelightModal.showModal());
+      document.getElementById('limelight-close').addEventListener('click', () => limelightModal.close());
+      limelightModal.addEventListener('click', (event) => {
+          if (event.target === limelightModal) limelightModal.close();
+      });
+
+      <?php if ($ll_error): ?>
+      // isian salah: modal dibuka lagi supaya pesan error dan isian sebelumnya terlihat
+      limelightModal.showModal();
+      <?php endif; ?>
+
+      <?php if (isset($_GET['joined'])): ?>
+      // berhasil daftar: modal tetap tertutup, tampilkan pop-up lalu sembunyikan otomatis
+      const limelightToast = document.getElementById('limelight-toast');
+      const hideToast = () => limelightToast.classList.add('is-hidden');
+
+      document.getElementById('limelight-toast-close').addEventListener('click', hideToast);
+      setTimeout(hideToast, 5000);
+
+      // hapus ?joined=1 dari alamat supaya pop-up tidak muncul lagi saat halaman di-refresh
+      history.replaceState(null, '', location.pathname + '#limelight');
+      <?php endif; ?>
+  </script>
 </body>
 
 </html>

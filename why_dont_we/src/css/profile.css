@@ -206,11 +206,67 @@ body {
     transform: translateY(-2px);
 }
 
-/* FORM LIMELIGHT */
+/* FORM LIMELIGHT — tombol CTA bintang pink membuka form di dalam modal (<dialog>) */
+
+.limelight-cta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: fit-content; /* selebar isinya, lalu margin auto menaruhnya di tengah */
+    margin: 1.5rem auto 0;
+    padding: 14px 30px;
+    border: 2px solid var(--pink);
+    border-radius: 999px;
+    background: rgba(255, 94, 138, 0.12);
+    color: var(--ink);
+    font-family: var(--title-font);
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(255, 94, 138, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.limelight-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 45px rgba(255, 94, 138, 0.55);
+}
+.limelight-cta:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 4px;
+}
+
+.limelight-cta .fa-star {
+    color: var(--pink);
+    font-size: 28px;
+    transition: transform 0.4s;
+}
+/* bintang berputar saat tombol disorot */
+.limelight-cta:hover .fa-star {
+    transform: rotate(144deg);
+}
+
+/* kotak modal: tanpa padding/latar sendiri — tampilannya dari .limelight-form,
+   jadi klik di area gelap di luar kartu = klik di <dialog> itu sendiri (menutup modal) */
+.limelight-modal {
+    /* margin: auto menaruh <dialog> di tengah layar; perlu ditulis ulang karena
+       reset "* { margin: 0 }" di atas menghapus margin bawaan browser */
+    margin: auto;
+    width: min(640px, calc(100% - 32px));
+    max-height: calc(100% - 32px);
+    padding: 0;
+    border: none;
+    background: transparent;
+    overflow: auto;
+}
+.limelight-modal::backdrop {
+    background: rgba(3, 0, 32, 0.75);
+    backdrop-filter: blur(4px);
+}
+/* halaman di belakang modal tidak ikut ter-scroll */
+body:has(.limelight-modal[open]) {
+    overflow: hidden;
+}
 
 .limelight-form {
-    max-width: 640px;
-    margin-top: 1.5rem;
     padding: 22px;
     background: var(--card-bg-light);
     display: flex;
@@ -218,10 +274,43 @@ body {
     gap: 18px;
 }
 
+.limelight-modal-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
 .limelight-form-title {
+    margin: 0;
     font-family: var(--title-font);
     font-size: 22px;
     color: var(--card-ink);
+}
+
+.limelight-close {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 50%;
+    background: rgba(1, 9, 18, 0.1);
+    color: var(--card-ink);
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+}
+.limelight-close:hover {
+    background: rgba(1, 9, 18, 0.2);
+}
+
+/* pop-up setelah berhasil daftar memakai .toast dari base.css */
+
+@media (prefers-reduced-motion: reduce) {
+    .limelight-cta,
+    .limelight-cta .fa-star {
+        transition: none;
+    }
 }
 
 .limelight-form .form-row {
