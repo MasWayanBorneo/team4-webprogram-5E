@@ -40,6 +40,8 @@ $order = $row ? [
     <link rel="stylesheet" href="../css/tour.css?v=<?= filemtime(__DIR__ . '/../css/tour.css') ?>">
     <link rel="stylesheet" href="../css/invoice.css?v=<?= filemtime(__DIR__ . '/../css/invoice.css') ?>">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- pembuat kode QR untuk tiket di PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" integrity="sha512-ZDSPMa/JM1D+7kdg2x3BsruQ6T/JpJo3jWDWkCZsP+5yVyp1KfESqLI+7RqB5k24F7p2cV7i2YHh/890y6P6Sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="../css/header.css?v=<?= filemtime(__DIR__ . '/../css/header.css') ?>">
     <link rel="stylesheet" href="../css/footer.css?v=<?= filemtime(__DIR__ . '/../css/footer.css') ?>">
 </head>
@@ -174,6 +176,26 @@ $order = $row ? [
             return usd.format(Number(amount));
         }
 
+        // gambar kode QR langsung sebagai kotak-kotak hitam di PDF (tetap tajam saat di-print);
+        // dilewati kalau library QR gagal dimuat
+        function drawQr(doc, text, x, y, size) {
+            if (!window.qrcode) return;
+            const qr = qrcode(0, 'M');
+            qr.addData(text);
+            qr.make();
+            const count = qr.getModuleCount();
+            const cell = size / count;
+            doc.setFillColor(0, 0, 0);
+            for (let row = 0; row < count; row++) {
+                for (let colIndex = 0; colIndex < count; colIndex++) {
+                    if (qr.isDark(row, colIndex)) {
+                        // +0.02 mm supaya tidak ada garis putih tipis di antara kotak
+                        doc.rect(x + colIndex * cell, y + row * cell, cell + 0.02, cell + 0.02, 'F');
+                    }
+                }
+            }
+        }
+
         const order = <?= json_encode($order, JSON_HEX_TAG | JSON_HEX_AMP | JSON_UNESCAPED_UNICODE) ?>;
 
         if (!order) {
@@ -262,14 +284,16 @@ $order = $row ? [
                 doc.text(order.phone || '-', marginX, y);
 
                 y += 14;
-                const col = { desc: marginX, cat: 90, qty: 125, unit: 145, sub: 175 };
+                // posisi kolom (mm). Description & Category rata kiri; Qty, Unit Price,
+                // dan Subtotal rata kanan supaya angka sejajar dan judulnya tidak bertumpuk
+                const col = { desc: marginX, cat: 92, qty: 128, unit: 158, sub: rightX };
                 doc.setFont('helvetica', 'bold');
                 doc.setFontSize(10);
                 doc.setTextColor(110, 110, 110);
                 doc.text('DESCRIPTION', col.desc, y);
                 doc.text('CATEGORY', col.cat, y);
-                doc.text('QTY', col.qty, y);
-                doc.text('UNIT PRICE', col.unit, y);
+                doc.text('QTY', col.qty, y, { align: 'right' });
+                doc.text('UNIT PRICE', col.unit, y, { align: 'right' });
                 doc.text('SUBTOTAL', col.sub, y, { align: 'right' });
 
                 y += 3;
@@ -280,13 +304,20 @@ $order = $row ? [
                 doc.setFont('helvetica', 'normal');
                 doc.setFontSize(10.5);
                 doc.setTextColor(30, 30, 30);
-                doc.text(order.concert || '-', col.desc, y, { maxWidth: col.cat - col.desc - 4 });
-                doc.text(order.categoryName || '-', col.cat, y);
-                doc.text(String(order.quantity ?? '-'), col.qty, y);
-                doc.text(formatPrice(order.unitPrice), col.unit, y);
+
+                // teks panjang dipecah per baris; tinggi baris tabel mengikuti kolom yang
+                // paling banyak barisnya, supaya baris kedua tidak menabrak garis & total.
+                // Tanda "—" diganti "-" karena tidak ada di font bawaan jsPDF.
+                const lineHeight = 5;
+                const descLines = doc.splitTextToSize((order.concert || '-').replace(/—/g, '-'), col.cat - col.desc - 6);
+                const catLines = doc.splitTextToSize(order.categoryName || '-', col.qty - col.cat - 14);
+                doc.text(descLines, col.desc, y, { lineHeightFactor: 1.15 });
+                doc.text(catLines, col.cat, y, { lineHeightFactor: 1.15 });
+                doc.text(String(order.quantity ?? '-'), col.qty, y, { align: 'right' });
+                doc.text(formatPrice(order.unitPrice), col.unit, y, { align: 'right' });
                 doc.text(formatPrice(order.total), col.sub, y, { align: 'right' });
 
-                y += 8;
+                y += (Math.max(descLines.length, catLines.length) - 1) * lineHeight + 8;
                 doc.setDrawColor(220, 220, 220);
                 doc.line(marginX, y, rightX, y);
 
@@ -306,6 +337,118 @@ $order = $row ? [
                 doc.text(
                     'Please bring this invoice and a valid ID to the venue entrance. E-tickets will also be sent to your email.',
                     marginX, y, { maxWidth: rightX - marginX }
+                );
+
+                /* ---- TIKET DENGAN SOBEKAN --------------------------------------------
+                   Kiri: bagian pengunjung. Kanan: "Committee Copy" yang disobek panitia di
+                   pintu masuk dan disimpan sebagai bukti, lalu pengunjung menerima gelang
+                   sebanyak jumlah tiket. Tiket tanpa sobekan berarti sudah dipakai.
+                   QR berisi alamat invoice ini, jadi panitia bisa memindainya untuk
+                   memastikan tiketnya terdaftar. */
+                const qty = Number(order.quantity) || 1;
+                const verifyUrl = new URL('invoice.php?no=' + encodeURIComponent(order.invoiceNo), location.href).href;
+                const ticketTop = Math.max(y + 16, 160);
+                const ticketHeight = 78;
+                const stubX = 140; // posisi garis sobekan (mm)
+
+                // satu isian tiket: label kecil abu-abu + isi tebal satu baris
+                const field = (label, value, x, fieldY, width) => {
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(7.5);
+                    doc.setTextColor(120, 120, 120);
+                    doc.text(label, x, fieldY);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setFontSize(10.5);
+                    doc.setTextColor(25, 25, 25);
+                    doc.text(doc.splitTextToSize(String(value), width)[0], x, fieldY + 4.5);
+                };
+
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(12);
+                doc.setTextColor(20, 30, 45);
+                doc.text('Your Ticket', marginX, ticketTop - 5);
+
+                // bingkai tiket
+                doc.setDrawColor(40, 40, 40);
+                doc.setLineWidth(0.4);
+                doc.roundedRect(marginX, ticketTop, rightX - marginX, ticketHeight, 3, 3, 'S');
+
+                // garis sobekan putus-putus + tulisan vertikal di sampingnya
+                doc.setLineDashPattern([1.5, 1.5], 0);
+                doc.line(stubX, ticketTop, stubX, ticketTop + ticketHeight);
+                doc.setLineDashPattern([], 0);
+                doc.setLineWidth(0.2);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(6.5);
+                doc.setTextColor(140, 140, 140);
+                doc.text('CUT HERE  -  TEAR OFF AT ENTRANCE', stubX - 1.3, ticketTop + ticketHeight - 6, { angle: 90 });
+
+                // bagian pengunjung
+                const left = marginX + 6;
+                const mainQrSize = 30;
+                const mainQrX = stubX - 8 - mainQrSize;
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(15);
+                doc.setTextColor(20, 30, 45);
+                doc.text("WHY DON'T WE", left, ticketTop + 10);
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8);
+                doc.setTextColor(120, 120, 120);
+                doc.text('CONCERT TICKET  -  VISITOR COPY', left, ticketTop + 15);
+
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(11);
+                doc.setTextColor(25, 25, 25);
+                const concertLines = doc.splitTextToSize((order.concert || '-').replace(/—/g, '-'), mainQrX - left - 4).slice(0, 2);
+                doc.text(concertLines, left, ticketTop + 24, { lineHeightFactor: 1.15 });
+
+                field('NAME', order.fullname || '-', left, ticketTop + 41, mainQrX - left - 4);
+                field('CATEGORY', order.categoryName || '-', left, ticketTop + 54, 34);
+                field('ADMITS', qty + (qty === 1 ? ' person' : ' people'), left + 40, ticketTop + 54, 34);
+                field('INVOICE NO.', order.invoiceNo, left, ticketTop + 67, 60);
+
+                drawQr(doc, verifyUrl, mainQrX, ticketTop + 12, mainQrSize);
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(7);
+                doc.setTextColor(120, 120, 120);
+                doc.text('Scan to verify', mainQrX + mainQrSize / 2, ticketTop + 47, { align: 'center' });
+
+                // bagian panitia (disobek)
+                const stubLeft = stubX + 5;
+                const stubCenter = (stubX + rightX) / 2;
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(8);
+                doc.setTextColor(120, 120, 120);
+                doc.text('COMMITTEE COPY', stubLeft, ticketTop + 9);
+                doc.setFontSize(10);
+                doc.setTextColor(25, 25, 25);
+                doc.text(order.invoiceNo, stubLeft, ticketTop + 15);
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8.5);
+                doc.text(doc.splitTextToSize(order.fullname || '-', rightX - stubLeft - 4).slice(0, 2), stubLeft, ticketTop + 21, { lineHeightFactor: 1.15 });
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(9);
+                doc.text((order.categoryName || '-') + '  x ' + qty, stubLeft, ticketTop + 32);
+
+                drawQr(doc, verifyUrl, stubCenter - 12, ticketTop + 36, 24);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(9);
+                doc.setTextColor(25, 25, 25);
+                doc.text('WRISTBANDS: ' + qty, stubCenter, ticketTop + 67, { align: 'center' });
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(7);
+                doc.setTextColor(120, 120, 120);
+                doc.text('Kept by the committee', stubCenter, ticketTop + 72, { align: 'center' });
+
+                // petunjuk di bawah tiket
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(8.5);
+                doc.setTextColor(110, 110, 110);
+                doc.text(
+                    'At the entrance, staff will tear off the committee copy and give you ' + qty +
+                    (qty === 1 ? ' wristband' : ' wristbands') +
+                    '. A ticket without its committee copy has already been used and is no longer valid.',
+                    marginX, ticketTop + ticketHeight + 8, { maxWidth: rightX - marginX }
                 );
 
                 doc.save(order.invoiceNo + '.pdf');
