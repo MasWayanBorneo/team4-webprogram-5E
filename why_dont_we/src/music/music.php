@@ -1,3 +1,46 @@
+<?php
+require __DIR__ . '/../../includes/db.php';
+
+// Top popular songs: lagu dengan is_featured = 1
+$songs = mysqli_fetch_all(mysqli_query($conn, 'SELECT * FROM songs WHERE is_featured = 1 ORDER BY id'), MYSQLI_ASSOC);
+
+// All albums
+$albums = mysqli_fetch_all(mysqli_query($conn, 'SELECT * FROM albums ORDER BY id'), MYSQLI_ASSOC);
+
+// All videos
+$videos = mysqli_fetch_all(mysqli_query($conn, 'SELECT * FROM videos ORDER BY id'), MYSQLI_ASSOC);
+
+// menu Stream: kolom link → [nama platform, ikon]
+$platforms = [
+    'spotify_url' => ['Spotify', 'spotify.svg'],
+    'apple_url'   => ['Apple Music', 'apple.svg'],
+    'youtube_url' => ['YouTube Music', 'ytmusic.svg'],
+];
+
+// tabel albums tidak punya link streaming, jadi kartu album memakai halaman artis
+$artist_links = [
+    'spotify_url' => 'https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw',
+    'apple_url'   => 'https://music.apple.com/us/artist/why-dont-we/1161814111',
+    'youtube_url' => 'https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6',
+];
+
+// gambar bisa berupa path di proyek (assets/...) atau URL lengkap (https://...)
+function media($path)
+{
+    return preg_match('#^https?://#', $path) ? $path : '../../' . $path;
+}
+
+// isi menu Stream dari kolom spotify_url / apple_url / youtube_url yang terisi
+function stream_menu($links, $platforms)
+{
+    foreach ($platforms as $column => [$name, $icon]) {
+        if (!empty($links[$column])) {
+            echo '<a href="' . e($links[$column]) . '" target="_blank" rel="noopener"><img src="../../assets/svg/' . $icon . '" alt="' . $name . '"></a>' . "
+";
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,478 +76,40 @@
   <!-- for card top songs -->
   <h1>See our top popular songs</h1>
   <div class="top-lagu">
-    
-     <div class="player2">
-      <div class="imgbox2">
-         <a href="https://open.spotify.com/track/4zRZAmBQP8vhNPf9i9opXt?si=c4fe6a9302404e1e"><img src="https://t2.genius.com/unsafe/387x387/https%3A%2F%2Fimages.genius.com%2Ff064a6c8ae2d60a424f1c2a07533c3ff.1000x1000x1.png" alt="Album 1"></a>
-      </div>
-
-      <div class="song-title"><h2>fallin</h2></div>
-      <details class="stream-dropdown">
-        <summary>Stream</summary>
-        <div class="stream-menu">
-          <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-          <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-          <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
-        </div>
-      </details>
-       <button class ="lirik2" popovertarget="dropdown3">Show lyric </button>
-      <audio src="../../assets/audio/fallin-adrenaline.mp3" type="audio/mp3" controls>
-        Your browser does not support the audio element.
-      </audio>
-      <div id="dropdown3" popover>
-        <!-- VERSE 1 -->
-<p class="verse">
-  Caught in the moment, not even thinkin' twice<br>
-  Everything's frozen, nothing but you and I<br>
-  Can't stop my heart from beating<br>
-  Why do I love this feeling?<br>
-  Make me a promise, tell me you'll stay with me<br>
-  If I'm bein' honest, I don't know where this leads<br>
-  But that's the only question<br>
-  Baby, don't keep me guessin'
-</p>
-
-<!-- PRE-CHORUS -->
-<p class="pre-chorus">
-  Ooh<br>
-  You are my muse<br>
-  I feel so reckless<br>
-  Oh, you're makin' me, makin' me, makin' me give in
-</p>
-
-<!-- CHORUS -->
-<p class="chorus">
-  Oh, baby, I can feel the rush of adrenalin<br>
-  I'm not scared to jump if you want to<br>
-  Let's just fall in love for the hell of it<br>
-  Maybe we'll just keep fallin'<br>
-  I can feel the rush of adrenaline<br>
-  I'm not scared to jump 'cause I want you<br>
-  Let's just fall in love for the hell of it<br>
-  Maybe we'll just keep fallin'
-</p>
-
-<!-- VERSE 2 -->
-<p class="verse">
-  When I'm around ya, I feel it in my veins<br>
-  There's something about ya that's makin' me go insane<br>
-  We have a storm to weather<br>
-  My little sweet surrender
-</p>
-
-<!-- PRE-CHORUS -->
-<p class="pre-chorus">
-  Ooh <span class="ad-lib">(Woah)</span><br>
-  You are my muse <span class="ad-lib">(You are my muse)</span><br>
-  I feel so reckless<br>
-  Oh, you're makin' me, makin' me, makin' me give in
-</p>
-
-<!-- CHORUS -->
-<p class="chorus">
-  Oh, baby, I can feel the rush of adrenaline<br>
-  I'm not scared to jump if you want to<br>
-  Let's just fall in love for the hell of it<br>
-  Maybe we'll just keep fallin'<br>
-  I can feel the rush of adrenaline<br>
-  I'm not scared to jump 'cause I want you<br>
-  Let's just fall in love for the hell of it<br>
-  Maybe we'll just keep fallin'
-</p>
-
-<!-- POST-CHORUS -->
-<p class="post-chorus">
-  <span class="ad-lib">(Fallin', fallin', fallin', fallin')</span> Fall, fallin'<br>
-  <span class="ad-lib">(Fallin', fallin', fallin', fallin')</span> Fallin'<br>
-  <span class="ad-lib">(Fallin', fallin', fallin', fallin')</span> Fallin'<br>
-  Maybe, we'll just keep fallin'
-</p>
-
-<!-- BRIDGE -->
-<p class="bridge">
-  Ooh<br>
-  You are my muse<br>
-  I feel so reckless<br>
-  Oh, you're makin' me, makin' me, makin' me, makin' me<br>
-  Makin' me, makin' me, makin' me give in
-</p>
-
-<!-- CHORUS -->
-<p class="chorus">
-  Oh, baby, I can feel the rush of adrenaline<br>
-  I'm not scared to jump if you want to<br>
-  Let's just fall in love for the hell of it<br>
-  Maybe we'll just keep fallin' <span class="ad-lib">(Just keep fallin')</span><br>
-  I can feel the rush of adrenaline <span class="ad-lib">(Adrenaline, ooh)</span><br>
-  I'm not scared to jump 'cause I want you <span class="ad-lib">(I want you)</span><br>
-  Let's just fall in love for the hell of it<br>
-  Maybe we'll just keep fallin' <span class="ad-lib">(We'll just keep fallin')</span>
-</p>
-
-<!-- OUTRO -->
-<p class="outro">
-  <span class="ad-lib">(Fallin', fallin', fallin', fallin')</span> Yeah<br>
-  <span class="ad-lib">(Fallin', fallin', fallin', fallin')</span> We'll just keep fallin'<br>
-  <span class="ad-lib">(Fallin', fallin', fallin', fallin')</span> Ooh, ooh<br>
-  Maybe we'll just keep fallin'
-</p>
-      </div>
-    
-    </div>
+    <?php foreach ($songs as $song): ?>
     <div class="player2">
       <div class="imgbox2">
-         <a href="https://open.spotify.com/track/4zRZAmBQP8vhNPf9i9opXt?si=c4fe6a9302404e1e"><img src="../../assets/image/album2.jpg" alt="Album 1"></a>
+        <?php if ($song['spotify_url']): ?>
+        <a href="<?= e($song['spotify_url']) ?>"><img src="<?= e(media($song['cover_image'])) ?>" alt="<?= e($song['title']) ?>"></a>
+        <?php else: ?>
+        <img src="<?= e(media($song['cover_image'])) ?>" alt="<?= e($song['title']) ?>">
+        <?php endif; ?>
       </div>
 
-      <div class="song-title"><h2>What am i</h2></div>
+      <div class="song-title"><h2><?= e($song['title']) ?></h2></div>
       <details class="stream-dropdown">
         <summary>Stream</summary>
         <div class="stream-menu">
-          <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-          <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-          <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
+          <?php stream_menu($song, $platforms); ?>
         </div>
       </details>
-       <button class ="lirik4" popovertarget="dropdown5">Show lyric </button>
-      <audio src="../../assets/audio/what-am-i.mp3" type="audio/mp3" controls>
+      <?php if ($song['lyrics']): ?>
+      <!-- anchor-name / position-anchor per lagu: popup lirik muncul di bawah tombolnya sendiri -->
+      <button class="lirik" popovertarget="lyric-<?= $song['id'] ?>" style="anchor-name: --lyric-<?= $song['id'] ?>">Show lyric </button>
+      <?php endif; ?>
+      <?php if ($song['audio_file']): ?>
+      <audio src="../../<?= e($song['audio_file']) ?>" type="audio/mp3" controls>
         Your browser does not support the audio element.
       </audio>
-      <div id="dropdown5" popover>
-<!-- VERSE 1 -->
-<p class="verse">
-  I met her on a Monday evening<br>
-  She was standing outside of the park and ride<br>
-  And I said, "Hey ma, where you been?"<br>
-  "Been looking for a woman like you for all my life"<br>
-  And she said, "Hola, talk to me, before I have to leave"<br>
-  And one day we could be<br>
-  Maybe more than two lost souls just passing by
-</p>
-
-<!-- PRE-CHORUS -->
-<p class="pre-chorus">
-  Knew I was falling when I looked inside your eyes<br>
-  She said, "I know you are, but what am I?"
-</p>
-
-<!-- CHORUS -->
-<p class="chorus">
-  Tell me, have you seen a sunset<br>
-  Turn into a sunrise?<br>
-  Kiss right through the night?<br>
-  'Cause we should try that sometime<br>
-  Hold you 'til the mornin'<br>
-  And if I said I'm fallin', would you just reply<br>
-  "I know you are, but what am I?"
-</p>
-
-<!-- POST-CHORUS -->
-<p class="post-chorus">
-  <span class="ad-lib">(Ah-ooh, ah-ooh)</span><br>
-  <span class="ad-lib">(Ah-ooh, ah-ooh)</span>
-</p>
-
-<!-- VERSE 2 -->
-<p class="verse">
-  Open the door to my apartment, when we get in<br>
-  Kissin' on my neck and throw my jacket to the side<br>
-  And I know your heart is beating quick<br>
-  And if you put your head on my chest, hear the same in mine, yeah<br>
-  And we'll be making love<br>
-  Until the sun comes up<br>
-  But one day maybe I<br>
-  I could put a ring on your finger before you change your mind, yeah
-</p>
-
-<!-- PRE-CHORUS -->
-<p class="pre-chorus">
-  Knew I was falling when I looked inside your eyes<br>
-  She said, "I know you are, but what am I?"
-</p>
-
-<!-- CHORUS -->
-<p class="chorus">
-  Tell me, have you seen a sunset<br>
-  Turn into a sunrise?<br>
-  Kiss right through the night?<br>
-  'Cause we should try that sometime<br>
-  Hold you 'til the mornin'<br>
-  And if I said I'm fallin', would you just reply<br>
-  "I know you are, but what am I?"
-</p>
-
-<!-- POST-CHORUS -->
-<p class="post-chorus">
-  <span class="ad-lib">(Ooh-ooh, ooh-ooh)</span><br>
-  What am I?<br>
-  <span class="ad-lib">(Ah-ooh, ah-ooh)</span>
-</p>
-
-<!-- BRIDGE -->
-<p class="bridge">
-  Tell me, have you seen a sunset<br>
-  Turn into a sunrise?<br>
-  Kiss right through the night?<br>
-  'Cause we should try that sometime<br>
-  Hold you 'til the mornin'<br>
-  And if I said I'm fallin', would you just reply<br>
-  "I know you are, but what am I?"
-</p>
-
-<!-- CHORUS -->
-<p class="chorus">
-  Tell me, have you seen a sunset <span class="ad-lib">(Yeah)</span><br>
-  Turn into a sunrise?<br>
-  Kiss right through the night? <span class="ad-lib">(The night)</span><br>
-  'Cause we should try that sometime <span class="ad-lib">(Try that sometime)</span><br>
-  Hold you 'til the mornin' <span class="ad-lib">(Hold you 'til the morning)</span><br>
-  And if I said I'm fallin', would you just reply<br>
-  "I know you are, but what am I?"
-</p>
-
-<!-- POST-CHORUS -->
-<p class="post-chorus">
-  What am I?<br>
-  What am I?<br>
-  Oh, what am I?<br>
-  What am I?<br>
-  What am I?
-</p>
-
-<!-- OUTRO -->
-<p class="outro">
-  What am I?
-</p>
+      <?php endif; ?>
+      <?php if ($song['lyrics']): ?>
+      <div id="lyric-<?= $song['id'] ?>" class="lyric-popup" popover style="position-anchor: --lyric-<?= $song['id'] ?>">
+        <?php // lirik disimpan sebagai HTML (<p class="verse">, <br>), jadi dicetak apa adanya ?>
+        <?= $song['lyrics'] ?>
       </div>
-    
+      <?php endif; ?>
     </div>
-     <div class="player2">
-      <div class="imgbox2">
-         <a href="https://open.spotify.com/track/4zRZAmBQP8vhNPf9i9opXt?si=c4fe6a9302404e1e"><img src="../../assets/image/trust-fund-baby.jpg" alt="Album 1"></a>
-      </div>
-
-      <div class="song-title"><h2>trust fund baby</h2></div>
-      <details class="stream-dropdown">
-        <summary>Stream</summary>
-        <div class="stream-menu">
-          <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-          <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-          <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
-        </div>
-      </details>
-       <button class ="lirik3" popovertarget="dropdown4">Show lyric </button>
-      <audio src="../../assets/audio/trust-fund-baby.mp3" type="audio/mp3" controls>
-        Your browser does not support the audio element.
-      </audio>
-     <div id="dropdown4" popover >
-      <!-- VERSE 1 -->
-<p class="verse">
-  I don't want a girl who gets a car for her sweet 16<br>
-  Or spends a stack of dollar bills on a limousine<br>
-  I want a girl who takes the bus and who wears baggy jeans<br>
-  Rockin' Nike Airs, what the hell are Louboutins?<br>
-  Don't want no fake tan, short skirt, daddy's money don't work<br>
-  Shop until you drop on the town<br>
-  I want a smart girl, stronger than her father<br>
-  Someone who will laugh and tryna fit in the crowd <span class="ad-lib">(ah-ow, ow)</span>
-</p>
-
-<!-- PRE-CHORUS -->
-<p class="pre-chorus">
-  And all we used to dream about<br>
-  Is getting rich and getting out<br>
-  Move to the nicer part of town<br>
-  Where we'd have numbers on our house<br>
-  It took a while to figure out<br>
-  What type of girl that I'm about<br>
-  Who brings the real man out of me, yah
-</p>
-
-<!-- CHORUS -->
-<p class="chorus">
-  I don't really want no trust fund baby<br>
-  I like my women independent<br>
-  And I say to people, "That's my lady"<br>
-  And we don't need nothing e-e-e-else<br>
-  I don't want no trust fund baby<br>
-  Save your money, don't spend it<br>
-  And I say to people, "That's my lady"<br>
-  And we don't need nothing e-e-e-else <span class="ad-lib">(I don't want no-)</span>
-</p>
-
-<!-- VERSE 2 -->
-<p class="verse">
-  Don't want a girl who take selfies, want her makeup free<br>
-  Don't want no mean girl lady, a pink prom Queen<br>
-  I want a girl who climbs trees, always dirt on her jeans<br>
-  Her daddy told her how to fix cars, maybe she could fix me<br>
-  I want a throwback kid who loves Missy Elliot<br>
-  Who for my birthday, makes a mixtape and puts it on cassette<br>
-  Want a girl with common sense, who's dripping in competence<br>
-  Don't wanna die to get rich, but she loves 50 Cent <span class="ad-lib">(ah-ow, ow)</span>
-</p>
-
-<!-- PRE-CHORUS -->
-<p class="pre-chorus">
-  And all we used to dream about<br>
-  Is getting rich and getting out<br>
-  Move to the nicer part of town<br>
-  Where we'd have numbers on our house<br>
-  It took a while to figure out<br>
-  What type of girl that I'm about<br>
-  Who brings the real man out of me, yah
-</p>
-
-<!-- CHORUS -->
-<p class="chorus">
-  I don't really want no trust fund baby<br>
-  I like my women independent<br>
-  And I say to people, "That's my lady"<br>
-  And we don't need nothing e-e-e-else<br>
-  I don't want no trust fund baby<br>
-  Save your money, don't spend it<br>
-  And I say to people, "That's my lady"<br>
-  And we don't need nothing e-e-e-else
-</p>
-
-<!-- POST-CHORUS -->
-<p class="post-chorus">
-  I don't want no- <span class="ad-lib">(no, I don't want me)</span><br>
-  I don't want no trust fund baby <span class="ad-lib">(no, I don't want me)</span><br>
-  I just want me a proper lady <span class="ad-lib">(no, I don't want me)</span><br>
-  I don't want no trust fund baby <span class="ad-lib">(no, I don't want me)</span>
-</p>
-
-<!-- CHORUS -->
-<p class="chorus">
-  I don't really want no trust fund baby<br>
-  I like my women independent <span class="ad-lib">(hey!)</span><br>
-  And I say to people, "That's my lady" <span class="ad-lib">(that's my lady, na-na-na-na-na)</span><br>
-  And we don't need nothing e-e-e-else
-</p>
-
-<!-- OUTRO -->
-<p class="outro">
-  I don't want no- <span class="ad-lib">(no, I don't want me)</span><br>
-  I don't want no trust fund baby <span class="ad-lib">(no, I don't want me)</span><br>
-  I just want me a proper lady <span class="ad-lib">(no, I don't want me)</span><br>
-  I don't want no trust fund baby <span class="ad-lib">(no, I don't want me)</span><br>
-  <br>
-  No, I don't want me
-</p>
-     </div>
-    
-    </div>
-    <div class="player2">
-      <div class="imgbox2">
-         <a href="https://open.spotify.com/track/4zRZAmBQP8vhNPf9i9opXt?si=c4fe6a9302404e1e"><img src="../../assets/image/8letters.jpg" alt="Album 1"></a>
-      </div>
-
-      <div class="song-title"><h2>8 Letters</h2></div>
-      <details class="stream-dropdown">
-        <summary>Stream</summary>
-        <div class="stream-menu">
-          <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-          <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-          <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
-        </div>
-      </details>
-       <button class ="lirik" popovertarget="dropdown2">Show lyric </button>
-      <audio src="../../assets/audio/wdw.mp3" type="audio/mp3" controls>
-        Your browser does not support the audio element.
-      </audio>
-      <div id="dropdown2"  popover>
-       <p class="verse">
-  You know my worst, see me hurt, but you don't judge<br>
-  That right there is the scariest feeling<br>
-  Opening and closing up again<br>
-  I've been hurt, so I don't trust<br>
-  Now here we are, staring at the ceiling
-</p>
-
-<!-- PRE-CHORUS -->
-<p class="pre-chorus">
-  I've said those words before, but it was a lie<br>
-  And you deserve to hear them a thousand times
-</p>
-
-<!-- CHORUS -->
-<p class="chorus">
-  If all it is is eight letters<br>
-  Why is it so hard to say?<br>
-  If all it is is eight letters<br>
-  Why am I in my own way?<br>
-  Why do I pull you close?<br>
-  And then ask you for space<br>
-  If all it is is eight letters<br>
-  Why is it so hard to say?
-</p>
-
-<!-- VERSE 2 -->
-<p class="verse">
-  Isn't it amazing how almost every line on our hands align?<br>
-  When your hand's in mine<br>
-  It's like I'm whole again, isn't that a sign?<br>
-  I should speak my mind
-</p>
-
-<!-- PRE-CHORUS -->
-<p class="pre-chorus">
-  I've said those words before, but it was a lie<br>
-  And you deserve to hear them a thousand times
-</p>
-
-<!-- CHORUS -->
-<p class="chorus">
-  If all it is is eight letters<br>
-  Why is it so hard to say?<br>
-  If all it is is eight letters<br>
-  Why am I in my own way?<br>
-  Why do I pull you close?<br>
-  And then ask you for space<br>
-  If all it is is eight letters<br>
-  Why is it so hard to say? <span class="ad-lib">(Woah, oh yeah)</span>
-</p>
-
-<!-- BRIDGE -->
-<p class="bridge">
-  When I close my eyes<br>
-  It's you there in my mind<br>
-  When I close my eyes
-</p>
-
-<!-- CHORUS -->
-<p class="chorus">
-  If all it is is eight letters<br>
-  Why is it so hard to say?<br>
-  If all it is is eight letters<br>
-  Why am I in my own way?<br>
-  Why do I pull you close?<br>
-  And then ask you for space<br>
-  If all it is is eight letters<br>
-  Why is it so hard to say?<br>
-  If all it is is eight letters
-</p>
-
-<!-- OUTRO -->
-<p class="bridge">
-  When I close my eyes<br>
-  It's you there in my mind <span class="ad-lib">(it's only you)</span><br>
-  When I close my eyes<br>
-  <br>
-  If all it is is eight letters<br>
-  <br>
-  When I close my eyes<br>
-  It's you there in my mind <span class="ad-lib">(you)</span><br>
-  When I close my eyes<br>
-  <br>
-  If all it is is eight letters
-</p>
-       
-      </div>
-    
-    </div>
+    <?php endforeach; ?>
   </div><!-- /.top-lagu -->
 
 <article class="music-main">
@@ -512,176 +117,21 @@
     <h1>All albums of Why Don't We</h1>
   </div>
   <div class="players-container">
+    <?php foreach ($albums as $album): ?>
     <div class="player">
-      <h2>2018</h2>
+      <h2><?= e($album['release_year']) ?></h2>
       <div class="imgbox">
-         <a href="https://open.spotify.com/track/4zRZAmBQP8vhNPf9i9opXt?si=c4fe6a9302404e1e"><img src="../../assets/image/8letters.jpg" alt="Album 1"></a>
+        <img src="<?= e(media($album['cover_image'])) ?>" alt="<?= e($album['title']) ?>">
       </div>
-      
-      <div class="song-title"><h2>Letters</h2></div>
+      <div class="song-title"><h2><?= e($album['title']) ?></h2></div>
       <details class="stream-dropdown">
         <summary>Stream</summary>
         <div class="stream-menu">
-          <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-          <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-          <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
+          <?php stream_menu($artist_links, $platforms); ?>
         </div>
       </details>
-      <!-- <audio src="../../assets/audio/wdw.mp3" type="audio/mp3" controls>
-        Your browser does not support the audio element.
-      </audio> -->
     </div>
-
-    <div class="player">
-      <h2>2018</h2>
-      <div class="imgbox">
-        <a href="#"><img src="../../assets/image/flower.jpg" alt="Album 2"></a>
-      </div>
-      <div class="song-title"><h2>let me down easy (lie)</h2></div>
-      <details class="stream-dropdown">
-        <summary>Stream</summary>
-        <div class="stream-menu">
-          <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-          <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-          <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
-        </div>
-      </details>
-      
-      
-    </div>
-
-    <div class="player">
-      <h2>2017</h2>
-      <div class="imgbox">
-        <a href="#"><img src="../../assets/image/HDYLS-new.jpg" alt="Album 3"></a>
-      </div>
-      <div class="song-title"><h2>how do you love somebody</h2></div>
-    <details class="stream-dropdown">
-      <summary>Stream</summary>
-      <div class="stream-menu">
-        <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-        <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-        <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
-      </div>
-    </details>
-    </div>
-    <div class="player">
-      <h2>2019</h2>
-      <div class="imgbox">
-        <a href="#"><img src="../../assets/image/PRESAVE-COVER_1_0.jpg" alt="Album 4"></a>
-      </div>
-      <div class="song-title"><h2>just friends</h2></div>
-     <details class="stream-dropdown">
-       <summary>Stream</summary>
-       <div class="stream-menu">
-         <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-         <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-         <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
-       </div>
-     </details>
-      
-    </div>
-    <div class="player">
-      <h2>2017</h2>
-      <div class="imgbox">
-        <a href="#"><img src="../../assets/image/wdw-cover-final.jpg" alt="Album 5"></a>
-      </div>
-      <div class="song-title"><h2>good times and bad ones</h2></div>
-      <details class="stream-dropdown">
-        <summary>Stream</summary>
-        <div class="stream-menu">
-          <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-          <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-          <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
-        </div>
-      </details>
-      
-    </div>
-    <div class="player">
-      <h2>2016</h2>
-      <div class="imgbox">
-        <img src="../../assets/image/lovebackcover1_0.jpg" alt="Album 6">
-      </div>
-      <div class="song-title"><h2>love back</h2></div>
-      <details class="stream-dropdown">
-        <summary>Stream</summary>
-        <div class="stream-menu">
-          <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-          <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-          <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
-        </div>
-      </details>
-      
-    </div>
-     <div class="player">
-      <h2>2016</h2>
-      <div class="imgbox">
-        <img src="../../assets/image/fallin.jpg" alt="Album 7">
-      </div>
-      <div class="song-title"><h2>Fallin</h2></div>
-      <details class="stream-dropdown">
-        <summary>Stream</summary>
-        <div class="stream-menu">
-          <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-          <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-          <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
-        </div>
-      </details>
-      
-    </div>
-     
-     <div class="player">
-      <h2>2019</h2>
-      <div class="imgbox">
-        <img src="../../assets/image/these-girl.png" alt="Album 8">
-      </div>
-      <div class="song-title"><h2>these girl</h2></div>
-      <details class="stream-dropdown">
-        <summary>Stream</summary>
-        <div class="stream-menu">
-          <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-          <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-          <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
-        </div>
-      </details>
-      
-    </div>
-
-     <div class="player">
-      <h2>2018</h2>
-      <div class="imgbox">
-        <img src="../../assets/image/trust-fund-baby.jpg" alt="Album 9">
-      </div>
-      <div class="song-title"><h2>trust fund baby</h2></div>
-      <details class="stream-dropdown">
-        <summary>Stream</summary>
-        <div class="stream-menu">
-          <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-          <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-          <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
-        </div>
-      </details>
-      
-      
-    </div>
-
-     <div class="player">
-      <h2>2020</h2>
-      <div class="imgbox">
-        <img src="../../assets/image/why-dont-we-just.jpg" alt="Album 10">
-      </div>
-      <div class="song-title"><h2>why don't we just</h2></div>
-      <details class="stream-dropdown">
-        <summary>Stream</summary>
-        <div class="stream-menu">
-          <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank" rel="noopener"><img src="../../assets/svg/spotify.svg" alt="Spotify"></a>
-          <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank" rel="noopener"><img src="../../assets/svg/apple.svg" alt="Apple Music"></a>
-          <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank" rel="noopener"><img src="../../assets/svg/ytmusic.svg" alt="YouTube Music"></a>
-        </div>
-      </details>
-      
-    </div>
-    
+    <?php endforeach; ?>
   </div> 
  
 <!-- <div class="streaming">
@@ -697,14 +147,9 @@
 </div> -->
 <h1>all videos</h1>
 <div class="video">
-  <iframe loading="lazy" src="https://www.youtube.com/embed/C3DlM19x4RQ?si=bCmOd3II_LufLGhp&amp;start=108" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  <iframe loading="lazy" src="https://www.youtube.com/embed/ZxgbQz4n8-s?si=oToy1MldmcC5XQLU&amp;start=108" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  <iframe loading="lazy" src="https://www.youtube.com/embed/fOmhbMXY52o?si=uzksPjRJRVbitREx&amp;start=108" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  <iframe loading="lazy" src="https://www.youtube.com/embed/vgx-R_4s12U?si=5qgqHBqX4XXpWq_V&amp;start=108" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  <iframe loading="lazy" src="https://www.youtube.com/embed/Y15MOr9saxE?si=yTtVxuHrKAd8aIMu&amp;start=108" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  <iframe loading="lazy" src="https://www.youtube.com/embed/vJF9kJxQpBY?si=LAaitcoQNRLfqB0-&amp;start=108" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  <iframe loading="lazy" src="https://www.youtube.com/embed/5qUfjqksDic?si=EAVPQhqgjpppVQAB&amp;start=108" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  <iframe loading="lazy" src="https://www.youtube.com/embed/Oy8H4zUxWjg?si=Ja_tofg5R3veKKkl&amp;start=108" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <?php foreach ($videos as $video): ?>
+  <iframe loading="lazy" src="https://www.youtube.com/embed/<?= e($video['youtube_id']) ?>?start=<?= (int) $video['start_second'] ?>" title="<?= e($video['title']) ?>" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  <?php endforeach; ?>
 </div>
 </article>
 
