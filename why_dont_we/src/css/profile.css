@@ -304,58 +304,12 @@ body:has(.limelight-modal[open]) {
     background: rgba(1, 9, 18, 0.2);
 }
 
-/* pop-up setelah berhasil daftar Limelight: muncul di atas tengah layar,
-   lalu memudar sendiri (class .is-hidden ditambah oleh script) */
-.limelight-toast {
-    position: fixed;
-    top: 24px;
-    left: 50%;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    width: min(440px, calc(100% - 32px));
-    padding: 16px 16px 16px 20px;
-    border-left: 6px solid var(--pink);
-    border-radius: var(--card-radius);
-    background: #ffffff;
-    color: var(--card-ink);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.45);
-    transform: translateX(-50%);
-    animation: limelight-toast-in 0.35s ease-out;
-    transition: opacity 0.4s, transform 0.4s;
-}
-.limelight-toast .fa-star {
-    flex-shrink: 0;
-    color: var(--pink);
-    font-size: 30px;
-}
-.limelight-toast div {
-    flex: 1;
-    font-size: 14px;
-}
-.limelight-toast-title {
-    font-family: var(--title-font);
-    font-size: 18px;
-}
-.limelight-toast.is-hidden {
-    opacity: 0;
-    transform: translate(-50%, -20px);
-    pointer-events: none;
-}
-@keyframes limelight-toast-in {
-    from {
-        opacity: 0;
-        transform: translate(-50%, -20px);
-    }
-}
+/* pop-up setelah berhasil daftar memakai .toast dari base.css */
 
 @media (prefers-reduced-motion: reduce) {
     .limelight-cta,
-    .limelight-cta .fa-star,
-    .limelight-toast {
+    .limelight-cta .fa-star {
         transition: none;
-        animation: none;
     }
 }
 

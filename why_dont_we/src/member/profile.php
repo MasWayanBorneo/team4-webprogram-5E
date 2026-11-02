@@ -219,14 +219,14 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
             </dialog>
 
             <?php if (isset($_GET['joined'])): ?>
-            <!-- pop-up setelah berhasil daftar; hilang sendiri setelah beberapa detik (script di bawah) -->
-            <div class="limelight-toast" id="limelight-toast" role="status">
-                <i class="fa-solid fa-star" aria-hidden="true"></i>
-                <div>
-                    <p class="limelight-toast-title">Welcome to Limelight!</p>
+            <!-- pop-up setelah berhasil daftar (style .toast di base.css); hilang sendiri setelah beberapa detik -->
+            <div class="toast" id="limelight-toast" role="status">
+                <span class="toast-icon" aria-hidden="true"><i class="fa-solid fa-star"></i></span>
+                <div class="toast-body">
+                    <p class="toast-title">Welcome to Limelight!</p>
                     <p>Check your email to confirm your membership.</p>
                 </div>
-                <button type="button" class="limelight-close" id="limelight-toast-close" aria-label="Close">&times;</button>
+                <button type="button" class="toast-close" id="limelight-toast-close" aria-label="Close">&times;</button>
             </div>
             <?php endif; ?>
         </div>
