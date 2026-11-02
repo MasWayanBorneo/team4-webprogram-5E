@@ -77,45 +77,9 @@ body {
   margin-top: auto;
 }
 
-/* Tombol lirik pertama - membuka lirik lagu pertama */
+/* Tombol "Show lyric" di setiap kartu lagu populer.
+   Posisi popup-nya diikat lewat anchor-name per lagu (inline style di music.php). */
 .player2 .lirik {
-  font-size: 30px;
-  text-decoration: underline;
-  border-radius: 10px;
-  border: var(--secondary-color);
-  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-  margin-top: auto;
-}
-
-/* Tombol lirik kedua - membuka lirik lagu kedua */
-.player2 .lirik2 {
-  font-size: 30px;
-  text-decoration: underline;
-  border-radius: 10px;
-  border: var(--secondary-color);
-  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  margin-bottom: 9px;
-  width: 100%;
-  margin-top: auto;
-}
-.player2 .lirik4 {
-  font-size: 30px;
-  text-decoration: underline;
-  border-radius: 10px;
-  border: var(--secondary-color);
-  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-  margin-top: auto;
-}
-
-/* Tombol lirik ketiga - membuka lirik lagu ketiga */
-.player2 .lirik3 {
   font-size: 30px;
   text-decoration: underline;
   border-radius: 10px;
@@ -212,25 +176,10 @@ h2 {
   margin-top: auto;
 }
 
-/* Titik anchor lirik pertama - acuan posisi popup lirik pertama */
-.lirik {
-  anchor-name: --lyric;
-}
-
-/* Titik anchor lirik kedua - acuan posisi popup lirik kedua */
-.lirik2 {
-  anchor-name: --lyric2;
-}
-
-/* Titik anchor lirik ketiga - acuan posisi popup lirik ketiga */
-.lirik3 {
-  anchor-name: --lyric3;
-}
-.lirik4 {
-  anchor-name: --lyric4;
-}
-/* Popup lirik ketiga - lirik yang bisa di-scroll dengan background gelap */
-#dropdown4 {
+/* Popup lirik - lirik yang bisa di-scroll dengan background gelap.
+   position-anchor diisi per lagu (inline style di music.php) supaya muncul tepat
+   di bawah tombol lagunya sendiri. */
+.lyric-popup {
   color: #fffb00;
   border-color: #000000;
   background-color: #3e3a3a;
@@ -239,62 +188,6 @@ h2 {
   height: 500px;
   padding: 20px;
   position: absolute;
-  position-anchor: --lyric3;
-  position-area: bottom center;
-  border-radius: 0px;
-  justify-self: center;
-  font-family: Caveat;
-  font-weight: bold;
-  font-size: 30px;
-}
-#dropdown5 {
-  color: #fffb00;
-  border-color: #000000;
-  background-color: #3e3a3a;
-  width: 100%;
-  overflow-y: auto;
-  height: 500px;
-  padding: 20px;
-  position: absolute;
-  position-anchor: --lyric4;
-  position-area: bottom center;
-  border-radius: 0px;
-  justify-self: center;
-  font-family: Caveat;
-  font-weight: bold;
-  font-size: 30px;
-}
-
-/* Popup lirik kedua - lirik yang bisa di-scroll dengan background gelap */
-#dropdown3 {
-  color: #fffb00;
-  border-color: #000000;
-  background-color: #3e3a3a;
-  width: 100%;
-  overflow-y: auto;
-  height: 500px;
-  padding: 20px;
-  position: absolute;
-  position-anchor: --lyric2;
-  position-area: bottom center;
-  border-radius: 0px;
-  justify-self: center;
-  font-family: Caveat;
-  font-weight: bold;
-  font-size: 30px;
-}
-
-/* Popup lirik pertama - lirik yang bisa di-scroll dengan background gelap */
-#dropdown2 {
-  color: #fffb00;
-  border-color: #000000;
-  background-color: #3e3a3a;
-  width: 100%;
-  overflow-y: auto;
-  height: 500px;
-  padding: 20px;
-  position: absolute;
-  position-anchor: --lyric;
   position-area: bottom center;
   border-radius: 0px;
   justify-self: center;
@@ -568,9 +461,6 @@ audio::-webkit-media-controls-mute-button {
   .player2 .tombol,
   .stream-dropdown > summary,
   .player2 .lirik,
-  .player2 .lirik2,
-  .player2 .lirik3,
-  .player2 .lirik4,
   .player button {
     font-size: 22px;
   }
@@ -591,10 +481,7 @@ audio::-webkit-media-controls-mute-button {
     gap: 16px;
   }
 
-  #dropdown2,
-  #dropdown3,
-  #dropdown4,
-  #dropdown5 {
+  .lyric-popup {
     height: 70vh;
     font-size: 24px;
   }
