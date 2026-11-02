@@ -2,20 +2,26 @@
 require __DIR__ . '/../../includes/db.php';
 
 // konser yang bisa dipesan: available (tiket biasa) dan coming_soon (pre-order)
-$concerts = [];
+$all_concerts = [];
 $result = mysqli_query($conn, "SELECT id, venue_name, event_date, status FROM concerts WHERE status IN ('available', 'coming_soon') ORDER BY event_date");
 foreach (mysqli_fetch_all($result, MYSQLI_ASSOC) as $row) {
-    $concerts[(int) $row['id']] = $row;
+    $all_concerts[(int) $row['id']] = $row;
 }
 
-// konser terpilih: dari form (POST), dari link "Get Ticket" / "Pre Order" (?concert=), atau konser pertama
+// konser terpilih: dari form (POST) atau dari link "Get Ticket" / "Pre Order" (?concert=);
+// tanpa pilihan → konser available pertama, kalau tidak ada baru konser pre-order pertama
 $concert_id = (int) ($_POST['concert'] ?? $_GET['concert'] ?? 0);
-if (!isset($concerts[$concert_id])) {
-    $concert_id = $concerts ? (int) array_key_first($concerts) : 0;
+if (!isset($all_concerts[$concert_id])) {
+    $available = array_filter($all_concerts, fn($c) => $c['status'] === 'available');
+    $concert_id = (int) array_key_first($available ?: $all_concerts);
 }
 
 // pre-order: konser belum mulai dijual, pesanan disimpan 'pending' sampai dikonfirmasi panitia
-$is_preorder = $concert_id && $concerts[$concert_id]['status'] === 'coming_soon';
+$is_preorder = $concert_id && $all_concerts[$concert_id]['status'] === 'coming_soon';
+
+// dropdown hanya berisi konser dengan jenis penjualan yang sama: form pre-order hanya
+// konser coming_soon, form tiket biasa hanya konser available
+$concerts = array_filter($all_concerts, fn($c) => ($c['status'] === 'coming_soon') === $is_preorder);
 
 // kategori tiket konser terpilih + sisa kuota (pesanan yang dibatalkan tidak dihitung)
 $stmt = mysqli_prepare($conn, "
@@ -35,8 +41,7 @@ foreach (mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC) as $row) 
 
 function concert_label($concert)
 {
-    return $concert['venue_name'] . ' — ' . date('j F Y', strtotime($concert['event_date']))
-        . ($concert['status'] === 'coming_soon' ? ' (Pre-order)' : '');
+    return $concert['venue_name'] . ' — ' . date('j F Y', strtotime($concert['event_date']));
 }
 
 /* --- form → tabel ticket_orders ------------------------------------------- */
