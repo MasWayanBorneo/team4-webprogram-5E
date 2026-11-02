@@ -1,3 +1,29 @@
+<?php
+require __DIR__ . '/includes/db.php';
+
+// The Band
+$members = mysqli_fetch_all(mysqli_query($conn, 'SELECT slug, full_name, roles, photo FROM members ORDER BY sort_order'), MYSQLI_ASSOC);
+
+// On Tour: 3 konser pertama yang belum sold out (sama seperti halaman Tour & tiket)
+$concerts = mysqli_fetch_all(mysqli_query($conn, "
+    SELECT id, venue_name, city, country, event_date, status
+    FROM concerts
+    WHERE status <> 'sold_out'
+    ORDER BY event_date
+    LIMIT 3"), MYSQLI_ASSOC);
+
+// Merch: 4 produk, yang is_featured lebih dulu
+$products = mysqli_fetch_all(mysqli_query($conn, 'SELECT name, price, image FROM products WHERE is_active = 1 ORDER BY is_featured DESC, id LIMIT 4'), MYSQLI_ASSOC);
+
+// Latest News: 3 berita terbaru
+$latest_news = mysqli_fetch_all(mysqli_query($conn, 'SELECT slug, title, excerpt, thumbnail, published_at FROM news ORDER BY published_at DESC, id DESC LIMIT 3'), MYSQLI_ASSOC);
+
+// 65.00 → $65, 12.50 → $12.50
+function price($amount)
+{
+    return '$' . (floor($amount) == $amount ? number_format($amount) : number_format($amount, 2));
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,26 +135,12 @@
       </header>
 
       <ul class="members">
-        <li class="member"><a href="src/member/member.php?m=jonah">
-          <img src="assets/image/jonah.jpg" alt="Jonah Marais">
-          <h3 class="member__name">Jonah Marais</h3><p class="member__role">Vocals</p>
+        <?php foreach ($members as $member): ?>
+        <li class="member"><a href="src/member/member.php?m=<?= e($member['slug']) ?>">
+          <img src="<?= e($member['photo']) ?>" alt="<?= e($member['full_name']) ?>">
+          <h3 class="member__name"><?= e($member['full_name']) ?></h3><p class="member__role"><?= e($member['roles']) ?></p>
         </a></li>
-        <li class="member"><a href="src/member/member.php?m=corbyn">
-          <img src="assets/image/besson-corbyn-image.jpg" alt="Corbyn Besson">
-          <h3 class="member__name">Corbyn Besson</h3><p class="member__role">Vocals</p>
-        </a></li>
-        <li class="member"><a href="src/member/member.php?m=daniel">
-          <img src="assets/image/daniel.jpg" alt="Daniel Seavey">
-          <h3 class="member__name">Daniel Seavey</h3><p class="member__role">Vocals · Multi</p>
-        </a></li>
-        <li class="member"><a href="src/member/member.php?m=jack">
-          <img src="assets/image/jack.jpg" alt="Jack Avery">
-          <h3 class="member__name">Jack Avery</h3><p class="member__role">Vocals</p>
-        </a></li>
-        <li class="member"><a href="src/member/member.php?m=zach">
-          <img src="assets/image/zach.jpg" alt="Zach Herron">
-          <h3 class="member__name">Zach Herron</h3><p class="member__role">Vocals</p>
-        </a></li>
+        <?php endforeach; ?>
       </ul>
     </div>
   </section>
@@ -142,11 +154,22 @@
       </header>
 
       <ul class="tour-list">
+        <?php foreach ($concerts as $concert): ?>
         <li class="tour-row">
-          <div class="tour-date"><span class="day">12</span><span class="mon">Aug</span></div>
-          <div class="tour-venue"><div class="v">Jakarta Convention Center</div><div class="c">Jakarta, Indonesia</div></div>
-          <a class="btn btn--primary" href="src/ticket/ticket.php">Get Tickets</a>
+          <div class="tour-date"><span class="day"><?= date('j', strtotime($concert['event_date'])) ?></span><span class="mon"><?= date('M', strtotime($concert['event_date'])) ?></span></div>
+          <div class="tour-venue"><div class="v"><?= e($concert['venue_name']) ?></div><div class="c"><?= e($concert['city'] . ', ' . $concert['country']) ?></div></div>
+          <?php if ($concert['status'] === 'available'): ?>
+          <a class="btn btn--primary" href="src/ticket/ticket.php?concert=<?= $concert['id'] ?>">Get Tickets</a>
+          <?php else: ?>
+          <a class="btn btn--primary" href="src/tour/tour.php">Coming Soon</a>
+          <?php endif; ?>
         </li>
+        <?php endforeach; ?>
+        <?php if (!$concerts): ?>
+        <li class="tour-row">
+          <div class="tour-venue"><div class="v">No upcoming shows</div><div class="c">New dates will be announced soon.</div></div>
+        </li>
+        <?php endif; ?>
       </ul>
     </div>
   </section>
@@ -160,22 +183,12 @@
       </header>
 
       <ul class="products">
+        <?php foreach ($products as $product): ?>
         <li class="product"><a href="src/merch/merch.php">
-          <img src="assets/image/hoodie.png" alt="Limited Edition Hoodie">
-          <h3 class="product__name">Limited Edition Hoodie</h3><p class="product__price">$65</p>
+          <img src="<?= e($product['image']) ?>" alt="<?= e($product['name']) ?>">
+          <h3 class="product__name"><?= e($product['name']) ?></h3><p class="product__price"><?= price($product['price']) ?></p>
         </a></li>
-        <li class="product"><a href="src/merch/merch.php">
-          <img src="assets/image/gelang.png" alt="Bracelet">
-          <h3 class="product__name">Bracelet</h3><p class="product__price">$65</p>
-        </a></li>
-        <li class="product"><a href="src/merch/merch.php">
-          <img src="assets/image/pngtree-black-tshirt.png" alt="Black T-Shirt">
-          <h3 class="product__name">Black T-Shirt</h3><p class="product__price">$65</p>
-        </a></li>
-        <li class="product"><a href="src/merch/merch.php">
-          <img src="assets/image/kaoskaki.png" alt="Socks">
-          <h3 class="product__name">Socks</h3><p class="product__price">$65</p>
-        </a></li>
+        <?php endforeach; ?>
       </ul>
     </div>
   </section>
@@ -189,30 +202,16 @@
       </header>
 
       <ul class="news">
-        <li><a href="src/article/article.php?slug=tour-dates-revealed"><article class="news-card">
-          <img src="assets/image/lovebackcover1_0.jpg" alt="">
+        <?php foreach ($latest_news as $item): ?>
+        <li><a href="src/article/article.php?slug=<?= e($item['slug']) ?>"><article class="news-card">
+          <img src="<?= e($item['thumbnail']) ?>" alt="">
           <div class="news-card__body">
-            <time datetime="2026-06">June 2026</time>
-            <h3>World tour dates announced</h3>
-            <p>Southeast Asia leg goes on sale Friday — full routing inside.</p>
+            <time datetime="<?= date('Y-m-d', strtotime($item['published_at'])) ?>"><?= date('F Y', strtotime($item['published_at'])) ?></time>
+            <h3><?= e($item['title']) ?></h3>
+            <p><?= e($item['excerpt']) ?></p>
           </div>
         </article></a></li>
-        <li><a href="src/article/article.php?slug=international-tour-begins"><article class="news-card">
-          <img src="assets/image/something-different.png" alt="">
-          <div class="news-card__body">
-            <time datetime="2026-06">June 2026</time>
-            <h3>International tour begins</h3>
-            <p>Europe, Asia, and Latin America — the band's first run abroad since 2019.</p>
-          </div>
-        </article></a></li>
-        <li><a href="src/article/article.php?slug=new-music-video-released"><article class="news-card">
-          <img src="assets/image/featured-news.jpg" alt="">
-          <div class="news-card__body">
-            <time datetime="2026-04">April 2026</time>
-            <h3>Behind the scenes: the new video</h3>
-            <p>Two days, one set, and the making of the latest single.</p>
-          </div>
-        </article></a></li>
+        <?php endforeach; ?>
       </ul>
     </div>
   </section>

@@ -595,6 +595,12 @@ button {
   color: var(--card-ink-soft);
   font-size: 0.92rem;
   margin: 0;
+  /* excerpt dari database bisa panjang — tampilkan maksimal 3 baris */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ============================================================================
