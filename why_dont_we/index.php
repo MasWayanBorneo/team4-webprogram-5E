@@ -161,7 +161,7 @@ function price($amount)
           <?php if ($concert['status'] === 'available'): ?>
           <a class="btn btn--primary" href="src/ticket/ticket.php?concert=<?= $concert['id'] ?>">Get Tickets</a>
           <?php else: ?>
-          <a class="btn btn--primary" href="src/tour/tour.php">Coming Soon</a>
+          <a class="btn btn--primary" href="src/ticket/ticket.php?concert=<?= $concert['id'] ?>">Pre Order</a>
           <?php endif; ?>
         </li>
         <?php endforeach; ?>

@@ -102,7 +102,7 @@ $statuses = [
                     <?php if ($concert['status'] === 'available'): ?>
                     <a href="../ticket/ticket.php?concert=<?= $concert['id'] ?>" class="ticket-link">Get Ticket</a>
                     <?php elseif ($concert['status'] === 'coming_soon'): ?>
-                    <button>Pre Order</button>
+                    <a href="../ticket/ticket.php?concert=<?= $concert['id'] ?>" class="ticket-link">Pre Order</a>
                     <?php endif; ?>
                 </div>
             </article>
