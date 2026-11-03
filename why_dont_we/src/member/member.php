@@ -1,8 +1,8 @@
 <?php
-/* ============================================================================
+/*
    HALAMAN PERSONEL — satu file untuk kelima personel.
    member.php?m=<slug>  (slug: daniel, corbyn, jack, jonah, zach)
-   ============================================================================ */
+    */
 require __DIR__ . '/../../includes/db.php';
 
 $slug = $_GET['m'] ?? '';
