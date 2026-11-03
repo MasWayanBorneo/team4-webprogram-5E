@@ -31,10 +31,20 @@ function price($amount)
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="Why Don't We — official site. New music, world tour dates, and the latest news from the five-piece pop group.">
 <title>Why Don't We — Official</title>
-<!-- GIF background diunduh lebih awal, tidak menunggu home.css selesai dibaca -->
-<link rel="preload" href="assets/home-bg.gif" as="image">
+<?php
+// alamat GIF background diberi versi (?v=waktu file diubah), sama seperti CSS: browser yang
+// pernah menyimpan respons error untuk GIF ini (hosting menyimpannya sampai 30 hari) akan
+// meminta ulang ke server, bukan memakai error lama dari cache
+$home_bg = 'assets/home-bg.gif?v=' . filemtime(__DIR__ . '/assets/home-bg.gif');
+?>
+<!-- GIF background diunduh lebih awal, tidak menunggu CSS selesai dibaca -->
+<link rel="preload" href="<?= $home_bg ?>" as="image">
 <link rel="stylesheet" href="src/css/base.css?v=<?= filemtime(__DIR__ . '/src/css/base.css') ?>">
 <link rel="stylesheet" href="src/css/home.css?v=<?= filemtime(__DIR__ . '/src/css/home.css') ?>">
+<style>
+  /* gambar background ditulis di sini (bukan di home.css) supaya alamatnya bisa diberi versi dari PHP */
+  body { background-image: url(<?= $home_bg ?>); }
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
