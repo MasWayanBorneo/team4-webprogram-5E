@@ -38,5 +38,5 @@ function e($text)
 // mengganggu tampilan, redirect, atau JSON dari api/.
 if (realpath($_SERVER['SCRIPT_FILENAME'] ?? '') === __FILE__) {
     $tables = mysqli_num_rows(mysqli_query($conn, 'SHOW TABLES'));
-    echo 'Database connection successful: ' . e($db_name) . ' (' . $tables . ' tables).';
+    echo 'Berhasil koneksi ke database! ' . e($db_name) . ' (' . $tables . ' tables).';
 }
