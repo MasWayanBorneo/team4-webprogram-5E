@@ -64,19 +64,6 @@ body {
   /* border-top-right-radius: 20px; */
 }
 
-/* Tombol Stream lagu populer - tombol aksi utama */
-.player2 .tombol {
-  font-size: 30px;
-  background-color: var(--secondary-color);
-  border-radius: 10px;
-  border: var(--secondary-color);
-  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-  margin-top: auto;
-}
-
 /* Tombol "Show lyric" di setiap kartu lagu populer.
    Posisi popup-nya diikat lewat anchor-name per lagu (inline style di music.php). */
 .player2 .lirik {
@@ -161,19 +148,6 @@ h2 {
 /* Efek hover cover album - sedikit transparan saat di-hover */
 .player .imgbox:hover {
   opacity: 60%;
-}
-
-/* Tombol kartu album - tombol aksi utama berwarna hijau */
-.player button {
-  font-size: 30px;
-  background-color: var(--secondary-color);
-  border-radius: 10px;
-  border: var(--secondary-color);
-  box-shadow: 0 5px 80px rgba(0, 0, 0, 0.5);
-  padding: 10px;
-  margin-bottom: 10px;
-  width: 100%;
-  margin-top: auto;
 }
 
 /* Popup lirik - lirik yang bisa di-scroll dengan background gelap.
@@ -281,34 +255,6 @@ h2 {
   margin: 0 auto;
 }
 
-/* Efek hover tombol album - transparan dan bergaris bawah saat di-hover */
-.player button:hover {
-  opacity: 80%;
-  text-decoration: underline;
-}
-
-/* Bagian streaming - kontainer link platform streaming */
-.streaming {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-/* Item platform streaming - kartu untuk satu link platform */
-.streaming-platforms {
-  background-color: #e8f4ff;
-  position: relative;
-  width: 250px;
-  padding: 5px;
-}
-
-/* Efek hover platform streaming - sedikit transparan saat di-hover */
-.streaming-platforms:hover {
-  opacity: 60%;
-}
-
 /* Judul CTA - judul besar rata tengah untuk call-to-action */
 .cta h2 {
   text-wrap: balance;
@@ -321,43 +267,6 @@ h2 {
 }
 .brand {
   width: 60px;
-}
-
-.page-header {
-  text-align: center;
-  padding: 1.5rem 1.25rem 0.5rem;
-}
-.email {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 30px;
-}
-
-/* Input email - kolom email untuk subscribe */
-.email input {
-  padding: 7px;
-  border-radius: 10px;
-  font-size: 15px;
-  text-wrap: balance;
-  display: flex;
-}
-
-/* Tombol submit email - tombol untuk subscribe */
-#email-btn {
-  background-color: red;
-  color: white;
-  display: flex;
-  flex-direction: row;
-
-  border-radius: 10px;
-}
-
-/* Kontainer ikon - membuat ikon rata tengah */
-.icon {
-  text-align: center;
 }
 /* Gaya gambar global - lebar/tinggi penuh dengan object-fit */
 img {
@@ -458,10 +367,8 @@ audio::-webkit-media-controls-mute-button {
     padding: 16px;
   }
 
-  .player2 .tombol,
   .stream-dropdown > summary,
-  .player2 .lirik,
-  .player button {
+  .player2 .lirik {
     font-size: 22px;
   }
 
@@ -513,7 +420,6 @@ audio::-webkit-media-controls-mute-button {
   .player .song-title h2 {
     font-size: 14px;
   }
-  .player button,
   .player .stream-dropdown > summary {
     font-size: 18px;
     padding: 8px;

@@ -134,17 +134,6 @@ function stream_menu($links, $platforms)
     <?php endforeach; ?>
   </div> 
  
-<!-- <div class="streaming">
-     <div class ="streaming-platforms" >
-     <a href="https://open.spotify.com/artist/2jnIB6XdLvnJUeNTy5A0J2?si=mBvpmUYUT36VpGjlDODlzw" target="_blank"><img src="../../assets/svg/spotify.svg"></a>
-     </div>
-     <div class="streaming-platforms">
-     <a href="https://music.apple.com/us/artist/why-dont-we/1161814111" target="_blank"><img src="../../assets/svg/apple.svg"></a>
-     </div>
-     <div class="streaming-platforms">
-     <a href="https://music.youtube.com/@whydontwe8155?si=rqwp_HvA8bUYQhs6" target="_blank"><img src="../../assets/svg/ytmusic.svg"></a>
-     </div>
-</div> -->
 <h1>all videos</h1>
 <div class="video">
   <?php foreach ($videos as $video): ?>
