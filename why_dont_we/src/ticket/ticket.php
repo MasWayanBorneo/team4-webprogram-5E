@@ -50,7 +50,8 @@ $old = ['fullname' => '', 'email' => '', 'phone' => '', 'category' => '', 'quant
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     $old = [
-        'fullname' => trim($_POST['fullname'] ?? ''),
+        // spasi berlebih dirapikan: "  Jonah   Marais " → "Jonah Marais"
+        'fullname' => preg_replace('/\s+/u', ' ', trim($_POST['fullname'] ?? '')),
         'email'    => trim($_POST['email'] ?? ''),
         'phone'    => trim($_POST['phone'] ?? ''),
         'category' => $_POST['category'] ?? '',
@@ -59,12 +60,19 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     $category = $categories[(int) $old['category']] ?? null;
     $quantity = filter_var($old['quantity'], FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 10]]);
 
-    if ($old['fullname'] === '' || strlen($old['fullname']) > 100) {
-        $error = 'Please enter your full name.';
-    } elseif (!filter_var($old['email'], FILTER_VALIDATE_EMAIL) || strlen($old['email']) > 100) {
-        $error = 'Please enter a valid email address.';
-    } elseif (!preg_match('/^[0-9+\s-]{8,20}$/', $old['phone'])) {
-        $error = 'Please enter a valid phone number.';
+    // aturan format sama dengan form Limelight; diperiksa lagi di server karena
+    // aturan di browser (pattern) bisa dilewati
+    if (!preg_match('/^\p{L}+( \p{L}+)*$/u', $old['fullname'])) {
+        // \p{L} = huruf apa saja, termasuk huruf beraksen (José); angka & simbol ditolak
+        $error = 'Your name can only contain letters and spaces.';
+    } elseif (mb_strlen($old['fullname']) < 2 || mb_strlen($old['fullname']) > 100) {
+        $error = 'Your name must be between 2 and 100 letters long.';
+    } elseif (!filter_var($old['email'], FILTER_VALIDATE_EMAIL) || !preg_match('/@[^@\s]+\.[^@\s]+$/', $old['email']) || strlen($old['email']) > 100) {
+        // FILTER_VALIDATE_EMAIL masih menerima "nama@gmail", jadi domain juga harus memakai titik
+        $error = 'Please enter a valid email address, e.g. you@email.com.';
+    } elseif (!preg_match('/^\+?[0-9]{8,15}$/', $old['phone'])) {
+        // hanya angka (boleh diawali +), 8–15 digit, tanpa spasi atau tanda hubung
+        $error = 'Your phone number can only contain 8–15 digits, e.g. 081234567890.';
     } elseif (!$category) {
         $error = 'Please choose a ticket category.';
     } elseif ($quantity === false) {
@@ -159,17 +167,24 @@ $checked = isset($categories[(int) $old['category']]) ? (int) $old['category'] :
                 <div class="form-row">
                     <div class="form-group">
                         <label for="fullname">Full Name</label>
-                        <input type="text" id="fullname" name="fullname" placeholder="Your full name" maxlength="100" value="<?= e($old['fullname']) ?>" required>
+                        <!-- pattern: form tidak bisa dikirim kalau isian tidak sesuai format (pesan di title) -->
+                        <input type="text" id="fullname" name="fullname" placeholder="Your full name" minlength="2" maxlength="100"
+                               pattern="[\p{L} ]+" title="Letters and spaces only, e.g. Jonah Marais"
+                               autocomplete="name" value="<?= e($old['fullname']) ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" placeholder="you@email.com" maxlength="100" value="<?= e($old['email']) ?>" required>
+                        <input type="email" id="email" name="email" placeholder="you@email.com" maxlength="100"
+                               pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="A valid email address, e.g. you@email.com"
+                               autocomplete="email" value="<?= e($old['email']) ?>" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" placeholder="08xx xxxx xxxx" maxlength="20" value="<?= e($old['phone']) ?>" required>
+                    <input type="tel" id="phone" name="phone" placeholder="081234567890" maxlength="16"
+                           pattern="\+?[0-9]{8,15}" title="Numbers only, 8–15 digits, e.g. 081234567890"
+                           autocomplete="tel" value="<?= e($old['phone']) ?>" required>
                 </div>
 
                 <!-- Ticket Categories -->
