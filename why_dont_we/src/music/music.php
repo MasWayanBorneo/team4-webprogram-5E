@@ -94,8 +94,8 @@ function stream_menu($links, $platforms)
         </div>
       </details>
       <?php if ($song['lyrics']): ?>
-      <!-- anchor-name / position-anchor per lagu: popup lirik muncul di bawah tombolnya sendiri -->
-      <button class="lirik" popovertarget="lyric-<?= $song['id'] ?>" style="anchor-name: --lyric-<?= $song['id'] ?>">Show lyric </button>
+      <!-- tombol membuka popup lirik lagu ini (popovertarget = id popup-nya) -->
+      <button class="lirik" popovertarget="lyric-<?= $song['id'] ?>">Show lyric </button>
       <?php endif; ?>
       <?php if ($song['audio_file']): ?>
       <audio src="../../<?= e($song['audio_file']) ?>" type="audio/mp3" controls>
@@ -103,7 +103,7 @@ function stream_menu($links, $platforms)
       </audio>
       <?php endif; ?>
       <?php if ($song['lyrics']): ?>
-      <div id="lyric-<?= $song['id'] ?>" class="lyric-popup" popover style="position-anchor: --lyric-<?= $song['id'] ?>">
+      <div id="lyric-<?= $song['id'] ?>" class="lyric-popup" popover>
         <?php // lirik disimpan sebagai HTML (<p class="verse">, <br>), jadi dicetak apa adanya ?>
         <?= $song['lyrics'] ?>
       </div>
