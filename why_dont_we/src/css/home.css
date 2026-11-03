@@ -11,12 +11,12 @@ html {
 }
 body {
   margin: 0;
-  /* home tetap memakai background GIF; kartu dan tombol mengikuti tema situs (base.css).
-     Gambarnya dipasang di <style> index.php (alamat GIF diberi versi ?v= dari PHP);
-     warna ini cadangan kalau GIF gagal dimuat */
+  /* home memakai background animasi (assets/home-bg.webp); kartu dan tombol mengikuti
+     tema situs (base.css). Gambarnya dipasang di <style> index.php (alamatnya diberi
+     versi ?v= dari PHP); warna ini cadangan kalau gambar gagal dimuat */
   background-color: var(--page-bg);
   color: var(--ink);
-  /* skala sama seperti `cover` untuk satu layar (gif 640x1136), tanpa mengunci
+  /* skala sama seperti `cover` untuk satu layar (gambar 640x1136), tanpa mengunci
      tinggi body ke 100vh — tinggi body yang dikunci membuat header sticky ikut hilang */
   background-size: max(100%, calc(100vh * 640 / 1136)) auto;
   min-height: 100vh;

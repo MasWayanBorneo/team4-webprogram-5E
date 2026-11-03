@@ -32,13 +32,14 @@ function price($amount)
 <meta name="description" content="Why Don't We — official site. New music, world tour dates, and the latest news from the five-piece pop group.">
 <title>Why Don't We — Official</title>
 <?php
-// alamat GIF background diberi versi (?v=waktu file diubah), sama seperti CSS: browser yang
-// pernah menyimpan respons error untuk GIF ini (hosting menyimpannya sampai 30 hari) akan
-// meminta ulang ke server, bukan memakai error lama dari cache
-$home_bg = 'assets/home-bg.gif?v=' . filemtime(__DIR__ . '/assets/home-bg.gif');
+// background animasi memakai animated WebP, bukan GIF: server TinkerHost menolak file .gif
+// (403 Forbidden) sementara format gambar lain tetap bisa dibuka.
+// Alamatnya diberi versi (?v=waktu file diubah), sama seperti CSS, supaya browser tidak
+// memakai respons error lama dari cache (hosting menyimpannya sampai 30 hari).
+$home_bg = 'assets/home-bg.webp?v=' . filemtime(__DIR__ . '/assets/home-bg.webp');
 ?>
-<!-- GIF background diunduh lebih awal, tidak menunggu CSS selesai dibaca -->
-<link rel="preload" href="<?= $home_bg ?>" as="image">
+<!-- background diunduh lebih awal, tidak menunggu CSS selesai dibaca -->
+<link rel="preload" href="<?= $home_bg ?>" as="image" type="image/webp">
 <link rel="stylesheet" href="src/css/base.css?v=<?= filemtime(__DIR__ . '/src/css/base.css') ?>">
 <link rel="stylesheet" href="src/css/home.css?v=<?= filemtime(__DIR__ . '/src/css/home.css') ?>">
 <style>
