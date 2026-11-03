@@ -12,22 +12,30 @@ $ll_old = ['name' => '', 'email' => '', 'dob' => '', 'favorite' => ''];
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     $ll_old = [
-        'name'     => trim($_POST['name'] ?? ''),
+        // spasi berlebih dirapikan: "  Jonah   Marais " → "Jonah Marais"
+        'name'     => preg_replace('/\s+/u', ' ', trim($_POST['name'] ?? '')),
         'email'    => trim($_POST['email'] ?? ''),
         'dob'      => $_POST['dob'] ?? '',
         'favorite' => $_POST['favorite'] ?? '',
     ];
     $dob = DateTime::createFromFormat('Y-m-d', $ll_old['dob']);
+    $member_ids = array_map('strval', array_column($members, 'id'));
 
-    if ($ll_old['name'] === '' || strlen($ll_old['name']) > 100) {
-        $ll_error = 'Please enter your full name.';
-    } elseif (!filter_var($ll_old['email'], FILTER_VALIDATE_EMAIL) || strlen($ll_old['email']) > 100) {
-        $ll_error = 'Please enter a valid email address.';
-    } elseif (!$dob || $dob->format('Y-m-d') !== $ll_old['dob'] || $dob > new DateTime()) {
+    // aturan format diperiksa lagi di server, karena aturan di browser (pattern) bisa dilewati
+    if (!preg_match('/^\p{L}+( \p{L}+)*$/u', $ll_old['name'])) {
+        // \p{L} = huruf apa saja, termasuk huruf beraksen (José); angka & simbol ditolak
+        $ll_error = 'Your name can only contain letters and spaces.';
+    } elseif (mb_strlen($ll_old['name']) < 2 || mb_strlen($ll_old['name']) > 100) {
+        $ll_error = 'Your name must be between 2 and 100 letters long.';
+    } elseif (!filter_var($ll_old['email'], FILTER_VALIDATE_EMAIL) || !preg_match('/@[^@\s]+\.[^@\s]+$/', $ll_old['email']) || strlen($ll_old['email']) > 100) {
+        // FILTER_VALIDATE_EMAIL masih menerima "nama@gmail", jadi domain juga harus memakai titik
+        $ll_error = 'Please enter a valid email address, e.g. you@email.com.';
+    } elseif (!$dob || $dob->format('Y-m-d') !== $ll_old['dob'] || $dob > new DateTime() || $dob < new DateTime('1900-01-01')) {
         $ll_error = 'Please enter a valid date of birth.';
+    } elseif (!in_array($ll_old['favorite'], $member_ids, true)) {
+        $ll_error = 'Please choose your favorite member from the list.';
     } else {
-        // favorite_member_id boleh kosong
-        $favorite = $ll_old['favorite'] === '' ? null : (int) $ll_old['favorite'];
+        $favorite = (int) $ll_old['favorite'];
 
         $stmt = mysqli_prepare($conn, 'INSERT INTO limelight_members (full_name, email, date_of_birth, favorite_member_id) VALUES (?, ?, ?, ?)');
         mysqli_stmt_bind_param($stmt, 'sssi', $ll_old['name'], $ll_old['email'], $ll_old['dob'], $favorite);
@@ -188,18 +196,23 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
                 <div class="form-row">
                     <div class="form-group">
                         <label for="ll-name">Full Name</label>
-                        <input type="text" id="ll-name" name="name" placeholder="Your full name" maxlength="100" value="<?= e($ll_old['name']) ?>" required>
+                        <!-- pattern: form tidak bisa dikirim kalau nama berisi selain huruf & spasi (pesan di title) -->
+                        <input type="text" id="ll-name" name="name" placeholder="Your full name" minlength="2" maxlength="100"
+                               pattern="[\p{L} ]+" title="Letters and spaces only, e.g. Jonah Marais"
+                               autocomplete="name" value="<?= e($ll_old['name']) ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="ll-email">Email</label>
-                        <input type="email" id="ll-email" name="email" placeholder="you@email.com" maxlength="100" value="<?= e($ll_old['email']) ?>" required>
+                        <input type="email" id="ll-email" name="email" placeholder="you@email.com" maxlength="100"
+                               pattern="[^@\s]+@[^@\s]+\.[^@\s]+" title="A valid email address, e.g. you@email.com"
+                               autocomplete="email" value="<?= e($ll_old['email']) ?>" required>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label for="ll-dob">Date of Birth</label>
-                        <input type="date" id="ll-dob" name="dob" max="<?= date('Y-m-d') ?>" value="<?= e($ll_old['dob']) ?>" required>
+                        <input type="date" id="ll-dob" name="dob" min="1900-01-01" max="<?= date('Y-m-d') ?>" value="<?= e($ll_old['dob']) ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="ll-favorite">Favorite Member</label>

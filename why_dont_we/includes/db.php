@@ -17,7 +17,7 @@ $conn = function_exists('mysqli_connect') ? @mysqli_connect($db_host, $db_user, 
 
 if (!$conn) {
     http_response_code(500);
-    exit('Database connection failed. Check includes/config.php.');
+    exit('Database Gagal Terhubung. Check includes/config.php.');
 }
 
 mysqli_set_charset($conn, 'utf8mb4');
