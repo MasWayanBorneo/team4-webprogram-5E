@@ -1,71 +1,74 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@442&family=Special+Elite&display=swap");
 
 /* HALAMAN ABOUT / MEMBER — tema situs, lihat token TEMA di base.css */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: var(--page-bg);
+  background-color: var(--page-bg);
 }
 
 .app {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: var(--page-ink);
-    min-height: 100vh;
-    width: 100%;
-    padding-bottom: 2rem;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--page-ink);
+  min-height: 100vh;
+  width: 100%;
+  padding-bottom: 2rem;
 }
 
-.icon { text-align: center; }
+.icon {
+  text-align: center;
+}
 
 /* ---- tampilan kartu bersama ---- */
 .timeline-item,
 .benefit-card,
 .member-card,
 .limelight-form {
-    border: var(--card-border);
-    border-radius: var(--card-radius);
-    box-shadow: var(--card-shadow);
-    color: var(--card-ink);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  color: var(--card-ink);
 }
 
 /* HEADER HALAMAN */
 
 .page-header {
-    text-align: center;
-    padding: 2rem 1.25rem 0.5rem;
+  text-align: center;
+  padding: 2rem 1.25rem 0.5rem;
 }
 
 .page-header .section-label {
-    margin-bottom: 0.25rem;
+  margin-bottom: 0.25rem;
 }
 
 /* call-to-action besar berwarna kuning, seperti di halaman music */
 .page-title {
-    font-family: var(--title-font);
-    font-size: clamp(2.4rem, 8vw, 4rem);
-    font-weight: bold;
-    color: var(--cta-ink);
-    text-transform: lowercase;
-    text-align: center;
+  font-family: var(--title-font);
+  font-size: clamp(2.4rem, 8vw, 4rem);
+  font-weight: bold;
+  color: var(--cta-ink);
+  text-transform: lowercase;
+  text-align: center;
 }
 
 .content {
-    max-width: 1032px;
-    margin: 0 auto;
+  max-width: 1032px;
+  margin: 0 auto;
 }
 
 .section-label {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
 .about-section,
@@ -73,394 +76,401 @@ body {
 .gallery-section,
 .members-section,
 .limelight-section {
-    padding: 1.5rem 16px;
-    margin-bottom: 1rem;
+  padding: 1.5rem 16px;
+  margin-bottom: 1rem;
 }
 
 .section-heading {
-    font-family: var(--title-font);
-    font-size: clamp(1.6rem, 4.5vw, 2.4rem);
-    color: var(--title-ink);
-    margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 700;
+  font-family: var(--title-font);
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  color: var(--title-ink);
+  margin-bottom: 1rem;
 }
 
 .about-text {
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--ink);
-    max-width: 720px;
+  text-align: justify;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink);
+  max-width: 720px;
 }
 
 /* SEJARAH */
 
 .history-timeline {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .timeline-item {
-    display: flex;
-    gap: 18px;
-    align-items: flex-start;
-    padding: 16px 18px;
-    background: var(--card-bg-light);
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  padding: 16px 18px;
+  background: var(--card-bg-light);
 }
 
 .timeline-year {
-    flex-shrink: 0;
-    width: 70px;
-    font-family: var(--title-font);
-    font-size: 18px;
-    font-weight: bold;
-    color: var(--card-ink);
+  flex-shrink: 0;
+  width: 70px;
+  font-family: var(--title-font);
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--card-ink);
 }
 
 .timeline-item p {
-    font-size: 14px;
-    line-height: 1.6;
-    color: var(--card-ink);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--card-ink);
 }
 
 /* GALERI */
 
 .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
 }
 
 .gallery-img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 14px;
-    border: var(--card-border);
-    box-shadow: var(--card-shadow);
-    transition: transform 0.2s;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 14px;
+  border: var(--card-border);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.2s;
 }
 
 .gallery-img:hover {
-    transform: scale(1.03);
+  transform: scale(1.03);
 }
 
 /* LIMELIGHT MEMBERSHIP */
 
 .limelight-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin: 1.5rem 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 1.5rem 0;
 }
 
 .benefit-card {
-    padding: 18px 16px;
-    background: var(--card-bg);
-    transition: transform 0.2s;
+  padding: 18px 16px;
+  background: var(--card-bg);
+  transition: transform 0.2s;
 }
 
 .benefit-card:hover {
-    transform: translateY(-3px);
+  transform: translateY(-3px);
 }
 
 .benefit-icon {
-    font-size: 22px;
-    color: var(--card-ink);
-    margin-bottom: 10px;
+  font-size: 22px;
+  color: var(--card-ink);
+  margin-bottom: 10px;
 }
 
 .benefit-title {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 15px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--card-ink);
-    margin-bottom: 6px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--card-ink);
+  margin-bottom: 6px;
 }
 
 .benefit-desc {
-    font-size: 13px;
-    line-height: 1.6;
-    color: var(--card-ink-soft);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--card-ink-soft);
 }
 
 .btn-join {
-    display: inline-block;
-    padding: 12px 28px;
-    border: none;
-    border-radius: var(--btn-radius);
-    background: var(--btn-bg);
-    color: var(--btn-ink);
-    font-weight: 700;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 16px;
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.25);
-    transition: opacity 0.2s, transform 0.2s;
+  display: inline-block;
+  padding: 12px 28px;
+  border: none;
+  border-radius: var(--btn-radius);
+  background: var(--btn-bg);
+  color: var(--btn-ink);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 5px 30px rgba(0, 0, 0, 0.25);
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
 }
 
 .btn-join:hover {
-    text-decoration: underline;
-    opacity: 0.85;
-    transform: translateY(-2px);
+  text-decoration: underline;
+  opacity: 0.85;
+  transform: translateY(-2px);
 }
 
 /* FORM LIMELIGHT — tombol CTA bintang pink membuka form di dalam modal (<dialog>) */
 
 .limelight-cta {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: fit-content; /* selebar isinya, lalu margin auto menaruhnya di tengah */
-    margin: 1.5rem auto 0;
-    padding: 14px 30px;
-    border: 2px solid var(--pink);
-    border-radius: 999px;
-    background: rgba(255, 94, 138, 0.12);
-    color: var(--ink);
-    font-family: var(--title-font);
-    font-size: 22px;
-    cursor: pointer;
-    box-shadow: 0 0 30px rgba(255, 94, 138, 0.35);
-    transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content; /* selebar isinya, lalu margin auto menaruhnya di tengah */
+  margin: 1.5rem auto 0;
+  padding: 14px 30px;
+  border: 2px solid var(--pink);
+  border-radius: 999px;
+  background: rgba(255, 94, 138, 0.12);
+  color: var(--ink);
+  font-family: var(--title-font);
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(255, 94, 138, 0.35);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 .limelight-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 0 45px rgba(255, 94, 138, 0.55);
+  transform: translateY(-2px);
+  box-shadow: 0 0 45px rgba(255, 94, 138, 0.55);
 }
 .limelight-cta:focus-visible {
-    outline: 3px solid var(--ink);
-    outline-offset: 4px;
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
 }
 
 .limelight-cta .fa-star {
-    color: var(--pink);
-    font-size: 28px;
-    transition: transform 0.4s;
+  color: var(--pink);
+  font-size: 28px;
+  transition: transform 0.4s;
 }
 /* bintang berputar saat tombol disorot */
 .limelight-cta:hover .fa-star {
-    transform: rotate(144deg);
+  transform: rotate(144deg);
 }
 
 /* kotak modal: tanpa padding/latar sendiri — tampilannya dari .limelight-form,
    jadi klik di area gelap di luar kartu = klik di <dialog> itu sendiri (menutup modal) */
 .limelight-modal {
-    /* margin: auto menaruh <dialog> di tengah layar; perlu ditulis ulang karena
+  /* margin: auto menaruh <dialog> di tengah layar; perlu ditulis ulang karena
        reset "* { margin: 0 }" di atas menghapus margin bawaan browser */
-    margin: auto;
-    width: min(640px, calc(100% - 32px));
-    max-height: calc(100% - 32px);
-    padding: 0;
-    border: none;
-    background: transparent;
-    overflow: auto;
+  margin: auto;
+  width: min(640px, calc(100% - 32px));
+  max-height: calc(100% - 32px);
+  padding: 0;
+  border: none;
+  background: transparent;
+  overflow: auto;
 }
 .limelight-modal::backdrop {
-    background: rgba(3, 0, 32, 0.75);
-    backdrop-filter: blur(4px);
+  background: rgba(3, 0, 32, 0.75);
+  backdrop-filter: blur(4px);
 }
 /* halaman di belakang modal tidak ikut ter-scroll */
 body:has(.limelight-modal[open]) {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .limelight-form {
-    padding: 22px;
-    background: var(--card-bg-light);
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+  padding: 22px;
+  background: var(--card-bg-light);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .limelight-modal-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .limelight-form-title {
-    margin: 0;
-    font-family: var(--title-font);
-    font-size: 22px;
-    color: var(--card-ink);
+  margin: 0;
+  font-family: var(--title-font);
+  font-size: 22px;
+  color: var(--card-ink);
 }
 
 .limelight-close {
-    width: 40px;
-    height: 40px;
-    flex-shrink: 0;
-    border: none;
-    border-radius: 50%;
-    background: rgba(1, 9, 18, 0.1);
-    color: var(--card-ink);
-    font-size: 26px;
-    line-height: 1;
-    cursor: pointer;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(1, 9, 18, 0.1);
+  color: var(--card-ink);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
 }
 .limelight-close:hover {
-    background: rgba(1, 9, 18, 0.2);
+  background: rgba(1, 9, 18, 0.2);
 }
 
 /* pop-up setelah berhasil daftar memakai .toast dari base.css */
 
 @media (prefers-reduced-motion: reduce) {
-    .limelight-cta,
-    .limelight-cta .fa-star {
-        transition: none;
-    }
+  .limelight-cta,
+  .limelight-cta .fa-star {
+    transition: none;
+  }
 }
 
 .limelight-form .form-row {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .limelight-form .form-group {
-    flex: 1;
-    min-width: 200px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .limelight-form label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--card-ink);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--card-ink);
 }
 
 .limelight-form input,
 .limelight-form select {
-    padding: 10px 12px;
-    border-radius: var(--btn-radius);
-    border: var(--field-border);
-    background: var(--field-bg);
-    color: var(--field-ink);
-    font-size: 14px;
+  padding: 10px 12px;
+  border-radius: var(--btn-radius);
+  border: var(--field-border);
+  background: var(--field-bg);
+  color: var(--field-ink);
+  font-size: 14px;
 }
 
 .limelight-form input:focus,
 .limelight-form select:focus {
-    outline: none;
-    border-color: var(--secondary-color);
+  outline: none;
+  border-color: var(--secondary-color);
 }
 
 .limelight-confirm {
-    font-size: 13px;
-    font-weight: 600;
-    color: #0b5d1e;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0b5d1e;
 }
 
 .limelight-error {
-    color: #8a1c12;
+  color: #8a1c12;
 }
 
 /* MEMBER */
 
 .member-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 16px;
-    background: var(--card-bg-light);
-    margin-bottom: 12px;
-    cursor: pointer;
-    transition: transform 0.2s;
-    text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--card-bg-light);
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  text-decoration: none;
 }
 
 .member-card:hover {
-    transform: translateX(4px);
+  transform: translateX(4px);
 }
 
 .avatar {
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: var(--surface);
-    border: 2px solid var(--secondary-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    overflow: hidden;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
 }
 
 .avatar-initials {
-    font-size: 13px;
-    color: var(--heading);
-    letter-spacing: 0.05em;
+  font-size: 13px;
+  color: var(--heading);
+  letter-spacing: 0.05em;
 }
 
-.avatar-img, .profile-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-    display: block;
+.avatar-img,
+.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
 }
 
 .member-info {
-    flex: 1;
-    min-width: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .member-name {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 16px;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--card-ink);
-    margin-bottom: 2px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--card-ink);
+  margin-bottom: 2px;
 }
 
 .member-role {
-    font-size: 13px;
-    color: var(--card-ink-soft);
+  font-size: 13px;
+  color: var(--card-ink-soft);
 }
 
 .member-arrow {
-    font-size: 24px;
-    color: var(--card-ink);
+  font-size: 24px;
+  color: var(--card-ink);
 }
 
 @media (max-width: 768px) {
+  .member-card {
+    padding: 12px 14px;
+  }
 
-    .member-card {
-        padding: 12px 14px;
-    }
+  .avatar {
+    width: 44px;
+    height: 44px;
+  }
 
-    .avatar {
-        width: 44px;
-        height: 44px;
-    }
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-    .gallery-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .limelight-grid {
+    grid-template-columns: 1fr;
+  }
 
-    .limelight-grid {
-        grid-template-columns: 1fr;
-    }
+  .limelight-form .form-row {
+    flex-direction: column;
+    gap: 14px;
+  }
 
-    .limelight-form .form-row {
-        flex-direction: column;
-        gap: 14px;
-    }
-
-    .timeline-item {
-        flex-direction: column;
-        gap: 4px;
-    }
+  .timeline-item {
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 
 @media (max-width: 480px) {
-
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

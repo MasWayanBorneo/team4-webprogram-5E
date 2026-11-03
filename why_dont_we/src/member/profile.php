@@ -84,18 +84,21 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
 
     <div class="app">
         <div class="page-header">
-            <p class="section-label">Why Don't We</p>
+            <!-- <p class="section-label">Why Don't We</p> -->
             <p class="page-title">About</p>
         </div>
 
         <div class="content about-section">
-            <p class="section-label">Who We Are</p>
+            <!-- <p class="section-label">Who We Are</p> -->
             <h2 class="section-heading">About the Band</h2>
             <p class="about-text">
-                Why Don't We is a five-piece group built on harmony, friendship, and a shared
-                love of songwriting. Blending pop hooks with live-band energy, the guys write
-                and produce much of their own music, performing it for fans — called
-                Limelights all over the world.
+               Why Don’t We started in 2016, when five young singer-songwriters met in Los Angeles. Each already had his own online following. During a jam session they started trading harmonies and asked themselves a simple question: why don’t we form a band? That question became their name.
+
+The lineup was Jack Avery, Corbyn Besson, Zach Herron, Jonah Marais, and Daniel Seavey. Their sound mixed pop and R&B with five-part vocals. After a run of fan-favorite EPs, they signed with Atlantic Records and released their debut album 8 Letters in 2018. In 2021 they followed it with The Good Times and the Bad Ones, a more personal record that the members had a larger hand in creating. They also collaborated with artists such as Macklemore and Jonas Blue.
+
+Over the years, legal disputes involving the band’s management slowed them down. Their planned 2022 North American tour was canceled, and the group eventually lost the rights to the Why Don’t We name, which brought the band to an end. The members have since moved on to solo careers.
+
+What lasts is the music and the community of fans who stayed with them through every era.
             </p>
         </div>
 
