@@ -64,8 +64,7 @@ body {
   /* border-top-right-radius: 20px; */
 }
 
-/* Tombol "Show lyric" di setiap kartu lagu populer.
-   Posisi popup-nya diikat lewat anchor-name per lagu (inline style di music.php). */
+/* Tombol "Show lyric" di setiap kartu lagu populer (membuka .lyric-popup) */
 .player2 .lirik {
   font-size: 30px;
   text-decoration: underline;
@@ -151,20 +150,27 @@ h2 {
 }
 
 /* Popup lirik - lirik yang bisa di-scroll dengan background gelap.
-   position-anchor diisi per lagu (inline style di music.php) supaya muncul tepat
-   di bawah tombol lagunya sendiri. */
+   Popover selalu tampil di "top layer" (di atas semua elemen, z-index tidak berpengaruh),
+   jadi popup dibuat diam di layar (fixed) tepat DI BAWAH navbar: saat halaman di-scroll
+   popup tidak ikut bergerak dan tidak pernah menutupi navbar.
+   --nav-h = tinggi navbar, diukur oleh music.js (bisa 1 atau 2 baris tergantung layar). */
 .lyric-popup {
+  position: fixed;
+  inset: auto; /* hapus posisi bawaan popover (di tengah layar) */
+  top: calc(var(--nav-h, 90px) + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(720px, calc(100% - 32px));
+  max-height: calc(100vh - var(--nav-h, 90px) - 32px);
+  max-height: calc(100dvh - var(--nav-h, 90px) - 32px);
+  margin: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain; /* scroll lirik tidak ikut menggulir halaman */
   color: #fffb00;
   border-color: #000000;
   background-color: #3e3a3a;
-  width: 100%;
-  overflow-y: auto;
-  height: 500px;
   padding: 20px;
-  position: absolute;
-  position-area: bottom center;
   border-radius: 0px;
-  justify-self: center;
   font-family: Caveat;
   font-weight: bold;
   font-size: 30px;
@@ -389,7 +395,6 @@ audio::-webkit-media-controls-mute-button {
   }
 
   .lyric-popup {
-    height: 70vh;
     font-size: 24px;
   }
 }
