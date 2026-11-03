@@ -1,5 +1,3 @@
-# Simpan di: .github/workflows/ci-cd.yml
-# (hapus ci.yml dan .htmlvalidate.json yang lama, keduanya tidak relevan untuk proyek PHP)
 
 name: CI/CD
 
