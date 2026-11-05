@@ -28,7 +28,7 @@ if (is_post() && post('do') === 'save') {
         'album_id'     => post('album_id'),
         'title'        => post('title'),
         'duration_sec' => post('duration_sec'),
-        'audio_file'   => post('audio_file'),
+        'audio_file'   => post('audio_file_current'),
         'cover_image'  => post('cover_image_current'),
         'lyrics'       => post('lyrics'),
         'spotify_url'  => post('spotify_url'),
@@ -52,6 +52,7 @@ if (is_post() && post('do') === 'save') {
         }
     }
     $data['cover_image'] = upload_image('cover_image', $data['cover_image'], $errors);
+    $data['audio_file'] = upload_audio('audio_file', $data['audio_file'], $errors);
 
     if (!$errors) {
         $album_id = $data['album_id'] === '' ? null : (int) $data['album_id'];
@@ -138,10 +139,12 @@ require __DIR__ . '/includes/header.php';
         <div class="col-md-6"><?php field_text('title', 'Judul lagu', $data['title'], 'required maxlength="150"'); ?></div>
         <div class="col-md-6"><?php field_select('album_id', 'Album', $albums, $data['album_id'], '— Tanpa album (single) —'); ?></div>
         <div class="col-md-6"><?php field_text('duration_sec', 'Durasi (detik)', $data['duration_sec'], 'type="number" min="1" max="65535"', 'Boleh dikosongkan. Contoh: 185 = 3 menit 5 detik.'); ?></div>
-        <div class="col-md-6"><?php field_text('audio_file', 'File audio', $data['audio_file'], 'maxlength="255" placeholder="assets/audio/nama-lagu.mp3"', 'Path file MP3 di folder assets/audio/.'); ?></div>
       </div>
-      <?php field_image('cover_image', 'Gambar sampul', $data['cover_image']); ?>
-      <?php field_textarea('lyrics', 'Lirik (HTML)', $data['lyrics'], 10, 'style="font-family:monospace"', 'Contoh: <p class="verse">baris pertama<br>baris kedua</p>'); ?>
+      <div class="row">
+        <div class="col-md-6"><?php field_audio('audio_file', 'File lagu (MP3)', $data['audio_file']); ?></div>
+        <div class="col-md-6"><?php field_image('cover_image', 'Gambar sampul', $data['cover_image']); ?></div>
+      </div>
+      <?php field_textarea('lyrics', 'Lirik', $data['lyrics'], 12, '', 'Ketik biasa, tanpa HTML: tekan Enter untuk baris baru, dan beri satu baris kosong untuk bait baru. Lirik lama yang berisi tag HTML tetap tampil seperti biasa.'); ?>
       <div class="row">
         <div class="col-md-4"><?php field_text('spotify_url', 'Link Spotify', $data['spotify_url'], 'type="url" maxlength="255"'); ?></div>
         <div class="col-md-4"><?php field_text('apple_url', 'Link Apple Music', $data['apple_url'], 'type="url" maxlength="255"'); ?></div>

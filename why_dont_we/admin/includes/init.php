@@ -115,45 +115,65 @@ function finish_delete($stmt, $back)
     redirect($back);
 }
 
-/* --- upload gambar (fitur plus) -----------------------------------------------
+/* --- upload file (fitur plus) -------------------------------------------------
    Menyimpan file dari <input type="file" name="$field"> ke folder
-   assets/uploads/ dan mengembalikan path-nya untuk disimpan di database.
+   assets/uploads/<$folder> dan mengembalikan path-nya untuk disimpan di database.
    Kalau tidak ada file yang dipilih, path lama ($current) dipakai lagi.
-   Hanya JPG, PNG, WebP (GIF tidak dipakai karena ditolak server hosting), maks 2 MB. */
-function upload_image($field, $current, &$errors)
+   $allowed = [jenis file (MIME) => ekstensi]; jenis file dicek dari ISI file,
+   bukan dari namanya, supaya file lain yang hanya diganti namanya ditolak. */
+function upload_file($field, $current, $allowed, $max_mb, $folder, $kind, &$errors)
 {
     $file = $_FILES[$field] ?? null;
     if (!$file || $file['error'] === UPLOAD_ERR_NO_FILE) {
         return $current;
     }
     if ($file['error'] !== UPLOAD_ERR_OK) {
-        $errors[] = 'Upload gambar gagal (kode error ' . $file['error'] . '). Pastikan ukurannya tidak melebihi 2 MB.';
+        $errors[] = "Upload $kind gagal (kode error {$file['error']}). Pastikan ukurannya tidak melebihi $max_mb MB.";
         return $current;
     }
-    if ($file['size'] > 2 * 1024 * 1024) {
-        $errors[] = 'Ukuran gambar maksimal 2 MB.';
+    if ($file['size'] > $max_mb * 1024 * 1024) {
+        $errors[] = "Ukuran $kind maksimal $max_mb MB.";
         return $current;
     }
 
-    // jenis file dicek dari isi file (bukan dari nama), supaya file lain yang diganti namanya ditolak
-    $allowed = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
-    $info = @getimagesize($file['tmp_name']);
-    if (!$info || !isset($allowed[$info['mime']])) {
-        $errors[] = 'File harus berupa gambar JPG, PNG, atau WebP.';
+    $mime = (new finfo(FILEINFO_MIME_TYPE))->file($file['tmp_name']);
+    if (!isset($allowed[$mime])) {
+        $errors[] = "File $kind harus berformat " . strtoupper(implode(', ', array_unique($allowed))) . '.';
         return $current;
     }
 
     // nama file baru yang acak, supaya tidak menimpa file lain
-    $name = date('Ymd-His') . '-' . bin2hex(random_bytes(4)) . '.' . $allowed[$info['mime']];
-    $dir = __DIR__ . '/../../assets/uploads';
+    $name = date('Ymd-His') . '-' . bin2hex(random_bytes(4)) . '.' . $allowed[$mime];
+    $dir = __DIR__ . '/../../assets/uploads' . ($folder ? "/$folder" : '');
     if (!is_dir($dir)) {
         mkdir($dir, 0755, true);
     }
-    if (!move_uploaded_file($file['tmp_name'], $dir . '/' . $name)) {
-        $errors[] = 'Gambar tidak bisa disimpan di server.';
+    if (!move_uploaded_file($file['tmp_name'], "$dir/$name")) {
+        $errors[] = ucfirst($kind) . ' tidak bisa disimpan di server.';
         return $current;
     }
-    return 'assets/uploads/' . $name;
+    return 'assets/uploads/' . ($folder ? "$folder/" : '') . $name;
+}
+
+// gambar: JPG, PNG, WebP (GIF tidak dipakai karena ditolak server hosting), maks 2 MB
+function upload_image($field, $current, &$errors)
+{
+    $allowed = ['image/jpeg' => 'jpg', 'image/png' => 'png', 'image/webp' => 'webp'];
+    return upload_file($field, $current, $allowed, 2, '', 'gambar', $errors);
+}
+
+// audio lagu: MP3 saja, maks 10 MB, disimpan di assets/uploads/audio/
+function upload_audio($field, $current, &$errors)
+{
+    $allowed = ['audio/mpeg' => 'mp3', 'audio/mp3' => 'mp3', 'audio/x-mpeg' => 'mp3'];
+    return upload_file($field, $current, $allowed, 10, 'audio', 'audio', $errors);
+}
+
+// file yang lebih besar dari batas server (post_max_size) membuat $_POST kosong,
+// sehingga form terlihat "tidak terjadi apa-apa"; di sini diberi pesan yang jelas
+if (is_post() && empty($_POST) && (int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) {
+    flash('danger', 'File yang di-upload terlalu besar untuk server (batas ' . ini_get('post_max_size') . '). Pilih file yang lebih kecil.');
+    redirect($_SERVER['REQUEST_URI']);
 }
 
 /* --- tanggal & jam: format database ↔ format <input type="datetime-local"> ---- */
@@ -258,6 +278,18 @@ function field_image($name, $label, $value)
     echo '<input class="form-control mb-2" name="' . $name . '_current" value="' . e($value) . '" placeholder="assets/image/nama-file.jpg">'
         . '<input class="form-control" type="file" id="f-' . $name . '" name="' . $name . '" accept=".jpg,.jpeg,.png,.webp">'
         . '<div class="form-text">Pilih file untuk upload gambar baru (JPG, PNG, WebP, maks 2 MB), atau isi path gambar yang sudah ada di atas.</div></div>';
+}
+
+// audio: pemutar untuk mendengar file sekarang + path (boleh diketik) + pilih file MP3 baru
+function field_audio($name, $label, $value)
+{
+    echo '<div class="mb-3"><label class="form-label" for="f-' . $name . '">' . e($label) . '</label>';
+    if ($value) {
+        echo '<div class="mb-2"><audio controls preload="none" src="' . e(media_url($value)) . '" class="w-100"></audio></div>';
+    }
+    echo '<input class="form-control mb-2" name="' . $name . '_current" value="' . e($value) . '" placeholder="assets/audio/nama-lagu.mp3">'
+        . '<input class="form-control" type="file" id="f-' . $name . '" name="' . $name . '" accept=".mp3,audio/mpeg">'
+        . '<div class="form-text">Pilih file untuk upload lagu baru (MP3, maks 10 MB), atau isi path file yang sudah ada di atas.</div></div>';
 }
 
 // tombol Simpan + Batal di bawah form
