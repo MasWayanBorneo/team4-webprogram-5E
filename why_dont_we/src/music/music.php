@@ -30,6 +30,23 @@ function media($path)
     return preg_match('#^https?://#', $path) ? $path : '../../' . $path;
 }
 
+// lirik dari dashboard diketik sebagai teks biasa: baris kosong = bait baru (<p>),
+// Enter = baris baru (<br>). Teksnya diamankan dengan e(). Lirik lama yang sudah
+// berupa HTML (berisi tag seperti <p> atau <br>) tetap dicetak apa adanya.
+function lyrics_html($lyrics)
+{
+    if (preg_match('/<(p|br|span)\b/i', $lyrics)) {
+        return $lyrics;
+    }
+    $html = '';
+    $lyrics = str_replace(["\r\n", "\r"], "\n", trim($lyrics));
+    foreach (preg_split('/\n\s*\n/', $lyrics) as $stanza) {
+        $lines = array_map('e', explode("\n", trim($stanza)));
+        $html .= '<p class="verse">' . implode("<br>\n", $lines) . "</p>\n";
+    }
+    return $html;
+}
+
 // isi menu Stream dari kolom spotify_url / apple_url / youtube_url yang terisi
 function stream_menu($links, $platforms)
 {
@@ -104,8 +121,7 @@ function stream_menu($links, $platforms)
       <?php endif; ?>
       <?php if ($song['lyrics']): ?>
       <div id="lyric-<?= $song['id'] ?>" class="lyric-popup" popover>
-        <?php // lirik disimpan sebagai HTML (<p class="verse">, <br>), jadi dicetak apa adanya ?>
-        <?= $song['lyrics'] ?>
+        <?= lyrics_html($song['lyrics']) ?>
       </div>
       <?php endif; ?>
     </div>
