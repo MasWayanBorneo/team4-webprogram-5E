@@ -108,14 +108,56 @@ if ($action === 'edit' && !is_post()) {
     }
 }
 
-/* --- DAFTAR (READ semua baris) ----------------------------------------------- */
+/* --- DAFTAR (READ dengan pencarian & filter) --------------------------------- */
+$concerts = options_from($conn, "SELECT id, CONCAT(venue_name, ' — ', DATE_FORMAT(event_date, '%e %b %Y')) FROM concerts ORDER BY event_date");
+$checkin_filters = ['yes' => 'Sudah check-in', 'no' => 'Belum check-in'];
+$filter = [
+    'q'       => trim($_GET['q'] ?? ''),        // cari nomor invoice / nama / email / HP
+    'concert' => $_GET['concert'] ?? '',
+    'status'  => $_GET['status'] ?? '',
+    'checkin' => $_GET['checkin'] ?? '',
+];
+
 if ($action === 'list') {
-    $rows = mysqli_fetch_all(mysqli_query($conn, '
+    // syarat WHERE disusun sesuai filter yang diisi; nilainya tetap lewat prepared statement (?)
+    $where = [];
+    $types = '';
+    $params = [];
+    if ($filter['q'] !== '') {
+        $where[] = '(o.invoice_no LIKE ? OR o.full_name LIKE ? OR o.email LIKE ? OR o.phone LIKE ?)';
+        $like = '%' . $filter['q'] . '%';
+        $types .= 'ssss';
+        array_push($params, $like, $like, $like, $like);
+    }
+    if (isset($concerts[$filter['concert']])) {
+        $where[] = 'k.id = ?';
+        $types .= 'i';
+        $params[] = (int) $filter['concert'];
+    }
+    if (isset($statuses[$filter['status']])) {
+        $where[] = 'o.status = ?';
+        $types .= 's';
+        $params[] = $filter['status'];
+    }
+    if ($filter['checkin'] === 'yes') {
+        $where[] = 'o.checked_in_at IS NOT NULL';
+    } elseif ($filter['checkin'] === 'no') {
+        $where[] = 'o.checked_in_at IS NULL';
+    }
+
+    $stmt = mysqli_prepare($conn, '
         SELECT o.*, c.name AS category, k.venue_name
         FROM ticket_orders o
         JOIN ticket_categories c ON c.id = o.ticket_category_id
         JOIN concerts k ON k.id = c.concert_id
-        ORDER BY o.created_at DESC, o.id DESC'), MYSQLI_ASSOC);
+        ' . ($where ? 'WHERE ' . implode(' AND ', $where) : '') . '
+        ORDER BY o.created_at DESC, o.id DESC');
+    if ($params) {
+        mysqli_stmt_bind_param($stmt, $types, ...$params);
+    }
+    mysqli_stmt_execute($stmt);
+    $rows = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);
+    $is_filtered = $where !== [];
 }
 
 $status_badges = ['pending' => 'text-bg-warning', 'paid' => 'text-bg-success', 'cancelled' => 'text-bg-danger'];
@@ -125,12 +167,48 @@ require __DIR__ . '/includes/header.php';
 <?php if ($action === 'list'): ?>
 <div class="card">
   <div class="card-header d-flex align-items-center">
-    <h3 class="card-title mb-0">Daftar pesanan (<?= count($rows) ?>)</h3>
+    <h3 class="card-title mb-0">Daftar pesanan (<?= count($rows) ?><?= $is_filtered ? ' sesuai filter' : '' ?>)</h3>
     <a href="ticket_orders.php?action=add" class="btn btn-primary btn-sm ms-auto"><i class="bi bi-plus-lg"></i> Tambah</a>
+  </div>
+  <!-- pencarian & filter (GET, jadi hasilnya bisa di-bookmark atau dibagikan ke panitia lain) -->
+  <div class="card-body border-bottom">
+    <form method="get" class="row g-2">
+      <div class="col-lg-4">
+        <input class="form-control" name="q" value="<?= e($filter['q']) ?>" placeholder="Cari invoice, nama, email, atau HP">
+      </div>
+      <div class="col-lg-3 col-md-4">
+        <select class="form-select" name="concert">
+          <option value="">Semua konser</option>
+          <?php foreach ($concerts as $value => $label): ?>
+          <option value="<?= $value ?>"<?= (string) $value === $filter['concert'] ? ' selected' : '' ?>><?= e($label) ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <div class="col-lg-2 col-md-3">
+        <select class="form-select" name="status">
+          <option value="">Semua status</option>
+          <?php foreach ($statuses as $value => $label): ?>
+          <option value="<?= $value ?>"<?= $value === $filter['status'] ? ' selected' : '' ?>><?= e(ucfirst($value)) ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <div class="col-lg-2 col-md-3">
+        <select class="form-select" name="checkin">
+          <option value="">Semua check-in</option>
+          <?php foreach ($checkin_filters as $value => $label): ?>
+          <option value="<?= $value ?>"<?= $value === $filter['checkin'] ? ' selected' : '' ?>><?= e($label) ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <div class="col-lg-1 col-md-2 d-flex gap-1">
+        <button class="btn btn-primary flex-fill" title="Cari"><i class="bi bi-search"></i></button>
+        <?php if ($is_filtered): ?><a href="ticket_orders.php" class="btn btn-outline-secondary" title="Hapus filter"><i class="bi bi-x-lg"></i></a><?php endif; ?>
+      </div>
+    </form>
   </div>
   <div class="card-body p-0 table-responsive">
     <table class="table table-striped table-hover align-middle mb-0">
-      <thead><tr><th>Invoice</th><th>Pemesan</th><th>Konser / kategori</th><th>Jumlah</th><th>Total</th><th>Status</th><th>Dipesan</th><th class="text-end">Aksi</th></tr></thead>
+      <thead><tr><th>Invoice</th><th>Pemesan</th><th>Konser / kategori</th><th>Jumlah</th><th>Total</th><th>Status</th><th>Check-in</th><th>Dipesan</th><th class="text-end">Aksi</th></tr></thead>
       <tbody>
         <?php foreach ($rows as $row): ?>
         <tr>
@@ -140,11 +218,18 @@ require __DIR__ . '/includes/header.php';
           <td><?= (int) $row['quantity'] ?></td>
           <td>$<?= number_format($row['total'], 2) ?></td>
           <td><span class="badge <?= $status_badges[$row['status']] ?>"><?= e(ucfirst($row['status'])) ?></span></td>
+          <td class="text-nowrap">
+            <?php if ($row['checked_in_at']): ?>
+            <span class="badge text-bg-dark"><i class="bi bi-check2"></i> <?= date('j M H:i', strtotime($row['checked_in_at'])) ?></span>
+            <?php elseif ($row['status'] === 'paid'): ?>
+            <a href="checkin.php?code=<?= urlencode($row['invoice_no']) ?>" class="small">Check-in</a>
+            <?php else: ?>—<?php endif; ?>
+          </td>
           <td class="text-nowrap"><?= date('j M Y H:i', strtotime($row['created_at'])) ?></td>
           <td class="text-end text-nowrap"><?= action_buttons('ticket_orders.php', $row['id']) ?></td>
         </tr>
         <?php endforeach; ?>
-        <?php if (!$rows): ?><tr><td colspan="8" class="text-center text-secondary py-4">Belum ada data.</td></tr><?php endif; ?>
+        <?php if (!$rows): ?><tr><td colspan="9" class="text-center text-secondary py-4"><?= $is_filtered ? 'Tidak ada pesanan yang cocok dengan filter.' : 'Belum ada data.' ?></td></tr><?php endif; ?>
       </tbody>
     </table>
   </div>

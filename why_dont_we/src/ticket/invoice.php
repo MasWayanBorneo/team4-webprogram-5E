@@ -6,7 +6,7 @@ $invoice_no = $_GET['no'] ?? '';
 
 $stmt = mysqli_prepare($conn, "
     SELECT o.invoice_no, o.created_at, o.full_name, o.email, o.phone,
-           o.quantity, o.unit_price, o.total, o.status,
+           o.quantity, o.unit_price, o.total, o.status, o.checked_in_at,
            c.name AS category, k.venue_name, k.event_date
     FROM ticket_orders o
     JOIN ticket_categories c ON c.id = o.ticket_category_id
@@ -102,6 +102,10 @@ $status_views = [
                         <p><strong>Invoice No.</strong> <span id="inv-number"></span></p>
                         <p><strong>Date</strong> <span id="inv-date"></span></p>
                         <p class="invoice-status<?= $status_class ?>"><?= $status_label ?></p>
+                        <?php if ($row && $row['checked_in_at']): ?>
+                        <!-- sudah check-in di pintu masuk: terlihat juga oleh panitia yang memindai QR dengan kamera HP -->
+                        <p class="invoice-status invoice-status--cancelled">Used · checked in <?= date('j M Y, H:i', strtotime($row['checked_in_at'])) ?></p>
+                        <?php endif; ?>
                     </div>
                 </header>
 

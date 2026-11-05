@@ -90,10 +90,35 @@
             🛒 Cart - <span id="cart-count">0 Items</span>
         </div>
 
-        <button type="button" class="checkout-btn">
+        <button type="button" class="checkout-btn" data-action="open-cart" aria-haspopup="dialog">
             Checkout
         </button>
     </div>
+
+    <!-- RINGKASAN KERANJANG — dibuka tombol Checkout, diisi merch.js dari keranjang di browser.
+         Pembayaran online belum tersedia (belum ada tabel pesanan merch di database). -->
+    <dialog class="cart-modal" id="cart-modal" aria-labelledby="cart-title">
+        <div class="cart-modal-body">
+        <div class="cart-modal-head">
+            <h2 id="cart-title">Your Cart</h2>
+            <button type="button" class="cart-close" data-action="close-cart" aria-label="Close">&times;</button>
+        </div>
+        <p class="cart-empty" id="cart-empty">Your cart is empty. Add some merch first!</p>
+        <ul class="cart-items" id="cart-items"></ul>
+        <div class="cart-total" id="cart-total-row">
+            <span>Total</span>
+            <span id="cart-total">$0</span>
+        </div>
+        <p class="cart-note">
+            <strong>Online checkout is coming soon.</strong>
+            Your cart is saved on this device, so your items will still be here when it opens.
+        </p>
+        <div class="cart-actions">
+            <button type="button" class="cart-clear" data-action="clear-cart">Clear cart</button>
+            <button type="button" data-action="close-cart">Continue shopping</button>
+        </div>
+        </div>
+    </dialog>
 <!-- ============================ FOOTER ============================ -->
 <footer class="site-footer">
   <div class="shell">
