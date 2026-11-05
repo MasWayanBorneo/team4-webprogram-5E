@@ -258,6 +258,146 @@ button:hover {
 }
 
 /* ==========================
+   RINGKASAN KERANJANG (modal tombol Checkout)
+   <dialog> tanpa padding sendiri: klik di area gelap di luar kartu = klik di <dialog>
+   itu sendiri, yang dipakai merch.js untuk menutup modal.
+========================== */
+
+.cart-modal {
+  margin: auto; /* reset "* { margin: 0 }" di atas menghapus posisi tengah bawaan <dialog> */
+  width: min(640px, calc(100% - 32px));
+  max-height: calc(100% - 32px);
+  padding: 0;
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  background: var(--card-bg-light);
+  color: var(--card-ink);
+  box-shadow: var(--card-shadow);
+}
+.cart-modal::backdrop {
+  background: rgba(3, 0, 32, 0.75);
+  backdrop-filter: blur(4px);
+}
+body:has(.cart-modal[open]) {
+  overflow: hidden;
+}
+
+.cart-modal-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cart-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.cart-modal-head h2 {
+  font-family: "Special Elite", serif;
+  font-size: 1.6rem;
+}
+
+/* tombol kecil di dalam modal tidak memakai ukuran besar tombol global */
+.cart-modal .cart-close,
+.cart-modal .cart-remove {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(1, 9, 18, 0.1);
+  color: var(--card-ink);
+  font-size: 22px;
+  line-height: 1;
+  box-shadow: none;
+}
+
+.cart-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 45vh;
+  overflow-y: auto;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 56px 1fr auto auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.55);
+}
+.cart-item img {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  background: #fff;
+}
+.cart-item-name {
+  font-weight: 700;
+}
+.cart-item-price {
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+.cart-item-subtotal {
+  font-weight: 700;
+  min-width: 60px;
+  text-align: right;
+}
+
+.cart-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cart-qty button {
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+  box-shadow: none;
+}
+
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3rem;
+  font-weight: 700;
+  padding-top: 10px;
+  border-top: 2px solid rgba(1, 9, 18, 0.15);
+}
+
+.cart-note {
+  font-size: 0.9rem;
+  padding: 10px 14px;
+  border-left: 4px solid var(--secondary-color);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.cart-actions button {
+  font-size: 16px;
+}
+.cart-modal .cart-clear {
+  background: transparent;
+  color: var(--card-ink);
+  box-shadow: none;
+  text-decoration: underline;
+}
+
+/* ==========================
    RESPONSIF
 ========================== */
 
@@ -325,4 +465,17 @@ button:hover {
     width: 100%;
     min-width: 0;
   }
+
+  /* HP: barang di keranjang jadi dua baris (gambar + nama, lalu jumlah + subtotal) */
+  .cart-item {
+    grid-template-columns: 56px 1fr auto;
+    grid-template-areas:
+      "img info remove"
+      "img qty subtotal";
+  }
+  .cart-item img { grid-area: img; }
+  .cart-item-info { grid-area: info; }
+  .cart-qty { grid-area: qty; }
+  .cart-item-subtotal { grid-area: subtotal; }
+  .cart-remove { grid-area: remove; }
 }

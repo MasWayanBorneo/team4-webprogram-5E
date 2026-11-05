@@ -175,6 +175,7 @@ CREATE TABLE ticket_orders (
   unit_price          DECIMAL(12,2) NOT NULL,       -- harga 1 tiket SAAT dipesan
   total               DECIMAL(12,2) NOT NULL,       -- unit_price × quantity
   status              ENUM('pending','paid','cancelled') NOT NULL DEFAULT 'pending',
+  checked_in_at       DATETIME      NULL,           -- waktu masuk di pintu konser; NULL = belum dipakai
   created_at          TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   UNIQUE KEY uq_ticket_orders_invoice (invoice_no),

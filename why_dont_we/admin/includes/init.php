@@ -19,6 +19,7 @@ session_start();
 /* --- menu samping: [file, judul, ikon Bootstrap Icons] per kelompok -------- */
 $admin_menu = [
     'Data Masuk' => [
+        ['checkin.php', 'Check-in Tiket', 'bi-qr-code-scan', 'checkin'],
         ['ticket_orders.php', 'Pesanan Tiket', 'bi-receipt', 'ticket_orders'],
         ['limelight_members.php', 'Anggota Limelight', 'bi-people', 'limelight_members'],
         ['subscribers.php', 'Subscriber', 'bi-envelope', 'subscribers'],

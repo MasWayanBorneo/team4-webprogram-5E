@@ -164,6 +164,7 @@ Table ticket_orders {
   unit_price          decimal(12,2) [not null, note: 'harga 1 tiket SAAT dipesan; tidak ikut berubah kalau ticket_categories.price naik']
   total               decimal(12,2) [not null, note: 'unit_price × quantity']
   status              order_status  [not null, default: 'pending', note: 'tiket biasa langsung paid; pre-order pending sampai dikonfirmasi']
+  checked_in_at       datetime      [note: 'waktu tiket dipakai masuk (check-in panitia); kosong = belum dipakai, mencegah tiket dipakai dua kali']
   created_at          timestamp     [not null, default: `now()`]
 }
 
