@@ -1,7 +1,10 @@
 <?php
 require __DIR__ . '/../../includes/db.php';
 
-$members = mysqli_fetch_all(mysqli_query($conn, 'SELECT * FROM members ORDER BY sort_order'), MYSQLI_ASSOC);
+$members = mysqli_fetch_all(
+    mysqli_query($conn, 'SELECT * FROM members ORDER BY sort_order'),
+    MYSQLI_ASSOC
+);
 
 // kartu benefit Limelight; benefit baru cukup ditambah sebagai baris di tabel
 $benefits = mysqli_fetch_all(mysqli_query($conn, 'SELECT icon, title, description FROM limelight_benefits WHERE is_active = 1 ORDER BY sort_order, id'), MYSQLI_ASSOC);
@@ -37,8 +40,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'POST') {
     } else {
         $favorite = (int) $ll_old['favorite'];
 
-        $stmt = mysqli_prepare($conn, 'INSERT INTO limelight_members (full_name, email, date_of_birth, favorite_member_id) VALUES (?, ?, ?, ?)');
-        mysqli_stmt_bind_param($stmt, 'sssi', $ll_old['name'], $ll_old['email'], $ll_old['dob'], $favorite);
+        $stmt = mysqli_prepare(
+            $conn, 'INSERT INTO limelight_members (full_name, email, date_of_birth, favorite_member_id) VALUES (?, ?, ?, ?)');
+            mysqli_stmt_bind_param($stmt, 'sssi', $ll_old['name'], $ll_old['email'], $ll_old['dob'], $favorite);
 
         if (mysqli_stmt_execute($stmt)) {
             // redirect supaya refresh tidak mengirim form dua kali
