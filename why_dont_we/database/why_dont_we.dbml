@@ -186,6 +186,17 @@ Table subscribers {
   subscribed_at  timestamp         [not null, default: `now()`]
 }
 
+// ---- Admin -----------------------------------------------------------------
+
+Table admins {
+  id             int          [pk, increment]
+  username       varchar(50)  [not null, unique]
+  email          varchar(100) [not null, unique]
+  password_hash  varchar(255) [not null, note: 'hasil password_hash(), bukan password asli']
+  created_at     timestamp    [not null, default: `now()`]
+  Note: 'Akun login dashboard admin (AdminLTE) untuk CRUD semua tabel; tidak berelasi dengan tabel lain'
+}
+
 // ---- Relasi (sama dengan FOREIGN KEY di SQL) -------------------------------
 
 Ref: songs.album_id > albums.id [delete: set null]
@@ -224,4 +235,8 @@ TableGroup tiket_konser {
 TableGroup lain_lain {
   products
   subscribers
+}
+
+TableGroup admin {
+  admins
 }

@@ -1,6 +1,7 @@
 -- ============================================================================
 -- WHY DON'T WE — database situs
--- Sesuai rancangan di dbdiagram.io (tanpa tabel admins).
+-- Sesuai rancangan akhir di dbdiagram.io (why_dont_we.dbml): 15 tabel,
+-- termasuk admins untuk login dashboard admin.
 --
 -- Cara import (phpMyAdmin, XAMPP atau TinkerHost):
 --   1. Pilih / buat database dulu (di TinkerHost database dibuat lewat panel).
@@ -18,7 +19,7 @@ DROP TABLE IF EXISTS ticket_orders, ticket_categories, concerts,
                      limelight_benefits, limelight_members, member_trivia, members,
                      news, news_categories,
                      songs, albums, videos,
-                     products, subscribers;
+                     products, subscribers, admins;
 
 SET FOREIGN_KEY_CHECKS = 1;
 
@@ -200,6 +201,20 @@ CREATE TABLE subscribers (
   subscribed_at  TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   UNIQUE KEY uq_subscribers_email (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ---- Admin -----------------------------------------------------------------
+
+-- akun login dashboard admin (AdminLTE); tidak berelasi dengan tabel lain
+CREATE TABLE admins (
+  id             INT UNSIGNED  NOT NULL AUTO_INCREMENT,
+  username       VARCHAR(50)   NOT NULL,
+  email          VARCHAR(100)  NOT NULL,
+  password_hash  VARCHAR(255)  NOT NULL,           -- hasil password_hash(), bukan password asli
+  created_at     TIMESTAMP     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_admins_username (username),
+  UNIQUE KEY uq_admins_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================================
