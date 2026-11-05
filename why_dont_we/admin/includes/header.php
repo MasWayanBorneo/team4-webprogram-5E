@@ -27,9 +27,18 @@ unset($_SESSION['flash']);
           <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button" aria-label="Buka/tutup menu"><i class="bi bi-list"></i></a>
         </li>
       </ul>
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-center">
         <li class="nav-item">
           <a class="nav-link" href="../index.php" target="_blank"><i class="bi bi-box-arrow-up-right me-1"></i> Lihat situs</a>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link"><i class="bi bi-person-circle me-1"></i> <?= e($current_admin['username']) ?></span>
+        </li>
+        <li class="nav-item">
+          <form method="post" action="logout.php" class="d-inline">
+            <?= csrf_field() ?>
+            <button class="btn btn-sm btn-outline-secondary ms-2"><i class="bi bi-box-arrow-right"></i> Keluar</button>
+          </form>
         </li>
       </ul>
     </div>

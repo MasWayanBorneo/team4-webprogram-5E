@@ -2,19 +2,54 @@
 /* ============================================================================
    DASHBOARD ADMIN — dipanggil di baris pertama setiap halaman admin:
      require __DIR__ . '/includes/init.php';
-   Isinya: koneksi database, daftar menu, dan fungsi bantu (pesan, upload
-   gambar, isian form, tombol aksi) yang dipakai semua halaman CRUD.
+   Isinya: koneksi database, pengecekan login & token CSRF, daftar menu, dan
+   fungsi bantu (pesan, upload file, isian form, tombol aksi) untuk halaman CRUD.
    ============================================================================ */
 require __DIR__ . '/../../includes/db.php';
 
+// cookie sesi admin: tidak bisa dibaca JavaScript (httponly), tidak ikut terkirim dari situs lain (samesite)
+session_name('wdw_admin');
+session_set_cookie_params(['httponly' => true, 'samesite' => 'Lax', 'secure' => !empty($_SERVER['HTTPS'])]);
 session_start();
 
 /* ----------------------------------------------------------------------------
-   LOGIN — BELUM ADA.
-   Sebelum folder admin/ ikut ter-deploy ke situs online, pasang pengecekan
-   login di sini (memakai tabel admins). Tanpa login, siapa pun yang membuka
-   /admin/ bisa menambah, mengubah, dan menghapus data.
+   LOGIN — semua halaman admin wajib login, kecuali halaman login dan halaman
+   pembuatan akun admin pertama (setup.php, hanya terbuka selama tabel admins kosong).
    ------------------------------------------------------------------------- */
+$public_pages = ['login.php', 'setup.php'];
+$current_admin = null;
+
+if (!empty($_SESSION['admin_id'])) {
+    // pastikan akunnya masih ada (bisa saja sudah dihapus admin lain)
+    $stmt = mysqli_prepare($conn, 'SELECT id, username FROM admins WHERE id = ?');
+    mysqli_stmt_bind_param($stmt, 'i', $_SESSION['admin_id']);
+    mysqli_stmt_execute($stmt);
+    $current_admin = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+    if (!$current_admin) {
+        $_SESSION = [];
+    }
+}
+if (!$current_admin && !in_array(basename($_SERVER['SCRIPT_NAME']), $public_pages, true)) {
+    redirect('login.php');
+}
+
+/* ----------------------------------------------------------------------------
+   CSRF — setiap form POST membawa token rahasia milik sesi ini (lihat csrf_field()).
+   Situs lain tidak tahu token ini, jadi tidak bisa menyuruh browser admin
+   mengirim form (mis. menghapus data) tanpa sepengetahuannya.
+   ------------------------------------------------------------------------- */
+function csrf_token()
+{
+    if (empty($_SESSION['csrf'])) {
+        $_SESSION['csrf'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf'];
+}
+
+function csrf_field()
+{
+    return '<input type="hidden" name="csrf" value="' . csrf_token() . '">';
+}
 
 /* --- menu samping: [file, judul, ikon Bootstrap Icons] per kelompok -------- */
 $admin_menu = [
@@ -177,6 +212,12 @@ if (is_post() && empty($_POST) && (int) ($_SERVER['CONTENT_LENGTH'] ?? 0) > 0) {
     redirect($_SERVER['REQUEST_URI']);
 }
 
+// setiap kiriman form harus membawa token CSRF yang cocok dengan sesi ini
+if (is_post() && !hash_equals(csrf_token(), $_POST['csrf'] ?? '')) {
+    http_response_code(400);
+    exit('Permintaan ditolak: token formulir tidak valid atau sesi sudah berakhir. Kembali, muat ulang halaman, lalu coba lagi.');
+}
+
 /* --- tanggal & jam: format database ↔ format <input type="datetime-local"> ---- */
 function to_datetime_input($value)
 {
@@ -219,7 +260,7 @@ function action_buttons($page, $id)
 {
     return '<a href="' . $page . '?action=edit&id=' . (int) $id . '" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i> Edit</a> '
         . '<form method="post" action="' . $page . '" class="d-inline" onsubmit="return confirm(\'Hapus data ini?\')">'
-        . '<input type="hidden" name="do" value="delete"><input type="hidden" name="id" value="' . (int) $id . '">'
+        . csrf_field() . '<input type="hidden" name="do" value="delete"><input type="hidden" name="id" value="' . (int) $id . '">'
         . '<button class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Hapus</button></form>';
 }
 
@@ -293,9 +334,10 @@ function field_audio($name, $label, $value)
         . '<div class="form-text">Pilih file untuk upload lagu baru (MP3, maks 10 MB), atau isi path file yang sudah ada di atas.</div></div>';
 }
 
-// tombol Simpan + Batal di bawah form
+// tombol Simpan + Batal di bawah form (sekaligus token CSRF form tersebut)
 function form_buttons($back)
 {
-    echo '<button class="btn btn-primary" name="do" value="save"><i class="bi bi-check-lg"></i> Simpan</button> '
+    echo csrf_field()
+        . '<button class="btn btn-primary" name="do" value="save"><i class="bi bi-check-lg"></i> Simpan</button> '
         . '<a href="' . $back . '" class="btn btn-secondary">Batal</a>';
 }
