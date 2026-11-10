@@ -1,6 +1,8 @@
 <?php
 /* CRUD tabel albums — kartu "All albums" di halaman Music */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Album';
 $active = 'albums';
@@ -8,6 +10,7 @@ $active = 'albums';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $types = ['album' => 'Album', 'ep' => 'EP', 'single' => 'Single'];
 $data = ['title' => '', 'type' => 'album', 'release_year' => '', 'cover_image' => ''];
 

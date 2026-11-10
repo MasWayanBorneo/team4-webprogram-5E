@@ -3,6 +3,8 @@
    Setelah akun pertama dibuat, halaman ini otomatis tertutup (diarahkan ke login);
    akun admin berikutnya dibuat dari menu Akun Admin di dashboard. */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Buat akun admin pertama';
 

@@ -1,6 +1,8 @@
 <?php
 /* Beranda dashboard: jumlah data di setiap tabel, dengan tautan ke halaman CRUD-nya */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Dashboard';
 $active = 'dashboard';

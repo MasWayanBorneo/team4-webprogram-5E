@@ -2,6 +2,9 @@
 /* CRUD tabel admins — akun dashboard admin. Password disimpan sebagai hash (password_hash),
    tidak pernah sebagai teks asli, dan tidak pernah ditampilkan. */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
+/** @var array $current_admin */
 
 $page_title = 'Akun Admin';
 $active = 'admins';
@@ -9,6 +12,7 @@ $active = 'admins';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $data = ['username' => '', 'email' => ''];
 
 /* --- HAPUS (DELETE) ---------------------------------------------------------- */

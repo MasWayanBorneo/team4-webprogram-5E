@@ -1,6 +1,8 @@
 <?php
 /* CRUD tabel news — berita di Home, halaman News, dan halaman artikel (article.php?slug=...) */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Berita';
 $active = 'news';
@@ -8,6 +10,7 @@ $active = 'news';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $categories = options_from($conn, 'SELECT id, name FROM news_categories ORDER BY name');
 $data = [
     'category_id' => '', 'slug' => '', 'title' => '', 'excerpt' => '', 'content' => '', 'thumbnail' => '',

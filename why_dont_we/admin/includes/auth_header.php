@@ -1,6 +1,7 @@
 <?php
 /* Kerangka halaman login & pembuatan akun pertama (gaya "login page" AdminLTE 4),
    tanpa menu samping. Sebelum include, halaman mengisi $page_title. */
+/** @var string $page_title */
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 ?>

@@ -1,6 +1,8 @@
 <?php
 /* CRUD tabel concerts — jadwal konser di Home, Tour, dan form tiket */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Konser';
 $active = 'concerts';
@@ -8,6 +10,7 @@ $active = 'concerts';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $regions = ['asia' => 'Asia', 'america' => 'America', 'europe' => 'Europe', 'other' => 'Other'];
 $statuses = ['available' => 'Available (tiket dijual)', 'coming_soon' => 'Coming Soon (pre-order)', 'sold_out' => 'Sold Out'];
 $data = ['venue_name' => '', 'city' => '', 'country' => '', 'region' => 'asia', 'event_date' => '', 'image' => '', 'status' => 'available'];

@@ -1,6 +1,10 @@
 <?php
 /* Bagian atas tampilan AdminLTE 4: <head>, navbar, menu samping, judul halaman.
    Sebelum include, halaman mengisi $page_title (judul) dan $active (nama tabel menu yang aktif). */
+/** @var string $page_title */
+/** @var string $active */
+/** @var array $admin_menu */
+/** @var array $current_admin */
 $flash = $_SESSION['flash'] ?? null;
 unset($_SESSION['flash']);
 ?>

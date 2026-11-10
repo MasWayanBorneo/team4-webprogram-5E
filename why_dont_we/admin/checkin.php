@@ -4,7 +4,11 @@
    Tiket lunas yang belum dipakai bisa di-check-in sekali; waktu masuk dicatat di
    ticket_orders.checked_in_at, sehingga tiket yang sama (mis. hasil cetak ulang PDF)
    ditolak kalau dipindai lagi. */
+
+   
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Check-in Tiket';
 $active = 'checkin';

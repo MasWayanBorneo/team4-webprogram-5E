@@ -1,6 +1,8 @@
 <?php
 /* CRUD tabel products — produk merch di Home dan halaman Merch */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Produk Merch';
 $active = 'products';
@@ -8,6 +10,7 @@ $active = 'products';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $data = ['name' => '', 'collection' => '', 'price' => '', 'image' => '', 'is_featured' => 0, 'is_active' => 1];
 
 /* --- HAPUS (DELETE) ---------------------------------------------------------- */

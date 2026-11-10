@@ -1,6 +1,8 @@
 <?php
 /* CRUD tabel ticket_categories — kategori tiket (Regular, VIP) setiap konser, dengan harga & kuota */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Kategori Tiket';
 $active = 'ticket_categories';
@@ -8,6 +10,7 @@ $active = 'ticket_categories';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $concerts = options_from($conn, "SELECT id, CONCAT(venue_name, ' — ', DATE_FORMAT(event_date, '%e %b %Y')) FROM concerts ORDER BY event_date");
 $data = ['concert_id' => '', 'name' => '', 'description' => '', 'price' => '', 'quota' => ''];
 

@@ -2,6 +2,8 @@
 /* CRUD tabel ticket_orders — pesanan tiket & pre-order dari form tiket.
    Di sini juga panitia mengonfirmasi pre-order: ubah status pending → paid. */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Pesanan Tiket';
 $active = 'ticket_orders';
@@ -9,6 +11,7 @@ $active = 'ticket_orders';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $statuses = ['pending' => 'Pending (pre-order, belum dikonfirmasi)', 'paid' => 'Paid (lunas, tiket terbit)', 'cancelled' => 'Cancelled (batal)'];
 
 // pilihan kategori tiket beserta konser dan harganya

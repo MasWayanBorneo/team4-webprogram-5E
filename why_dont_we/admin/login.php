@@ -2,6 +2,9 @@
 /* LOGIN dashboard admin — username atau email + password (dicek dengan password_verify
    terhadap admins.password_hash). Halaman ini terbuka tanpa login (lihat includes/init.php). */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
+/** @var array|null $current_admin */
 
 $page_title = 'Login';
 
