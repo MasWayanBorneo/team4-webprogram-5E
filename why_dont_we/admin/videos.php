@@ -1,6 +1,8 @@
 <?php
 /* CRUD tabel videos — "All videos" di halaman Music */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Video';
 $active = 'videos';
@@ -8,6 +10,7 @@ $active = 'videos';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $data = ['title' => '', 'youtube_id' => '', 'start_second' => '0'];
 
 /* --- HAPUS (DELETE) ---------------------------------------------------------- */

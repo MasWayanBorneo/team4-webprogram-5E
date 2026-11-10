@@ -1,6 +1,8 @@
 <?php
 /* CRUD tabel songs — "Top popular songs" di halaman Music (audio, lirik, link streaming) */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Lagu';
 $active = 'songs';
@@ -8,6 +10,7 @@ $active = 'songs';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $albums = options_from($conn, 'SELECT id, title FROM albums ORDER BY title');
 $data = [
     'album_id' => '', 'title' => '', 'duration_sec' => '', 'audio_file' => '', 'cover_image' => '',

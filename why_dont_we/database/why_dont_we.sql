@@ -1,15 +1,8 @@
 -- ============================================================================
 -- WHY DON'T WE — database situs
--- Sesuai rancangan akhir di dbdiagram.io (why_dont_we.dbml): 15 tabel,
--- termasuk admins untuk login dashboard admin.
---
--- Cara import (phpMyAdmin, XAMPP atau TinkerHost):
---   1. Pilih / buat database dulu (di TinkerHost database dibuat lewat panel).
---   2. Tab Import → pilih file ini → Go.
---
--- PERHATIAN: file ini menghapus tabel dengan nama yang sama sebelum membuatnya
--- lagi, termasuk tabel `products` lama dari merch.sql. Data di tabel-tabel
--- itu akan hilang.
+
+-- PERHATIAN:
+-- Buat database baru di phpMyAdmin, lalu import file ini. 
 -- ============================================================================
 
 SET NAMES utf8mb4;

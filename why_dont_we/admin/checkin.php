@@ -4,7 +4,11 @@
    Tiket lunas yang belum dipakai bisa di-check-in sekali; waktu masuk dicatat di
    ticket_orders.checked_in_at, sehingga tiket yang sama (mis. hasil cetak ulang PDF)
    ditolak kalau dipindai lagi. */
+
+   
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Check-in Tiket';
 $active = 'checkin';
@@ -125,12 +129,14 @@ require __DIR__ . '/includes/header.php';
   <div class="card-footer">
     <?php if ($order['status'] === 'paid' && !$order['checked_in_at']): ?>
     <form method="post" class="d-inline">
+      <?= csrf_field() ?>
       <input type="hidden" name="id" value="<?= (int) $order['id'] ?>">
       <input type="hidden" name="invoice_no" value="<?= e($order['invoice_no']) ?>">
       <button class="btn btn-success btn-lg" name="do" value="checkin"><i class="bi bi-box-arrow-in-right"></i> Check-in (<?= (int) $order['quantity'] ?> gelang)</button>
     </form>
     <?php elseif ($order['checked_in_at']): ?>
     <form method="post" class="d-inline" onsubmit="return confirm('Batalkan check-in tiket ini? Tiket akan bisa dipakai masuk lagi.')">
+      <?= csrf_field() ?>
       <input type="hidden" name="id" value="<?= (int) $order['id'] ?>">
       <input type="hidden" name="invoice_no" value="<?= e($order['invoice_no']) ?>">
       <button class="btn btn-outline-secondary" name="do" value="undo"><i class="bi bi-arrow-counterclockwise"></i> Batalkan check-in (kalau salah pindai)</button>

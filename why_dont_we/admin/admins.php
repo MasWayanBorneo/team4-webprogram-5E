@@ -2,6 +2,9 @@
 /* CRUD tabel admins — akun dashboard admin. Password disimpan sebagai hash (password_hash),
    tidak pernah sebagai teks asli, dan tidak pernah ditampilkan. */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
+/** @var array $current_admin */
 
 $page_title = 'Akun Admin';
 $active = 'admins';
@@ -9,10 +12,12 @@ $active = 'admins';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $data = ['username' => '', 'email' => ''];
 
 /* --- HAPUS (DELETE) ---------------------------------------------------------- */
-// akun admin terakhir tidak boleh dihapus, supaya dashboard tetap punya admin
+// akun admin terakhir dan akun yang sedang dipakai login tidak boleh dihapus,
+// supaya dashboard tetap punya admin dan tidak ada yang terkunci di luar
 if (is_post() && post('do') === 'delete') {
     $total = mysqli_fetch_row(mysqli_query($conn, 'SELECT COUNT(*) FROM admins'))[0];
     if ($total <= 1) {
@@ -20,6 +25,10 @@ if (is_post() && post('do') === 'delete') {
         redirect('admins.php');
     }
     $delete_id = (int) $_POST['id'];
+    if ($delete_id === (int) $current_admin['id']) {
+        flash('danger', 'Akun yang sedang dipakai login tidak bisa dihapus. Minta admin lain untuk menghapusnya.');
+        redirect('admins.php');
+    }
     $stmt = mysqli_prepare($conn, 'DELETE FROM admins WHERE id = ?');
     mysqli_stmt_bind_param($stmt, 'i', $delete_id);
     finish_delete($stmt, 'admins.php');

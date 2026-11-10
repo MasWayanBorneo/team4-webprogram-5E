@@ -1,6 +1,8 @@
 <?php
 /* CRUD tabel limelight_members — pendaftar fan club dari form Limelight (halaman About) */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Anggota Limelight';
 $active = 'limelight_members';
@@ -8,6 +10,7 @@ $active = 'limelight_members';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $members = options_from($conn, 'SELECT id, full_name FROM members ORDER BY sort_order, id');
 $data = ['full_name' => '', 'email' => '', 'date_of_birth' => '', 'favorite_member_id' => ''];
 

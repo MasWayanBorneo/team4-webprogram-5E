@@ -1,6 +1,8 @@
 <?php
 /* CRUD tabel members — personel di Home, About, dan halaman personel (member.php?m=slug) */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Personel';
 $active = 'members';
@@ -8,6 +10,7 @@ $active = 'members';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $data = [
     'slug' => '', 'full_name' => '', 'roles' => '', 'birth_date' => '', 'zodiac' => '', 'hometown' => '',
     'extra_label' => '', 'extra_value' => '', 'bio' => '', 'photo' => '', 'hero_photo' => '', 'sort_order' => '0',

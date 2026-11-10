@@ -1,6 +1,8 @@
 <?php
 /* CRUD tabel subscribers — email dari form subscribe di Home, News, dan Tour */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Subscriber';
 $active = 'subscribers';
@@ -8,6 +10,7 @@ $active = 'subscribers';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $sources = ['home' => 'Home', 'news' => 'News', 'tour' => 'Tour'];
 $data = ['email' => '', 'source' => 'home'];
 

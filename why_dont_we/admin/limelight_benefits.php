@@ -1,6 +1,8 @@
 <?php
 /* CRUD tabel limelight_benefits — kartu benefit Limelight di halaman About */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Benefit Limelight';
 $active = 'limelight_benefits';
@@ -8,6 +10,7 @@ $active = 'limelight_benefits';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $data = ['icon' => 'fa-star', 'title' => '', 'description' => '', 'sort_order' => '0', 'is_active' => 1];
 
 /* --- HAPUS (DELETE) ---------------------------------------------------------- */

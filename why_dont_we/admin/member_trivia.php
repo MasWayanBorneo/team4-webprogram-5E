@@ -1,6 +1,8 @@
 <?php
 /* CRUD tabel member_trivia — trivia di halaman setiap personel */
 require __DIR__ . '/includes/init.php';
+// variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
+/** @var mysqli $conn */
 
 $page_title = 'Trivia Personel';
 $active = 'member_trivia';
@@ -8,6 +10,7 @@ $active = 'member_trivia';
 $action = $_GET['action'] ?? 'list';   // list | add | edit
 $id = (int) ($_GET['id'] ?? 0);
 $errors = [];
+$rows = [];
 $members = options_from($conn, 'SELECT id, full_name FROM members ORDER BY sort_order, id');
 $data = ['member_id' => '', 'content' => '', 'sort_order' => '1'];
 
