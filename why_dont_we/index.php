@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/includes/db.php';
 
-// The Band
+// The  Band ....
 $members = mysqli_fetch_all(mysqli_query($conn, 'SELECT slug, full_name, roles, photo FROM members ORDER BY sort_order'), MYSQLI_ASSOC);
 
 // On Tour: 3 konser pertama yang belum sold out (sama seperti halaman Tour & tiket)
