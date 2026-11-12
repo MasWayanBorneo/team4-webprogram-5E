@@ -26,6 +26,8 @@ if (is_post() && post('do') === 'delete') {
 }
 
 /* --- SIMPAN (INSERT / UPDATE) ------------------------------------------------ */
+
+
 if (is_post() && post('do') === 'save') {
     $data = [
         'album_id'     => post('album_id'),
@@ -95,6 +97,7 @@ if ($action === 'edit' && !is_post()) {
     }
 }
 
+//..
 /* --- DAFTAR (READ semua baris) ----------------------------------------------- */
 if ($action === 'list') {
     $rows = mysqli_fetch_all(mysqli_query($conn, '

@@ -5,6 +5,7 @@ require __DIR__ . '/includes/init.php';
 // variabel dari includes/init.php (keterangan untuk editor, supaya tidak ditandai merah)
 /** @var mysqli $conn */
 
+//..
 if (!is_post()) {
     redirect('index.php');
 }

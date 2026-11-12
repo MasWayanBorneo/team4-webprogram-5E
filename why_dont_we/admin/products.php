@@ -22,6 +22,7 @@ if (is_post() && post('do') === 'delete') {
 }
 
 /* --- SIMPAN (INSERT / UPDATE) ------------------------------------------------ */
+//..
 if (is_post() && post('do') === 'save') {
     $data = [
         'name'        => post('name'),
@@ -72,6 +73,7 @@ if ($action === 'edit' && !is_post()) {
 }
 
 /* --- DAFTAR (READ semua baris) ----------------------------------------------- */
+//..
 if ($action === 'list') {
     $rows = mysqli_fetch_all(mysqli_query($conn, 'SELECT * FROM products ORDER BY is_featured DESC, id'), MYSQLI_ASSOC);
 }

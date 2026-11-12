@@ -67,6 +67,7 @@ if ($action === 'edit' && !is_post()) {
 }
 
 /* --- DAFTAR (READ semua baris) ----------------------------------------------- */
+// ..
 if ($action === 'list') {
     $rows = mysqli_fetch_all(mysqli_query($conn, 'SELECT * FROM videos ORDER BY id'), MYSQLI_ASSOC);
 }

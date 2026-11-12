@@ -23,6 +23,7 @@ if (is_post() && post('do') === 'delete') {
     finish_delete($stmt, 'ticket_categories.php');
 }
 
+
 /* --- SIMPAN (INSERT / UPDATE) ------------------------------------------------ */
 if (is_post() && post('do') === 'save') {
     $data = [
@@ -80,6 +81,8 @@ if ($action === 'edit' && !is_post()) {
 
 /* --- DAFTAR (READ semua baris) ----------------------------------------------- */
 // terjual = jumlah tiket dari pesanan yang tidak dibatalkan (pending + paid)
+
+
 if ($action === 'list') {
     $rows = mysqli_fetch_all(mysqli_query($conn, "
         SELECT c.*, k.venue_name, k.event_date, COALESCE(SUM(o.quantity), 0) AS sold
