@@ -22,6 +22,7 @@ if ($admin_count == 0) {
 $error = '';
 $login = '';
 
+//..
 if (is_post()) {
     $login = post('login');
     $password = $_POST['password'] ?? '';

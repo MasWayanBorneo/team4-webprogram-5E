@@ -16,6 +16,7 @@ if ($admin_count > 0) {
 $errors = [];
 $data = ['username' => '', 'email' => ''];
 
+//..
 if (is_post()) {
     $data = ['username' => post('username'), 'email' => post('email')];
     $password = $_POST['password'] ?? '';

@@ -22,6 +22,7 @@ if (is_post() && post('do') === 'delete') {
     finish_delete($stmt, 'subscribers.php');
 }
 
+//..
 /* --- SIMPAN (INSERT / UPDATE) ------------------------------------------------ */
 if (is_post() && post('do') === 'save') {
     $data = ['email' => post('email'), 'source' => post('source')];
@@ -57,6 +58,8 @@ if ($action === 'edit' && !is_post()) {
         redirect('subscribers.php');
     }
 }
+
+
 
 /* --- DAFTAR (READ semua baris) ----------------------------------------------- */
 if ($action === 'list') {

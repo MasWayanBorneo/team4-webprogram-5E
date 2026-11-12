@@ -26,6 +26,7 @@ if (is_post() && post('do') === 'delete') {
     finish_delete($stmt, 'members.php');
 }
 
+//..
 /* --- SIMPAN (INSERT / UPDATE) ------------------------------------------------ */
 if (is_post() && post('do') === 'save') {
     $data = [
@@ -104,6 +105,7 @@ if ($action === 'edit' && !is_post()) {
     }
 }
 
+//..
 /* --- DAFTAR (READ semua baris) ----------------------------------------------- */
 if ($action === 'list') {
     $rows = mysqli_fetch_all(mysqli_query($conn, '

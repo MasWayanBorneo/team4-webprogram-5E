@@ -23,6 +23,7 @@ if (is_post() && post('do') === 'delete') {
 }
 
 /* --- SIMPAN (INSERT / UPDATE) ------------------------------------------------ */
+//..
 if (is_post() && post('do') === 'save') {
     $data = ['name' => post('name')];
 
@@ -54,6 +55,8 @@ if ($action === 'edit' && !is_post()) {
         redirect('news_categories.php');
     }
 }
+
+//..
 
 /* --- DAFTAR (READ semua baris) ----------------------------------------------- */
 if ($action === 'list') {
