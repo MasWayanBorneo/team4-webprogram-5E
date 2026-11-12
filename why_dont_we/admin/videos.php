@@ -13,6 +13,7 @@ $errors = [];
 $rows = [];
 $data = ['title' => '', 'youtube_id' => '', 'start_second' => '0'];
 
+//..
 /* --- HAPUS (DELETE) ---------------------------------------------------------- */
 if (is_post() && post('do') === 'delete') {
     $delete_id = (int) $_POST['id'];
@@ -54,7 +55,8 @@ if (is_post() && post('do') === 'save') {
     $action = $id ? 'edit' : 'add';
 }
 
-/* --- AMBIL DATA UNTUK FORM EDIT (READ satu baris) ---------------------------- */
+//..AMBIL DATA UNTUK FORM EDIT (READ satu baris
+
 if ($action === 'edit' && !is_post()) {
     $stmt = mysqli_prepare($conn, 'SELECT * FROM videos WHERE id = ?');
     mysqli_stmt_bind_param($stmt, 'i', $id);

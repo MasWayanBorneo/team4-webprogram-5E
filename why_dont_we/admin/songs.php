@@ -17,7 +17,7 @@ $data = [
     'lyrics' => '', 'spotify_url' => '', 'apple_url' => '', 'youtube_url' => '', 'is_featured' => 1,
 ];
 
-/* --- HAPUS (DELETE) ---------------------------------------------------------- */
+//.. HAPUS (DELETE)
 if (is_post() && post('do') === 'delete') {
     $delete_id = (int) $_POST['id'];
     $stmt = mysqli_prepare($conn, 'DELETE FROM songs WHERE id = ?');
@@ -85,7 +85,7 @@ if (is_post() && post('do') === 'save') {
     $action = $id ? 'edit' : 'add';
 }
 
-/* --- AMBIL DATA UNTUK FORM EDIT (READ satu baris) ---------------------------- */
+//..AMBIL DATA UNTUK FORM EDIT (READ satu baris)
 if ($action === 'edit' && !is_post()) {
     $stmt = mysqli_prepare($conn, 'SELECT * FROM songs WHERE id = ?');
     mysqli_stmt_bind_param($stmt, 'i', $id);

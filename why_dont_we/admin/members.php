@@ -16,7 +16,7 @@ $data = [
     'extra_label' => '', 'extra_value' => '', 'bio' => '', 'photo' => '', 'hero_photo' => '', 'sort_order' => '0',
 ];
 
-/* --- HAPUS (DELETE) ---------------------------------------------------------- */
+//.. HAPUS (DELETE)
 // trivia personel ikut terhapus (ON DELETE CASCADE); pendaftar Limelight yang memilih
 // personel ini tetap ada, kolom favoritnya dikosongkan (ON DELETE SET NULL)
 if (is_post() && post('do') === 'delete') {
@@ -93,7 +93,7 @@ if (is_post() && post('do') === 'save') {
     $action = $id ? 'edit' : 'add';
 }
 
-/* --- AMBIL DATA UNTUK FORM EDIT (READ satu baris) ---------------------------- */
+//..AMBIL DATA UNTUK FORM EDIT (READ satu baris)
 if ($action === 'edit' && !is_post()) {
     $stmt = mysqli_prepare($conn, 'SELECT * FROM members WHERE id = ?');
     mysqli_stmt_bind_param($stmt, 'i', $id);

@@ -15,7 +15,7 @@ $errors = [];
 $rows = [];
 $data = ['username' => '', 'email' => ''];
 
-/* --- HAPUS (DELETE) ---------------------------------------------------------- */
+//.. HAPUS (DELETE)
 // akun admin terakhir dan akun yang sedang dipakai login tidak boleh dihapus,
 // supaya dashboard tetap punya admin dan tidak ada yang terkunci di luar
 if (is_post() && post('do') === 'delete') {
@@ -74,7 +74,8 @@ if (is_post() && post('do') === 'save') {
     $action = $id ? 'edit' : 'add';
 }
 
-/* --- AMBIL DATA UNTUK FORM EDIT (READ satu baris, tanpa password_hash) ------- */
+//..AMBIL DATA UNTUK FORM EDIT (READ satu baris, tanpa password_hash)
+
 if ($action === 'edit' && !is_post()) {
     $stmt = mysqli_prepare($conn, 'SELECT username, email FROM admins WHERE id = ?');
     mysqli_stmt_bind_param($stmt, 'i', $id);

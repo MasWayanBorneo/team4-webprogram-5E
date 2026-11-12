@@ -14,7 +14,7 @@ $rows = [];
 $types = ['album' => 'Album', 'ep' => 'EP', 'single' => 'Single'];
 $data = ['title' => '', 'type' => 'album', 'release_year' => '', 'cover_image' => ''];
 
-/* --- HAPUS (DELETE) ---------------------------------------------------------- */
+//.. HAPUS (DELETE)
 if (is_post() && post('do') === 'delete') {
     $delete_id = (int) $_POST['id'];
     $stmt = mysqli_prepare($conn, 'DELETE FROM albums WHERE id = ?');
@@ -58,7 +58,7 @@ if (is_post() && post('do') === 'save') {
     $action = $id ? 'edit' : 'add';
 }
 
-/* --- AMBIL DATA UNTUK FORM EDIT (READ satu baris) ---------------------------- */
+//..AMBIL DATA UNTUK FORM EDIT (READ satu baris)
 if ($action === 'edit' && !is_post()) {
     $stmt = mysqli_prepare($conn, 'SELECT * FROM albums WHERE id = ?');
     mysqli_stmt_bind_param($stmt, 'i', $id);

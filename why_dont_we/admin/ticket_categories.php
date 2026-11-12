@@ -14,7 +14,7 @@ $rows = [];
 $concerts = options_from($conn, "SELECT id, CONCAT(venue_name, ' — ', DATE_FORMAT(event_date, '%e %b %Y')) FROM concerts ORDER BY event_date");
 $data = ['concert_id' => '', 'name' => '', 'description' => '', 'price' => '', 'quota' => ''];
 
-/* --- HAPUS (DELETE) ---------------------------------------------------------- */
+//.. HAPUS (DELETE)
 // kategori yang sudah punya pesanan tidak bisa dihapus (foreign key RESTRICT)
 if (is_post() && post('do') === 'delete') {
     $delete_id = (int) $_POST['id'];
@@ -67,7 +67,9 @@ if (is_post() && post('do') === 'save') {
     $action = $id ? 'edit' : 'add';
 }
 
-/* --- AMBIL DATA UNTUK FORM EDIT (READ satu baris) ---------------------------- */
+
+//..AMBIL DATA UNTUK FORM EDIT (READ satu baris)
+
 if ($action === 'edit' && !is_post()) {
     $stmt = mysqli_prepare($conn, 'SELECT * FROM ticket_categories WHERE id = ?');
     mysqli_stmt_bind_param($stmt, 'i', $id);

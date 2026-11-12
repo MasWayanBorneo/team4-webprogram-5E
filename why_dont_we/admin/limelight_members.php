@@ -14,7 +14,7 @@ $rows = [];
 $members = options_from($conn, 'SELECT id, full_name FROM members ORDER BY sort_order, id');
 $data = ['full_name' => '', 'email' => '', 'date_of_birth' => '', 'favorite_member_id' => ''];
 
-/* --- HAPUS (DELETE) ---------------------------------------------------------- */
+//..HAPUS (DELETE)
 if (is_post() && post('do') === 'delete') {
     $delete_id = (int) $_POST['id'];
     $stmt = mysqli_prepare($conn, 'DELETE FROM limelight_members WHERE id = ?');
@@ -60,7 +60,7 @@ if (is_post() && post('do') === 'save') {
     $action = $id ? 'edit' : 'add';
 }
 
-/* --- AMBIL DATA UNTUK FORM EDIT (READ satu baris) ---------------------------- */
+//.. AMBIL DATA UNTUK FORM EDIT (READ satu baris)
 if ($action === 'edit' && !is_post()) {
     $stmt = mysqli_prepare($conn, 'SELECT * FROM limelight_members WHERE id = ?');
     mysqli_stmt_bind_param($stmt, 'i', $id);
