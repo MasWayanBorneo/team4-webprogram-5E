@@ -13,7 +13,7 @@ $colors = ['Data Masuk' => 'text-bg-primary', 'Konten' => 'text-bg-success', 'Mu
 // hanya menu yang berupa tabel database yang dihitung jumlah datanya (Check-in bukan tabel)
 $tables = array_column(mysqli_fetch_all(mysqli_query($conn, 'SHOW TABLES')), 0);
 
-// ringkasan hari konser: tiket lunas, yang sudah masuk, dan pre-order yang menunggu konfirmasi
+//.. ringkasan hari konser: tiket lunas, yang sudah masuk, dan pre-order yang menunggu konfirmasi
 $ticket_summary = mysqli_fetch_assoc(mysqli_query($conn, "
     SELECT COALESCE(SUM(status = 'paid'), 0) AS paid_orders,
            COALESCE(SUM(status = 'paid' AND checked_in_at IS NOT NULL), 0) AS checked_in,

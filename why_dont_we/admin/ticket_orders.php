@@ -100,7 +100,8 @@ if (is_post() && post('do') === 'save') {
     $action = $id ? 'edit' : 'add';
 }
 
-/* --- AMBIL DATA UNTUK FORM EDIT (READ satu baris) ---------------------------- */
+//.. AMBIL DATA UNTUK FORM EDIT (READ satu baris)
+
 if ($action === 'edit' && !is_post()) {
     $stmt = mysqli_prepare($conn, 'SELECT * FROM ticket_orders WHERE id = ?');
     mysqli_stmt_bind_param($stmt, 'i', $id);

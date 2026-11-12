@@ -13,7 +13,7 @@ $errors = [];
 $rows = [];
 $data = ['name' => ''];
 
-/* --- HAPUS (DELETE) ---------------------------------------------------------- */
+//..HAPUS (DELETE)
 // kategori yang masih dipakai berita tidak bisa dihapus (foreign key RESTRICT)
 if (is_post() && post('do') === 'delete') {
     $delete_id = (int) $_POST['id'];
@@ -44,7 +44,7 @@ if (is_post() && post('do') === 'save') {
     $action = $id ? 'edit' : 'add';
 }
 
-/* --- AMBIL DATA UNTUK FORM EDIT (READ satu baris) ---------------------------- */
+//.. AMBIL DATA UNTUK FORM EDIT (READ satu baris)
 if ($action === 'edit' && !is_post()) {
     $stmt = mysqli_prepare($conn, 'SELECT * FROM news_categories WHERE id = ?');
     mysqli_stmt_bind_param($stmt, 'i', $id);

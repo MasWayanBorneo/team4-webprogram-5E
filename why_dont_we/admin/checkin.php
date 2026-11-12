@@ -60,7 +60,7 @@ if ($invoice_no !== '') {
     $order = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
 }
 
-// check-in terakhir, untuk dipantau panitia
+//..check-in terakhir, untuk dipantau panitia
 $recent = mysqli_fetch_all(mysqli_query($conn, '
     SELECT o.invoice_no, o.full_name, o.quantity, o.checked_in_at, k.venue_name
     FROM ticket_orders o

@@ -15,7 +15,7 @@ $regions = ['asia' => 'Asia', 'america' => 'America', 'europe' => 'Europe', 'oth
 $statuses = ['available' => 'Available (tiket dijual)', 'coming_soon' => 'Coming Soon (pre-order)', 'sold_out' => 'Sold Out'];
 $data = ['venue_name' => '', 'city' => '', 'country' => '', 'region' => 'asia', 'event_date' => '', 'image' => '', 'status' => 'available'];
 
-/* --- HAPUS (DELETE) ---------------------------------------------------------- */
+//..HAPUS (DELETE) 
 // konser yang masih punya kategori tiket tidak bisa dihapus (foreign key RESTRICT)
 if (is_post() && post('do') === 'delete') {
     $delete_id = (int) $_POST['id'];
@@ -70,7 +70,7 @@ if (is_post() && post('do') === 'save') {
     $action = $id ? 'edit' : 'add';
 }
 
-/* --- AMBIL DATA UNTUK FORM EDIT (READ satu baris) ---------------------------- */
+//.. AMBIL DATA UNTUK FORM EDIT (READ satu baris) 
 if ($action === 'edit' && !is_post()) {
     $stmt = mysqli_prepare($conn, 'SELECT * FROM concerts WHERE id = ?');
     mysqli_stmt_bind_param($stmt, 'i', $id);

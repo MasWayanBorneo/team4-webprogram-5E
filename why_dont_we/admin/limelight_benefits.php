@@ -13,7 +13,7 @@ $errors = [];
 $rows = [];
 $data = ['icon' => 'fa-star', 'title' => '', 'description' => '', 'sort_order' => '0', 'is_active' => 1];
 
-/* --- HAPUS (DELETE) ---------------------------------------------------------- */
+//.. HAPUS (DELETE)
 if (is_post() && post('do') === 'delete') {
     $delete_id = (int) $_POST['id'];
     $stmt = mysqli_prepare($conn, 'DELETE FROM limelight_benefits WHERE id = ?');
@@ -59,7 +59,7 @@ if (is_post() && post('do') === 'save') {
     $action = $id ? 'edit' : 'add';
 }
 
-/* --- AMBIL DATA UNTUK FORM EDIT (READ satu baris) ---------------------------- */
+//..AMBIL DATA UNTUK FORM EDIT (READ satu baris)
 if ($action === 'edit' && !is_post()) {
     $stmt = mysqli_prepare($conn, 'SELECT * FROM limelight_benefits WHERE id = ?');
     mysqli_stmt_bind_param($stmt, 'i', $id);
